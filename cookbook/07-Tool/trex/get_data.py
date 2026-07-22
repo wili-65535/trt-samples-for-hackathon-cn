@@ -22,11 +22,13 @@
 #   2. profile the engine and export the per-layer profile + per-iteration timing.
 # The resulting JSON files are GPU-free to analyse afterwards.
 #
-# Two engines are built from the same MNIST network so the CompareEngines example
+# Two engines are built from two MNIST networks so the CompareEngines example
 # has something to compare:
-#   model.*       - an INT8 (QAT) engine
-#   model.fp16.*  - an FP16 engine
-# All other examples only use the INT8 engine (`model.*`).
+#   model.*       - built from the INT8 (QAT) ONNX (Q/DQ nodes -> INT8 kernels)
+#   model.fp16.*  - built from the plain trained ONNX
+# All other examples only use the first engine (`model.*`).
+#
+# strongly typed by default and precision is derived from the ONNX graph itself.
 
 import subprocess
 from pathlib import Path
@@ -39,10 +41,10 @@ data_path = Path(__file__).parent / "data"
 # (Dynamic shape profiles are covered in a dedicated trex example.)
 shapes = ["--minShapes=x:4x1x28x28", "--optShapes=x:4x1x28x28", "--maxShapes=x:4x1x28x28"]
 
-# (json prefix, onnx file, precision flag)
+# (json prefix, onnx file)
 engines = [
-    ("model", model_dir / "model-trained-int8-qat.onnx", "--int8"),
-    ("model.fp16", model_dir / "model-trained.onnx", "--fp16"),
+    ("model", model_dir / "model-trained-int8-qat.onnx"),
+    ("model.fp16", model_dir / "model-trained.onnx"),
 ]
 
 def run(cmd, log_file):
@@ -52,7 +54,7 @@ def run(cmd, log_file):
     if completed.returncode != 0:
         raise RuntimeError(f"trtexec failed (exit {completed.returncode}), see {log_file}")
 
-def build_and_profile(prefix, onnx_file, precision_flag):
+def build_and_profile(prefix, onnx_file):
     engine_file = data_path / f"{prefix}.engine"
     graph_json = data_path / f"{prefix}.graph.json"
     profile_json = data_path / f"{prefix}.profile.json"
@@ -69,7 +71,6 @@ def build_and_profile(prefix, onnx_file, precision_flag):
             "trtexec",
             f"--onnx={onnx_file}",
             f"--saveEngine={engine_file}",
-            precision_flag,
             "--profilingVerbosity=detailed",  # required for a detailed graph JSON
             f"--exportLayerInfo={graph_json}",
             "--skipInference",
@@ -99,8 +100,8 @@ def build_and_profile(prefix, onnx_file, precision_flag):
 
 def main():
     data_path.mkdir(exist_ok=True)
-    for prefix, onnx_file, precision_flag in engines:
-        build_and_profile(prefix, onnx_file, precision_flag)
+    for prefix, onnx_file in engines:
+        build_and_profile(prefix, onnx_file)
 
 if __name__ == "__main__":
     main()

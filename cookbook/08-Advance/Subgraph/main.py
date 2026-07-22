@@ -41,7 +41,7 @@ class ExampleModel(torch.nn.Module):
 
 def build_engine(model_file):
     builder = trt.Builder(TRT_LOGGER)
-    network = builder.create_network(1 << int(trt.NetworkDefinitionCreationFlag.EXPLICIT_BATCH))
+    network = builder.create_network()
     builder_config = builder.create_builder_config()
     profile = builder.create_optimization_profile()
     parser = trt.OnnxParser(network, TRT_LOGGER)

@@ -32,7 +32,7 @@ builder, network, parser = p.network_from_onnx_path(str(onnx_file))
 
 builderConfig = p.CreateConfig( \
     tf32=False,
-    fp16=True,
+    fp16=False,  # `fp16`/`int8`/`fp8`/`bf16` must stay False
     int8=False,
     profiles=[p.Profile().add("x", [1, 1, 28, 28], [4, 1, 28, 28], [16, 1, 28, 28])],
     calibrator=None,

@@ -56,10 +56,12 @@ pip install -r requirements.txt  # Add "-i https://pypi.tuna.tsinghua.edu.cn/sim
 python -m pip install -U build
 rm -rf build dist
 python -m build
+apt-get update && apt-get install -y graphviz
 pip install dist/*.whl
 
 # For developer usage:
-pip install -e .
+apt-get update && apt-get install -y graphviz
+pip install -e . --no-deps
 ```
 
 + [Optional] Prepare the dataset (following the steps in 00-Data/README.md) which some examples need.
@@ -104,12 +106,12 @@ pip install -e .
 ## Useful Links
 
 + [Git address of this repo](https://github.com/wili-65535/trt-samples-for-hackathon-cn.git)
-+ [**TensorRT Download**](https://developer.nvidia.com/nvidia-tensorrt-download)
++ [**TensorRT Download**](https://developer.nvidia.com/tensorrt/download)
 + [TensorRT Open Source Software (TRTOSS) on GitHub](https://github.com/NVIDIA/TensorRT)
 + [Document](https://docs.nvidia.com/deeplearning/tensorrt/)
 + [C++ API](https://docs.nvidia.com/deeplearning/tensorrt/latest/_static/c-api/index.html)
 + [Python API](https://docs.nvidia.com/deeplearning/tensorrt/latest/_static/python-api/index.html)
-+ [Operators Document](https://docs.nvidia.com/deeplearning/tensorrt/operators/docs/)
++ [Operators Document](https://docs.nvidia.com/deeplearning/tensorrt/latest/_static/operators/index.html)
 
 + Others
   + [CUDA](https://developer.nvidia.com/cuda-zone)
@@ -120,6 +122,6 @@ pip install -e .
   + [Polygraphy API Reference](https://docs.nvidia.com/deeplearning/tensorrt/polygraphy/docs/index.html)
   + [Polygraphy document](https://github.com/NVIDIA/TensorRT/tree/main/tools/Polygraphy/polygraphy)
   + [tensorrtx (Network API building)](https://github.com/wang-xinyu/tensorrtx)
-  + [TF-TRT](https://github.com/tensorflow/tensorrt)
-  + [Torch-TensorRT](https://pytorch.org/TensorRT/)
+  + [TF-TRT](https://github.com/tensorflow/tensorrt) (archived since Feb 2025, read-only)
+  + [Torch-TensorRT](https://docs.pytorch.org/TensorRT/)
   + [TREX](https://github.com/NVIDIA/TensorRT/tree/main/tools/experimental/trt-engine-explorer)

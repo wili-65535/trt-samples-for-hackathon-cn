@@ -54,8 +54,9 @@ def case_v1_double_quantization():
     layer.set_input(1, double_quantization_layer.get_output(0))
 
     tw.build([layer.get_output(0), layer.get_output(1)])
-    tw.setup(data)
-    tw.infer()
+    # TODO: add a method to convert FP8 / FP4 array into numpy array, then run the engine as usual
+    # tw.setup(data)
+    # tw.infer()
 
 @case_mark
 def case_v2():
@@ -94,7 +95,7 @@ if __name__ == "__main__":
     case_v1_double_quantization()
     # v2
     case_v2()
-    # v2 + double quantization (expected to fail)
+    # v2 + double quantization, TODO: fix this
     case_v2_double_quantization()
 
     print_enumerated_members(trt.DataType)

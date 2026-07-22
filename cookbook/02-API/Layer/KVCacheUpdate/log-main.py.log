@@ -1,16 +1,14 @@
 [TensorRT-Cookbook] Version: 1.0.0
-[07/07/2026-06:30:22] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[07/22/2026-00:23:49] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 ============================== Start [case_simple,(),{}]
+layer.cache_mode = <KVCacheMode.LINEAR: 0>
+layer.update_form = <AttentionIOForm.PADDED_BHND: 0>
+layer.update_lengths = None
 
-================ Public members of <tensorrt.tensorrt.IKVCacheUpdateLayer object at 0x7419341e7930> (instance)
+================ Public members of <tensorrt.tensorrt.IKVCacheUpdateLayer object at 0x764eb2ecf3f0> (instance)
  0 Callback members: []
  0 Callable methods: []
- 1 Non-callable attributions: ['cache_mode']
-
-================ Usage coverage in this script
- 0/ 1 used members: []
- 1 uncovered members: ['cache_mode']
-
+ 3 Non-callable attributions: ['cache_mode', 'update_form', 'update_lengths']
 Input ->DataType.HALF, (1, 2, 8, 8), (1, 2, 8, 8), cache
 Input ->DataType.HALF, (1, 2, 2, 8), (1, 2, 2, 8), update
 Input ->DataType.INT32, (1,), (1,), write_indices

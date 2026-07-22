@@ -2,21 +2,23 @@
 
 Hello (fallback)
 
-[07/07/2026-01:51:22] [TRT] [I] [MemUsageChange] Init CUDA: CPU +25, GPU +0, now: CPU 165, GPU 458 (MiB)
-[07/07/2026-01:51:23] [TRT] [I] [MemUsageChange] Init builder kernel library: CPU +522, GPU +10, now: CPU 884, GPU 470 (MiB)
-[07/07/2026-01:51:23] [TRT] [I] Local timing cache in use. Profiling results in this builder pass will not be stored.
-[07/07/2026-01:51:23] [TRT] [I] Detected 1 inputs and 1 output network tensors.
-[07/07/2026-01:51:23] [TRT] [I] Total Host Persistent Memory: 336 bytes
-[07/07/2026-01:51:23] [TRT] [I] Total Device Persistent Memory: 0 bytes
-[07/07/2026-01:51:23] [TRT] [I] Max Scratch Memory: 0 bytes
-[07/07/2026-01:51:23] [TRT] [I] Total Activation Memory: 0 bytes
-[07/07/2026-01:51:23] [TRT] [I] Total Weights Memory: 0 bytes
-[07/07/2026-01:51:23] [TRT] [I] Engine generation completed in 0.00255462 seconds.
-[07/07/2026-01:51:23] [TRT] [I] [MemUsageStats] Peak memory usage of TRT CPU/GPU memory allocators: CPU 0 MiB, GPU 0 MiB
-[07/07/2026-01:51:23] [TRT] [I] Loaded engine size: 0 MiB
-[07/07/2026-01:51:23] [TRT] [I] [MemUsageChange] TensorRT-managed allocation in IExecutionContext creation: CPU +0, GPU +0, now: CPU 0, GPU 0 (MiB)
-[07/07/2026-01:51:23] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[07/07/2026-01:51:23] [TRT] [I]
+[07/22/2026-00:39:32] [TRT] [I] [MemUsageChange] Init CUDA: CPU +57, GPU +0, now: CPU 189, GPU 627 (MiB)
+[07/22/2026-00:39:32] [TRT] [I] [MemUsageChange] Init builder kernel library: CPU +321, GPU +8, now: CPU 707, GPU 635 (MiB)
+[07/22/2026-00:39:32] [TRT] [I] Local timing cache in use. Profiling results in this builder pass will not be stored.
+[07/22/2026-00:39:32] [TRT] [I] Compiler backend is used during engine build.
+[07/22/2026-00:39:32] [TRT] [I] Detected 1 inputs and 1 output network tensors.
+[07/22/2026-00:39:32] [TRT] [I] Total Host Persistent Memory: 80 bytes
+[07/22/2026-00:39:32] [TRT] [I] Total Device Persistent Memory: 0 bytes
+[07/22/2026-00:39:32] [TRT] [I] Max Scratch Memory: 0 bytes
+[07/22/2026-00:39:32] [TRT] [I] Total Activation Memory: 0 bytes
+[07/22/2026-00:39:32] [TRT] [I] Total Weights Memory: 0 bytes
+[07/22/2026-00:39:32] [TRT] [I] Compiler backend is used during engine execution.
+[07/22/2026-00:39:32] [TRT] [I] Engine generation completed in 0.0397681 seconds.
+[07/22/2026-00:39:32] [TRT] [I] [MemUsageStats] Peak memory usage of TRT CPU/GPU memory allocators: CPU 0 MiB, GPU 4 MiB
+[07/22/2026-00:39:32] [TRT] [I] Loaded engine size: 0 MiB
+[07/22/2026-00:39:32] [TRT] [I] [MemUsageChange] TensorRT-managed allocation in IExecutionContext creation: CPU +0, GPU +0, now: CPU 0, GPU 0 (MiB)
+[07/22/2026-00:39:32] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[07/22/2026-00:39:32] [TRT] [I] 
 
 Hello
 
@@ -57,10 +59,10 @@ outputT0
 
 Hello (fallback)
 
-[07/07/2026-01:51:23] [TRT] [I] Loaded engine size: 0 MiB
-[07/07/2026-01:51:23] [TRT] [I] [MemUsageChange] TensorRT-managed allocation in IExecutionContext creation: CPU +0, GPU +0, now: CPU 0, GPU 0 (MiB)
-[07/07/2026-01:51:23] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[07/07/2026-01:51:23] [TRT] [I]
+[07/22/2026-00:39:32] [TRT] [I] Loaded engine size: 0 MiB
+[07/22/2026-00:39:32] [TRT] [I] [MemUsageChange] TensorRT-managed allocation in IExecutionContext creation: CPU +0, GPU +0, now: CPU 0, GPU 0 (MiB)
+[07/22/2026-00:39:32] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[07/22/2026-00:39:32] [TRT] [I] 
 
 Hello
 

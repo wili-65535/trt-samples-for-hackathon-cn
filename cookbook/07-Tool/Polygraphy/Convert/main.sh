@@ -40,11 +40,9 @@ polygraphy convert \
     --convert-to trt \
     --output ./model-trained.trt \
     --save-timing-cache model-trained.TimingCache \
-    --save-tactics model-trained-tactics.json \
     --trt-min-shapes 'x:[1,1,28,28]' \
     --trt-opt-shapes 'x:[4,1,28,28]' \
     --trt-max-shapes 'x:[16,1,28,28]' \
-    --fp16 \
     --memory-pool-limit workspace:1G \
     --builder-optimization-level 3 \
     --max-aux-streams 4 \
@@ -58,18 +56,6 @@ polygraphy convert \
     $MODEL_HALF_MNIST \
     --convert-to onnx-like-trt-network \
     --output model-half-mnist-network.onnx \
-    > result-03.log 2>&1
-
-# 02-Parse ONNX file, build and save TensorRT engine in INT8 mode
-# + We need to provide a script to load calibration data
-# + INT8 cache can be reused with `---calibration-cache` during rebuild
-polygraphy convert \
-    $MODEL_TRAINED \
-    --convert-to trt \
-    --output model-trained-int8.trt \
-    --int8 \
-    --data-loader-script data_loader.py \
-    --calibration-cache model-trained.Int8Cache \
     > result-03.log 2>&1
 
 echo "Finish"

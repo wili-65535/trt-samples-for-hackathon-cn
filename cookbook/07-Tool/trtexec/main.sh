@@ -40,7 +40,6 @@ trtexec \
     --minShapes=x:1x1x28x28 \
     --optShapes=x:4x1x28x28 \
     --maxShapes=x:16x1x28x28 \
-    --fp16 \
     --noTF32 \
     --memPoolSize=workspace:1024MiB \
     --builderOptimizationLevel=5 \

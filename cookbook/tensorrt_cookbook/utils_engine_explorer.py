@@ -240,9 +240,14 @@ class Activation:
     def __init__(self, raw_dict: Dict):
         self.name = raw_dict["Name"]
         self.shape = raw_dict["Dimensions"]
-        fmt = raw_dict["Format/Datatype"].replace(".", "")
-        self.format = _region_format_dict.get(fmt, "Unknown format")
-        data_type = self.format.split(" ")[0]
+        if "Format/Datatype" in raw_dict:
+            fmt = raw_dict["Format/Datatype"].replace(".", "")
+            self.format = _region_format_dict.get(fmt, "Unknown format")
+            data_type = self.format.split(" ")[0]
+        else:
+            # separate "Datatype" (e.g. "Float") and "Format" keys.
+            data_type = raw_dict.get("Datatype", "Unknown")
+            self.format = raw_dict.get("Format", data_type)
         self.precision, self.data_size = _precision_dict.get(data_type, (data_type, 0))
         self.size_bytes = int(np.prod(self.shape) * self.data_size)
 
@@ -359,7 +364,13 @@ def read_graph_file(graph_file: str) -> Tuple[List, List]:
     if not isinstance(graph, dict):
         raise ValueError(err_msg)
     layers = graph["Layers"]
-    bindings = graph.get("Bindings", [])  # Older TRT did not include bindings.
+    # Convert name strings to "I/O Tensors"
+    if "Bindings" in graph:  # For old TensorRT
+        bindings = graph["Bindings"]
+    elif "I/O Tensors" in graph:
+        bindings = [t["Name"] for t in graph["I/O Tensors"]]
+    else:
+        bindings = []
     if not isinstance(layers, list):
         raise ValueError(err_msg)
     if not isinstance(layers[0], dict):

@@ -33,7 +33,6 @@ def case_simple(model_name):
         "--profilingVerbosity=detailed",
         f"--exportLayerInfo={model_name}.json",
         f"--saveEngine={model_name}.trt",
-        "--fp16",
         "--memPoolSize=workspace:1024MiB",
         "--builderOptimizationLevel=0",
         "--skipInference",

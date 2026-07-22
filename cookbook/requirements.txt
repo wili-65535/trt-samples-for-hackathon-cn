@@ -1,26 +1,28 @@
 build
 colored
 cuda-python
-cupy                    # Several examples need this and it needs numpy >=2
-lief                    # For Model Optimizer
-mpi4py                  # MPI utility examples
-nccl4py                 # For multi-GPU examples
-numpy                   # need numpy==1.26.4 for NetworkSerialization in TensorRT-10.16, remove version constraint if fixed
-nvidia-modelopt[onnx]   # For Model Optimizer
+# cupy                          # For several examples, needs numpy >=2 but not supported in CUDA 13 yet
+graphviz                        # For trex
+lief                            # For Model Optimizer
+mpi4py                          # MPI utility examples
+nccl4py                         # For multi-GPU examples
+numpy                           # need numpy==1.26.4 for NetworkSerialization in TensorRT-10.16, remove version constraint if fixed
+nvidia-modelopt[onnx]           # For Model Optimizer
 nvtx
 onnx
 onnx_graphsurgeon
 onnxruntime-gpu
-onnxslim                # For Model Optimizer
+onnxslim                        # For Model Optimizer
 opencv-python-headless
+openpyxl                        # For trex
 polygraphy
-pyarrow                 # For HuggingFace .parquet files
-pybind11-stubgen        # For API inspection
-pytorch-quantization==2.1.2 --extra-index-url https://pypi.nvidia.com   # Problems for tensorrt>8.6 + pytorch-quantization>2.1.2
+pyarrow                         # For HuggingFace .parquet files
+pybind11-stubgen                # For API inspection
+pytorch-quantization==2.1.3 --extra-index-url https://pypi.nvidia.com     # Problems for tensorrt>8.6 + pytorch-quantization>2.1.2
 scipy
-torch                   # For pyTorch
+torch                           # For pyTorch
 torchinfo
 tripy
 triton
 
-# pycuda                # Old CUDA python API (not recommended), replaced by cuda-python
+# pycuda                        # Old CUDA python API (not recommended), replaced by cuda-python

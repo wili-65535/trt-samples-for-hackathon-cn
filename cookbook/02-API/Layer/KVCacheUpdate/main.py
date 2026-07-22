@@ -50,6 +50,10 @@ def case_simple():
     output_tensor = layer.get_output(0)
     output_tensor.name = "cache_out"
 
+    print(f"{layer.cache_mode = }")  # KV-cache addressing mode (trt.KVCacheMode)
+    print(f"{layer.update_form = }")  # Memory form of the `update` input (trt.AttentionIOForm)
+    print(f"{layer.update_lengths = }")  # [Optional] Per-batch update-length tensor, default: None
+
     check_api_coverage(layer)  # Sanity check, unnecessary in normal workflow
 
     if not tw.build([output_tensor]):

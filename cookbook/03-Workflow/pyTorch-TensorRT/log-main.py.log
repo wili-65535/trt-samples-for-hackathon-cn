@@ -1,9 +1,7 @@
 [TensorRT-Cookbook] Version: 1.0.0
-[07/07/2026-06:15:59] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[07/07/2026-06:16:20] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[07/07/2026-06:16:21] [TRT] [W] Calibration Profile is not defined. Calibrating with Profile 0
-[07/07/2026-06:16:25] [TRT] [W] Missing scale and zero-point for tensor z, expect fall back to non-int8 implementation for any layer consuming or producing given tensor
-[07/07/2026-06:17:03] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[07/22/2026-00:29:40] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[07/22/2026-00:29:46] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[07/22/2026-00:29:53] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 ============================== Start [case_normal,(),{}]
 Input ->DataType.FLOAT, (-1, 1, 28, 28), (1, 1, 28, 28), x
 Output->DataType.FLOAT, (-1, 10), (1, 10), y
@@ -94,8 +92,8 @@ x
       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
       0.   0.]]]]
 y
-[[8.1094159e-11 1.2494717e-09 1.3109772e-05 2.4522991e-05 1.0034220e-12
-  1.0567185e-08 2.3617092e-10 1.3065711e-09 9.9996233e-01 2.5534488e-08]]
+[[8.1093535e-11 1.2494646e-09 1.3109721e-05 2.4522895e-05 1.0034143e-12
+  1.0567125e-08 2.3616956e-10 1.3065636e-09 9.9996233e-01 2.5534343e-08]]
 z
 [[8]]
 ============================== End   [case_normal]
@@ -190,8 +188,8 @@ x
       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
       0.   0.]]]]
 y
-[[0.0000000e+00 0.0000000e+00 1.2993813e-05 2.4318695e-05 0.0000000e+00
-  0.0000000e+00 0.0000000e+00 0.0000000e+00 1.0000000e+00 0.0000000e+00]]
+[[8.1093535e-11 1.2494646e-09 1.3109721e-05 2.4522895e-05 1.0034143e-12
+  1.0567125e-08 2.3616956e-10 1.3065636e-09 9.9996233e-01 2.5534343e-08]]
 z
 [[8]]
 ============================== End   [case_normal]
@@ -286,8 +284,8 @@ x
       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
       0.   0.]]]]
 y
-[[3.1938591e-10 3.3334340e-09 3.4881552e-05 3.8149530e-05 3.6167853e-12
-  1.3303343e-08 4.1652390e-10 2.7046967e-09 9.9992692e-01 5.4356313e-08]]
+[[8.1093535e-11 1.2494646e-09 1.3109721e-05 2.4522895e-05 1.0034143e-12
+  1.0567125e-08 2.3616956e-10 1.3065636e-09 9.9996233e-01 2.5534343e-08]]
 z
 [[8]]
 ============================== End   [case_normal]

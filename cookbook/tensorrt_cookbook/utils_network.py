@@ -379,16 +379,21 @@ def get_engine_tensor_info(tensor: dict = None):
     """
     Get information of a tensor
     """
-    assert isinstance(tensor, dict) and "Dimensions" in tensor.keys() and "Format/Datatype" in tensor.keys(), f"Wrong tensor format: {tensor}"
+    assert isinstance(tensor, dict) and "Dimensions" in tensor.keys(), f"Wrong tensor format: {tensor}"
     shape = tensor["Dimensions"]
     location = tensor["Location"] if "Location" in tensor.keys() else "Unknown"
-    fd = tensor["Format/Datatype"]
-    fd_list = fd.split(" ")  # Define in "runtime/common/blobInfo.cpp"
-    if "format" in fd_list:
-        index = fd_list.index("format")
-        data_type = fd_list[index - 1]
+    # Separate "Datatype" and "Format" keys. Support both schemas.
+    if "Format/Datatype" in tensor.keys():
+        fd = tensor["Format/Datatype"]
+        fd_list = fd.split(" ")  # Define in "runtime/common/blobInfo.cpp"
+        if "format" in fd_list:
+            index = fd_list.index("format")
+            data_type = fd_list[index - 1]
+        else:
+            data_type = fd_list[-1]
     else:
-        data_type = fd_list[-1]
+        data_type = tensor["Datatype"]
+        fd = f'{tensor.get("Format", "")} {data_type}'.strip()
     data_type = datatype_cast(data_type, "np")
     info = f"{fd}->{location}"
 
@@ -413,14 +418,18 @@ def is_tensor_used_later(name, tensor_list, layer_list):
 
 def export_engine_as_onnx(engine_json_file: Path = None, export_onnx_file: Path = None):
     """
-    Export TensorRT engine as a "ONNX-like" file, which can be opend by software like Netron
+    Export TensorRT engine as a "ONNX-like" file, which can be opened by software like Netron
     Loop structure is not supported yet
     """
     with open(engine_json_file, "r") as f:
         js = json.loads(f.read())
 
     layer_list = js["Layers"]
-    io_tensor_list = js["Bindings"]
+    # Convert name string to "I/O Tensors" (list of dicts)
+    if "Bindings" in js:
+        io_tensor_list = js["Bindings"]
+    else:
+        io_tensor_list = [t["Name"] for t in js.get("I/O Tensors", [])]
 
     # Preprocess to fix duplicate name problem, O(V^2)
     reg_myelin_tensor = r"(__my.+)|(__tran)(\d+)"  # for example: "__myln_k_arg__bb1_24", "__tran7010"
@@ -452,7 +461,11 @@ def export_engine_as_onnx(engine_json_file: Path = None, export_onnx_file: Path 
                         b_finish = True
 
     # Main process of building ONNX like graph
-    io_tensor_list = js["Bindings"]
+    # Convert name string to "I/O Tensors" (list of dicts)
+    if "Bindings" in js:
+        io_tensor_list = js["Bindings"]
+    else:
+        io_tensor_list = [t["Name"] for t in js.get("I/O Tensors", [])]
 
     graph = gs.Graph(nodes=[], inputs=[], outputs=[])
     n = 0

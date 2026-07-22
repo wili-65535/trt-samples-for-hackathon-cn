@@ -1,1 +1,0 @@
-BoundingBoxFormat.CORNER_PAIRS

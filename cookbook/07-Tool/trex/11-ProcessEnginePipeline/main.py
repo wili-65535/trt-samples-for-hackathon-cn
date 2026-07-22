@@ -69,7 +69,7 @@ def case_build():
     """Step 1: build the engine and export the engine-graph JSON."""
     out_dir.mkdir(exist_ok=True)
     _run(
-        ["trtexec", f"--onnx={onnx_file}", f"--saveEngine={engine_file}", "--fp16", "--profilingVerbosity=detailed", f"--exportLayerInfo={graph_json}", "--skipInference", *shapes],
+        ["trtexec", f"--onnx={onnx_file}", f"--saveEngine={engine_file}", "--profilingVerbosity=detailed", f"--exportLayerInfo={graph_json}", "--skipInference", *shapes],
         build_log,
     )
 

@@ -31,7 +31,8 @@ polygraphy run \
     > result-01.log 2>&1
 
 # 02-Combine input and output data into a raw file
-polygraphy data to-input \
+# TRT-11.0 / Polygraphy 0.50: `data to-input` renamed to `data merge` (same behavior, usable with --load-inputs)
+polygraphy data merge \
     model-trained-inputs.raw model-trained-outputs.raw \
     --output model-trained-io.raw \
     > result-02.log 2>&1

@@ -33,9 +33,10 @@ out_path = Path(__file__).parent  # this example's own figures
 graph_json = data_path / "model.graph.json"
 profile_json = data_path / "model.profile.json"
 
-# Output format for the rendered graph ("svg" is compact and zoomable; "png"
-# is easy to preview). Change and re-run to taste.
-output_format = "png"
+# Output format for the rendered graph ("svg" is compact, zoomable and only needs
+# core graphviz; "png" additionally needs the graphviz raster plugins). Change and
+# re-run to taste.
+output_format = "svg"
 
 def _load():
     return EnginePlan(str(graph_json), str(profile_json), name="model")
