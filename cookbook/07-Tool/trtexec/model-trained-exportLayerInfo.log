@@ -1,376 +1,161 @@
 {"Layers": [{
-  "Name": "__mye1085_myl0_0",
-  "LayerType": "custom_layer",
-  "Inputs": [
-  {
-    "Name": "l2_cache_policy_inputs_0_myl0",
-    "Dimensions": [4],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_1_myl0",
-    "Dimensions": [36],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_2_myl0",
-    "Dimensions": [4],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_3_myl0",
-    "Dimensions": [40],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_4_myl0",
-    "Dimensions": [88],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_5_myl0",
-    "Dimensions": [124],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_6_myl0",
-    "Dimensions": [88],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_7_myl0",
-    "Dimensions": [4],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_8_myl0",
-    "Dimensions": [2748],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_9_myl0",
-    "Dimensions": [9344],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_10_myl0",
-    "Dimensions": [4096],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_11_myl0",
-    "Dimensions": [64],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_12_myl0",
-    "Dimensions": [33536],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_13_myl0",
-    "Dimensions": [12544],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_14_myl0",
-    "Dimensions": [40832],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_15_myl0",
-    "Dimensions": [25088],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_management_device_0_myl0",
-    "Dimensions": [256],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt64",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_management_host_0_myl0",
-    "Dimensions": [1],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt64",
-    "Format": "(Linear) Row major linear format"
-  }],
-  "Constants": [],
-  "Outputs": [],
-  "TacticName": "",
-  "StreamId": 0,
-  "Metadata": ""
-},{
-  "Name": "__myl_Move_myl0_1",
-  "LayerType": "kgen",
+  "Name": "node_conv2d + node_relu",
+  "LayerType": "CaskConvolution",
   "Inputs": [
   {
     "Name": "x",
+    "Location": "Device",
     "Dimensions": [1,1,28,28],
-    "Strides": [784,784,28,1],
-    "StrideOrder": [3,2,1,0],
     "Datatype": "Float",
-    "Format": "(Linear) Row major linear format"
+    "Format": "Format not available due to dynamic shapes"
   }],
-  "Constants": [],
   "Outputs": [
   {
-    "Name": "relu.1_2_myl0",
-    "Dimensions": [1,1,28,28],
-    "Strides": [784,1,28,1],
-    "StrideOrder": [3,0,2,1],
+    "Name": "relu",
+    "Location": "Device",
+    "Dimensions": [1,32,28,28],
     "Datatype": "Float",
-    "Format": "(NHWC) Channel major format"
+    "Format": "Format not available due to dynamic shapes"
   }],
-  "TacticName": "__myl_Move_0x7c5792c8b90390f33ed500020cefee34",
+  "ParameterType": "Convolution",
+  "Kernel": [5,5],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [2,2],
+  "PostPadding": [2,2],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 32,
+  "Groups": 1,
+  "Weights": {"Type": "Float", "Count": 800},
+  "Bias": {"Type": "Float", "Count": 32},
+  "HasBias": 1,
+  "HasReLU": 1,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize32x32x8_stage3_warpsize1x2x1_g1_ffma_t1r5s5_aligna4_alignc4",
+  "TacticValue": "0x5b8bf1b8028629d9",
   "StreamId": 0,
-  "Metadata": ""
+  "Metadata": "[ONNX Layer: node_conv2d]\u001e[ONNX Layer: node_relu]"
 },{
-  "Name": "node_conv2d_myl0_2",
-  "LayerType": "correlation",
+  "Name": "node_max_pool2d",
+  "LayerType": "CaskPooling",
   "Inputs": [
   {
-    "Name": "relu.1_2_myl0",
-    "Dimensions": [1,1,28,28],
-    "Strides": [784,1,28,1],
-    "StrideOrder": [3,0,2,1],
+    "Name": "relu",
+    "Location": "Device",
+    "Dimensions": [1,32,28,28],
     "Datatype": "Float",
-    "Format": "(NHWC) Channel major format"
-  }],
-  "Constants": [
-  {
-    "Name": "__mye1002dconst_myl0",
-    "Dimensions": [32,1,5,5],
-    "Strides": [25,1,5,1],
-    "StrideOrder": [3,0,2,1],
-    "Datatype": "Float",
-    "Format": "(NHWC) Channel major format"
-  },
-  {
-    "Name": "__mye1089_const_myl0",
-    "Dimensions": [1],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "Float",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "__mye1093_const_myl0",
-    "Dimensions": [1],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "Float",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "__mye1007dconst_myl0",
-    "Dimensions": [1,32,1,1],
-    "Strides": [32,1,32,32],
-    "StrideOrder": [3,0,2,1],
-    "Datatype": "Float",
-    "Format": "(NHWC) Channel major format"
+    "Format": "Format not available due to dynamic shapes"
   }],
   "Outputs": [
   {
-    "Name": "max_pool2d.1_3_myl0",
-    "Dimensions": [1,32,28,28],
-    "Strides": [25088,1,896,32],
-    "StrideOrder": [3,0,2,1],
-    "Datatype": "Float",
-    "Format": "(NHWC) Channel major format"
-  }],
-  "TacticName": "sm80_xmma_fprop_implicit_gemm_indexed_wo_smem_f32f32_tf32f32_f32_nhwckrsc_nhwc_tilesize128x16x32_stage1_warpsize4x1x1_g1_tensor16x8x8_aligna4_alignc8",
-  "StreamId": 0,
-  "Metadata": "[ONNX Layer: node_conv2d]\u001f[ONNX Layer: node_relu]"
-},{
-  "Name": "node_max_pool2d_myl0_3",
-  "LayerType": "maxpool",
-  "Inputs": [
-  {
-    "Name": "max_pool2d.1_3_myl0",
-    "Dimensions": [1,32,28,28],
-    "Strides": [25088,1,896,32],
-    "StrideOrder": [3,0,2,1],
-    "Datatype": "Float",
-    "Format": "(NHWC) Channel major format"
-  }],
-  "Constants": [],
-  "Outputs": [
-  {
-    "Name": "relu_1.1_4_myl0",
+    "Name": "max_pool2d",
+    "Location": "Device",
     "Dimensions": [1,32,14,14],
-    "Strides": [6272,1,448,32],
-    "StrideOrder": [3,0,2,1],
     "Datatype": "Float",
-    "Format": "(NHWC) Channel major format"
+    "Format": "Format not available due to dynamic shapes"
   }],
-  "TacticName": "sm50_xmma_pooling_max_nhwc_FP32FP32_WINDOWSIZE_0_PROPAGATE_NAN_2D",
+  "ParameterType": "Pooling",
+  "PoolingType": "MAX",
+  "WindowSize": [2,2],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [2,2],
+  "BlendFactor": 0,
+  "AverageCountExcludesPadding": 1,
+  "TacticName": "sm50_xmma_pooling_tiled_FP32NCHW_kMAX_tP2_tQ16_tR2_tS2_tU2_tV2_tUnroll4_tThreads128",
+  "TacticValue": "0xdd39499496c9cc38",
   "StreamId": 0,
   "Metadata": "[ONNX Layer: node_max_pool2d]"
 },{
-  "Name": "node_conv2d_1_myl0_4",
-  "LayerType": "correlation",
+  "Name": "node_conv2d_1 + node_relu_1",
+  "LayerType": "CaskConvolution",
   "Inputs": [
   {
-    "Name": "relu_1.1_4_myl0",
+    "Name": "max_pool2d",
+    "Location": "Device",
     "Dimensions": [1,32,14,14],
-    "Strides": [6272,1,448,32],
-    "StrideOrder": [3,0,2,1],
     "Datatype": "Float",
-    "Format": "(NHWC) Channel major format"
-  }],
-  "Constants": [
-  {
-    "Name": "__mye1012dconst_myl0",
-    "Dimensions": [64,32,5,5],
-    "Strides": [800,1,160,32],
-    "StrideOrder": [3,0,2,1],
-    "Datatype": "Float",
-    "Format": "(NHWC) Channel major format"
-  },
-  {
-    "Name": "__mye1089_const_myl0",
-    "Dimensions": [1],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "Float",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "__mye1093_const_myl0",
-    "Dimensions": [1],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "Float",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "__mye1017dconst_myl0",
-    "Dimensions": [1,64,1,1],
-    "Strides": [64,1,64,64],
-    "StrideOrder": [3,0,2,1],
-    "Datatype": "Float",
-    "Format": "(NHWC) Channel major format"
+    "Format": "Format not available due to dynamic shapes"
   }],
   "Outputs": [
   {
-    "Name": "max_pool2d_1.1_5_myl0",
+    "Name": "relu_1",
+    "Location": "Device",
     "Dimensions": [1,64,14,14],
-    "Strides": [12544,1,896,64],
-    "StrideOrder": [3,0,2,1],
     "Datatype": "Float",
-    "Format": "(NHWC) Channel major format"
+    "Format": "Format not available due to dynamic shapes"
   }],
-  "TacticName": "cutlass3x_sm100_tensorop_s128x128x8tf32implicit_gemm_fprop_f32_f32_f32_f32_f32_f32_128x128x32_dyn_cga_ndhwc_ndhwc_ndhwc_align4_2sm_relu_valpha_vbeta",
+  "ParameterType": "Convolution",
+  "Kernel": [5,5],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [2,2],
+  "PostPadding": [2,2],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 64,
+  "Groups": 1,
+  "Weights": {"Type": "Float", "Count": 51200},
+  "Bias": {"Type": "Float", "Count": 64},
+  "HasBias": 1,
+  "HasReLU": 1,
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "TacticName": "sm50_xmma_conv_fprop_fused_conv_act_fp32_NCHW_fp32_NCHW_KCRS_fp32_fp32_fp32_Accfloat_1_1_cC1_dC1_srcVec1_fltVec1_1_TP3_TQ4_C8_R5_S5_U1_V1",
+  "TacticValue": "0xf26d5b1bbc7d3ee9",
   "StreamId": 0,
-  "Metadata": "[ONNX Layer: node_conv2d_1]\u001f[ONNX Layer: node_relu_1]"
+  "Metadata": "[ONNX Layer: node_conv2d_1]\u001e[ONNX Layer: node_relu_1]"
 },{
-  "Name": "node_max_pool2d_1_myl0_5",
-  "LayerType": "maxpool",
+  "Name": "node_max_pool2d_1",
+  "LayerType": "CaskPooling",
   "Inputs": [
   {
-    "Name": "max_pool2d_1.1_5_myl0",
+    "Name": "relu_1",
+    "Location": "Device",
     "Dimensions": [1,64,14,14],
-    "Strides": [12544,1,896,64],
-    "StrideOrder": [3,0,2,1],
     "Datatype": "Float",
-    "Format": "(NHWC) Channel major format"
+    "Format": "Format not available due to dynamic shapes"
   }],
-  "Constants": [],
   "Outputs": [
   {
-    "Name": "__myln_k_arg__bb1_6_myl0",
+    "Name": "max_pool2d_1",
+    "Location": "Device",
     "Dimensions": [1,64,7,7],
-    "Strides": [3136,1,448,64],
-    "StrideOrder": [3,0,2,1],
     "Datatype": "Float",
-    "Format": "(NHWC) Channel major format"
+    "Format": "Format not available due to dynamic shapes"
   }],
-  "TacticName": "sm50_xmma_pooling_max_nhwc_FP32FP32_WINDOWSIZE_0_PROPAGATE_NAN_3D",
+  "ParameterType": "Pooling",
+  "PoolingType": "MAX",
+  "WindowSize": [2,2],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [2,2],
+  "BlendFactor": 0,
+  "AverageCountExcludesPadding": 1,
+  "TacticName": "sm50_xmma_pooling_tiled_FP32NCHW_kMAX_tP2_tQ16_tR2_tS2_tU2_tV2_tUnroll4_tThreads128",
+  "TacticValue": "0xdd39499496c9cc38",
   "StreamId": 0,
   "Metadata": "[ONNX Layer: node_max_pool2d_1]"
 },{
-  "Name": "__myl_Resh_myl0_6",
-  "LayerType": "kgen",
-  "Inputs": [
-  {
-    "Name": "__myln_k_arg__bb1_6_myl0",
-    "Dimensions": [1,64,7,7],
-    "Strides": [3136,1,448,64],
-    "StrideOrder": [3,0,2,1],
-    "Datatype": "Float",
-    "Format": "(NHWC) Channel major format"
-  }],
-  "Constants": [],
-  "Outputs": [
-  {
-    "Name": "relu_2.1_7_myl0",
-    "Dimensions": [1,3136],
-    "Strides": [3136,1],
-    "StrideOrder": [1,0],
-    "Datatype": "Float",
-    "Format": "(Linear) Row major linear format"
-  }],
-  "TacticName": "__myl_Resh_0x4155422b648f1f4214c3704bba2e00a0",
-  "StreamId": 0,
-  "Metadata": "[ONNX Layer: node_view]"
-},{
-  "Name": "node_linear_myl0_7",
+  "Name": "node_linear_myl4_0",
   "LayerType": "gemm",
   "Inputs": [
   {
-    "Name": "relu_2.1_7_myl0",
+    "Name": "max_pool2d_1",
     "Dimensions": [1,3136],
     "Strides": [3136,1],
     "StrideOrder": [1,0],
@@ -379,7 +164,7 @@
   }],
   "Constants": [
   {
-    "Name": "gemm1.weight_constantFloat_myl0",
+    "Name": "gemm1.weight_constantFloat_myl4",
     "Dimensions": [3136,1024],
     "Strides": [1,3136],
     "StrideOrder": [0,1],
@@ -387,7 +172,7 @@
     "Format": "(Transposed) Transposed format"
   },
   {
-    "Name": "__mye884node_linear_alpha_myl0",
+    "Name": "__mye772node_linear_alpha_myl4",
     "Dimensions": [1],
     "Strides": [1],
     "StrideOrder": [0],
@@ -395,7 +180,7 @@
     "Format": "(Linear) Row major linear format"
   },
   {
-    "Name": "__mye885node_linear_beta_myl0",
+    "Name": "__mye773node_linear_beta_myl4",
     "Dimensions": [1],
     "Strides": [1],
     "StrideOrder": [0],
@@ -403,7 +188,7 @@
     "Format": "(Linear) Row major linear format"
   },
   {
-    "Name": "gemm1.bias + ONNXTRT_Broadcast_constantFloat_myl0",
+    "Name": "gemm1.bias + ONNXTRT_Broadcast_constantFloat_myl4",
     "Dimensions": [1,1024],
     "Strides": [1024,1],
     "StrideOrder": [1,0],
@@ -412,22 +197,22 @@
   }],
   "Outputs": [
   {
-    "Name": "relu_2.1_myl0",
+    "Name": "relu_2.1_myl4",
     "Dimensions": [1,1024],
     "Strides": [1024,1],
     "StrideOrder": [1,0],
     "Datatype": "Float",
     "Format": "(Linear) Row major linear format"
   }],
-  "TacticName": "sm50_xmma_cublas_gemvx_f32f32_f32_f32_tn_n_int32_unit_n_launch_param8x32x32_strided_unit_stride",
+  "TacticName": "sm50_xmma_cublas_gemvx_f32f32_f32_f32_tn_n_int32_unit_n_launch_param4x32x32_strided_unit_stride",
   "StreamId": 0,
   "Metadata": "[ONNX Layer: node_linear]\u001f[ONNX Layer: node_relu_2]"
 },{
-  "Name": "__myl_MulSum_myl0_8",
+  "Name": "__myl_MulSum_myl4_1",
   "LayerType": "kgen",
   "Inputs": [
   {
-    "Name": "relu_2.1_myl0",
+    "Name": "relu_2.1_myl4",
     "Dimensions": [1024,1],
     "Strides": [1,1],
     "StrideOrder": [1,0],
@@ -436,7 +221,7 @@
   }],
   "Constants": [
   {
-    "Name": "gemm2.weight_constantFloat_myl0",
+    "Name": "gemm2.weight_constantFloat_myl4",
     "Dimensions": [1024,10],
     "Strides": [1,1024],
     "StrideOrder": [0,1],
@@ -445,7 +230,7 @@
   }],
   "Outputs": [
   {
-    "Name": "__myln_k_arg__bb1_9_myl0",
+    "Name": "__myln_k_arg__bb1_3_myl4",
     "Dimensions": [1,10],
     "Strides": [10,1],
     "StrideOrder": [1,0],
@@ -456,11 +241,11 @@
   "StreamId": 0,
   "Metadata": "[ONNX Layer: node_linear_1]"
 },{
-  "Name": "__myl_AddMaxrSubExpSum_myl0_9",
+  "Name": "__myl_AddMaxrSubExpSum_myl4_2",
   "LayerType": "kgen",
   "Inputs": [
   {
-    "Name": "__myln_k_arg__bb1_9_myl0",
+    "Name": "__myln_k_arg__bb1_3_myl4",
     "Dimensions": [1,10],
     "Strides": [10,1],
     "StrideOrder": [1,0],
@@ -469,7 +254,7 @@
   }],
   "Constants": [
   {
-    "Name": "gemm2.bias + ONNXTRT_Broadcast_4_constantFloat_myl0",
+    "Name": "gemm2.bias + ONNXTRT_Broadcast_4_constantFloat_myl4",
     "Dimensions": [1,10],
     "Strides": [10,1],
     "StrideOrder": [1,0],
@@ -478,7 +263,7 @@
   }],
   "Outputs": [
   {
-    "Name": "__myln_k_arg__bb1_12_myl0",
+    "Name": "__myln_k_arg__bb1_6_myl4",
     "Dimensions": [1,10],
     "Strides": [10,1],
     "StrideOrder": [1,0],
@@ -486,7 +271,7 @@
     "Format": "(Linear) Row major linear format"
   },
   {
-    "Name": "__myln_k_arg__bb1_11_myl0",
+    "Name": "__myln_k_arg__bb1_5_myl4",
     "Dimensions": [1,1],
     "Strides": [1,1],
     "StrideOrder": [1,0],
@@ -505,11 +290,11 @@
   "StreamId": 0,
   "Metadata": "[ONNX Layer: node_linear_1]\u001f[ONNX Layer: node_softmax]"
 },{
-  "Name": "__myl_DivMulMaxr_myl0_10",
+  "Name": "__myl_DivMaxr_myl4_3",
   "LayerType": "kgen",
   "Inputs": [
   {
-    "Name": "__myln_k_arg__bb1_12_myl0",
+    "Name": "__myln_k_arg__bb1_6_myl4",
     "Dimensions": [1,10],
     "Strides": [10,1],
     "StrideOrder": [1,0],
@@ -517,7 +302,7 @@
     "Format": "(Linear) Row major linear format"
   },
   {
-    "Name": "__myln_k_arg__bb1_11_myl0",
+    "Name": "__myln_k_arg__bb1_5_myl4",
     "Dimensions": [1,1],
     "Strides": [1,1],
     "StrideOrder": [1,0],
@@ -527,7 +312,7 @@
   "Constants": [],
   "Outputs": [
   {
-    "Name": "node_argmax_output.1_myl0",
+    "Name": "node_argmax_output.1_myl4",
     "Dimensions": [1,1],
     "Strides": [1,1],
     "StrideOrder": [1,0],
@@ -535,22 +320,22 @@
     "Format": "(Linear) Row major linear format"
   },
   {
-    "Name": "__myln_k_arg__bb1_14_myl0",
+    "Name": "__myln_k_arg__bb1_8_myl4",
     "Dimensions": [1,1],
     "Strides": [1,1],
     "StrideOrder": [1,0],
     "Datatype": "Int32",
     "Format": "(Linear) Row major linear format"
   }],
-  "TacticName": "__myl_DivMulMaxr_0xeed0d44e25801453f72eeb03693cc519",
+  "TacticName": "__myl_DivMaxr_0xb586b6ef538ec22645e83c2d48682616",
   "StreamId": 0,
   "Metadata": "[ONNX Layer: node_softmax]\u001f[ONNX Layer: node_argmax]"
 },{
-  "Name": "__myl_CastReshCast_myl0_11",
+  "Name": "__myl_CastReshCast_myl4_4",
   "LayerType": "kgen",
   "Inputs": [
   {
-    "Name": "__myln_k_arg__bb1_14_myl0",
+    "Name": "__myln_k_arg__bb1_8_myl4",
     "Dimensions": [1,1],
     "Strides": [1,1],
     "StrideOrder": [1,0],
@@ -568,159 +353,6 @@
     "Format": "(Linear) Row major linear format"
   }],
   "TacticName": "__myl_CastReshCast_0x5baf1ddb7083512f99818d0d7872c872",
-  "StreamId": 0,
-  "Metadata": ""
-},{
-  "Name": "__mye1087_myl0_12",
-  "LayerType": "custom_layer",
-  "Inputs": [
-  {
-    "Name": "l2_cache_policy_inputs_0_myl0",
-    "Dimensions": [4],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_1_myl0",
-    "Dimensions": [36],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_2_myl0",
-    "Dimensions": [4],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_3_myl0",
-    "Dimensions": [40],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_4_myl0",
-    "Dimensions": [88],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_5_myl0",
-    "Dimensions": [124],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_6_myl0",
-    "Dimensions": [88],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_7_myl0",
-    "Dimensions": [4],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_8_myl0",
-    "Dimensions": [2748],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_9_myl0",
-    "Dimensions": [9344],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_10_myl0",
-    "Dimensions": [4096],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_11_myl0",
-    "Dimensions": [64],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_12_myl0",
-    "Dimensions": [33536],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_13_myl0",
-    "Dimensions": [12544],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_14_myl0",
-    "Dimensions": [40832],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_policy_inputs_15_myl0",
-    "Dimensions": [25088],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt8",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_management_device_0_myl0",
-    "Dimensions": [256],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt64",
-    "Format": "(Linear) Row major linear format"
-  },
-  {
-    "Name": "l2_cache_management_host_0_myl0",
-    "Dimensions": [1],
-    "Strides": [1],
-    "StrideOrder": [0],
-    "Datatype": "UInt64",
-    "Format": "(Linear) Row major linear format"
-  }],
-  "Constants": [],
-  "Outputs": [],
-  "TacticName": "",
   "StreamId": 0,
   "Metadata": ""
 }],
@@ -763,4 +395,7 @@
   {
     "Format": "Row major linear INT64 format (kLINEAR)"
   }]
-}]}
+}],
+"Engine Metadata": {
+  "Multi-Device": "Disabled"
+}}

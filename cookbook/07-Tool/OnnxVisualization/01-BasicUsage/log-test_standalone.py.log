@@ -1,0 +1,31 @@
+case_no_drift
+    [PASS] same file list, copy-only=[], package-only=[]
+    [PASS] __init__.py identical to the package
+    [PASS] __main__.py identical to the package
+    [PASS] config.py identical to the package
+    [PASS] discover.py identical to the package
+    [PASS] discover_parallel.py identical to the package
+    [PASS] graph_ir.py identical to the package
+    [PASS] ordering.py identical to the package
+    [PASS] preprocess.py identical to the package
+    [PASS] rewrite.py identical to the package
+    [PASS] rewrite_loop.py identical to the package
+    [PASS] verify.py identical to the package
+    [PASS] outliner.py has exactly one _tensorrt_check in both
+    [PASS] outliner.py identical before _tensorrt_check
+    [PASS] outliner.py identical after _tensorrt_check
+    [PASS] the copy imports nothing outside itself, offenders=[]
+    [PASS] requirements.txt lists every required package, missing=[]
+case_run_without_cookbook
+        Outlining /work/trt-samples-for-hackathon-cn-wili/cookbook/07-Tool/OnnxVisualization/01-BasicUsage/model-toy.onnx -> /work/trt-samples-for-hackathon-cn-wili/cookbook/07-Tool/OnnxVisualization/01-BasicUsage/model-standalone.onnx
+                12 nodes in the input file
+                 8 nodes after onnxslim (P0)
+                 2 nodes in the main graph + 1 local function(s) + 0 loop(s), coverage 100.0%
+                   L0 Block0 [function]:   4 nodes x  2 instances, gain    3, interface 5 in / 1 out
+            verification: {'onnx_checker': 'pass', 'onnxruntime': {'status': 'pass', 'max_abs_diff': 0.0, 'max_rel_diff': 0.0, 'bit_exact': True}, 'tensorrt': {'status': 'pass', 'n_layer': 24}}
+            Open /work/trt-samples-for-hackathon-cn-wili/cookbook/07-Tool/OnnxVisualization/01-BasicUsage/model-standalone.onnx in Netron: the repeated blocks are now single nodes.
+    [PASS] main.py exits 0
+    [PASS] model-standalone.onnx written
+    [PASS] at least one function was folded out of the toy model
+
+Finish

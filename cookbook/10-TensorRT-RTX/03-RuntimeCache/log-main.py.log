@@ -1,3 +1,0 @@
-Serialized runtime cache size = 147 bytes
-runtime_config.get_runtime_cache() = <tensorrt_rtx_bindings.tensorrt_rtx.IRuntimeCache object at 0x728475f22c30>
-Finish

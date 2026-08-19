@@ -399,8 +399,8 @@ class NetworkSerialization:
         builder_config_dict = self.dump_member(self.builder_config, self.builder_config_dump_exclude_set)
 
         # Memory / Preview Feature
-        feature_name_list = ["MemoryPoolType", "PreviewFeature", "QuantizationFlag"]
-        method_name_list = ["memory_pool_limit", "preview_feature", "quantization_flag"]
+        feature_name_list = ["MemoryPoolType", "PreviewFeature"]
+        method_name_list = ["memory_pool_limit", "preview_feature"]
         for feature_name, method_name in zip(feature_name_list, method_name_list):
             obj_dict = {}
             for key, value in getattr(trt, feature_name).__members__.items():  # Save enumerate names as string rather than integer

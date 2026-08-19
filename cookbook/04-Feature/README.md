@@ -2,10 +2,6 @@
 
 + Examples of the feature APIs, which are not necessary in a basic workflow.
 
-## AlgorithmSelectorDeterministic
-
-+ Deterministic tactic-selection example using `CookbookAlgorithmSelector`.
-
 ## Aux Stream
 
 + Use auxiliary streams for infernece.
@@ -49,6 +45,10 @@
 ## Event
 
 + Demonstrates `IExecutionContext.set_input_consumed_event` and `IExecutionContext.get_input_consumed_event`.
+
+## Event - Unfinish
+
++ Steps to run.
 
 ## Execution Context Allocation Strategy
 
@@ -106,17 +106,13 @@
 
 + Example of enabling sparse weights in TensorRT to reduce compute cost on supported hardware.
 
-## Strongly Typed
-
-+ Usage of strongly-typed mode, which means all tensor data types are inferred from network inputs and operator type rules.
-
 ##
 
 ## Steps to run
 
 ## Timing Cache
 
-+ Usage of timing cache to reduce engine buildingtime, including editable timing cache.
++ Usage of timing cache to reduce engine building time, including editable timing cache.
 
 ## Version Compatibility
 
@@ -125,3 +121,7 @@
 ## Weight Streaming
 
 + Steps to run.
+
+## WeightStripping
+
++ Build a weight-stripped engine with `BuilderFlag.STRIP_PLAN` and refit it back to a full one from the original ONNX.

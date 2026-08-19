@@ -1,12 +1,13 @@
 [TensorRT-Cookbook] Version: 1.0.0
-[07/22/2026-00:44:08] [TRT] [E] ModelImporter.cpp:139: While parsing node number 0 [Unique -> "output_0"]:
-[07/22/2026-00:44:08] [TRT] [E] ModelImporter.cpp:141: --- Begin node ---
+[08/27/2026-03:26:43] [TRT] [E] ModelImporter.cpp:139: While parsing node number 0 [Unique -> "output_0"]:
+[08/27/2026-03:26:43] [TRT] [E] ModelImporter.cpp:141: --- Begin node ---
 Node name: node__unique2__0
-[07/22/2026-00:44:08] [TRT] [E] ModelImporter.cpp:142: --- End node ---
-[07/22/2026-00:44:08] [TRT] [E] ModelImporter.cpp:150: ERROR: onnxOpCheckers.cpp:1227 In function checkUnique:
+[08/27/2026-03:26:43] [TRT] [E] ModelImporter.cpp:142: --- End node ---
+[08/27/2026-03:26:43] [TRT] [E] ModelImporter.cpp:150: ERROR: onnxOpCheckers.cpp:1227 In function checkUnique:
 [8] false
-[07/22/2026-00:44:09] [TRT] [E] IBuilder::buildSerializedNetwork: Error Code 4: API Usage Error (Network must have at least one output. In validate at /_src/optimizer/api/network.cpp:3668)
+[08/27/2026-03:26:44] [TRT] [E] IBuilder::buildSerializedNetwork: Error Code 4: API Usage Error (Network must have at least one output. In validate at /_src/optimizer/api/network.cpp:3668)
 ============================== Start [case_static_repeat_interlace,(),{}]
+[W] 'colored' module is not installed, will not use colors when logging. To enable colors, please install the 'colored' module: python3 -m pip install colored
 [I] Folding Constants | Pass 1
 [I]     Total Nodes | Original:    15, After Folding:     2 |    13 Nodes Folded
 [I] Folding Constants | Pass 2
@@ -52,17 +53,27 @@ SUPPORT SUMMARY
 ================================================================================
 ============================== End   [case_not_supported_trt]
 ============================== Start [case_not_supported_onnx,(),{}]
-[I] Folding Constants | Pass 1
-[I]     Total Nodes | Original:    15, After Folding:    15 |     0 Nodes Folded
 
 ================================================================================
 SUPPORT SUMMARY
 ================================================================================
 [Torch              ] SUPPORTED     | Succeeded
-[ONNX Export        ] SUPPORTED     | Succeeded
-[ONNX Runtime       ] SUPPORTED     | Succeeded
-[Polygraphy sanitize] SUPPORTED     | Succeeded
-[TensorRT           ] SUPPORTED     | Succeeded
+[ONNX Export        ] NOT SUPPORTED | ConversionError: Failed to convert the exported program t...
+[ONNX Runtime       ] SKIPPED       | Not run
+[Polygraphy sanitize] SKIPPED       | Not run
+[TensorRT           ] NOT SUPPORTED | Not run
 ================================================================================
 ============================== End   [case_not_supported_onnx]
+============================== Start [case_not_supported_torch,(),{}]
+
+================================================================================
+SUPPORT SUMMARY
+================================================================================
+[Torch              ] SUPPORTED     | Succeeded
+[ONNX Export        ] NOT SUPPORTED | TorchExportError: Failed to export the model with torch.e...
+[ONNX Runtime       ] SKIPPED       | Not run
+[Polygraphy sanitize] SKIPPED       | Not run
+[TensorRT           ] NOT SUPPORTED | Not run
+================================================================================
+============================== End   [case_not_supported_torch]
 Finish

@@ -34,7 +34,6 @@ input_tensor = tw.network.add_input("inputT0", trt.float32, [-1, -1, -1])
 tw.profile.set_shape(input_tensor.name, [1, 1, 1], [3, 4, 5], [6, 8, 10])
 builder_config.add_optimization_profile(tw.profile)
 
-
 layer = tw.network.add_identity(input_tensor)
 tw.network.mark_output(layer.get_output(0))
 tw.builder.build_serialized_network(tw.network, builder_config)
@@ -80,7 +79,6 @@ print_enumerated_members(trt.TilingOptimizationLevel)
 builder_config.tiling_optimization_level = trt.TilingOptimizationLevel.FULL  # Set the tiling optimization level
 print(f"{builder_config.tiling_optimization_level = }")
 builder_config.tiling_optimization_level = trt.TilingOptimizationLevel.NONE  # Restore default
-
 
 print(f"\n{'=' * 64} Preview feature related")
 print_enumerated_members(trt.PreviewFeature)

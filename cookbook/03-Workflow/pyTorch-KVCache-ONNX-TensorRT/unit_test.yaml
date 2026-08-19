@@ -1,0 +1,15 @@
+version: 1
+name: 03-Workflow/pyTorch-KVCache-ONNX-TensorRT
+enabled: true
+tags:
+  - workflow
+  - pytorch
+  - onnx
+  - slow
+# Needs `transformers` and downloads the `gpt2` checkpoint (~550 MB) from HuggingFace on the first
+# run, then caches it. The two exported ONNX graphs (~650 MB each) and two engines (~480 MiB each)
+# are written into this directory and removed by `clean`.
+run:
+  - python3 main.py > log-main.py.log
+clean:
+  - rm -rf *.log model-gpt2-step*.onnx model-gpt2-step*.trt

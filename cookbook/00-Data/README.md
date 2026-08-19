@@ -12,7 +12,7 @@
 
 ### Using Baidu-Netdisk
 
-+ Download the dataset (4 .gz files) and put them as `<PathToCookbook>/00-Data/data-gz/*.gz`
++ Download the dataset (4 .gz files) and save them as `<PathToCookbook>/00-Data/data-gz/*.gz`
 
 ```bash
 cd <PathToCookbook>/00-Data
@@ -32,7 +32,7 @@ python3 get-data.py
 
 ### Using Kaggle
 
-+ Download the dataset (1 .zip files) and put it as `<PathToCookbook>/00-Data/data-kg/archive.zip`
++ Download the dataset (1 .zip files) and save it as `<PathToCookbook>/00-Data/data-kg/archive.zip`
 
 ```bash
 cd <PathToCookbook>/00-Data

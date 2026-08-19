@@ -1,0 +1,18 @@
+[08/27/2026-03:23:32] [TRT] [W] Functionality provided through tensorrt.plugin module is experimental.
+[TensorRT-Cookbook] Version: 1.0.0
+============================== Start [case_plain_module_goes_stale,(),{}]
+    compiled output changed at all : False
+    still agrees with eager        : False, max |eager - TensorRT| = 2.495
+    the engine kept the weights it was built with, silently
+============================== End   [case_plain_module_goes_stale]
+============================== Start [case_mutable_refits,(),{}]
+    first call compiles      :  10.76 s
+    load_state_dict + refit  :   1.80 s (6.0x cheaper than compiling)
+    max |eager - TensorRT|   : 1.68e-07
+============================== End   [case_mutable_refits]
+============================== Start [case_save_and_load,(),{}]
+    pickle  150.6 MB, loaded in 0.68 s
+    max |before save - after load| = 0.00e+00
+============================== End   [case_save_and_load]
+
+Finish

@@ -49,3 +49,12 @@ python3 09-build_model_with_API.py
 
 # 10-Use advance API to work on ONNX files, wili's ONNX tool box.
 python3 10-advanceAPI.py
+
+# 11-Mark intermediate tensors as output to bisect a reduced-precision accuracy bug
+python3 11-mark_output_to_bisect.py
+
+# 12-Replace a constant-only computation with a lookup table computed on the host
+python3 12-constant_table.py
+
+# 13-Splice a second ONNX file onto the first, and move post-processing into the graph
+python3 13-merge_two_models.py

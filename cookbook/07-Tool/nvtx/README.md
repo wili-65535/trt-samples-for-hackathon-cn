@@ -2,6 +2,8 @@
 
 + Use NVIDIA®Tools Extension SDK to add mark in timeline of Nsight systems.
 
++ Requires `nvtx >= 0.2.16` for the counter case, everything else works on `0.2.15`.
+
 + Steps to run.
 
 ```bash
@@ -15,6 +17,56 @@ nsys profile \
     --force-overwrite=true \
     -o cpp \
     ./main.exe
+```
+
++ Without a profiler attached, `nvtx.get_domain()` returns a dummy object and every
+  call returns immediately, so the annotations can be left in production code. Run
+  `python3 main.py` on its own and each case prints `DummyDomain` / `DummyCounter`
+  to say so.
+
+## What each case shows
+
+| Case | API | Point |
+| --- | --- | --- |
+| `case_mark_and_range` | `mark`, `annotate`, `push_range`/`pop_range`, `start_range`/`end_range` | Three ways to mark a range. `annotate` closes the range even if the body raises; `push`/`pop` must be paired in the same thread; `start`/`end` is the only pair that may cross threads |
+| `case_decorator` | `@nvtx.annotate(...)` | Annotate a whole function without touching its body; `message` defaults to the function name |
+| `case_payload` | `payload=` | Carry the *data* of an event separately from its message. Encoding a value into the message (`f"enqueue-{n}"`) makes every value a different range name and destroys grouping |
+| `case_domain` | `nvtx.get_domain()`, `Domain.get_event_attributes`, `Domain.set_event_attributes` | The low-overhead path. `domain="..."` on the module-level functions costs a lookup plus a fresh `EventAttributes` per call, which lands inside the measurement itself |
+| `case_counter` | `Domain.get_counter`, `Counter.sample`, `CounterSemantics`, `Domain.get_timestamp` | **New in 0.2.16.** Draws a *curve*, not a range: latency per iteration, throughput, bytes moved. `int` / `float` / a structured NumPy dtype give `Int64Counter` / `Float64Counter` / `ExtCounter` |
+| `case_auto_profile` | `nvtx.Profile` | Annotate every Python call automatically, no source changes. Uses `sys.setprofile`, so it is a diagnostic, not something to leave enabled |
+| `case_switch` | `nvtx.enabled()`, `NVTX_DISABLE=1` | Strip every annotation at import time |
+
+Whole scripts can be auto-annotated without editing them at all:
+
+```bash
+nsys profile --force-overwrite=true -o py python3 -m nvtx main.py
+```
+
+## Where the events land
+
+Ranges show up in `nvtx_sum`, prefixed by their domain:
+
+```bash
+nsys stats --report nvtx_sum py.nsys-rep
+```
+
+```
+ Instances    Style                       Range
+        30  PushPop   NVTX-cookbook:enqueue              # annotate / push_range / payload
+        10  StartEnd  NVTX-cookbook:enqueue              # start_range
+        10  PushPop   NVTX-cookbook:enqueue-fast         # Domain object + reused EventAttributes
+        10  PushPop   NVTX-cookbook:preprocess           # decorator, message from the function name
+        10  PushPop   NVTX-cookbook:postprocess-renamed  # decorator with an explicit message
+        10  PushPop   nvtx.py:main.py:59(infer_once)     # nvtx.Profile
+```
+
+**Counters do not appear in `nvtx_sum`.** They are plotted as their own rows in the
+Nsight Systems GUI, and in the exported database they live in `GENERIC_EVENTS`:
+
+```python
+import sqlite3
+c = sqlite3.connect("py.sqlite")  # nsys stats writes this next to the .nsys-rep
+print(c.execute("select count(*) from GENERIC_EVENTS").fetchone())
 ```
 
 + Check full color table

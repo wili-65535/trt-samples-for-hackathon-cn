@@ -1,0 +1,58 @@
+[TensorRT-Cookbook] Version: 1.0.0
+============================== Start [case_pythonpath_is_not_enough,(),{}]
+    python3 -c 'import polygraphy_cookbook_ref' with PYTHONPATH: imported
+    `polygraphy run --help` with the same PYTHONPATH mentions --cookbook-ref: False
+    after `pip install ./extension`                              : True
+============================== End   [case_pythonpath_is_not_enough]
+============================== Start [case_what_the_extension_adds,(),{}]
+      [--cookbook-ref-precision {float32,float64}]
+      --cookbook-ref        Run inference using Cookbook NumPy Reference.
+      Cookbook NumPy Reference Inference:
+      --cookbook-ref-precision {float32,float64}
+    `polygraphy convert --help` mentions cookbook-ref: False
+    `polygraphy inspect --help` mentions cookbook-ref: False
+============================== End   [case_what_the_extension_adds]
+============================== Start [case_the_runner_is_run_by_generated_code,(),{}]
+      # Loaders
+      load_onnx = OnnxFromPath('/work/trt-samples-for-hackathon-cn-wili/cookbook/07-Tool/Polygraphy/More/19-CustomBackend/model-cancellation.onnx')
+      gs_from_onnx = GsFromOnnx(load_onnx)
+      # Runners
+      runners = [
+          CookbookRefRunner(gs_from_onnx, precision='float64'),
+      ]
+      # Runner Execution
+      results = Comparator.run(runners)
+============================== End   [case_the_runner_is_run_by_generated_code]
+============================== Start [case_more_ops_than_pluginref,(),{}]
+    polygraphy run model-cancellation.onnx --pluginref
+      [E] FAILED | Runtime: 0.179s | Command: /usr/local/bin/polygraphy run model-cancellation.onnx --pluginref
+      [!] Op: Mul does not have a reference implementation registered!
+    polygraphy run model-cancellation.onnx --onnxrt --cookbook-ref
+      [I]         PASSED | Output: 'y' | Difference is within tolerance (rel=1e-05, abs=1e-05)
+      [I]     PASSED | All outputs matched | Outputs: ['y']
+      [I] Average Metrics | y: max_absdiff=0 (n=1), max_reldiff=0 (n=1), mean_absdiff=0 (n=1), mean_reldiff=0 (n=1), median_ab
+      [I] PASSED | Runtime: 2.286s | Command: /usr/local/bin/polygraphy run model-cancellation.onnx --onnxrt --cookbook-ref
+============================== End   [case_more_ops_than_pluginref]
+============================== Start [case_float64_as_the_reference,(),{}]
+    float32 reference vs onnxrt:
+      [I] Average Metrics | y: max_absdiff=0 (n=1), max_reldiff=0 (n=1), mean_absdiff=0 (n=1), mean_reldiff=0 (n=1), median_ab
+    float64 reference vs onnxrt:
+      [E] Average Metrics | y: max_absdiff=0.29271 (n=1), max_reldiff=1 (n=1), mean_absdiff=0.12565 (n=1), mean_reldiff=1 (n=1
+    float64 reference vs TensorRT:
+      [E] Average Metrics | y: max_absdiff=0.29271 (n=1), max_reldiff=1 (n=1), mean_absdiff=0.12565 (n=1), mean_reldiff=1 (n=1
+    the two GPU/CPU float32 backends agree perfectly, and are both wrong by 100%
+============================== End   [case_float64_as_the_reference]
+============================== Start [case_registering_an_op_by_importing,(),{}]
+    polygraphy run model-addscalar.onnx --pluginref   (with the extension installed)
+      [I] pluginref-runner-N0-08/27/26-02:38:26 | Completed 1 iteration(s) in 0.09155 ms | Average inference time: 0.09155 ms.
+      [I] PASSED | Runtime: 2.056s | Command: /usr/local/bin/polygraphy run model-addscalar.onnx --pluginref
+    the same command after `pip uninstall`
+      [E] FAILED | Runtime: 0.177s | Command: /usr/local/bin/polygraphy run model-addscalar.onnx --pluginref
+      [!] Op: AddScalar does not have a reference implementation registered!
+============================== End   [case_registering_an_op_by_importing]
+============================== Start [case_option_names_collide,(),{}]
+    subscribing a group that redefines --onnx-outputs -> ArgumentError: argument --onnx-outputs: conflicting option string: --onnx-outputs
+    it fails while building the parser, so `polygraphy run --help` breaks for everyone
+============================== End   [case_option_names_collide]
+
+Finish

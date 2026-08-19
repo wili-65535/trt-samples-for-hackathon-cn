@@ -8,6 +8,11 @@
 
 + This example is too simple to show the performance differences among the libraries.
 
++ Two pieces of boilerplate that every Python plugin needs now live in `tensorrt_cookbook.utils_plugin` instead of being copied into each script:
+  + `KernelHelper` / `get_kernel(code, device_id, function_name)` — compile a CUDA source string with **NVRTC** at run time and return a kernel handle (CUBIN for the exact SM when NVRTC supports it, PTX otherwise). Used by the two `add_scalar_cuda_python*.py` examples.
+  + `wrap_device_pointer(pointer, shape, dtype, owner)` — view the raw device pointer TensorRT passes into `enqueue()` as a CuPy array **without copying**, via `cupy.cuda.UnownedMemory`. Used by `add_scalar_cupy.py`; the same array hands off zero-copy to PyTorch (`torch.as_tensor`) or CuteDSL (`cute.runtime.from_dlpack`).
+  + `check_nvrtc_error(result)` — unwrap the `(status, *values)` tuples that `cuda.bindings.{driver,runtime,nvrtc}` return, raising on a non-zero status.
+
 + TODO:
   + Remove the redundant memory copy in torch / triton example, which need a solution of wrapping a pointer as a torch.tensor.
   + Get rid of using cupy, so remove the examples with suffix "-using-cupy".

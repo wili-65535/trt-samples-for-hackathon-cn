@@ -21,8 +21,8 @@ Wrote device_info.json
 ============================== End   [case_device_info]
 ============================== Start [case_gpu_state,(),{}]
 Current GPU 0 state:
-    temperature_C: 42
-    power_W: 201
+    temperature_C: 35
+    power_W: 195
     gpu_util_pct: 0
     sm_clock_mhz: 120
     mem_clock_mhz: 3996

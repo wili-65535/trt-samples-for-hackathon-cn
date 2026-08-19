@@ -1,0 +1,37 @@
+[TensorRT-Cookbook] Version: 1.0.0
+============================== Start [case_the_replay_api_is_gone,(),{}]
+    TacticReplayData(): TacticReplayData -- constructs fine, it is just a dict
+    TacticRecorder: AttributeError: module 'tensorrt' has no attribute 'IAlgorithmSelector'
+      warned first: TacticRecorder is deprecated and will be removed in Polygraphy 0.55.0.
+    TacticReplayer: AttributeError: module 'tensorrt' has no attribute 'IAlgorithmSelector'
+      warned first: TacticReplayer is deprecated and will be removed in Polygraphy 0.55.0.
+    trt.IAlgorithmSelector present in TensorRT 11.1.0.106: False
+    IBuilderConfig.algorithm_selector: False
+============================== End   [case_the_replay_api_is_gone]
+============================== Start [case_save_timing_cache_does_not_load_it,(),{}]
+    warm-up (CUDA init, discarded): 11.30 s
+    no cache at all               :  8.57 s
+    save_timing_cache=, run 1     :  8.50 s  (wrote 32825 B)
+    save_timing_cache=, run 2     :  8.51 s  <- the file is there and full, and nothing got faster
+    speed-up from run 1 to run 2  : 1.00x
+============================== End   [case_save_timing_cache_does_not_load_it]
+============================== Start [case_loading_it_properly,(),{}]
+    no cache                      :  8.36 s
+    cache loaded onto the config  :  7.05 s
+    speed-up                      : 1.19x  -- against 1.00x for the kwarg alone
+============================== End   [case_loading_it_properly]
+============================== Start [case_proving_the_cache_was_used,(),{}]
+[E] [timingCache.cpp::addOp::640] Error Code 2: Internal Error (Assertion !errorOnMiss failed. Adding new entry to timing cache is not allowed if `BuilderFlag::kERROR_ON_TIMING_CACHE_MISS` is set. In addOp at /_src/optimizer/api/timingCache.cpp:640)
+    flag set, no cache loaded  : PolygraphyException -- build refused
+    flag set, cache loaded     : built
+    the same flag would have caught the kwarg-only setup on day one
+============================== End   [case_proving_the_cache_was_used]
+============================== Start [case_what_the_cache_actually_holds,(),{}]
+    entries in timing.cache: 30
+      tactic 0x4b9ef35ad8721, measured 0.006918 ms
+      tactic 0x0, measured 0.004727 ms
+      tactic 0x0, measured 0.004797 ms
+    one entry per autotuned layer -- this is where the tactic choice now lives
+============================== End   [case_what_the_cache_actually_holds]
+
+Finish

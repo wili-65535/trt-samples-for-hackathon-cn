@@ -30,6 +30,15 @@
 
 + A workflow of: export trained model from pyTorch to ONNX, parse ONNX in TensorRT, build TensorRT engine and do inference.
 
+## Workflow of pyTorch (KV cache) -> ONNX -> TensorRT
+
++ The same road for an **autoregressive** model, where the KV cache is the interesting part: gpt2's
+  decode graph has 51 I/O tensors (gpt2-medium's has **99**), and wrapping the model so that the
+  whole cache is one packed tensor brings that to **5**. The engine's cache input and output are
+  then bound to **one allocation** — which works only because the cache is repacked sequence-first;
+  in the layout `transformers` uses, a shared buffer is silently wrong. Greedy sampling is moved
+  into the graph, so the engine returns a token id instead of 50257 floats per step.
+
 ## Workflow of pyTorch -> TensorRT
 
 + A workflow of: rebuild model in TensorRT with exported weights, build TensorRT engine and do inference.

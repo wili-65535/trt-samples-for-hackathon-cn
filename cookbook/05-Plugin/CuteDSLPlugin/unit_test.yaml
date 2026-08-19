@@ -1,0 +1,11 @@
+version: 1
+name: 05-Plugin/CuteDSLPlugin
+enabled: true
+tags:
+  - plugin
+  - python
+timeout: 900
+run:
+  - python3 main.py > log-main.py.log
+clean:
+  - rm -rf *.trt *.log

@@ -304,22 +304,10 @@ def compare_output_dict(dict_a, dict_b, des_a="A", des_b="B", weak=True, error_e
 
     return success
 
-def _one_line(text: str) -> str:
-    """Collapse multi-line text into one whitespace-normalized line."""
-    return " ".join(str(text).split())
-
-def _short_exception(e: Exception, max_len: int = 60) -> str:
-    """Format an exception as a one-line message truncated to ``max_len`` characters."""
-    message = _one_line(f"{type(e).__name__}: {e}")
-    if len(message) <= max_len:
-        return message
-    return message[:max_len - 3] + "..."
-
 def check_torch_operator(
     net,
     data: dict | None = None,
     dynamic_shapes: dict | None = None,
-    onnx_file: Path | None = None,
     b_polygraphy: bool = True,
     b_onnxruntime: bool = True,
     verbose_error: bool = False,
@@ -350,15 +338,14 @@ def check_torch_operator(
             print(f"[{framework:<19}] {mark:<13} | {msg}")
         print("=" * 80)
 
-    temp_dir_obj = None
+    def _short_exception(e: Exception) -> str:
+        return " ".join(f"{type(e).__name__}: {e}".split())
+
     try:
-        if onnx_file is None:
-            temp_dir_obj = tempfile.TemporaryDirectory(prefix="check_torch_operator_")
-            temp_onnx = tempfile.NamedTemporaryFile(dir=temp_dir_obj.name, suffix=".onnx", delete=False)
-            temp_onnx.close()
-            onnx_file = Path(temp_onnx.name)
-        else:
-            onnx_file = Path.cwd() / Path(onnx_file).name
+        temp_dir_obj = tempfile.TemporaryDirectory(prefix="check_torch_operator_")
+        temp_onnx = tempfile.NamedTemporaryFile(dir=temp_dir_obj.name, suffix=".onnx", delete=False)
+        temp_onnx.close()
+        onnx_file = Path(temp_onnx.name)
 
         input_name_list = []
         input_tensor_list = []

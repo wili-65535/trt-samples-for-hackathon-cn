@@ -1,0 +1,18 @@
+[08/27/2026-03:16:39] [TRT] [W] Functionality provided through tensorrt.plugin module is experimental.
+[TensorRT-Cookbook] Version: 1.0.0
+============================== Start [case_without_plugin,(),{}]
+    no plugin                 : segments ['_run_on_acc_0', '_run_on_gpu_1', '_run_on_acc_2']
+                                max |eager - TensorRT| = 0.0e+00, 0.269 ms
+============================== End   [case_without_plugin]
+============================== Start [case_with_plugin,(),{}]
+    QDP plugin                : segments ['_run_on_acc_0']
+                                max |eager - TensorRT| = 0.0e+00, 0.673 ms
+    one engine: the Triton kernel is now a plugin layer inside it
+============================== End   [case_with_plugin]
+============================== Start [case_measure_the_tradeoff,(),{}]
+    no plugin  : 3 segments, 0.270 ms
+    QDP plugin : 1 segment , 0.683 ms  (2.53x)
+    measure before adopting: a JIT plugin buys structure, not speed
+============================== End   [case_measure_the_tradeoff]
+
+Finish

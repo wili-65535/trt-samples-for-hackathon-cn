@@ -70,29 +70,26 @@
 
 + CLI tool of polygraphy (deep learning model debugger).
 
-## Polygraphy Extension Trtexec
-
-+ Polygraphy extension for `trtexec` workflows.
-
-## TRT Engine Explorer
-
-+ TensorRT Engine Explorer for inspecting engine internals and performance information.
-
 ## TritonServerDeploy
 
 + Minimal skeleton to generate a TensorRT plan and Triton model repository layout.
 
-## TriPy
+## nvtriPy
 
-+ A Python programming model for TensorRT that aims to provide an excellent user experience without compromising performance.
++ An **eager-mode Python frontend for TensorRT** (package `nvtripy`): write the model as a
+  `tp.Module`, run it immediately while debugging, then `tp.compile` it into a TensorRT
+  `Executable` (dynamic shapes via `InputInfo`, `save`/`load` the artifact). Pre-1.0, so it is a
+  tour rather than a stable interface. **`pip install nvtripy` into the cookbook's environment
+  replaces TensorRT 11 with its own TensorRT 10 and downgrades NumPy**, so the example installs it
+  into a private virtual environment instead.
 
 ## nvtx
 
 + Use NVIDIA®Tools Extension SDK to add mark in timeline of Nsight systems.
 
-##
+## trex - TensorRT Engine Explorer
 
-## Steps to run (in my environment)
+Explore the structure and performance of a **built** TensorRT engine by analysing
 
 ## trtexec
 

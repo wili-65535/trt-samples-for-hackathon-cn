@@ -1,3 +1,0 @@
-builder_config.num_compute_capabilities = 0
-No compute-capability slots available in current runtime, skip setting.
-Finish

@@ -25,7 +25,7 @@ import onnx
 import tensorrt as trt
 import torch
 import torch.nn.functional as F
-from tensorrt_cookbook import TRTWrapperV1, case_mark, cookbook_path, parse_onnx
+from tensorrt_cookbook import TRTWrapperV1, case_mark, check_array, cookbook_path, parse_onnx
 
 data_path = cookbook_path("00-Data", "data")
 train_data_file = data_path / "TrainData.npz"
@@ -35,9 +35,12 @@ inference_data_file = data_path / "InferenceData.npz"  # Data used for TensorRT 
 model_path = Path(__file__).parent
 onnx_file_fp32 = model_path / "model-fp32.onnx"
 onnx_file_fp16 = model_path / "model-fp16-autocast.onnx"
+onnx_file_fp16_excluded = model_path / "model-fp16-autocast-excluded.onnx"
 onnx_file_int8 = model_path / "model-int8-qat.onnx"
 onnx_file_fp8 = model_path / "model-fp8.onnx"
+trt_file_fp32 = model_path / "model-fp32.trt"
 trt_file_fp16 = model_path / "model-fp16-autocast.trt"
+trt_file_fp16_excluded = model_path / "model-fp16-autocast-excluded.trt"
 trt_file_int8 = model_path / "model-int8-qat.trt"
 trt_file_fp8 = model_path / "model-fp8.trt"
 
@@ -163,12 +166,46 @@ def build_and_infer(onnx_file, trt_file):
     tw.serialize_engine(trt_file)
     tw.setup(data)
     tw.infer()
+    # Return the host output buffers so callers can compare precisions against each other.
+    return {name: tw.buffer[name][0].copy() for name in ["y", "z"]}
+
+def report_precision(onnx_file):
+    """Count where AutoCast actually put each tensor.
+
+    The interesting number is not "is the model FP16" but how much of it stayed FP32: AutoCast
+    keeps numerically-sensitive nodes in high precision and pays for the switch with Cast nodes.
+    """
+    model = onnx.load(str(onnx_file))
+    type_name = {
+        onnx.TensorProto.FLOAT: "FP32",
+        onnx.TensorProto.FLOAT16: "FP16",
+        onnx.TensorProto.BFLOAT16: "BF16",
+        onnx.TensorProto.INT64: "INT64",
+        onnx.TensorProto.INT32: "INT32",
+    }
+
+    initializer_count = {}
+    for initializer in model.graph.initializer:
+        key = type_name.get(initializer.data_type, str(initializer.data_type))
+        initializer_count[key] = initializer_count.get(key, 0) + 1
+
+    value_count = {}
+    for value in model.graph.value_info:
+        key = type_name.get(value.type.tensor_type.elem_type, str(value.type.tensor_type.elem_type))
+        value_count[key] = value_count.get(key, 0) + 1
+
+    n_cast = sum(node.op_type == "Cast" for node in model.graph.node)
+    print(f"{onnx_file.name}: {len(model.graph.node)} nodes ({n_cast} Cast), initializers={initializer_count}, intermediate tensors={value_count}")
 
 @case_mark
 def case_autocast():
     # Train the floating-point model and export it to a FP32 ONNX file
     model, _, _ = get_trained_model()
     export_onnx(model, onnx_file_fp32)
+
+    # FP32 baseline, so the cost of the conversion can actually be measured rather than assumed.
+    report_precision(onnx_file_fp32)
+    output_fp32 = build_and_infer(onnx_file_fp32, trt_file_fp32)
 
     # Convert the FP32 ONNX to a mixed FP16/FP32 ONNX with ModelOptimizer AutoCast.
     # AutoCast inserts explicit Cast nodes, keeping numerically-sensitive nodes in FP32.
@@ -182,7 +219,39 @@ def case_autocast():
     onnx.save(model_fp16, str(onnx_file_fp16))
     print(f"Succeed exporting {onnx_file_fp16}")
 
-    build_and_infer(onnx_file_fp16, trt_file_fp16)
+    report_precision(onnx_file_fp16)
+    output_fp16 = build_and_infer(onnx_file_fp16, trt_file_fp16)
+
+    # How much accuracy did the conversion actually cost? `y` is the FP32 logit vector, `z` the
+    # predicted label. A mixed-precision graph should keep `z` identical while `y` drifts slightly.
+    check_array(output_fp16["y"], output_fp32["y"], True, error_epsilon=1e-2)
+    print(f"Predicted label unchanged: {bool((output_fp16['z'] == output_fp32['z']).all())}")
+
+@case_mark
+def case_autocast_exclude():
+    """Steer AutoCast with the node-selection knobs.
+
+    Automatic selection is a heuristic. When a specific operator turns out to be the one losing
+    accuracy, `op_types_to_exclude` / `nodes_to_exclude` pin it back to FP32 without giving up
+    low precision everywhere else. Here MatMul-family nodes are forced to stay FP32, which shows
+    up as more FP32 initializers and a different Cast count than the unrestricted conversion.
+    """
+    if not onnx_file_fp32.exists():  # `case_autocast` normally produces it
+        export_onnx(get_trained_model()[0], onnx_file_fp32)
+
+    model_excluded = autocast.convert_to_mixed_precision(
+        onnx_path=str(onnx_file_fp32),
+        low_precision_type="fp16",
+        keep_io_types=True,
+        op_types_to_exclude=["Gemm", "MatMul"],
+    )
+    onnx.save(model_excluded, str(onnx_file_fp16_excluded))
+    print(f"Succeed exporting {onnx_file_fp16_excluded}")
+
+    report_precision(onnx_file_fp16)  # Unrestricted conversion, for comparison
+    report_precision(onnx_file_fp16_excluded)
+
+    build_and_infer(onnx_file_fp16_excluded, trt_file_fp16_excluded)
 
 @case_mark
 def case_qat_train():
@@ -243,6 +312,8 @@ def case_onnx_post_train():
 if __name__ == "__main__":
     # ONNX AutoCast to a mixed FP16/FP32 model
     case_autocast()
+    # The same conversion, but steered away from the MatMul family
+    case_autocast_exclude()
     # pyTorch quantization-aware training (QAT) to an INT8 model
     case_qat_train()
     # ONNX post-training quantization (PTQ) to a FP8 model

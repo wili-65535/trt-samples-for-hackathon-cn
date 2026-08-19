@@ -3,7 +3,7 @@
 Exported engine to /work/trt-samples-for-hackathon-cn/cookbook/07-Tool/trex/10-ExportToONNX/engine_model.onnx
 Nodes   = 14
 Inputs  = ['x']
-Outputs = ['y', 'z']
+Outputs = ['z', 'y']
 
 First few nodes (op_type: name):
     custom_layer: __mye1890_myl0_0

@@ -186,7 +186,7 @@ pip install -e . --no-deps
 
 ## 99-Todo
 
-+ Todo list for the cookbook.
++ Todo list and research notes for the cookbook.
 
 ## Cookbook Test Runner Notes
 

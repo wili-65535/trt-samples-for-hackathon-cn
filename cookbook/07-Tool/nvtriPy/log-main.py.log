@@ -1,0 +1,44 @@
+============================== Start [prepare]
+    reusing .venv/
+    cookbook interpreter : TensorRT 11.1.0.106
+    .venv                 : TensorRT 10.16.1.11 (nvtripy 0.1.7), from /work/trt-samples-for-hackathon-cn-wili/cookbook/07-Tool/nvtriPy/.venv/lib/python3.12/site-packages/tensorrt/__init__.py
+    -> nvtripy brings its own TensorRT; installing it next to the cookbook's would replace TensorRT 11
+============================== End   [prepare]
+nvtripy 0.1.7
+
+============================== Start [case_eager_then_compile]
+    eager    : [0.41942882537841797, 0.41942882537841797]
+    compiled : [0.4194698929786682, 0.4194698929786682]
+    max |eager - compiled| = 4.107e-05  (9.8e-05 relative)
+    elementwise only, eager == compiled: True
+    one Linear, exact answer 0.28: eager 0.28000974655151367, compiled 0.2800000011920929
+    -> the matmul is the difference, and eager is the one that drifts
+    Executable runtime inputs: ['args0'] (the weights were folded in)
+============================== End   [case_eager_then_compile]
+
+============================== Start [case_lazy_evaluation]
+    defining the tensor :    2.741 ms
+    first .eval()       :  163.256 ms  <- compiles, then executes
+    second .eval()      :    0.016 ms  <- already evaluated, cached
+    -> timing the definition understates the cost by 60x
+    passing an unevaluated tensor to an Executable: TripyException: Hint: Try calling `.eval()` on the tensor.
+============================== End   [case_lazy_evaluation]
+
+============================== Start [case_dynamic_shapes]
+    batch 1: output shape (1, 2)
+    batch 4: output shape (4, 2)
+    batch 8: output shape (8, 2)
+    batch 9 (outside 1..8): TripyException
+    -> one Executable serves the declared range; outside it you get an error, not a rebuild
+============================== End   [case_dynamic_shapes]
+
+============================== Start [case_save_and_load_executable]
+    compile :    177.4 ms
+    load    :      2.5 ms   (54 KiB on disk)
+    -> loading is 71x cheaper than compiling, and the output is identical
+============================== End   [case_save_and_load_executable]
+
+Finish
+
+What TensorRT wrote to stderr underneath Tripy:
+    IExecutionContext::setInputShape: Error Code 3: API Usage Error (Parameter check failed, condition: satisfyProfile. Set dimension [9,4] for tensor arg0 does not satisfy any optimization profiles. Valid range for profile 0: [1,4]..[8,4]. In setInputShape at /_src/runtime/api/executionContext.cpp:2417)

@@ -1,0 +1,10 @@
+[TensorRT-Cookbook] Version: 1.0.0
+model: /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-large.onnx (1.52 GB)
+onnx.load               :   2.58s  peakRSS=  3.8GB
+                          nodes=6119, initializers=293
+gs.import_onnx          :   0.33s  peakRSS=  3.8GB
+gs.toposort             :   0.06s  peakRSS=  3.8GB
+gs.export_onnx          :   0.66s  peakRSS=  3.8GB
+ir.from_proto           :   0.13s  peakRSS=  3.8GB
+
+Finish

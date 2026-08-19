@@ -6,6 +6,10 @@
 
 + Example of showing all APIs of plugin.
 
+## AliasedIOPlugin
+
++ A Python plugin that writes into one of its own inputs, using the aliased-I/O capability of `IPluginV3OneBuildV2`.
+
 ## Basic Example
 
 + Basic example of using `PluginV3` to add a scalar onto the input tensor.
@@ -17,6 +21,10 @@
 ## Basic Example - static register (deprecated)
 
 + The same as Basic Example, but register the plugin in a static way (deprecated).
+
+## CuteDSLPlugin
+
++ An `IPluginV3` whose kernel is written in **CuteDSL**, CUTLASS's Python DSL.
 
 ## Data Dependent Shape
 
@@ -33,6 +41,10 @@
 ## In-Place Plugin
 
 + The same as Basic Example, but use in-place plugin (input and output tensor share the same buffer).
+
+## MigrationV2toV3
+
++ Migrate a Python plugin from the deprecated `IPluginV2DynamicExt` to `IPluginV3`.
 
 ## Multi-Version
 
@@ -78,6 +90,16 @@
 
 + The same as BasicExample, but we use our own tactics and timing-cache in the plugin.
 
+## Triton AOT Plugin
+
++ Ship an **OpenAI-Triton** kernel inside a C++ `IPluginV3` with no Python, no Triton and no JIT at
+  run time: `triton.tools.compile` bakes the cubin into C source, `triton.tools.link` gives it a
+  stable symbol name. The AOT counterpart of the Triton backend in `PythonPlugin`. Also a generator
+  that writes the whole plugin from a kernel plus a small spec, and maps several AOT variants onto
+  TensorRT **tactics** so the builder times them and keeps the best (**1.83x** over a fixed choice
+  here). Watch out for the `fp32` argument that the generated C declares as `double` and the kernel
+  then reads as `0`, with a successful launch either way.
+
 ## Use cuBLAS
 
 + Example of using cuBLAS in plugin.
@@ -85,7 +107,3 @@
 ## UseFP16
 
 + The same as BasicExample, but enabling FP16 mode.
-
-## UseINT8-PTQ
-
-+ The same as BasicExample, but enabling INT8-PTQ mode.

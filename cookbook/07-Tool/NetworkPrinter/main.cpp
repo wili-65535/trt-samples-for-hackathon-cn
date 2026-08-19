@@ -37,5 +37,9 @@ int main()
 
     printNetwork(network);
 
+    // `profile` is owned by `builder`, so it must NOT be deleted separately.
+    delete config;
+    delete network;
+    delete builder;
     return 0;
 }

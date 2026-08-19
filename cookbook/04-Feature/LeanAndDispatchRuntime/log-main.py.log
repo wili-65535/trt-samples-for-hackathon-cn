@@ -1,16 +1,16 @@
 [TensorRT-Cookbook] Version: 1.0.0
-[07/22/2026-00:35:13] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[07/22/2026-00:35:21] [TRT] [I] Loaded engine size: 112 MiB
-[07/22/2026-00:35:21] [TRT] [V] Loaded shared library leanRuntime
-[07/22/2026-00:35:21] [TRT] [I] Loaded engine size: 112 MiB
-[07/22/2026-00:35:21] [TRT] [V] Deserialization required 2089 microseconds.
-[07/22/2026-00:35:21] [TRT] [V] Total per-runner device persistent memory is 0
-[07/22/2026-00:35:21] [TRT] [V] Total per-runner host persistent memory is 160
-[07/22/2026-00:35:21] [TRT] [V] Allocated device scratch memory of size 591872
-[07/22/2026-00:35:21] [TRT] [V] - Runner scratch: 591872 bytes
-[07/22/2026-00:35:21] [TRT] [I] [MemUsageChange] TensorRT-managed allocation in IExecutionContext creation: CPU +0, GPU +1, now: CPU 0, GPU 13 (MiB)
-[07/22/2026-00:35:21] [TRT] [V] CUDA lazy loading is enabled.
-[07/22/2026-00:35:21] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[08/27/2026-02:58:36] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[08/27/2026-02:58:51] [TRT] [I] Loaded engine size: 112 MiB
+[08/27/2026-02:58:51] [TRT] [V] Loaded shared library leanRuntime
+[08/27/2026-02:58:51] [TRT] [I] Loaded engine size: 112 MiB
+[08/27/2026-02:58:51] [TRT] [V] Deserialization required 3844 microseconds.
+[08/27/2026-02:58:51] [TRT] [V] Total per-runner device persistent memory is 0
+[08/27/2026-02:58:51] [TRT] [V] Total per-runner host persistent memory is 21376
+[08/27/2026-02:58:51] [TRT] [V] Allocated device scratch memory of size 1186304
+[08/27/2026-02:58:51] [TRT] [V] - Runner scratch: 1186304 bytes
+[08/27/2026-02:58:51] [TRT] [I] [MemUsageChange] TensorRT-managed allocation in IExecutionContext creation: CPU +0, GPU +1, now: CPU 0, GPU 13 (MiB)
+[08/27/2026-02:58:51] [TRT] [V] CUDA lazy loading is enabled.
+[08/27/2026-02:58:51] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 ============================== Start [case_build,(),{}]
 ============================== End   [case_build]
 ============================== Start [case_normal,(),{}]

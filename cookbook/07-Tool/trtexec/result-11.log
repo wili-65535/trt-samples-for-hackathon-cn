@@ -1,0 +1,52 @@
+[TensorRT-Cookbook] Version: 1.0.0
+============================== Start [case_profile,('./model-trained-exportProfile.json', 10),{}]
+Iteration count = 25463, layer count = 10
+Top 10 layers by total time:
+                       name |  timeMs |  averageMs | medianMs | percentage
+--------------------------------------------------------------------------
+node_conv2d_1 + node_relu_1 | 685.432 |  0.0269188 |  0.02688 |    30.4133
+         node_linear_myl4_1 | 528.987 |  0.0207747 | 0.020768 |    23.4717
+     node_linear_1_2_myl4_2 | 307.982 |  0.0120953 | 0.012096 |    13.6655
+    node_conv2d + node_relu | 177.113 | 0.00695572 |  0.00688 |     7.8587
+            node_max_pool2d | 111.419 |  0.0043757 |  0.00432 |    4.94375
+ __myl_MaxrSubExpSum_myl4_3 | 109.969 | 0.00431879 |  0.00432 |    4.87946
+       __myl_DivTopk_myl4_4 |  108.39 | 0.00425676 | 0.004256 |    4.80937
+          node_max_pool2d_1 | 99.7406 | 0.00391708 | 0.003904 |    4.42559
+  __myl_CastReshCast_myl4_5 |  90.463 | 0.00355272 | 0.003552 |    4.01394
+          __mye258_0_myl4_0 | 34.2278 | 0.00134422 | 0.001344 |    1.51872
+         total (all layers) | 2253.72 |  0.0885098 |  0.08832 |        100
+============================== End   [case_profile]
+============================== Start [case_profile_compare,('./model-trained-exportProfile.json', './model-trained-reference-exportProfile.json', 5.0),{}]
+Layers differing by >= 5.0% in averageMs (reference = model-trained-reference-exportProfile.json):
+                         name | refAverageMs |  averageMs | % difference
+------------------------------------------------------------------------
+  node_conv2d_1 + node_relu_1 |    0.0114932 |  0.0269188 |     +134.22%
+            node_max_pool2d_1 |   0.00429222 | 0.00391708 |       -8.74%
+            __mye258_0_myl4_0 |            - | 0.00134422 |          new
+           node_linear_myl4_1 |            - |  0.0207747 |          new
+       node_linear_1_2_myl4_2 |            - |  0.0120953 |          new
+   __myl_MaxrSubExpSum_myl4_3 |            - | 0.00431879 |          new
+         __myl_DivTopk_myl4_4 |            - | 0.00425676 |          new
+    __myl_CastReshCast_myl4_5 |            - | 0.00355272 |          new
+           node_linear_myl4_0 |   0.00854511 |          - |         gone
+          __myl_MulSum_myl4_1 |   0.00438393 |          - |         gone
+__myl_AddMaxrSubExpSum_myl4_2 |   0.00416053 |          - |         gone
+         __myl_DivMaxr_myl4_3 |   0.00406412 |          - |         gone
+    __myl_CastReshCast_myl4_4 |   0.00355358 |          - |         gone
+============================== End   [case_profile_compare]
+============================== Start [case_trace,('./model-trained-exportTimes.json', 5),{}]
+Iteration count = 46580
+First 5 iterations (ms):
+h2dMs | computeMs | d2hMs | latencyMs
+-------------------------------------
+    0 | 0.0630341 |     0 | 0.0630341
+    0 | 0.0630493 |     0 | 0.0630493
+    0 | 0.0630493 |     0 | 0.0630493
+    0 | 0.0630646 |     0 | 0.0630646
+    0 | 0.0628357 |     0 | 0.0628357
+Latency percentiles (ms):
+      min |      mean |       P50 |       P90 |       P95 |       P99 |       max
+---------------------------------------------------------------------------------
+0.0627441 | 0.0630262 | 0.0629883 | 0.0632324 | 0.0632324 | 0.0632324 | 0.0937042
+============================== End   [case_trace]
+Finish

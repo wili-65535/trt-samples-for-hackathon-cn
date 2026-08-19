@@ -1,10 +1,10 @@
-[07/22/2026-00:42:17] [TRT] [W] Functionality provided through tensorrt.plugin module is experimental.
+[08/27/2026-03:11:37] [TRT] [W] Functionality provided through tensorrt.plugin module is experimental.
 [TensorRT-Cookbook] Version: 1.0.0
-[07/22/2026-00:42:21] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[07/22/2026-00:42:22] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[07/22/2026-00:42:22] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[07/22/2026-00:42:33] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[07/22/2026-00:42:33] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[08/27/2026-03:11:42] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[08/27/2026-03:11:44] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[08/27/2026-03:11:45] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[08/27/2026-03:11:46] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[08/27/2026-03:11:46] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 ============================== Start [case_add,(),{}]
 Input ->DataType.FLOAT, (-1, -1, -1), (3, 4, 5), inputT0
 Output->DataType.FLOAT, (-1, -1, -1), (3, 4, 5), (Unnamed Layer* 0) [PluginV3_V3QUICK]_output
@@ -56,20 +56,20 @@ tensor([[[ 0.,  1.,  2.,  3.,  4.],
          [50., 51., 52., 53., 54.],
          [55., 56., 57., 58., 59.]]], device='cuda:0')
 inputT0 after inference
-tensor([[[ 2.,  3.,  4.,  5.,  6.],
-         [ 7.,  8.,  9., 10., 11.],
-         [12., 13., 14., 15., 16.],
-         [17., 18., 19., 20., 21.]],
+tensor([[[ 2., 22., 42.,  3., 23.],
+         [43.,  4., 24., 44.,  5.],
+         [25., 45.,  6., 26., 46.],
+         [ 7., 27., 47.,  8., 28.]],
 
-        [[22., 23., 24., 25., 26.],
-         [27., 28., 29., 30., 31.],
-         [32., 33., 34., 35., 36.],
-         [37., 38., 39., 40., 41.]],
+        [[48.,  9., 29., 49., 10.],
+         [30., 50., 11., 31., 51.],
+         [12., 32., 52., 13., 33.],
+         [53., 14., 34., 54., 15.]],
 
-        [[42., 43., 44., 45., 46.],
-         [47., 48., 49., 50., 51.],
-         [52., 53., 54., 55., 56.],
-         [57., 58., 59., 60., 61.]]], device='cuda:0')
+        [[35., 55., 16., 36., 56.],
+         [17., 37., 57., 18., 38.],
+         [58., 19., 39., 59., 20.],
+         [40., 60., 21., 41., 61.]]], device='cuda:0')
 ============================== End   [case_inplace_add]
 ============================== Start [case_pad,(False,),{}]
 Input ->DataType.FLOAT, (1, 3, 32, 32), (1, 3, 32, 32), inputT0
@@ -181,20 +181,20 @@ res=True
 Input ->DataType.FLOAT, (128, 128), (128, 128), inputT0
 Output->DataType.INT32, (-1, 2), (-1, 2), Y
 inputT0
-[[1. 0. 0. ... 0. 0. 0.]
+[[0. 0. 0. ... 0. 0. 0.]
  [0. 0. 0. ... 0. 0. 0.]
  [0. 0. 0. ... 1. 0. 0.]
  ...
- [0. 0. 1. ... 0. 0. 0.]
- [0. 0. 0. ... 0. 0. 1.]
- [0. 1. 0. ... 0. 0. 0.]]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]]
 Y
-[[  0   0]
- [  0  29]
- [  0  59]
+[[  0  18]
+ [  0  24]
+ [  0  32]
  ...
- [127 103]
- [127 109]
- [127 110]]
+ [127 112]
+ [127 117]
+ [127 124]]
 ============================== End   [case_non_zero]
 Finish

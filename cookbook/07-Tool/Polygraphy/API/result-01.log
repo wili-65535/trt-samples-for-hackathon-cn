@@ -8,14 +8,14 @@
 [I] Building engine with configuration:
     Flags                  | [STRONGLY_TYPED]
     Engine Capability      | EngineCapability.STANDARD
-    Memory Pools           | [WORKSPACE: 1024.00 MiB, TACTIC_DRAM: 182624.31 MiB, TACTIC_SHARED_MEMORY: 1024.00 MiB]
+    Memory Pools           | [WORKSPACE: 1024.00 MiB, TACTIC_DRAM: 81071.25 MiB, TACTIC_SHARED_MEMORY: 1024.00 MiB]
     Tactic Sources         | [EDGE_MASK_CONVOLUTIONS, JIT_CONVOLUTIONS]
     Profiling Verbosity    | ProfilingVerbosity.DETAILED
 [W] [MS] Multi stream is disabled because the stream assignment failed.
-[I] Finished engine building in 11.068 seconds
+[I] Finished engine building in 7.412 seconds
 [I] Saving tactic timing cache to model-trained.TimingCache
 [I] Saving engine to model-trained.trt
-OrderedDict({'y': array([[-5.0855856 , -2.3542964 ,  6.911274  ,  7.5294075 , -9.479674  ,
-        -0.22395566, -4.019307  , -2.308152  , 18.146263  ,  0.66160035]],
+OrderedDict({'y': array([[-5.085586  , -2.3542953 ,  6.911274  ,  7.5294104 , -9.479679  ,
+        -0.22395518, -4.0193105 , -2.3081508 , 18.146265  ,  0.66159946]],
       dtype=float32), 'z': array([8])})
 Finish
