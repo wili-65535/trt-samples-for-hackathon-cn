@@ -316,8 +316,6 @@ def check_torch_operator(
     data = data or {}
     dynamic_shapes = dynamic_shapes or {}
 
-    from .utils_class import TRTWrapperV2
-
     model = net.cuda() if isinstance(net, torch.nn.Module) else net().cuda()
 
     status = {
@@ -341,6 +339,7 @@ def check_torch_operator(
     def _short_exception(e: Exception) -> str:
         return " ".join(f"{type(e).__name__}: {e}".split())
 
+    # Try block to cover temporary directory cleanup, even if exceptions occur
     try:
         temp_dir_obj = tempfile.TemporaryDirectory(prefix="check_torch_operator_")
         temp_onnx = tempfile.NamedTemporaryFile(dir=temp_dir_obj.name, suffix=".onnx", delete=False)
@@ -354,6 +353,7 @@ def check_torch_operator(
             input_tensor_list.append(torch.from_numpy(v).cuda())
         output_name_list = []
 
+        # Try Torch inference
         try:
             with torch.no_grad():
                 output_torch_list = model(*input_tensor_list)
@@ -369,6 +369,7 @@ def check_torch_operator(
             print_summary()
             return
 
+        # Try ONNX export
         try:
             model.eval()
             torch.onnx.export(
@@ -392,6 +393,7 @@ def check_torch_operator(
             print_summary()
             return
 
+        # Try Polygraphy sanitize
         onnx_file_po = onnx_file
         if b_polygraphy:
             try:
@@ -408,6 +410,7 @@ def check_torch_operator(
                 print_summary()
                 return
 
+        # Try ONNX Runtime inference
         if b_onnxruntime:
             try:
                 session = onnxruntime.InferenceSession(onnx_file_po, providers=["CPUExecutionProvider"])
@@ -426,9 +429,11 @@ def check_torch_operator(
                 print_summary()
                 return
 
+        # Try TensorRT inference
         try:
+            from .utils_class import TRTWrapperV2
             tw = TRTWrapperV2(logger="error")
-            parse_onnx(onnx_file_po, tw.logger, tw.network, tw.builder_config)
+            parse_onnx(onnx_file_po, tw=tw)
 
             for i in range(tw.network.num_inputs):
                 input_tensor = tw.network.get_input(i)
@@ -1155,13 +1160,20 @@ def print_context_io_information(context: trt.IExecutionContext = None, ) -> Non
     return
 
 def parse_onnx(
-    onnx_file: Union[str, Path],
-    logger: trt.ILogger,
-    network: trt.INetworkDefinition,
-    builder_config: trt.IBuilderConfig,
+    onnx_file: Union[str, Path] | None = None,
+    logger: trt.ILogger | None = None,
+    network: trt.INetworkDefinition | None = None,
+    builder_config: trt.IBuilderConfig | None = None,
     original_parser: trt.OnnxParser | None = None,
+    tw=None,
 ):
     """Parse an ONNX file into a TensorRT network and print parser errors."""
+    if tw is not None:
+        logger = tw.logger
+        network = tw.network
+        builder_config = tw.builder_config
+    else:
+        assert not (logger is None or network is None or builder_config is None), "Either provide a TRTWrapperV1 or provide builder_config/network/profile separately."
     # Use parser from input argument if exists, otherwise construct a local one
     parser = trt.OnnxParser(network, logger) if original_parser is None else original_parser
     parser.set_builder_config(builder_config)

@@ -28,11 +28,14 @@ def traced_add(a, b):
 
 if __name__ == "__main__":
 
+    # No-op on second call
     init_once()
-    init_once()  # no-op on second call
+    init_once()
 
+    # Track the function call stack
     traced_add(3, 4)
 
+    # Print the function call stack
     print_stacks()
 
     print("finish")

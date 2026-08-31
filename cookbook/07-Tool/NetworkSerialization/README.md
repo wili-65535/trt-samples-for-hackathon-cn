@@ -13,7 +13,6 @@ python3 main.py
 ## TODO
 
 - [ ] INT8-PTQ
-- [ ] Plugin Layer
 - [ ] Advanced feature
 - [ ] Timing cache
 - [ ] Calibration cache

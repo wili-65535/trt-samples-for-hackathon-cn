@@ -59,7 +59,6 @@ trtexec \
     > result-03.log 2>&1
 
 # 04-Print information of the TensorRT engine
-# Notice
 # + `--profilingVerbosity=detailed` must be added during buildtime
 # + output of "--dumpLayerInfo" locates in result*.log file, output of "--exportLayerInfo" locates in specified file
 trtexec \
@@ -71,7 +70,6 @@ trtexec \
     > result-04.log 2>&1
 
 # 05-Print information of profiling
-# Notice
 # + output of "--dumpProfile" locates in result*.log file, output of "--exportProfile" locates in specified file
 trtexec \
     --loadEngine=./model-trained.trt \
@@ -81,7 +79,6 @@ trtexec \
     > result-05.log 2>&1
 
 # 06-Save data of input/output
-# Notice
 # + output of "--dumpOutput" locates in result*.log file, output of "--dumpRawBindingsToFile" locates in *.raw files
 trtexec \
     --loadEngine=./model-trained.trt \

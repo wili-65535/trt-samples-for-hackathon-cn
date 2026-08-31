@@ -49,7 +49,7 @@ def case_simple(model_name):
             "--optShapes=x:32x1x28x28",
             "--maxShapes=x:64x1x28x28",
         ]
-    else:
+    else:  # model-large
         command += [
             "--profile=0",
             "--minShapes=input_ids:1x1,attention_mask:1x1",

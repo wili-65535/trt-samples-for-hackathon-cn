@@ -14,18 +14,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Annotate a TensorRT inference loop for the Nsight Systems timeline with NVTX.
-
-Run it under a profiler, otherwise every call below is a no-op:
-
-    nsys profile --force-overwrite=true -o py python3 main.py
-
-Nothing here needs a profiler to be *installed* -- when no tool is attached
-`nvtx.get_domain()` hands back a dummy object and every call returns immediately,
-which is why the annotations can stay in production code.
-
-Requires `nvtx >= 0.2.16` for the counter cases; the other cases work on 0.2.15.
-"""
 
 from pathlib import Path
 
@@ -36,7 +24,6 @@ from cuda.bindings import runtime as cudart
 from tensorrt_cookbook import (
     TRTWrapperV1,
     case_mark,
-    enable_gc_nvtx_profiling,
     load_mnist_network_trt,
 )
 
@@ -53,9 +40,6 @@ load_mnist_network_trt(tw)
 tw.build()
 tw.setup(data)
 
-# Optional, enable GC->NVTX callback if `TRT_COOKBOOK_PROFILE_RECORD_GC=1`
-enable_gc_nvtx_profiling()
-
 def infer_once() -> None:
     """One inference, the thing every case below is annotating."""
     tw.context.execute_async_v3(0)
@@ -68,16 +52,14 @@ def case_mark_and_range() -> None:
     nvtx.mark("build_done", color="black", domain=DOMAIN_NAME, category="setup")
 
     with nvtx.annotate("infer", color="yellow", domain=DOMAIN_NAME, category="multi-steps"):
-        # 1. Context manager. Prefer this one: the range is closed even if the
-        #    body raises.
+        # 1. Context manager. Prefer this one: the range is closed even if the body raises.
         cudart.cudaDeviceSynchronize()
         for _ in range(N_INFERENCE):
             with nvtx.annotate("enqueue", color="red", domain=DOMAIN_NAME, category="step-red"):
                 infer_once()
         cudart.cudaDeviceSynchronize()
 
-        # 2. push / pop. Must be paired *in the same thread*, and a raise in
-        #    between leaks the range.
+        # 2. push / pop. Must be paired *in the same thread*, and a raise in between leaks the range.
         cudart.cudaDeviceSynchronize()
         for _ in range(N_INFERENCE):
             nvtx.push_range("enqueue", color="green", domain=DOMAIN_NAME, category="step-green")
@@ -85,8 +67,7 @@ def case_mark_and_range() -> None:
             nvtx.pop_range(domain=DOMAIN_NAME)
         cudart.cudaDeviceSynchronize()
 
-        # 3. start / end. The only one that may cross threads, because the range
-        #    is identified by the returned id rather than by a per-thread stack.
+        # 3. start / end. The only one that may cross threads, because the range is identified by the returned id rather than by a per-thread stack.
         cudart.cudaDeviceSynchronize()
         for _ in range(N_INFERENCE):
             range_id = nvtx.start_range("enqueue", color="blue", domain=DOMAIN_NAME, category="step-blue")
@@ -99,10 +80,9 @@ def case_mark_and_range() -> None:
 
 @case_mark
 def case_decorator() -> None:
-    """`annotate` also works as a decorator, taking the function name as message.
-
-    Handy for annotating a whole pre/post-processing function without touching
-    its body. The range is popped in a `finally`, so an exception cannot leak it.
+    """
+    `annotate` also works as a decorator.
+    The range is popped in a `finally`, so an exception cannot leak it.
     """
 
     @nvtx.annotate(color="orange", domain=DOMAIN_NAME, category="decorated")

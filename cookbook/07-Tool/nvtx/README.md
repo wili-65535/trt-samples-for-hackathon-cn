@@ -2,19 +2,19 @@
 
 + Use NVIDIA®Tools Extension SDK to add mark in timeline of Nsight systems.
 
-+ Requires `nvtx >= 0.2.16` for the counter case, everything else works on `0.2.15`.
++ Requires `nvtx >= 0.2.16`.
 
 + Steps to run.
 
 ```bash
 nsys profile \
-    --force-overwrite=true \
+    -f true \
     -o py \
     python3 main.py
 
 make
 nsys profile \
-    --force-overwrite=true \
+    -f true \
     -o cpp \
     ./main.exe
 ```
@@ -23,24 +23,6 @@ nsys profile \
   call returns immediately, so the annotations can be left in production code. Run
   `python3 main.py` on its own and each case prints `DummyDomain` / `DummyCounter`
   to say so.
-
-## What each case shows
-
-| Case | API | Point |
-| --- | --- | --- |
-| `case_mark_and_range` | `mark`, `annotate`, `push_range`/`pop_range`, `start_range`/`end_range` | Three ways to mark a range. `annotate` closes the range even if the body raises; `push`/`pop` must be paired in the same thread; `start`/`end` is the only pair that may cross threads |
-| `case_decorator` | `@nvtx.annotate(...)` | Annotate a whole function without touching its body; `message` defaults to the function name |
-| `case_payload` | `payload=` | Carry the *data* of an event separately from its message. Encoding a value into the message (`f"enqueue-{n}"`) makes every value a different range name and destroys grouping |
-| `case_domain` | `nvtx.get_domain()`, `Domain.get_event_attributes`, `Domain.set_event_attributes` | The low-overhead path. `domain="..."` on the module-level functions costs a lookup plus a fresh `EventAttributes` per call, which lands inside the measurement itself |
-| `case_counter` | `Domain.get_counter`, `Counter.sample`, `CounterSemantics`, `Domain.get_timestamp` | **New in 0.2.16.** Draws a *curve*, not a range: latency per iteration, throughput, bytes moved. `int` / `float` / a structured NumPy dtype give `Int64Counter` / `Float64Counter` / `ExtCounter` |
-| `case_auto_profile` | `nvtx.Profile` | Annotate every Python call automatically, no source changes. Uses `sys.setprofile`, so it is a diagnostic, not something to leave enabled |
-| `case_switch` | `nvtx.enabled()`, `NVTX_DISABLE=1` | Strip every annotation at import time |
-
-Whole scripts can be auto-annotated without editing them at all:
-
-```bash
-nsys profile --force-overwrite=true -o py python3 -m nvtx main.py
-```
 
 ## Where the events land
 
