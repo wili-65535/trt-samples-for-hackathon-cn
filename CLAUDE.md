@@ -4,27 +4,60 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Environment Setup
 
-**Recommended before running examples (optional in most Python cases due to auto-discovery):**
+**The container is reset between sessions.** Everything *installed* is lost — the pip packages, the
+apt packages, and `tensorrt_cookbook` itself — while the repository under `/work` survives. So the
+first thing to do in a new session is put the environment back:
+
 ```bash
 cd cookbook/
-export TRT_COOKBOOK_PATH=$(pwd)   # Point to the cookbook/ root
-pip install -e .
+./setup_environment.sh
 ```
 
-The `tensorrt_cookbook` package first tries to auto-discover this path and sets the environment variable automatically when found.
+That installs the apt packages, the pip packages and `tensorrt_cookbook` (editable), preferring the
+local caches in `cookbook/dependence_packages/` over the network. With the caches warm it takes
+about **6 seconds** and touches the network not at all. It ends with a table of what is present, so
+a partial setup is visible rather than assumed:
 
-**Recommended environment:** NVIDIA Docker image `nvcr.io/nvidia/pytorch:26.07-py3` (Python 3.12, CUDA 13.3, TensorRT 11.0).
+```txt
+  [OK  ] the cookbook package
+  [OK  ] TensorRT
+  ...
+  [OK  ] graphviz `dot` binary (apt)
+  Everything is present
+```
 
-**Install dependencies:**
+If something reports `MISS`, or `requirements.txt` changed, refresh the caches first — this needs
+the network, and the `.deb` step needs `sudo`:
+
 ```bash
-pip install -r requirements.txt
+./setup_environment.sh --refresh
+```
 
-# Developer (editable) install:
-pip install -e .
+The caches are **not** tracked by git (see `cookbook/dependence_packages/README.md`). They are a
+local accelerator: a fresh clone downloads everything once, and only later setups on that machine
+are offline.
+
+**Recommended environment:** NVIDIA Docker image `nvcr.io/nvidia/pytorch:26.07-py3` (Python 3.12,
+CUDA 13.3, TensorRT 11.0). The image already provides torch, TensorRT, numpy and much else, which is
+why the pip cache holds only the ~23 packages that are actually missing rather than the whole
+dependency tree.
+
+### Doing it by hand
+
+```bash
+cd cookbook/
+export TRT_COOKBOOK_PATH=$(pwd)   # Optional: the package auto-discovers this when it can
+pip install -r requirements.txt
+pip install -e .                  # Editable install for development
 
 # Release build:
 python -m pip install -U build && python -m build && pip install dist/*.whl
 ```
+
+Two flags in `setup_environment.sh` are not decoration, and hand-installs offline need them too:
+`pip install --no-index --find-links=dependence_packages/pip` to stay off the network, and
+`pip install --no-build-isolation -e .` because build isolation otherwise downloads a fresh
+`setuptools` into a throwaway environment and fails when there is no network.
 
 ## Common Commands
 

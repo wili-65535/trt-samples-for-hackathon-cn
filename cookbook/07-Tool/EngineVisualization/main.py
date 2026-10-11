@@ -17,9 +17,13 @@
 """One engine layer-info JSON, four outputs: Graphviz `.gv` and its rendered picture, a Dagre HTML
 page, and yEd GraphML.
 
-`trtexec --exportLayerInfo` (or `IEngineInspector`) gives a JSON description of the *final* engine --
-after fusion, after Myelin, with the layer names the profiler will use. Reading it as text stops
-working at about thirty layers.
+`trtexec --exportLayerInfo` gives a JSON description of the *final* engine -- after fusion, after
+Myelin, with the layer names the profiler will use. Reading it as text stops working at about thirty
+layers.
+
+The same JSON comes out of `IEngineInspector` in Python, byte for byte -- see
+`../../04-Feature/EngineInspector/`. trtexec is used here because these cases also want
+`--exportProfile` for the per-layer latency, which the inspector does not provide.
 
 | Format | Needs | Good for |
 | ------ | ----- | -------- |
@@ -36,7 +40,7 @@ image is rendered here; the HTML output exists for the machines where it is not.
 third implementation of this file's job and has been removed; what it drew, this draws, plus
 per-tensor tooltips, dashed back-edges and multi-profile filtering.
 
-Re-expressed from the idea in the internal `tools/engine_visualizer/plotEngine.py`. That file
+Re-expressed from the idea in the internal file. That file
 carries a proprietary SPDX header, an internal email address and `gitlab-master.nvidia.com`
 links; none of it was copied, and nothing internal appears here.
 """

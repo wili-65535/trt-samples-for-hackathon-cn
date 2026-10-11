@@ -18,12 +18,41 @@ every tensor instead of just the topology.
 `trtexec --exportLayerInfo` describes the **final** engine — after fusion, after Myelin, with the
 names the profiler will use. Reading it as text stops working at about thirty layers.
 
-| Format | Needs | Good for |
-| ------ | ----- | -------- |
-| Graphviz `.gv` + `.svg` | `dot` for the picture; the `.gv` needs nothing | publication-quality static images, scripting |
-| **Dagre `.html`** | **nothing but a browser** | looking at it now; pan, zoom, hover for the full layer record |
-| **yEd `.graphml`** | yEd (free desktop app) | hand-editing, re-layout, large graphs |
-| **ONNX** | Netron | the most information kept, and other ONNX tooling can read it |
+## Where the JSON comes from
+
+Two entry points, one string. `trtexec` has no layer-info implementation of its own: it creates an
+`IEngineInspector` over the engine and writes `getEngineInformation(kJSON)` to the file
+(`samples/common/sampleReporting.cpp`). Measured on TensorRT 11.0.0.114, for one and the same plan
+file the output of
+
+```bash
+trtexec --loadEngine=model.plan --exportLayerInfo=layer_info.json
+```
+
+and of
+
+```python
+engine.create_engine_inspector().get_engine_information(trt.LayerInformationFormat.JSON)
+```
+
+are **byte-for-byte identical**, with and without an execution context bound. See
+[`../../04-Feature/EngineInspector/`](../../04-Feature/EngineInspector/README.md) for the Python
+side; either one can feed the writers here.
+
+The scripts here use `trtexec` anyway, and the reason is the one place the two entry points do not
+overlap: the latency cases also need `--exportProfile`, which measures layers at run time and is not
+something the inspector reports. Everything else is a matter of taste — trtexec needs no Python and
+runs straight on a saved plan, while the inspector can additionally report one layer at a time.
+
+What *does* change the content is the build-time profiling verbosity, which belongs to neither
+entry point; see the flags section below.
+
+| Format                  | Needs                                          | Good for                                                      |
+| ----------------------- | ---------------------------------------------- | ------------------------------------------------------------- |
+| Graphviz `.gv` + `.svg` | `dot` for the picture; the `.gv` needs nothing | publication-quality static images, scripting                  |
+| **Dagre `.html`**       | **nothing but a browser**                      | looking at it now; pan, zoom, hover for the full layer record |
+| **yEd `.graphml`**      | yEd (free desktop app)                         | hand-editing, re-layout, large graphs                         |
+| **ONNX**                | Netron                                         | the most information kept, and other ONNX tooling can read it |
 
 **Both the `.gv` and the picture are written.** The `.gv` is the source you can edit and re-render;
 the `.svg` is what you actually look at. `dot` is a *system* package (`apt-get install graphviz`)
@@ -128,7 +157,7 @@ carries a colour. It has earned its place twice:
 
 Both were "runs fine, output is wrong" faults, which is the only kind this case can catch.
 
-Re-expressed from the idea in the internal `tools/engine_visualizer/plotEngine.py`. That file carries
+Re-expressed from the idea in the internal file. That file carries
 a proprietary SPDX header, an internal email address and `gitlab-master.nvidia.com` links; none of it
 was copied and nothing internal appears here.
 
@@ -137,17 +166,17 @@ was copied and nothing internal appears here.
 Two writers here turn the same layer-info JSON into a picture. They are not redundant, but they are
 not equally good at the same things either.
 
-| | `export_as_onnx.py` | `main.py` |
-| :-- | :-- | :-- |
-| Output | `.onnx` | `.gv` + `.svg`, `.html`, `.graphml` |
-| Viewer | Netron | image viewer, browser, yEd, `dot` |
-| Per-layer attributes kept | **all of them** — `Constants`, `Metadata`, `StreamId`, `TacticName`, plus a synthesised `TensorInfo` and the optional `Latency` | all of them, in the node tooltip |
-| Tensor dtype / shape | yes, on every tensor | yes, on every tensor |
-| Visual encoding | none — Netron colours by operator category and you cannot change it | **nodes by layer type, edges by precision, slowest layer outlined, back-edges dashed** |
-| Editing | **programmatic** (`onnx_graphsurgeon`) | **interactive** (yEd, on the GraphML) |
-| Downstream tooling | **`onnx_outliner`, and anything else that reads ONNX** | none |
-| Multi-profile engines | not filtered | **filtered, and says so** |
-| Control flow (`Loop`) | all dependencies; cycle drawn as a cycle, or a DAG on request | all dependencies, back-edges dashed |
+|                           | `export_as_onnx.py`                                                                                                             | `main.py`                                                                              |
+| :------------------------ | :------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------- |
+| Output                    | `.onnx`                                                                                                                         | `.gv` + `.svg`, `.html`, `.graphml`                                                    |
+| Viewer                    | Netron                                                                                                                          | image viewer, browser, yEd, `dot`                                                      |
+| Per-layer attributes kept | **all of them** — `Constants`, `Metadata`, `StreamId`, `TacticName`, plus a synthesised `TensorInfo` and the optional `Latency` | all of them, in the node tooltip                                                       |
+| Tensor dtype / shape      | yes, on every tensor                                                                                                            | yes, on every tensor                                                                   |
+| Visual encoding           | none — Netron colours by operator category and you cannot change it                                                             | **nodes by layer type, edges by precision, slowest layer outlined, back-edges dashed** |
+| Editing                   | **programmatic** (`onnx_graphsurgeon`)                                                                                          | **interactive** (yEd, on the GraphML)                                                  |
+| Downstream tooling        | **`onnx_outliner`, and anything else that reads ONNX**                                                                          | none                                                                                   |
+| Multi-profile engines     | not filtered                                                                                                                    | **filtered, and says so**                                                              |
+| Control flow (`Loop`)     | all dependencies; cycle drawn as a cycle, or a DAG on request                                                                   | all dependencies, back-edges dashed                                                    |
 
 There used to be a third, `trex/02-DrawEngineGraph`, which rendered the same JSON with Graphviz.
 Everything it drew is here now — nodes by layer type, edges by precision, per-layer latency, the
@@ -247,22 +276,22 @@ that name elsewhere in the graph. Worse, removing the back-edge is often what sp
 into disconnected components, because that edge was the only thing joining them. The `@0` / `@2`
 suffixes also lengthen names that TensorRT already made unwieldy.
 
-| | default | `b_break_cycle=True` |
-| :-- | :-- | :-- |
-| back-edge | drawn as a cycle | `BackEdge` marker node |
-| tensor names | unchanged | SSA versions, `...@0`, `...@2` |
-| `onnx.checker` | rejects (cyclic) | passes |
-| `onnx_graphsurgeon` / `onnx_outliner` | `Cycle detected in graph!` | works |
-| reading the loop in Netron | direct | follow `Target` by name |
+|                                       | default                    | `b_break_cycle=True`           |
+| :------------------------------------ | :------------------------- | :----------------------------- |
+| back-edge                             | drawn as a cycle           | `BackEdge` marker node         |
+| tensor names                          | unchanged                  | SSA versions, `...@0`, `...@2` |
+| `onnx.checker`                        | rejects (cyclic)           | passes                         |
+| `onnx_graphsurgeon` / `onnx_outliner` | `Cycle detected in graph!` | works                          |
+| reading the loop in Netron            | direct                     | follow `Target` by name        |
 
 Engines **without** control flow are identical in both modes: no repeated tensor name means no
 cycle, no renaming and no marker, so they pass `onnx.checker` either way.
 
-| | dependencies represented | on failure |
-| :-- | :-- | :-- |
-| `export_as_onnx.py` | **8 of 8** (6 forward + 2 back-edges) | — |
-| `main.py` | 5 of 8 | silent |
-| `trex/02` | 5 of 8 | silent |
+|                     | dependencies represented              | on failure |
+| :------------------ | :------------------------------------ | :--------- |
+| `export_as_onnx.py` | **8 of 8** (6 forward + 2 back-edges) | —          |
+| `main.py`           | 5 of 8                                | silent     |
+| `trex/02`           | 5 of 8                                | silent     |
 
 Verified on `model-loop.onnx` (a `Loop` and nothing else) and `model-for.onnx` (a `Loop` with an
 `If` in its body, 4 back-edges); both pass `onnx.checker`. Engines without control flow produce zero

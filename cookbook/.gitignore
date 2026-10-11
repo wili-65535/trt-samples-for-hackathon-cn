@@ -67,3 +67,16 @@ tensorrt_cookbook.egg-info/
 
 # Plan-file inspection depending on TensorRT's non-public layout; must not be published
 tensorrt_cookbook/utils_private.py
+# Its output is a field-by-field dump of that layout. `log-main.py.log` is pinned to the public view
+# by the test config and is safe to commit; this one is not.
+07-Tool/EnginePrinter/log-main.py-internal.log
+
+# Offline install caches, deliberately not tracked. They are a *local* accelerator, not something
+# the repository ships: a fresh clone still downloads everything once, and only the second and later
+# setups on that machine are offline. Tracking them would put ~455 MB of wheels into git history
+# permanently, and would not help anyway - `/work` already survives the container resets that wipe
+# the installed packages. See dependence_packages/README.md.
+dependence_packages/*.json
+dependence_packages/apt/*.deb
+dependence_packages/pip/*.whl
+dependence_packages/resolved.txt

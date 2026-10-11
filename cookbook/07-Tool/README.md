@@ -16,7 +16,7 @@
 
 ## Engine Printer
 
-+ Print the header, device requirements and I/O tables of a TensorRT engine, from the plan file alone.
++ Print the I/O tables of a TensorRT engine, from the plan file alone.
 
 ## Engine Visualization
 

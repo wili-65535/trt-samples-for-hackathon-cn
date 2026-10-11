@@ -56,10 +56,8 @@ def build_mnist_network_trt(
 
     shape = [-1, 1, 28, 28]
     tensor = network.add_input("x", trt.float32, shape)
-    # Configure the profile but do NOT add it to the builder config, matching
-    # `load_mnist_network_trt` below. Adding it here as well as in `TRTWrapperV1.build` put the same
-    # profile into the engine twice, and `engine.num_optimization_profiles` came back as 2.
     profile.set_shape(tensor.name, [1] + shape[1:], [2] + shape[1:], [4] + shape[1:])
+    # Do not call `builder_config.add_optimization_profile(profile)` in this function, `tw.build` will do this
 
     if is_load_weight:
         w = np.ascontiguousarray(para["conv1.weight"])
@@ -173,7 +171,7 @@ def load_large_network_trt(
 
     profile.set_shape("input_ids", [1, 4], [2, 32], [4, 128])
     profile.set_shape("attention_mask", [1, 4], [2, 32], [4, 128])
-    builder_config.add_optimization_profile(profile)
+    # Do not call `builder_config.add_optimization_profile(profile)` in this function, `tw.build` will do this
 
     return []
 
@@ -201,7 +199,7 @@ def load_mnist_network_trt(
         profile.set_shape("x", [1, 1, 28, 28], [2, 1, 28, 28], [4, 1, 28, 28])
     else:
         profile.set_shape("x", [1, 1, 28, 28], [1, 1, 28, 28], [1, 1, 28, 28])
-    builder_config.add_optimization_profile(profile)
+    # Do not call `builder_config.add_optimization_profile(profile)` in this function, `tw.build` will do this
 
     return
 
