@@ -75,6 +75,9 @@ python3 tests/run_tests.py --include "02-API/**"    # glob filter
 python3 tests/run_tests.py --list                   # list without running
 python3 tests/run_tests.py --dry-run                # print commands only
 python3 tests/run_tests.py --tags plugin            # filter by tag
+python3 tests/run_tests.py --since HEAD             # only what your changes affect
+python3 tests/run_tests.py --since HEAD --explain-since   # ... and why each file selected it
+python3 tests/run_tests.py --framework tensorflow   # ONLY the TensorFlow examples
 ```
 
 **Run the full test suite (unified runner):**
@@ -156,6 +159,18 @@ Examples are discovered and run by `tests/run_tests.py`. Discovery rules:
 4. Presence of a `.skip_unit_test` file disables that directory entirely.
 
 `unit_test.yaml` fields: `enabled`, `tags`, `timeout`, `env`, `pre`, `run`, `post`, `clean`. See `tests/run_tests.py` for the full spec.
+
+**Two selectors that change what a default sweep means:**
+
++ **`--since REF`** runs only the examples your changes affect, which turns a ~40 minute sweep into
+  seconds. A changed file is attributed to the example directory that owns it; a change under
+  `tensorrt_cookbook/`, `include/`, `tests/` or `00-Data/`, or to a shared root file, selects
+  everything; a `.md`/`.txt` selects nothing; and **a path no rule recognises selects everything**,
+  because widening is the safe direction. `--explain-since` prints the reason per file.
++ **`--framework NAME`** is how the TensorFlow / JAX / PaddlePaddle examples run. They are skipped
+  by default so a torch-only container does not watch them fail, and this flag is **exclusive**:
+  it runs those and nothing else. The workflow is "default sweep, then `pip install tensorflow`,
+  then `--framework tensorflow`". `--framework all` covers every gated framework.
 
 ## Code Style
 

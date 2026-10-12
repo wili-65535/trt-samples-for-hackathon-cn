@@ -77,7 +77,7 @@ Succeed saving result-engine-model-redundant.onnx:     1 Nodes,     3 tensors
 ============================== End   [case_export_corpus]
 ============================== Start [case_cycle_is_viewable,(),{}]
     reference-cyclic-no-subgraph.onnx: onnx.load works, onnx.checker rejects it as expected
-        Nodes in a graph must be topologically sorted, however input 'loop_back' of node: 
+        Nodes in a graph must be topologically sorted, however input 'loop_back' of node:
 ============================== End   [case_cycle_is_viewable]
 ============================== Start [case_control_flow,(),{}]
 Removed 3 dangling input tensors (read but never written, and not graph inputs):

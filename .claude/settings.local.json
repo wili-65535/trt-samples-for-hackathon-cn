@@ -6,7 +6,8 @@
       "Read",
       "WebFetch",
       "WebSearch",
-      "Write"
+      "Write",
+      "Bash(timeout 900 python3 main.py)"
     ]
   }
 }

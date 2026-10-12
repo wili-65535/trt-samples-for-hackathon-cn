@@ -46,7 +46,7 @@ def case_simple():
 
     # Print engine input / output information
     print_engine_io_information(trt_file=trt_file)
-    
+
 if __name__ == "__main__":
     case_simple()
 
