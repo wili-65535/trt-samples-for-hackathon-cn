@@ -45,10 +45,10 @@ nvtripy 0.1.7
 ============================== End   [case_eager_then_compile]
 
 ============================== Start [case_lazy_evaluation]
-    defining the tensor :    2.063 ms
-    first .eval()       :  108.038 ms  <- compiles, then executes
-    second .eval()      :    0.014 ms  <- already evaluated, cached
-    -> timing the definition understates the cost by 52x
+    defining the tensor :    2.100 ms
+    first .eval()       :  123.613 ms  <- compiles, then executes
+    second .eval()      :    0.013 ms  <- already evaluated, cached
+    -> timing the definition understates the cost by 59x
     passing an unevaluated tensor to an Executable: TripyException: Hint: Try calling `.eval()` on the tensor.
 ============================== End   [case_lazy_evaluation]
 
@@ -61,9 +61,9 @@ nvtripy 0.1.7
 ============================== End   [case_dynamic_shapes]
 
 ============================== Start [case_save_and_load_executable]
-    compile :    445.4 ms
-    load    :      3.1 ms   (122 KiB on disk)
-    -> loading is 142x cheaper than compiling, and the output is identical
+    compile :    554.4 ms
+    load    :      3.4 ms   (88 KiB on disk)
+    -> loading is 163x cheaper than compiling, and the output is identical
 ============================== End   [case_save_and_load_executable]
 
 Finish

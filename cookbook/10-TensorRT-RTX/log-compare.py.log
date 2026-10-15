@@ -1,4 +1,3 @@
 [TensorRT-Cookbook] Version: 2.0.0
-TensorRT     latency: 54.306 us
-TensorRT-RTX latency: 135.890 us
-Finish
+TensorRT     latency: 42.471 us
+[SKIP] tensorrt_rtx is not installed (pip install tensorrt_rtx)

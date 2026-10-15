@@ -1,4 +1,4 @@
-CUDA device count: 4
+CUDA device count: 2
 ================================================================ Device 0
 L2_cache_size                            = 132644864
 clock_rate                               = 1965000
@@ -21,7 +21,7 @@ shared_memory_per_block                  = 49152
 shared_memory_per_block_optin            = 232448
 shared_memory_per_multiprocessor         = 233472
 total_memory                             = 191545606144
-uuid                                     = 3f040b4d-a5b4-f722-61cc-1e9ba3e130cf
+uuid                                     = 032cc9ce-c7f1-23bb-e695-6946f1192583
 warp_size                                = 32
 ================================================================ Device 1
 L2_cache_size                            = 132644864
@@ -37,7 +37,7 @@ memory_clock_rate                        = 3996000
 minor                                    = 0
 multi_processor_count                    = 148
 name                                     = NVIDIA B200
-pci_bus_id                               = 67
+pci_bus_id                               = 82
 pci_device_id                            = 0
 pci_domain_id                            = 0
 regs_per_multiprocessor                  = 65536
@@ -45,54 +45,6 @@ shared_memory_per_block                  = 49152
 shared_memory_per_block_optin            = 232448
 shared_memory_per_multiprocessor         = 233472
 total_memory                             = 191545606144
-uuid                                     = 062f1975-70e6-9dce-227d-42916dc8a45b
-warp_size                                = 32
-================================================================ Device 2
-L2_cache_size                            = 132644864
-clock_rate                               = 1965000
-gcnArchName                              = NVIDIA B200
-is_integrated                            = 0
-is_multi_gpu_board                       = 0
-major                                    = 10
-max_threads_per_block                    = 1024
-max_threads_per_multi_processor          = 2048
-memory_bus_width                         = 7680
-memory_clock_rate                        = 3996000
-minor                                    = 0
-multi_processor_count                    = 148
-name                                     = NVIDIA B200
-pci_bus_id                               = 157
-pci_device_id                            = 0
-pci_domain_id                            = 0
-regs_per_multiprocessor                  = 65536
-shared_memory_per_block                  = 49152
-shared_memory_per_block_optin            = 232448
-shared_memory_per_multiprocessor         = 233472
-total_memory                             = 191545606144
-uuid                                     = 134c5094-1411-941a-0764-676f94bde078
-warp_size                                = 32
-================================================================ Device 3
-L2_cache_size                            = 132644864
-clock_rate                               = 1965000
-gcnArchName                              = NVIDIA B200
-is_integrated                            = 0
-is_multi_gpu_board                       = 0
-major                                    = 10
-max_threads_per_block                    = 1024
-max_threads_per_multi_processor          = 2048
-memory_bus_width                         = 7680
-memory_clock_rate                        = 3996000
-minor                                    = 0
-multi_processor_count                    = 148
-name                                     = NVIDIA B200
-pci_bus_id                               = 195
-pci_device_id                            = 0
-pci_domain_id                            = 0
-regs_per_multiprocessor                  = 65536
-shared_memory_per_block                  = 49152
-shared_memory_per_block_optin            = 232448
-shared_memory_per_multiprocessor         = 233472
-total_memory                             = 191545606144
-uuid                                     = 89fb0d9a-3f28-0920-587f-7da41794b77a
+uuid                                     = 38cc7b94-d606-8ae1-9cde-a3ac93fe4ef0
 warp_size                                = 32
 Finish

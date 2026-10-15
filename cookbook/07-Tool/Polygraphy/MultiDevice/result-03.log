@@ -15,20 +15,20 @@
 [I] Saving ONNX model to: model-TP_tp2_rank0.onnx
 [I] Saving rank 1 graph
 [I] Saving ONNX model to: model-TP_tp2_rank1.onnx
--rw-r--r-- 1 wili dip 1928 Oct 14 09:49 model-TP_tp2_rank0.onnx
--rw-r--r-- 1 wili dip 1928 Oct 14 09:49 model-TP_tp2_rank1.onnx
+-rw-r--r-- 1 wili dip 1928 Oct 15 08:50 model-TP_tp2_rank0.onnx
+-rw-r--r-- 1 wili dip 1928 Oct 15 08:50 model-TP_tp2_rank1.onnx
 [I] Loading model: /work/trt-samples-for-hackathon-cn-wili/cookbook/07-Tool/Polygraphy/MultiDevice/model-TP_tp2_rank0.onnx
 [I] ==== ONNX Model ====
     Name: toy_transformer_block | ONNX Opset: 17
-    
+
     ---- 3 Graph Input(s) ----
     {q [dtype=float32, shape=(1, 4, 8)],
      k [dtype=float32, shape=(1, 8, 4)],
      v [dtype=float32, shape=(1, 4, 8)]}
-    
+
     ---- 1 Graph Output(s) ----
     {shard_0 [dtype=float32, shape=()]}
-    
+
     ---- 4 Initializer(s) ----
     Initializer | w_o [dtype=float32, shape=[8, 8]] | Values:
         [[ 0.03117166 -0.01845115  0.04728983  0.00759657  0.05285276  0.0107718
@@ -47,7 +47,7 @@
           -0.04344859  0.00409321]
          [ 0.06014466 -0.02622201  0.05776031 -0.0327007   0.00435647  0.04482256
           -0.01942877 -0.05899965]]
-    
+
     Initializer | w_gate [dtype=float32, shape=[8, 8]] | Values:
         [[-0.0352166   0.05718695 -0.00329078 -0.04077721 -0.00602347 -0.02671643
            0.04018179 -0.00561855]
@@ -65,7 +65,7 @@
           -0.01749297  0.01471122]
          [-0.00025545  0.01086421 -0.04475883 -0.0592554  -0.01173293  0.01327001
            0.04506773 -0.06135878]]
-    
+
     Initializer | w_up [dtype=float32, shape=[8, 8]] | Values:
         [[-0.02212804  0.03563838 -0.04915002  0.05634458  0.02946722 -0.04225708
           -0.01356652 -0.02662674]
@@ -83,7 +83,7 @@
            0.04964338 -0.05122647]
          [-0.01638282  0.03167497  0.03359424  0.02365955  0.0522152  -0.00169127
           -0.04771798  0.0109143 ]]
-    
+
     Initializer | w_down [dtype=float32, shape=[8, 8]] | Values:
         [[ 8.4693208e-03  1.1000834e-02  8.4631890e-03 -1.0657154e-02
            6.2655658e-04  2.5280170e-02  3.2891929e-03 -3.1031659e-02]
@@ -101,58 +101,58 @@
           -2.3300732e-02 -1.9326102e-02 -2.3444647e-02 -1.2951853e-02]
          [-2.6697710e-02  1.9335181e-02 -4.9736071e-03 -1.4416097e-02
           -2.3432337e-02  2.4411406e-02 -9.3582142e-03 -6.0266424e-03]]
-    
+
     ---- 11 Node(s) ----
     Node 0    | node_qk [Op: MatMul]
         {q [dtype=float32, shape=(1, 4, 8)],
          k [dtype=float32, shape=(1, 8, 4)]}
          -> {qk}
-    
+
     Node 1    | node_softmax [Op: Softmax]
         {qk}
          -> {attention_weight}
         ---- Attributes ----
         node_softmax.axis = -1
-    
+
     Node 2    | node_context [Op: MatMul]
         {attention_weight,
          v [dtype=float32, shape=(1, 4, 8)]}
          -> {context}
-    
+
     Node 3    | node_o_projection [Op: MatMul]
         {context,
          Initializer | w_o [dtype=float32, shape=(8, 8)]}
          -> {attention_out}
-    
+
     Node 4    | node_gate_projection [Op: MatMul]
         {attention_out,
          Initializer | w_gate [dtype=float32, shape=(8, 8)]}
          -> {gate}
-    
+
     Node 5    | node_sigmoid [Op: Sigmoid]
         {gate}
          -> {gate_sigmoid}
-    
+
     Node 6    | node_silu [Op: Mul]
         {gate,
          gate_sigmoid}
          -> {silu}
-    
+
     Node 7    | node_up_projection [Op: MatMul]
         {attention_out,
          Initializer | w_up [dtype=float32, shape=(8, 8)]}
          -> {up}
-    
+
     Node 8    | node_gating [Op: Mul]
         {silu,
          up}
          -> {hidden}
-    
+
     Node 9    | node_down_projection [Op: MatMul]
         {hidden,
          Initializer | w_down [dtype=float32, shape=(8, 8)]}
          -> {y [dtype=float32, shape=(1, 4, 8)]}
-    
+
     Node 10   | shard_1 [Op: DistCollective]
         {y [dtype=float32, shape=(1, 4, 8)]}
          -> {shard_0 [dtype=float32, shape=()]}

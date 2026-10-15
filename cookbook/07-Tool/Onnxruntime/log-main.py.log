@@ -3,7 +3,7 @@
     onnxruntime 1.24.4, get_device() = GPU
     compiled with: ['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider']
     this container has TensorRT 11.3.0.99
-[1;31m2026-10-14 09:35:55.043415461 [E:onnxruntime:Default, provider_bridge_ort.cc:2331 TryGetProviderInfo_TensorRT] /onnxruntime_src/onnxruntime/core/session/provider_bridge_ort.cc:1952 onnxruntime::Provider& onnxruntime::ProviderLibrary::Get() [ONNXRuntimeError] : 1 : FAIL : Failed to load library /home/wili/.local/lib/python3.12/site-packages/onnxruntime/capi/libonnxruntime_providers_tensorrt.so with error: libcublas.so.12: cannot open shared object file: No such file or directory
+[1;31m2026-10-15 08:37:42.910761808 [E:onnxruntime:Default, provider_bridge_ort.cc:2331 TryGetProviderInfo_TensorRT] /onnxruntime_src/onnxruntime/core/session/provider_bridge_ort.cc:1952 onnxruntime::Provider& onnxruntime::ProviderLibrary::Get() [ONNXRuntimeError] : 1 : FAIL : Failed to load library /home/wili/.local/lib/python3.12/site-packages/onnxruntime/capi/libonnxruntime_providers_tensorrt.so with error: libcublas.so.12: cannot open shared object file: No such file or directory
 [m
 *************** EP Error ***************
 EP Error /onnxruntime_src/onnxruntime/python/onnxruntime_pybind_state.cc:539 void onnxruntime::python::RegisterTensorRTPluginsAsCustomOps(PySessionOptions&, const onnxruntime::ProviderOptions&) Please install TensorRT libraries as mentioned in the GPU requirements page, make sure they're in the PATH or LD_LIBRARY_PATH, and that your GPU is supported.
@@ -11,7 +11,7 @@ EP Error /onnxruntime_src/onnxruntime/python/onnxruntime_pybind_state.cc:539 voi
 Falling back to ['CPUExecutionProvider'] and retrying.
 ****************************************
     TensorrtExecutionProvider    -> silently fell back: got ['CPUExecutionProvider']
-[1;31m2026-10-14 09:35:55.177999925 [E:onnxruntime:Default, provider_bridge_ort.cc:2359 TryGetProviderInfo_CUDA] /onnxruntime_src/onnxruntime/core/session/provider_bridge_ort.cc:1952 onnxruntime::Provider& onnxruntime::ProviderLibrary::Get() [ONNXRuntimeError] : 1 : FAIL : Failed to load library /home/wili/.local/lib/python3.12/site-packages/onnxruntime/capi/libonnxruntime_providers_cuda.so with error: libcublasLt.so.12: cannot open shared object file: No such file or directory
+[1;31m2026-10-15 08:37:42.946404070 [E:onnxruntime:Default, provider_bridge_ort.cc:2359 TryGetProviderInfo_CUDA] /onnxruntime_src/onnxruntime/core/session/provider_bridge_ort.cc:1952 onnxruntime::Provider& onnxruntime::ProviderLibrary::Get() [ONNXRuntimeError] : 1 : FAIL : Failed to load library /home/wili/.local/lib/python3.12/site-packages/onnxruntime/capi/libonnxruntime_providers_cuda.so with error: libcublasLt.so.12: cannot open shared object file: No such file or directory
 [m
     CUDAExecutionProvider        -> silently fell back: got ['CPUExecutionProvider']
     CPUExecutionProvider         -> ok
@@ -33,7 +33,7 @@ Falling back to ['CPUExecutionProvider'] and retrying.
     here, is unaffected - `case_reference_for_tensorrt` builds a real engine in this same process.
 
     latency of the providers that actually run (median of 30):
-        CPUExecutionProvider           0.589 ms
+        CPUExecutionProvider           0.091 ms
     -> always assert on `session.get_providers()`. A benchmark that silently ran on CPU is the
        single most common way an 'ORT with TensorRT EP is slow' report gets produced.
 ============================== End   [case_providers]
@@ -47,13 +47,13 @@ Falling back to ['CPUExecutionProvider'] and retrying.
        reads it straight from the ONNX file and accepts any batch (see `case_dynamic_shape`)
 ============================== End   [case_basic_inference]
 ============================== Start [case_reference_for_tensorrt,(),{}]
-[10/14/2026-09:35:59] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[10/14/2026-09:36:05] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-08:37:44] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/15/2026-08:37:50] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
     default (TF32 allowed)   max|ORT - TRT| = 2.971e-03  (1.51e-04 relative), argmax equal: True
-[10/14/2026-09:36:05] [TRT] [W] WARNING The logger passed into createInferBuilder differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
-[10/14/2026-09:36:05] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[10/14/2026-09:36:07] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
-[10/14/2026-09:36:07] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-08:37:50] [TRT] [W] WARNING The logger passed into createInferBuilder differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+[10/15/2026-08:37:50] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/15/2026-08:37:52] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+[10/15/2026-08:37:52] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
     TF32 cleared             max|ORT - TRT| = 9.537e-06  (4.86e-07 relative), argmax equal: True
     -> clearing one flag moved the disagreement by 312x.
        `BuilderFlag.TF32` is on by default, so a TensorRT engine built with no precision flags at
@@ -72,12 +72,12 @@ Falling back to ['CPUExecutionProvider'] and retrying.
        plugins. Dump the optimized model to *read* it; always build TensorRT from the original.
 ============================== End   [case_graph_optimization]
 ============================== Start [case_profiling,(),{}]
-    ort_profile_2026-10-14_09-36-08.json: 122 events, 100 node kernel timings
-        FusedGemm          7150 us  77.5%
-        Conv               1605 us  17.4%
-        MaxPool             143 us   1.5%
-        Gemm                108 us   1.2%
-        ArgMax               63 us   0.7%
+    ort_profile_2026-10-15_08-37-53.json: 122 events, 100 node kernel timings
+        Conv                469 us  35.4%
+        FusedGemm           399 us  30.1%
+        MaxPool             199 us  15.0%
+        ReorderOutput        74 us   5.6%
+        Gemm                 62 us   4.7%
     -> the op names are the *optimized* ones from the previous case, so this is what really ran.
        The file is Chrome-trace format: open it in `chrome://tracing` or Perfetto for a timeline.
 ============================== End   [case_profiling]

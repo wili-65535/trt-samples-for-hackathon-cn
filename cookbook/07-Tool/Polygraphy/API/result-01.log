@@ -12,7 +12,7 @@
     Tactic Sources         | [EDGE_MASK_CONVOLUTIONS, JIT_CONVOLUTIONS]
     Profiling Verbosity    | ProfilingVerbosity.DETAILED
 [W] [MS] Multi stream is disabled because the stream assignment failed.
-[I] Finished engine building in 5.346 seconds
+[I] Finished engine building in 5.622 seconds
 [I] Saving tactic timing cache to model-trained.TimingCache
 [I] Saving engine to model-trained.trt
 OrderedDict({'y': array([[ -0.5980417 ,  -2.3660245 ,   5.615027  ,  10.219767  ,

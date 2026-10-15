@@ -1,6 +1,6 @@
 
 ============================== Start [case_build_model_repository]
-    Engine: model_repository/mnist-cnn/1/model.plan (13280204 B)
+    Engine: model_repository/mnist-cnn/1/model.plan (13279732 B)
     Config: model_repository/mnist-cnn/config.pbtxt
     Repository:
         model_repository/mnist-cnn

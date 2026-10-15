@@ -1,34 +1,34 @@
 [TensorRT-Cookbook] Version: 2.0.0
 ============================== Start [case_partition_scaling,(),{}]
     device: 148 SM, minSmPartitionSize=8, smCoscheduledAlignment=8
-    default stream (all 148 SM):   0.061 ms
-    green stream,  16 SM         :   0.275 ms  (4.47x of the whole GPU, SM ratio 9.25x)
-    green stream,  32 SM         :   0.151 ms  (2.45x of the whole GPU, SM ratio 4.62x)
-    green stream,  64 SM         :   0.088 ms  (1.44x of the whole GPU, SM ratio 2.31x)
-    green stream, 148 SM         :   0.060 ms  (0.98x of the whole GPU, SM ratio 1.00x)
+    default stream (all 148 SM):   0.051 ms
+    green stream,  16 SM         :   0.222 ms  (4.40x of the whole GPU, SM ratio 9.25x)
+    green stream,  32 SM         :   0.123 ms  (2.43x of the whole GPU, SM ratio 4.62x)
+    green stream,  64 SM         :   0.073 ms  (1.44x of the whole GPU, SM ratio 2.31x)
+    green stream, 148 SM         :   0.050 ms  (0.98x of the whole GPU, SM ratio 1.00x)
     -> a partition of every SM costs nothing, so the mechanism itself is free
 ============================== End   [case_partition_scaling]
 ============================== Start [case_noisy_neighbour,(),{}]
-    alone, default stream                     : median  0.056 ms, p95  0.066 ms
-    background job, both on default stream    : median  0.037 ms, p95  0.060 ms  ( 0.66x /  0.91x)
-    background job, green 32 SM / 116 SM        : median  0.042 ms, p95  0.047 ms  ( 0.75x /  0.72x)
+    alone, default stream                     : median  0.030 ms, p95  0.032 ms
+    background job, both on default stream    : median  0.054 ms, p95  0.090 ms  ( 1.79x /  2.79x)
+    background job, green 32 SM / 116 SM        : median  0.035 ms, p95  0.037 ms  ( 1.16x /  1.15x)
     -> this is the MIG experiment, without MIG: same process, no root, no restart
 ============================== End   [case_noisy_neighbour]
 ============================== Start [case_auxiliary_streams_escape_the_partition,(),{}]
     partitions: latency job 32 SM, background job 116 SM (disjoint)
-    background idle                              : median  0.037 ms, p95  0.039 ms
-    background on its partition, max_aux_streams=0      : median  0.043 ms ( 1.15x), p95  0.047 ms ( 1.18x)
-    background on its partition, max_aux_streams=4      : median  0.044 ms ( 1.19x), p95  0.051 ms ( 1.31x)
-    background on its partition, default (-1, TRT decides): median  0.044 ms ( 1.18x), p95  0.046 ms ( 1.17x)
+    background idle                              : median  0.032 ms, p95  0.035 ms
+    background on its partition, max_aux_streams=0      : median  0.035 ms ( 1.09x), p95  0.038 ms ( 1.10x)
+    background on its partition, max_aux_streams=4      : median  0.036 ms ( 1.13x), p95  0.040 ms ( 1.15x)
+    background on its partition, default (-1, TRT decides): median  0.037 ms ( 1.14x), p95  0.043 ms ( 1.25x)
     -> build with `max_aux_streams = 0` or the isolation is a p95 illusion
 ============================== End   [case_auxiliary_streams_escape_the_partition]
 ============================== Start [case_build_is_not_partition_aware,(),{}]
     primary context: cudaGetDeviceProperties.multiProcessorCount=148, cuCtxGetDevResource=148
     green context  : cudaGetDeviceProperties.multiProcessorCount=148, cuCtxGetDevResource=32
-    built on the whole GPU (1), run on 32 SM:   0.151 ms
-    built on the whole GPU (2), run on 32 SM:   0.150 ms
-    built inside the partition, run on 32 SM:   0.137 ms
-    build-to-build spread of two identical builds: 0.001 ms; partition effect: 0.014 ms
+    built on the whole GPU (1), run on 32 SM:   0.123 ms
+    built on the whole GPU (2), run on 32 SM:   0.123 ms
+    built inside the partition, run on 32 SM:   0.112 ms
+    build-to-build spread of two identical builds: 0.001 ms; partition effect: 0.011 ms
     -> the tactic search is empirical, so it adapts to the partition even though the reported
        device properties do not: build where you will run
 ============================== End   [case_build_is_not_partition_aware]

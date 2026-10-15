@@ -2,7 +2,7 @@
 [V] Loaded Module: polygraphy | Version: 0.53.4 | Path: ['/usr/local/lib/python3.12/dist-packages/polygraphy']
 [V] Loaded extension modules: []
 [I] Will generate inference input data according to provided TensorMetadata: {x [shape=(4, 1, 28, 28)]}
-[I] trt-runner-N0-10/14/26-15:06:42     | Activating and starting inference
+[I] trt-runner-N0-10/15/26-08:51:17     | Activating and starting inference
 [I] Loading bytes from /work/trt-samples-for-hackathon-cn-wili/cookbook/07-Tool/Polygraphy/Run/model-trained.trt
 [V] Loaded Module: tensorrt | Version: 11.3.0.99 | Path: ['/usr/local/lib/python3.12/dist-packages/tensorrt']
 [V] Loaded engine size: 12 MiB
@@ -14,11 +14,11 @@
 [I] Streaming iteration 0
     ---- Inference Input(s) ----
     {x [dtype=float32, shape=(4, 1, 28, 28)]}
-[V] trt-runner-N0-10/14/26-15:06:42     | Input metadata is: {x [dtype=float32, shape=(-1, 1, 28, 28)]}
+[V] trt-runner-N0-10/15/26-08:51:17     | Input metadata is: {x [dtype=float32, shape=(-1, 1, 28, 28)]}
 [V] Loaded Module: torch | Version: 2.14.0a0+b2c75dd062.nv26.09 | Path: ['/usr/local/lib/python3.12/dist-packages/torch']
-[I] trt-runner-N0-10/14/26-15:06:42    
+[I] trt-runner-N0-10/15/26-08:51:17
     ---- Inference Output(s) ----
     {y [dtype=float32, shape=(4, 10)],
      z [dtype=int64, shape=(4,)]}
 [I] Iteration: 0
-[I] PASSED | Runtime: 1.851s | Command: /usr/local/bin/polygraphy run model-trained.trt --model-type engine --trt --input-shapes x:[4,1,28,28] --verbose
+[I] PASSED | Runtime: 2.113s | Command: /usr/local/bin/polygraphy run model-trained.trt --model-type engine --trt --input-shapes x:[4,1,28,28] --verbose

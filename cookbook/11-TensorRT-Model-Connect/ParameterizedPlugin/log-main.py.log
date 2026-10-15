@@ -1,9 +1,9 @@
-[10/14/2026-09:02:46] [TRT] [W] Functionality provided through tensorrt.plugin module is experimental.
+[10/15/2026-09:19:31] [TRT] [W] Functionality provided through tensorrt.plugin module is experimental.
 [TensorRT-Cookbook] Version: 2.0.0
-[10/14/2026-09:02:51] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[10/14/2026-09:02:53] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[10/14/2026-09:02:53] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[10/14/2026-09:02:53] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-09:19:36] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-09:19:37] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-09:19:38] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-09:19:38] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 ============================== Start [case_one_plugin_three_kernels,(),{}]
     Registered kernels: ['cookbook.residual_add', 'cookbook.row_sum', 'cookbook.scaled_add']
     residual_add -> shape (2, 3, 8), max abs diff 0.000e+00

@@ -1,5 +1,5 @@
 [TensorRT-Cookbook] Version: 2.0.0
-[10/14/2026-09:05:42] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/15/2026-08:14:17] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
 ============================== Start [case_simple,(),{}]
 Input ->DataType.FLOAT, (-1, 1, 28, 28), (1, 1, 28, 28), x
 Output->DataType.FLOAT, (-1, 10), (1, 10), y

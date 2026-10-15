@@ -230,7 +230,7 @@
     "Datatype": "Float",
     "Format": "(NHWC) Channel major format"
   }],
-  "TacticName": "sm80_xmma_fprop_implicit_gemm_indexed_wo_smem_f32f32_tf32f32_f32_nhwckrsc_nhwc_tilesize128x16x32_stage1_warpsize4x1x1_g1_tensor16x8x8_aligna4_alignc8",
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_indexed_wo_smem_f32f32_tf32f32_f32_nhwckrsc_nhwc_tilesize128x16x32_stage1_warpsize4x1x1_g1_tensor16x8x8_aligna4_alignc4",
   "StreamId": 0,
   "Metadata": "[ONNX Layer: node_conv2d]\u001f[ONNX Layer: node_relu]"
 },{
@@ -419,7 +419,7 @@
     "Datatype": "Float",
     "Format": "(Linear) Row major linear format"
   }],
-  "TacticName": "sm50_xmma_cublas_gemvx_f32f32_f32_f32_tn_n_int32_unit_n_launch_param4x32x32_strided_unit_stride",
+  "TacticName": "sm50_xmma_cublas_gemvx_f32f32_f32_f32_tn_n_int32_unit_n_launch_param8x32x32_strided_unit_stride",
   "StreamId": 0,
   "Metadata": "[ONNX Layer: node_linear]\u001f[ONNX Layer: node_relu_2]"
 },{

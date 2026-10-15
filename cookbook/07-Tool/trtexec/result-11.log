@@ -1,66 +1,66 @@
 [TensorRT-Cookbook] Version: 2.0.0
 ============================== Start [case_profile,('./model-trained-exportProfile.json', 10),{}]
-Iteration count = 10551, layer count = 12
+Iteration count = 18379, layer count = 12
 Top 10 layers by total time:
                       name |  timeMs |  averageMs | medianMs | percentage
 -------------------------------------------------------------------------
-      node_conv2d_1_myl0_4 | 263.392 |  0.0249637 |  0.02496 |    21.1101
-        node_linear_myl0_7 | 221.514 |  0.0209946 | 0.020992 |    17.7537
-    node_linear_1_2_myl0_8 | 156.327 |  0.0148163 | 0.014816 |    12.5292
-        node_conv2d_myl0_1 | 95.5948 | 0.00906026 | 0.009056 |    7.66164
-__myl_MaxrSubExpSum_myl0_9 | 81.3809 | 0.00771309 | 0.007712 |    6.52244
-     __myl_DivTopk_myl0_10 | 80.0194 | 0.00758405 | 0.007584 |    6.41332
-    node_max_pool2d_myl0_2 | 72.2612 | 0.00684875 | 0.006848 |    5.79153
-  node_max_pool2d_1_myl0_6 | 69.2207 | 0.00656058 |  0.00656 |    5.54784
-         __myl_Move_myl0_3 | 63.1492 | 0.00598514 | 0.005984 |    5.06123
-         __myl_Tran_myl0_5 | 59.4185 | 0.00563155 | 0.005632 |    4.76222
-        total (all layers) | 1247.71 |   0.118255 |  0.11824 |        100
+      node_conv2d_1_myl0_4 | 458.215 |  0.0249315 | 0.024928 |    22.0761
+        node_linear_myl0_7 | 381.775 |  0.0207723 | 0.020768 |    18.3933
+    node_linear_1_2_myl0_8 | 234.711 |  0.0127706 | 0.012768 |     11.308
+        node_conv2d_myl0_1 | 163.517 | 0.00889696 | 0.008896 |    7.87799
+         __myl_Move_myl0_3 | 141.162 | 0.00768062 |  0.00768 |    6.80096
+  node_max_pool2d_1_myl0_6 | 121.721 | 0.00662282 | 0.006624 |    5.86431
+    node_max_pool2d_myl0_2 | 116.422 |  0.0063345 | 0.006336 |    5.60901
+__myl_MaxrSubExpSum_myl0_9 | 103.494 | 0.00563109 | 0.005632 |    4.98616
+     __myl_DivTopk_myl0_10 | 102.923 | 0.00560003 |   0.0056 |    4.95866
+__myl_CastReshCast_myl0_11 | 101.141 | 0.00550309 | 0.005504 |    4.87283
+        total (all layers) | 2075.62 |   0.112934 | 0.112928 |        100
 ============================== End   [case_profile]
 ============================== Start [case_profile_compare,('./model-trained-exportProfile.json', './model-trained-reference-exportProfile.json', 5.0),{}]
 Layers differing by >= 5.0% in averageMs (reference = model-trained-reference-exportProfile.json):
                           name | refAverageMs |  averageMs | % difference
 -------------------------------------------------------------------------
-             __mye362_0_myl0_0 |            - | 0.00249629 |          new
-            node_conv2d_myl0_1 |            - | 0.00906026 |          new
-        node_max_pool2d_myl0_2 |            - | 0.00684875 |          new
-             __myl_Move_myl0_3 |            - | 0.00598514 |          new
-          node_conv2d_1_myl0_4 |            - |  0.0249637 |          new
-             __myl_Tran_myl0_5 |            - | 0.00563155 |          new
-      node_max_pool2d_1_myl0_6 |            - | 0.00656058 |          new
-            node_linear_myl0_7 |            - |  0.0209946 |          new
-        node_linear_1_2_myl0_8 |            - |  0.0148163 |          new
-    __myl_MaxrSubExpSum_myl0_9 |            - | 0.00771309 |          new
-         __myl_DivTopk_myl0_10 |            - | 0.00758405 |          new
-    __myl_CastReshCast_myl0_11 |            - | 0.00560037 |          new
-               __mye724_myl0_0 |     0.002564 |          - |         gone
-             __myl_Move_myl0_1 |   0.00694378 |          - |         gone
-            node_conv2d_myl0_2 |    0.0125433 |          - |         gone
-             __myl_Tran_myl0_3 |   0.00700762 |          - |         gone
-        node_max_pool2d_myl0_4 |   0.00611158 |          - |         gone
-             __myl_Move_myl0_5 |   0.00569576 |          - |         gone
-          node_conv2d_1_myl0_6 |    0.0166708 |          - |         gone
-             __myl_Tran_myl0_7 |   0.00563213 |          - |         gone
-      node_max_pool2d_1_myl0_8 |   0.00672027 |          - |         gone
-            node_linear_myl0_9 |    0.0105923 |          - |         gone
-          __myl_MulSum_myl0_10 |   0.00559997 |          - |         gone
-__myl_AddMaxrSubExpSum_myl0_11 |   0.00560007 |          - |         gone
-         __myl_DivMaxr_myl0_12 |   0.00566461 |          - |         gone
-    __myl_CastReshCast_myl0_13 |   0.00566449 |          - |         gone
-              __mye726_myl0_14 |   0.00259207 |          - |         gone
+             __mye362_0_myl0_0 |            - | 0.00271989 |          new
+            node_conv2d_myl0_1 |            - | 0.00889696 |          new
+        node_max_pool2d_myl0_2 |            - |  0.0063345 |          new
+             __myl_Move_myl0_3 |            - | 0.00768062 |          new
+          node_conv2d_1_myl0_4 |            - |  0.0249315 |          new
+             __myl_Tran_myl0_5 |            - | 0.00547092 |          new
+      node_max_pool2d_1_myl0_6 |            - | 0.00662282 |          new
+            node_linear_myl0_7 |            - |  0.0207723 |          new
+        node_linear_1_2_myl0_8 |            - |  0.0127706 |          new
+    __myl_MaxrSubExpSum_myl0_9 |            - | 0.00563109 |          new
+         __myl_DivTopk_myl0_10 |            - | 0.00560003 |          new
+    __myl_CastReshCast_myl0_11 |            - | 0.00550309 |          new
+               __mye724_myl0_0 |   0.00256058 |          - |         gone
+             __myl_Move_myl0_1 |   0.00483274 |          - |         gone
+            node_conv2d_myl0_2 |    0.0127386 |          - |         gone
+             __myl_Tran_myl0_3 |   0.00572914 |          - |         gone
+        node_max_pool2d_myl0_4 |   0.00672126 |          - |         gone
+             __myl_Move_myl0_5 |   0.00720082 |          - |         gone
+          node_conv2d_1_myl0_6 |    0.0168648 |          - |         gone
+             __myl_Tran_myl0_7 |   0.00547094 |          - |         gone
+      node_max_pool2d_1_myl0_8 |    0.0066228 |          - |         gone
+            node_linear_myl0_9 |   0.00867234 |          - |         gone
+          __myl_MulSum_myl0_10 |   0.00556889 |          - |         gone
+__myl_AddMaxrSubExpSum_myl0_11 |   0.00560003 |          - |         gone
+         __myl_DivMaxr_myl0_12 |    0.0056311 |          - |         gone
+    __myl_CastReshCast_myl0_13 |   0.00550307 |          - |         gone
+              __mye726_myl0_14 |   0.00262438 |          - |         gone
 ============================== End   [case_profile_compare]
 ============================== Start [case_trace,('./model-trained-exportTimes.json', 5),{}]
-Iteration count = 30318
+Iteration count = 47247
 First 5 iterations (ms):
 h2dMs | computeMs | d2hMs | latencyMs
 -------------------------------------
-    0 | 0.0641174 |     0 | 0.0641174
-    0 | 0.0629425 |     0 | 0.0629425
-    0 | 0.0635529 |     0 | 0.0635529
-    0 | 0.0628815 |     0 | 0.0628815
-    0 | 0.0630035 |     0 | 0.0630035
+    0 | 0.0608063 |     0 | 0.0608063
+    0 | 0.0608978 |     0 | 0.0608978
+    0 | 0.0608978 |     0 | 0.0608978
+    0 | 0.0609589 |     0 | 0.0609589
+    0 | 0.0608673 |     0 | 0.0608673
 Latency percentiles (ms):
-      min |      mean |       P50 |       P90 |       P95 |    P99 |     max
-----------------------------------------------------------------------------
-0.0620117 | 0.0690329 | 0.0629883 | 0.0630798 | 0.0632324 | 0.2854 | 5.09631
+      min |      mean |       P50 |       P90 |       P95 |       P99 |       max
+---------------------------------------------------------------------------------
+0.0594482 | 0.0608648 | 0.0609131 | 0.0610352 | 0.0610352 | 0.0610962 | 0.0730591
 ============================== End   [case_trace]
 Finish

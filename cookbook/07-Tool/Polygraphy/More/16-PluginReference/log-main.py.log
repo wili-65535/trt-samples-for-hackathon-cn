@@ -30,7 +30,7 @@
     hard-coded 1.0, model attribute is 1.0 -> passes: True
 [E]         FAILED | Output: 'CustomOpModel-V-0-AddScalar-0' | Difference exceeds tolerance (rel=1e-05, abs=1e-06)
 [E]     FAILED | simple | Mismatched outputs: ['CustomOpModel-V-0-AddScalar-0']
-[E] Accuracy Summary | trt-runner-N2-10/14/26-15:50:44 vs. pluginref-runner-N4-10/14/26-15:50:44 | Passed: 0/1 iterations | Pass Rate: 0.00%
+[E] Accuracy Summary | trt-runner-N2-10/15/26-08:49:05 vs. pluginref-runner-N4-10/15/26-08:49:05 | Passed: 0/1 iterations | Pass Rate: 0.00%
     same reference, model attribute is 5.0 -> passes: False
     plugin says [5. 6. 7. 8.], reference says [1. 2. 3. 4.], max |diff| = 4.0
     the bug was in the reference the whole time -- the first comparison just could not see it

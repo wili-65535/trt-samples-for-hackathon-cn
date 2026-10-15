@@ -46,9 +46,9 @@ from tensorrt_cookbook import case_mark
 
 np.random.seed(31193)
 
-N_SWEEP = 16     # Knobs flipped in `case_sweep`; each costs one build, roughly 5 s
-N_BASELINE = 5   # Identical builds used to measure how much the plan size moves on its own
-MARGIN = 1024    # B, added to each side of the measured baseline band
+N_SWEEP = 16  # Knobs flipped in `case_sweep`; each costs one build, roughly 5 s
+N_BASELINE = 5  # Identical builds used to measure how much the plan size moves on its own
+MARGIN = 1024  # B, added to each side of the measured baseline band
 
 result = OrderedDict()
 

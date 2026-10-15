@@ -26,10 +26,10 @@ Hello (fallback)
 ============================== End   [case_bypass_a_layer]
 ============================== Start [case_replace_a_layer_with_a_plugin,(),{}]
     as parsed        : engine layers=1, y[0, 0, :4]=[0. 0. 0. 2.]
-    as parsed        : kernel time 0.0217 ms
+    as parsed        : kernel time 0.0039 ms
     Add -> AddScalar : engine layers=4, y[0, 0, :4]=[0. 0. 0. 2.]
-    Add -> AddScalar : kernel time 0.0119 ms
-    -> output is bit-identical, and the lost fusion costs 0.55x: one pass over memory became two
+    Add -> AddScalar : kernel time 0.0084 ms
+    -> output is bit-identical, and the lost fusion costs 2.16x: one pass over memory became two
 ============================== End   [case_replace_a_layer_with_a_plugin]
 
 Finish

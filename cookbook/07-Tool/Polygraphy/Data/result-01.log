@@ -1,5 +1,5 @@
 [I] RUNNING | Command: /usr/local/bin/polygraphy run /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-trained.onnx --onnxrt --iterations 2 --save-inputs model-trained-inputs.raw --save-outputs model-trained-outputs.raw
-[I] onnxrt-runner-N0-10/14/26-09:37:31  | Activating and starting inference
+[I] onnxrt-runner-N0-10/15/26-08:38:51  | Activating and starting inference
 [I] Creating ONNX-Runtime Inference Session with providers: ['CPUExecutionProvider']
 [I] Saving inference input data to a single file: model-trained-inputs.raw
 [I] Saving inference results to a single file: model-trained-outputs.raw
@@ -8,7 +8,7 @@
 [I] Streaming iteration 0
     ---- Inference Input(s) ----
     {x [dtype=float32, shape=(1, 1, 28, 28)]}
-[I] onnxrt-runner-N0-10/14/26-09:37:31 
+[I] onnxrt-runner-N0-10/15/26-08:38:51
     ---- Inference Output(s) ----
     {y [dtype=float32, shape=(1, 10)],
      z [dtype=int64, shape=(1,)]}
@@ -20,9 +20,9 @@
 [I] Iteration: 1
 [I] Saving inference input data to model-trained-inputs.raw
 [I] Saving inference results to model-trained-outputs.raw
-[I] PASSED | Runtime: 1.394s | Command: /usr/local/bin/polygraphy run /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-trained.onnx --onnxrt --iterations 2 --save-inputs model-trained-inputs.raw --save-outputs model-trained-outputs.raw
+[I] PASSED | Runtime: 1.498s | Command: /usr/local/bin/polygraphy run /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-trained.onnx --onnxrt --iterations 2 --save-inputs model-trained-inputs.raw --save-outputs model-trained-outputs.raw
 [I] RUNNING | Command: /usr/local/bin/polygraphy run /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-trained.onnx --onnxrt --iterations 3 --save-outputs model-trained-outputs-2.raw
-[I] onnxrt-runner-N0-10/14/26-09:37:34  | Activating and starting inference
+[I] onnxrt-runner-N0-10/15/26-08:38:55  | Activating and starting inference
 [I] Creating ONNX-Runtime Inference Session with providers: ['CPUExecutionProvider']
 [I] Saving inference results to a single file: model-trained-outputs-2.raw
 [W] Input tensor: x [shape=BoundedShape(['nBS', 1, 28, 28], min=None, max=None)] | Will generate data of shape: [1, 1, 28, 28].
@@ -30,7 +30,7 @@
 [I] Streaming iteration 0
     ---- Inference Input(s) ----
     {x [dtype=float32, shape=(1, 1, 28, 28)]}
-[I] onnxrt-runner-N0-10/14/26-09:37:34 
+[I] onnxrt-runner-N0-10/15/26-08:38:55
     ---- Inference Output(s) ----
     {y [dtype=float32, shape=(1, 10)],
      z [dtype=int64, shape=(1,)]}
@@ -45,4 +45,4 @@
     {x [dtype=float32, shape=(1, 1, 28, 28)]}
 [I] Iteration: 2
 [I] Saving inference results to model-trained-outputs-2.raw
-[I] PASSED | Runtime: 1.350s | Command: /usr/local/bin/polygraphy run /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-trained.onnx --onnxrt --iterations 3 --save-outputs model-trained-outputs-2.raw
+[I] PASSED | Runtime: 1.443s | Command: /usr/local/bin/polygraphy run /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-trained.onnx --onnxrt --iterations 3 --save-outputs model-trained-outputs-2.raw

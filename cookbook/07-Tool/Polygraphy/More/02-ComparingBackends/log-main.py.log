@@ -63,7 +63,7 @@
     the second one is the useful question: same ranking, regardless of rounding
 ============================== End   [case_indices_needs_indices]
 ============================== Start [case_fp16_is_refused_not_ignored,(),{}]
-[E] 
+[E]
     PolygraphyException: fp16 in CreateConfig is not available on TensorRT version 11.3.0.99.
     loud refusal beats silent no-op
 ============================== End   [case_fp16_is_refused_not_ignored]

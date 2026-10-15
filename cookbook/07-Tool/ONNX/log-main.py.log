@@ -2,12 +2,12 @@
 ============================== Start [case_checker,(),{}]
     check_model(full_check=False) -> passed
     check_model(full_check=True ) -> InferenceError: [ShapeInferenceError] Inference error(s): (op_type:Mul): [ShapeInferenceError] Incompatible dimensions
-[10/14/2026-09:12:06] [TRT] [E] ITensor::getDimensions: Error Code 4: Shape Error (broadcast dimensions must be conformable In op at /_src/optimizer/common/shape/shapeContext.cpp:2700)
-[10/14/2026-09:12:06] [TRT] [E] ModelImporter.cpp:139: While parsing node number 0 [Mul -> "b"]:
-[10/14/2026-09:12:06] [TRT] [E] ModelImporter.cpp:141: --- Begin node ---
-Node name: 
-[10/14/2026-09:12:06] [TRT] [E] ModelImporter.cpp:142: --- End node ---
-[10/14/2026-09:12:06] [TRT] [E] ModelImporter.cpp:150: ERROR: ModelImporter.cpp:517 In function parseNode:
+[10/15/2026-08:21:40] [TRT] [E] ITensor::getDimensions: Error Code 4: Shape Error (broadcast dimensions must be conformable In op at /_src/optimizer/common/shape/shapeContext.cpp:2700)
+[10/15/2026-08:21:40] [TRT] [E] ModelImporter.cpp:139: While parsing node number 0 [Mul -> "b"]:
+[10/15/2026-08:21:40] [TRT] [E] ModelImporter.cpp:141: --- Begin node ---
+Node name:
+[10/15/2026-08:21:40] [TRT] [E] ModelImporter.cpp:142: --- End node ---
+[10/15/2026-08:21:40] [TRT] [E] ModelImporter.cpp:150: ERROR: ModelImporter.cpp:517 In function parseNode:
 [6] Invalid Node - node_of_b
 ITensor::getDimensions: Error Code 4: Shape Error (broadcast dimensions must be conformable In op at /_src/optimizer/common/shape/shapeContext.cpp:2700)
     TensorRT on the same model    -> ok=False, Invalid Node - node_of_b

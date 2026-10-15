@@ -1,4 +1,26 @@
 [TensorRT-Cookbook] Version: 2.0.0
+/opt/pytorch/ao/torchao/quantization/quant_api.py:1542: SyntaxWarning: invalid escape sequence '\.'
+  """Configuration class for applying different quantization configs to modules or parameters based on their fully qualified names (FQNs).
+W1015 07:39:33.269000 97449 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1015 07:39:33.326000 97449 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1015 07:39:34.348000 97449 torch/_library/opaque_object.py:381] is_opaque_value_type is deprecated, use is_opaque_constant_type instead
+W1015 07:39:34.349000 97449 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1015 07:39:34.349000 97449 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1015 07:39:34.350000 97449 torch/_library/opaque_object.py:381] is_opaque_value_type is deprecated, use is_opaque_constant_type instead
+W1015 07:39:34.350000 97449 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1015 07:39:34.350000 97449 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1015 07:39:34.351000 97449 torch/_library/opaque_object.py:381] is_opaque_value_type is deprecated, use is_opaque_constant_type instead
+W1015 07:39:34.351000 97449 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1015 07:39:34.351000 97449 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1015 07:39:34.352000 97449 torch/_library/opaque_object.py:381] is_opaque_value_type is deprecated, use is_opaque_constant_type instead
+W1015 07:39:34.352000 97449 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1015 07:39:34.352000 97449 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+/usr/local/lib/python3.12/dist-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+/usr/local/lib/python3.12/dist-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+/usr/local/lib/python3.12/dist-packages/modelopt/torch/__init__.py:55: UserWarning: transformers 5.19.0 is not tested with current version of modelopt and may cause issues. Please install recommended version with `pip install -U nvidia-modelopt[hf]` if working with HF models.
+  _warnings.warn(
 ============================== Start [case_reference,(),{}]
     model: 2 x Conv2d(32) + Linear(32,256) + Linear(256,256)
     output (8, 256), range [-0.141, 0.159]
@@ -8,21 +30,27 @@
     ----------------------------------------------------------
 Inserted 14 quantizers
 Loading extension modelopt_cuda_ext_fp8...
-Loaded extension modelopt_cuda_ext_fp8 in 86.9 seconds
+Loaded extension modelopt_cuda_ext_fp8 in 86.6 seconds
     FP8                 14             6.824e-03      4.29%
 Inserted 14 quantizers
 Loading extension modelopt_cuda_ext...
+/usr/local/lib/python3.12/dist-packages/triton/language/core.py:2625: UserWarning: tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.
+  warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
 Loaded extension modelopt_cuda_ext in 0.0 seconds
     INT8                14             1.258e-03      0.79%
 Inserted 14 quantizers
     NVFP4               14             1.832e-02     11.51%
 Inserted 14 quantizers
 Loading extension modelopt_cuda_ext_mx...
-Loaded extension modelopt_cuda_ext_mx in 113.0 seconds
+Loaded extension modelopt_cuda_ext_mx in 112.3 seconds
     MXFP8               14             6.946e-03      4.37%
 Inserted 14 quantizers
 awq_lite: Caching activation statistics...
 awq_lite: Searching parameters...
+/work/trt-samples-for-hackathon-cn-wili/cookbook/04-Feature/LowBitQuantization/main.py:92: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter has become the default. Learn more about the new export logic: https://docs.pytorch.org/docs/stable/onnx_export.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html
+  torch.onnx.export(model, (example, ), path, dynamo=use_dynamo, opset_version=OPSET, input_names=["x"], output_names=["y"], verbose=False)
+/usr/local/lib/python3.12/dist-packages/modelopt/torch/quantization/nn/modules/tensor_quantizer.py:1138: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if inputs.numel() == 0:
 Torch IR graph at exception: graph(%inputs.1 : Float(8, 32, 16, 16, strides=[8192, 256, 16, 1], requires_grad=0, device=cuda:0),
       %conv1.weight : Float(32, 32, 3, 3, strides=[288, 9, 3, 1], requires_grad=1, device=cuda:0),
       %conv1.bias : Float(32, strides=[1], requires_grad=1, device=cuda:0),
@@ -133,13 +161,26 @@ Torch IR graph at exception: graph(%inputs.1 : Float(8, 32, 16, 16, strides=[819
       %822 : Long(device=cpu) = prim::Constant[value={8}](), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer
       %823 : Long(device=cpu) = prim::Constant[value={4}](), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer
       %824 : Bool(device=cpu) = prim::Constant[value={0}](), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer
-      %825 : Bool(device=cpu) = prim::Constant[value={0}](), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer
+      %825 : Bool(device=cpu) = prim::Constant[value={0}](), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::wCUDA 13 is not currently supported for TRT-LLM plugins. Please install pytorch with CUDA 12.x support
+eight_quantizer
       %776 : Float(256, 256, strides=[256, 1], requires_grad=0, device=cuda:0) = tensorrt::quantize_op(%inputs, %amax, %822, %823, %824, %825), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer # /usr/local/lib/python3.12/dist-packages/torch/_ops.py:1350:0
       -> (%776)
   %708 : Float(8, 256, strides=[256, 1], requires_grad=0, device=cuda:0) = aten::linear(%input, %702, %fc2.bias), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2 # /usr/local/lib/python3.12/dist-packages/torch/nn/modules/linear.py:134:0
   return (%708)
 
-[10/14/2026-05:27:28] [TRT] [W] Functionality provided through tensorrt.plugin module is experimental.
+[10/15/2026-07:42:58] [TRT] [W] Functionality provided through tensorrt.plugin module is experimental.
+W1015 07:42:58.814000 97449 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1015 07:42:58.815000 97449 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1015 07:42:58.815000 97449 torch/_library/opaque_object.py:207] typ='reference' is deprecated, use typ='symbolic' instead
+WARNING:py.warnings:<string>:6: UserWarning: RuntimeSettings is only honored on TRT-RTX builds; constructing it on regular TensorRT has no effect.
+
+WARNING: [Torch-TensorRT] - Detected this engine is being instantitated in a multi-GPU system with multi-device safe mode disabled. For more on the implications of this as well as workarounds, see the linked documentation (https://pytorch.org/TensorRT/user_guide/runtime.html#multi-device-safe-mode)
+WARNING:py.warnings:/work/trt-samples-for-hackathon-cn-wili/cookbook/04-Feature/LowBitQuantization/main.py:92: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter has become the default. Learn more about the new export logic: https://docs.pytorch.org/docs/stable/onnx_export.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html
+  torch.onnx.export(model, (example, ), path, dynamo=use_dynamo, opset_version=OPSET, input_names=["x"], output_names=["y"], verbose=False)
+
+WARNING:py.warnings:/usr/local/lib/python3.12/dist-packages/modelopt/torch/quantization/nn/modules/tensor_quantizer.py:1138: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if inputs.numel() == 0:
+
 Torch IR graph at exception: graph(%inputs.1 : Float(8, 32, 16, 16, strides=[8192, 256, 16, 1], requires_grad=0, device=cuda:0),
       %conv1.weight : Float(32, 32, 3, 3, strides=[288, 9, 3, 1], requires_grad=1, device=cuda:0),
       %conv1.bias : Float(32, strides=[1], requires_grad=1, device=cuda:0),
@@ -248,7 +289,8 @@ Torch IR graph at exception: graph(%inputs.1 : Float(8, 32, 16, 16, strides=[819
   %702 : Float(256, 256, strides=[256, 1], requires_grad=0, device=cuda:0) = ^FakeTensorQuantFunction[inplace=0, module="modelopt.torch.quantization.tensor_quant"](None, 8, False, False, Float, True, None, 0)(%fc2.weight, %amax.71), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer # /usr/local/lib/python3.12/dist-packages/modelopt/torch/quantization/nn/modules/tensor_quantizer.py:936:0
     block0(%inputs : Float(256, 256, strides=[256, 1], requires_grad=1, device=cuda:0), %amax : Float(256, 1, strides=[1, 1], requires_grad=0, device=cuda:0)):
       %822 : Long(device=cpu) = prim::Constant[value={8}](), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer
-      %823 : Long(device=cpu) = prim::Constant[value={0}](), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer
+      %823 : Long(device=cpu) = prim::Constant[value={0}](), sWARNING:torch_tensorrt [TensorRT Conversion Context]:WARNING The logger passed into createInferBuilder differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+cope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer
       %824 : Bool(device=cpu) = prim::Constant[value={0}](), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer
       %825 : Bool(device=cpu) = prim::Constant[value={0}](), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer
       %776 : Float(256, 256, strides=[256, 1], requires_grad=0, device=cuda:0) = tensorrt::quantize_op(%inputs, %amax, %822, %823, %824, %825), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer # /usr/local/lib/python3.12/dist-packages/torch/_ops.py:1350:0
@@ -256,6 +298,18 @@ Torch IR graph at exception: graph(%inputs.1 : Float(8, 32, 16, 16, strides=[819
   %708 : Float(8, 256, strides=[256, 1], requires_grad=0, device=cuda:0) = aten::linear(%input, %702, %fc2.bias), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2 # /usr/local/lib/python3.12/dist-packages/torch/nn/modules/linear.py:134:0
   return (%708)
 
+WARNING: [Torch-TensorRT] - RuntimeCacheHandle::serialize() invoked on a non-RTX build; returning empty bytes.
+WARNING:py.warnings:<string>:6: UserWarning: RuntimeSettings is only honored on TRT-RTX builds; constructing it on regular TensorRT has no effect.
+
+WARNING: [Torch-TensorRT] - Detected this engine is being instantitated in a multi-GPU system with multi-device safe mode disabled. For more on the implications of this as well as workarounds, see the linked documentation (https://pytorch.org/TensorRT/user_guide/runtime.html#multi-device-safe-mode)
+WARNING:py.warnings:/work/trt-samples-for-hackathon-cn-wili/cookbook/04-Feature/LowBitQuantization/main.py:92: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter has become the default. Learn more about the new export logic: https://docs.pytorch.org/docs/stable/onnx_export.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html
+  torch.onnx.export(model, (example, ), path, dynamo=use_dynamo, opset_version=OPSET, input_names=["x"], output_names=["y"], verbose=False)
+
+WARNING:py.warnings:/usr/local/lib/python3.12/dist-packages/modelopt/torch/quantization/nn/modules/tensor_quantizer.py:1138: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if inputs.numel() == 0:
+
+[W1015 07:43:23.951611704 shape_type_inference.cpp:1994] Warning: The shape inference of trt::TRT_FP4QDQ type is missing, so it may result in wrong shape inference for the exported graph. Please consider adding it in symbolic function. (function UpdateReliable)
+[W1015 07:43:23.951775336 shape_type_inference.cpp:1994] Warning: The shape inference of trt::TRT_FP4QDQ type is missing, so it may result in wrong shape inference for the exported graph. Please consider adding it in symbolic function. (function UpdateReliable)
 Torch IR graph at exception: graph(%inputs.1 : Float(8, 32, 16, 16, strides=[8192, 256, 16, 1], requires_grad=0, device=cuda:0),
       %conv1.weight : Float(32, 32, 3, 3, strides=[288, 9, 3, 1], requires_grad=1, device=cuda:0),
       %conv1.bias : Float(32, strides=[1], requires_grad=1, device=cuda:0),
@@ -366,7 +420,14 @@ Torch IR graph at exception: graph(%inputs.1 : Float(8, 32, 16, 16, strides=[819
       %872 : Long(device=cpu) = prim::Constant[value={2}](), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::input_quantizer
       %873 : Long(device=cpu) = prim::Constant[value={8}](), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::input_quantizer
       %874 : Long(device=cpu) = prim::Constant[value={4}](), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::input_quantizer
-      %813 : Float(8, 256, strides=[256, 1], requires_grad=0, device=cuda:0) = tensorrt::dynamic_block_quantize_op(%inputs.39, %870, %amax.87, %871, %872, %873, %874), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::input_quantizer # /usr/local/lib/python3.12/dist-packages/torch/_ops.py:1350:0
+      %813 : Float(8, WARNING:torch_tensorrt [TensorRT Conversion Context]:WARNING The logger passed into createInferBuilder differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+WARNING:py.warnings:/work/trt-samples-for-hackathon-cn-wili/cookbook/04-Feature/LowBitQuantization/main.py:92: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter has become the default. Learn more about the new export logic: https://docs.pytorch.org/docs/stable/onnx_export.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html
+  torch.onnx.export(model, (example, ), path, dynamo=use_dynamo, opset_version=OPSET, input_names=["x"], output_names=["y"], verbose=False)
+
+WARNING:py.warnings:/usr/local/lib/python3.12/dist-packages/modelopt/torch/quantization/nn/modules/tensor_quantizer.py:1138: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if inputs.numel() == 0:
+
+256, strides=[256, 1], requires_grad=0, device=cuda:0) = tensorrt::dynamic_block_quantize_op(%inputs.39, %870, %amax.87, %871, %872, %873, %874), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::input_quantizer # /usr/local/lib/python3.12/dist-packages/torch/_ops.py:1350:0
       -> (%813)
   %amax.71 : Float(requires_grad=0, device=cuda:0) = aten::detach(%fc2.weight_quantizer._amax), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer # /usr/local/lib/python3.12/dist-packages/modelopt/torch/quantization/nn/modules/tensor_quantizer.py:749:0
   %737 : Float(256, 256, strides=[256, 1], requires_grad=0, device=cuda:0) = ^DynamicBlockQuantizationFunction[inplace=0, module="modelopt.torch.quantization.tensor_quant"](16, None, (2, 1), (4, 3), Float, None, True)(%fc2.weight, %amax.71), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer # /usr/local/lib/python3.12/dist-packages/modelopt/torch/quantization/nn/modules/tensor_quantizer.py:909:0
@@ -381,6 +442,8 @@ Torch IR graph at exception: graph(%inputs.1 : Float(8, 32, 16, 16, strides=[819
   %744 : Float(8, 256, strides=[256, 1], requires_grad=0, device=cuda:0) = aten::linear(%input, %737, %fc2.bias), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2 # /usr/local/lib/python3.12/dist-packages/torch/nn/modules/linear.py:134:0
   return (%744)
 
+[W1015 07:43:24.695427401 shape_type_inference.cpp:1994] Warning: The shape inference of trt::TRT_MXFP8DequantizeLinear type is missing, so it may result in wrong shape inference for the exported graph. Please consider adding it in symbolic function. (function UpdateReliable)
+[W1015 07:43:24.695657431 shape_type_inference.cpp:1994] Warning: The shape inference of trt::TRT_MXFP8DequantizeLinear type is missing, so it may result in wrong shape inference for the exported graph. Please consider adding it in symbolic function. (function UpdateReliable)
 Torch IR graph at exception: graph(%inputs.1 : Float(8, 32, 16, 16, strides=[8192, 256, 16, 1], requires_grad=0, device=cuda:0),
       %conv1.weight : Float(32, 32, 3, 3, strides=[288, 9, 3, 1], requires_grad=1, device=cuda:0),
       %conv1.bias : Float(32, strides=[1], requires_grad=1, device=cuda:0),
@@ -492,7 +555,20 @@ Torch IR graph at exception: graph(%inputs.1 : Float(8, 32, 16, 16, strides=[819
       %868 : Long(device=cpu) = prim::Constant[value={4}](), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer
       %869 : Long(device=cpu) = prim::Constant[value={9}](), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer
       %870 : Long(device=cpu) = prim::Constant[value={8}](), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer
-      %812 : Float(256, 256, strides=[256, 1], requires_grad=0, device=cuda:0) = tensorrt::dynamic_block_quantize_op(%inputs, %866, %807, %867, %868, %869, %870), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer # /usr/local/lib/python3.12/dist-packages/torch/_ops.py:1350:0
+      %812 : Float(256, 256, strides=[256, 1], requires_grad=0, device=cuda:0) = tensorrt::dynamic_block_quantize_oWARNING:torch_tensorrt [TensorRT Conversion Context]:WARNING The logger passed into createInferBuilder differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+WARNING:py.warnings:/work/trt-samples-for-hackathon-cn-wili/cookbook/04-Feature/LowBitQuantization/main.py:92: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter has become the default. Learn more about the new export logic: https://docs.pytorch.org/docs/stable/onnx_export.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html
+  torch.onnx.export(model, (example, ), path, dynamo=use_dynamo, opset_version=OPSET, input_names=["x"], output_names=["y"], verbose=False)
+
+WARNING:py.warnings:/usr/local/lib/python3.12/dist-packages/modelopt/torch/quantization/nn/modules/tensor_quantizer.py:1138: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if inputs.numel() == 0:
+
+WARNING:py.warnings:/usr/local/lib/python3.12/dist-packages/modelopt/torch/quantization/nn/modules/tensor_quantizer.py:1048: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if inputs.shape != self._original_shape:
+
+WARNING:py.warnings:/usr/local/lib/python3.12/dist-packages/torch/onnx/_internal/torchscript_exporter/jit_utils.py:308: UserWarning: Constant folding - Only steps=1 can be constant folded for opset >= 10 onnx::Slice op. Constant folding not applied. (Triggered internally at /opt/pytorch/pytorch/torch/csrc/jit/passes/onnx/constant_fold.cpp:178.)
+  _C._jit_pass_onnx_node_shape_type_inference(node, params_dict, opset_version)
+
+p(%inputs, %866, %807, %867, %868, %869, %870), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2/modelopt.torch.quantization.nn.modules.tensor_quantizer.TensorQuantizer::weight_quantizer # /usr/local/lib/python3.12/dist-packages/torch/_ops.py:1350:0
       -> (%812)
   %735 : Float(8, 256, strides=[256, 1], requires_grad=0, device=cuda:0) = aten::linear(%input, %727, %fc2.bias), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2 # /usr/local/lib/python3.12/dist-packages/torch/nn/modules/linear.py:134:0
   return (%735)
@@ -601,6 +677,7 @@ Torch IR graph at exception: graph(%input.1 : Float(8, 32, 16, 16, strides=[8192
   %1241 : Float(8, 256, strides=[256, 1], requires_grad=0, device=cuda:0) = aten::linear(%input, %1240, %fc2.bias), scope: __main__.MixedModel::/modelopt.torch.opt.dynamic.QuantLinear::fc2 # /usr/local/lib/python3.12/dist-packages/torch/nn/modules/linear.py:134:0
   return (%1241)
 
+WARNING: [Torch-TensorRT] - RuntimeCacheHandle::serialize() invoked on a non-RTX build; returning empty bytes.
     INT4_AWQ            12             1.071e-02      6.73%
 ============================== End   [case_quantize_each_format]
 ============================== Start [case_two_routes_to_tensorrt,(),{}]

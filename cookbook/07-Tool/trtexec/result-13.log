@@ -1,5 +1,5 @@
 &&&& RUNNING TensorRT.trtexec [TensorRT v110300] [b99] # trtexec --helpBuildRoute
-[10/15/2026-05:44:53] [I] [TRT] [MemUsageChange] Init CUDA: CPU +57, GPU +0, now: CPU 62, GPU 3470 (MiB)
+[10/15/2026-09:07:01] [I] [TRT] [MemUsageChange] Init CUDA: CPU +57, GPU +0, now: CPU 62, GPU 625 (MiB)
 {
   "tuner_version": "2.21.55",
   "tuner_options": [

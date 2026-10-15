@@ -89,18 +89,7 @@
 -conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
 -conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
 -conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
--conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
--conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
--conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
--conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
--conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
--conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
--conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
--conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
--conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
--conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
--conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
-============================== Start [case_knob_database,(),{}]
+-c============================== Start [case_knob_database,(),{}]
     tuner_version = 2.21.55, 215 knobs
 
     allowed values               knobs
@@ -127,7 +116,7 @@
     default build_route = ''
     after assignment     = '-conv_use_long_w=off'
 
-    baseline plan size, 5 identical builds: [34860, 34860, 34476, 34860, 34476]
+    baseline plan size, 5 identical builds: [34860, 34476, 34860, 34860, 34860]
     -> 2 distinct value(s), spread 384 B on a 34,476 B plan
        The builder times tactics; a tie broken differently changes the plan. So a single
        build is not a baseline, and `size != baseline` is not evidence of anything.
@@ -138,8 +127,8 @@
 
     route                                plan size   verdict
     -conv_use_long_w=off                    34,476   inside the baseline band - no evidence of any effect
-    -conv_lowering=off                      34,860   inside the baseline band - no evidence of any effect
-    -reshape_ppg=off                        34,860   inside the baseline band - no evidence of any effect
+    -conv_lowering=off                      34,476   inside the baseline band - no evidence of any effect
+    -reshape_ppg=off                        34,476   inside the baseline band - no evidence of any effect
     -transpose_ppg=off                      34,860   inside the baseline band - no evidence of any effect
 
     Each one came back echoed by the tuner as `[TuningBuildRoute] Using build route: ...`,
@@ -154,7 +143,7 @@
     -no_such_knob=on              False   -                       Build route knob '-no_such_knob' is not a valid knob. Use IB
     garbage                       False   -                       Build route token 'garbage' must match format -name=value (w
     -conv_use_long_w              False   -                       Build route token '-conv_use_long_w' must match format -name
-    -conv_use_long_w=maybe        True    -conv_use_long_w=maybe  
+    -conv_use_long_w=maybe        True    -conv_use_long_w=maybe
 
     -> the name is validated, the value is not, and the one case that silently does
        nothing is also the one the tuner claims to be using. Check a route against
@@ -172,3 +161,14 @@
 ============================== End   [case_sweep]
 
 Finish
+onv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
+-conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
+-conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
+-conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
+-conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
+-conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
+-conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
+-conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
+-conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
+-conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")
+-conv_use_long_w=maybe invalid compilation option, ignored (invalid boolean value "maybe")

@@ -1,8 +1,8 @@
 [TensorRT-Cookbook] Version: 2.0.0
-[10/14/2026-05:06:11] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[10/14/2026-05:06:16] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[10/14/2026-05:06:16] [TRT] [E] INetworkDefinition::markOutput: Error Code 4: API Usage Error (Failed attempt to set a tensor (Unnamed Layer* 0) [Convolution]_output as network-level output as it was already set as network-level output. In markOutputHelper at /_src/optimizer/api/network.cpp:2591)
-[10/14/2026-05:06:20] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-07:21:20] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-07:21:24] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-07:21:25] [TRT] [E] INetworkDefinition::markOutput: Error Code 4: API Usage Error (Failed attempt to set a tensor (Unnamed Layer* 0) [Convolution]_output as network-level output as it was already set as network-level output. In markOutputHelper at /_src/optimizer/api/network.cpp:2591)
+[10/15/2026-07:21:29] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 ============================== Start [case_round_trip,(),{}]
     5 blobs, file is 81,870 bytes of ASCII
     name              torch shape          values   flat in .wts   bit-exact
@@ -23,8 +23,8 @@
     9,088 float32 values = 36,352 bytes raw
     format        size        vs raw   load time   keeps shape
     ------------------------------------------------------------------
-    .wts (ASCII)     81,870    2.25x       3.0 ms   no
-    .npz             37,640    1.04x       2.2 ms   yes
+    .wts (ASCII)     81,870    2.25x       3.6 ms   no
+    .npz             37,640    1.04x       2.6 ms   yes
 
     The text format costs 2.2x the size and 1x the load time, and loses the shapes.
     It buys one thing: the file is diffable, greppable and survives being pasted into
@@ -47,9 +47,9 @@ Output->DataType.FLOAT, (4, 10), (4, 10), (Unnamed Layer* 8) [Matrix Multiply]_o
     TF32 True  -> max |TensorRT - torch| = 2.643e-04    (9 layers)
 Input ->DataType.FLOAT, (4, 1, 28, 28), (4, 1, 28, 28), x
 Output->DataType.FLOAT, (4, 10), (4, 10), (Unnamed Layer* 8) [Matrix Multiply]_output
-    TF32 False -> max |TensorRT - torch| = 8.941e-08    (9 layers)
+    TF32 False -> max |TensorRT - torch| = 1.192e-07    (9 layers)
 
-    Same weights, same graph, 2956x difference. **The default builder config
+    Same weights, same graph, 2217x difference. **The default builder config
     enables TF32**, which rounds the mantissa to 10 bits inside the MatMul. Nothing about
     the weight transport is wrong -- with TF32 cleared the hand-built network agrees with
     torch to 1e-07, which is float32 accumulation order and nothing more.

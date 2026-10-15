@@ -2,7 +2,7 @@
 
 Hello (fallback)
 
-[10/14/2026-06:06:16] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-07:53:20] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 ============================== Start [case_int8_qdq_plugin_skeleton,(),{}]
 Input ->DataType.FLOAT, (1, 8), (1, 8), inputT0
 Output->DataType.FLOAT, (1, 8), (1, 8), outputT0
@@ -11,10 +11,7 @@ inputT0
 outputT0
 [[1. 2. 3. 4. 5. 6. 7. 8.]]
 [check]:True,maxAbsDiff=0.000e+00,meanAbsDiff=0.000e+00,maxRelDiff=0.000e+00,meanRelDiff=0.000e+00
-
-Hello (fallback)
-
-[10/14/2026-06:06:16] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-07:53:20] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 ============================== End   [case_int8_qdq_plugin_skeleton]
 ============================== Start [case_int8_qdq_plugin_skeleton,(),{}]
 Input ->DataType.FLOAT, (1, 8), (1, 8), inputT0

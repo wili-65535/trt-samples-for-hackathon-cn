@@ -12,7 +12,7 @@
 ============================== Start [case_setting_a_layer_precision,(),{}]
     trt.ILayer.precision exists: False
     BuilderFlag.*PRECISION_CONSTRAINTS: none left
-[E] 
+[E]
     SetLayerPrecisions: PolygraphyException: layer precision in SetLayerPrecisions is not available on TensorRT version 11.3.0.99.
     a named, version-stamped refusal -- the good kind of removal
 ============================== End   [case_setting_a_layer_precision]

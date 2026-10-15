@@ -1,8 +1,8 @@
 [TensorRT-Cookbook] Version: 2.0.0
-[10/14/2026-05:16:06] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[10/14/2026-05:16:13] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[10/14/2026-05:16:13] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[10/14/2026-05:16:45] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-07:29:51] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/15/2026-07:29:57] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-07:29:58] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/15/2026-07:30:07] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 ============================== Start [case_normal,(),{}]
 Input ->DataType.FLOAT, (-1, 1, 28, 28), (1, 1, 28, 28), x
 Output->DataType.FLOAT, (-1, 10), (1, 10), y
@@ -93,8 +93,8 @@ x
       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
       0.   0.]]]]
 y
-[[ -0.59898555  -2.3657212    5.614266    10.2168     -11.550332
-    0.8892093   -5.151585    -3.6253533   19.623173    -3.7576973 ]]
+[[ -0.5989856  -2.3657217   5.614266   10.216802  -11.550335    0.8892094
+   -5.151586   -3.6253543  19.623178   -3.757697 ]]
 z
 [8]
 ============================== End   [case_normal]

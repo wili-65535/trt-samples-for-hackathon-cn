@@ -29,7 +29,7 @@
     'plan-size' among them        : False
     `polygraphy plan-size` -> exit 2: polygraphy: error: argument tools: invalid choice: 'plan-size' (choose from 'run
     `./plan-size model.onnx --version-compatible` -> exit 0
-      [I] Built in 6.37 s, plan is 118011508 bytes (118.012 MB)
+      [I] Built in 6.25 s, plan is 118011508 bytes (118.012 MB)
     --version-compatible was never written in plan-size; TrtConfigArgs brought it
 ============================== End   [case_your_tool_stays_standalone]
 

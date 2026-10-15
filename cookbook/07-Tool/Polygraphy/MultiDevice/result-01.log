@@ -75,12 +75,6 @@
     },
     "inputs": [
         {
-            "name": "q",
-            "seq_len_idx": 0,
-            "rank": 3,
-            "polygraphy_class": "ShardTensor"
-        },
-        {
             "name": "k",
             "seq_len_idx": 0,
             "rank": 3,
@@ -88,6 +82,12 @@
         },
         {
             "name": "v",
+            "seq_len_idx": 0,
+            "rank": 3,
+            "polygraphy_class": "ShardTensor"
+        },
+        {
+            "name": "q",
             "seq_len_idx": 0,
             "rank": 3,
             "polygraphy_class": "ShardTensor"
@@ -183,7 +183,7 @@
     },
     "inputs": [
         {
-            "name": "v",
+            "name": "k",
             "seq_len_idx": 0,
             "rank": 3,
             "polygraphy_class": "ShardTensor"
@@ -195,7 +195,7 @@
             "polygraphy_class": "ShardTensor"
         },
         {
-            "name": "k",
+            "name": "v",
             "seq_len_idx": 0,
             "rank": 3,
             "polygraphy_class": "ShardTensor"

@@ -3,19 +3,19 @@
 /usr/local/lib/python3.12/dist-packages/polygraphy/util/array.py:677: RuntimeWarning: invalid value encountered in divide
   "numpy": lambda lhs, rhs: lhs / rhs,
 [I] TF32 is disabled by default. Turn on TF32 for better performance with minor accuracy differences.
-[I] onnxrt-runner-N0-10/14/26-15:07:50  | Activating and starting inference
+[I] onnxrt-runner-N0-10/15/26-08:52:16  | Activating and starting inference
 [I] Creating ONNX-Runtime Inference Session with providers: ['CPUExecutionProvider']
-[I] onnxrt-runner-N0-10/14/26-15:07:50  | Running 3 warm-up run(s)
-[I] onnxrt-runner-N0-10/14/26-15:07:50  | Finished 3 warm-up run(s)
-[I] onnxrt-runner-N0-10/14/26-15:07:50 
+[I] onnxrt-runner-N0-10/15/26-08:52:16  | Running 3 warm-up run(s)
+[I] onnxrt-runner-N0-10/15/26-08:52:16  | Finished 3 warm-up run(s)
+[I] onnxrt-runner-N0-10/15/26-08:52:16
     ---- Inference Input(s) ----
     {x [dtype=float32, shape=(1, 1, 28, 28)]}
-[I] onnxrt-runner-N0-10/14/26-15:07:50 
+[I] onnxrt-runner-N0-10/15/26-08:52:16
     ---- Inference Output(s) ----
     {y [dtype=float32, shape=(1, 10)],
      z [dtype=int64, shape=(1,)]}
-[I] onnxrt-runner-N0-10/14/26-15:07:50  | Completed 10 iteration(s) in 3.643 ms | Average inference time: 0.3643 ms.
-[I] trt-runner-N0-10/14/26-15:07:50     | Activating and starting inference
+[I] onnxrt-runner-N0-10/15/26-08:52:16  | Completed 10 iteration(s) in 2.05 ms | Average inference time: 0.205 ms.
+[I] trt-runner-N0-10/15/26-08:52:16     | Activating and starting inference
 [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
 [I] Configuring with profiles:[
         Profile 0:
@@ -27,18 +27,18 @@
     Memory Pools           | [WORKSPACE: 182672.12 MiB, TACTIC_DRAM: 182672.12 MiB, TACTIC_SHARED_MEMORY: 1024.00 MiB]
     Tactic Sources         | [EDGE_MASK_CONVOLUTIONS, JIT_CONVOLUTIONS]
     Profiling Verbosity    | ProfilingVerbosity.DETAILED
-[I] Finished engine building in 5.632 seconds
-[I] trt-runner-N0-10/14/26-15:07:50     | Running 3 warm-up run(s)
-[I] trt-runner-N0-10/14/26-15:07:50     | Finished 3 warm-up run(s)
-[I] trt-runner-N0-10/14/26-15:07:50    
+[I] Finished engine building in 5.579 seconds
+[I] trt-runner-N0-10/15/26-08:52:16     | Running 3 warm-up run(s)
+[I] trt-runner-N0-10/15/26-08:52:16     | Finished 3 warm-up run(s)
+[I] trt-runner-N0-10/15/26-08:52:16
     ---- Inference Input(s) ----
     {x [dtype=float32, shape=(1, 1, 28, 28)]}
-[I] trt-runner-N0-10/14/26-15:07:50    
+[I] trt-runner-N0-10/15/26-08:52:16
     ---- Inference Output(s) ----
     {y [dtype=float32, shape=(1, 10)],
      z [dtype=int64, shape=(1,)]}
-[I] trt-runner-N0-10/14/26-15:07:50     | Completed 10 iteration(s) in 2.814 ms | Average inference time: 0.2814 ms.
-[I] Accuracy Comparison | onnxrt-runner-N0-10/14/26-15:07:50 vs. trt-runner-N0-10/14/26-15:07:50
+[I] trt-runner-N0-10/15/26-08:52:16     | Completed 10 iteration(s) in 2.825 ms | Average inference time: 0.2825 ms.
+[I] Accuracy Comparison | onnxrt-runner-N0-10/15/26-08:52:16 vs. trt-runner-N0-10/15/26-08:52:16
 [I] Iteration: 0
 [I]     simple | Comparing Output: 'y' (dtype=float32, shape=(1, 10)) with 'y' (dtype=float32, shape=(1, 10))
 [I]         Tolerance: [abs=0.001, rel=0.001] | Checking elemwise error
@@ -55,10 +55,10 @@
 [I]             Relative Difference | Stats: mean=0, std-dev=0, var=0, median=0, min=0 at (0,), max=0 at (0,), avg-magnitude=0, p90=0, p95=0, p99=0
 [I]         PASSED | Output: 'z' | Difference is within tolerance (rel=0.001, abs=0.001)
 [I]     PASSED | simple | All outputs matched | Outputs: ['y', 'z']
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: y | Stats: mean=1.5865, std-dev=12.671, var=160.55, median=-0.12711, min=-12.699 at (0, 4), max=27.255 at (0, 5), avg-magnitude=10.059, p90=20.383, p95=23.819, p99=26.568
-[I]     trt-runner-N0-10/14/26-15:07:50: y | Stats: mean=1.5865, std-dev=12.671, var=160.55, median=-0.12711, min=-12.699 at (0, 4), max=27.255 at (0, 5), avg-magnitude=10.059, p90=20.383, p95=23.819, p99=26.568
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: z | Stats: mean=5, std-dev=0, var=0, median=5, min=5 at (0,), max=5 at (0,), avg-magnitude=5, p90=5, p95=5, p99=5
-[I]     trt-runner-N0-10/14/26-15:07:50: z | Stats: mean=5, std-dev=0, var=0, median=5, min=5 at (0,), max=5 at (0,), avg-magnitude=5, p90=5, p95=5, p99=5
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: y | Stats: mean=1.5865, std-dev=12.671, var=160.55, median=-0.12711, min=-12.699 at (0, 4), max=27.255 at (0, 5), avg-magnitude=10.059, p90=20.383, p95=23.819, p99=26.568
+[I]     trt-runner-N0-10/15/26-08:52:16: y | Stats: mean=1.5865, std-dev=12.671, var=160.55, median=-0.12711, min=-12.699 at (0, 4), max=27.255 at (0, 5), avg-magnitude=10.059, p90=20.383, p95=23.819, p99=26.568
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: z | Stats: mean=5, std-dev=0, var=0, median=5, min=5 at (0,), max=5 at (0,), avg-magnitude=5, p90=5, p95=5, p99=5
+[I]     trt-runner-N0-10/15/26-08:52:16: z | Stats: mean=5, std-dev=0, var=0, median=5, min=5 at (0,), max=5 at (0,), avg-magnitude=5, p90=5, p95=5, p99=5
 [I] Iteration: 1
 [I]     simple | Comparing Output: 'y' (dtype=float32, shape=(1, 10)) with 'y' (dtype=float32, shape=(1, 10))
 [I]         Tolerance: [abs=0.001, rel=0.001] | Checking elemwise error
@@ -75,10 +75,10 @@
 [I]             Relative Difference | Stats: mean=nan, std-dev=nan, var=nan, median=nan, min=nan at (0,), max=nan at (0,), avg-magnitude=nan, p90=nan, p95=nan, p99=nan
 [I]         PASSED | Output: 'z' | Difference is within tolerance (rel=0.001, abs=0.001)
 [I]     PASSED | simple | All outputs matched | Outputs: ['y', 'z']
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: y | Stats: mean=1.3538, std-dev=14.479, var=209.63, median=-1.2881, min=-16.142 at (0, 5), max=38.266 at (0, 0), avg-magnitude=10.218, p90=12.622, p95=25.444, p99=35.701
-[I]     trt-runner-N0-10/14/26-15:07:50: y | Stats: mean=1.3538, std-dev=14.479, var=209.63, median=-1.2881, min=-16.142 at (0, 5), max=38.266 at (0, 0), avg-magnitude=10.218, p90=12.622, p95=25.444, p99=35.701
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: z | Stats: mean=0, std-dev=0, var=0, median=0, min=0 at (0,), max=0 at (0,), avg-magnitude=0, p90=0, p95=0, p99=0
-[I]     trt-runner-N0-10/14/26-15:07:50: z | Stats: mean=0, std-dev=0, var=0, median=0, min=0 at (0,), max=0 at (0,), avg-magnitude=0, p90=0, p95=0, p99=0
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: y | Stats: mean=1.3538, std-dev=14.479, var=209.63, median=-1.2881, min=-16.142 at (0, 5), max=38.266 at (0, 0), avg-magnitude=10.218, p90=12.622, p95=25.444, p99=35.701
+[I]     trt-runner-N0-10/15/26-08:52:16: y | Stats: mean=1.3538, std-dev=14.479, var=209.63, median=-1.2881, min=-16.142 at (0, 5), max=38.266 at (0, 0), avg-magnitude=10.218, p90=12.622, p95=25.444, p99=35.701
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: z | Stats: mean=0, std-dev=0, var=0, median=0, min=0 at (0,), max=0 at (0,), avg-magnitude=0, p90=0, p95=0, p99=0
+[I]     trt-runner-N0-10/15/26-08:52:16: z | Stats: mean=0, std-dev=0, var=0, median=0, min=0 at (0,), max=0 at (0,), avg-magnitude=0, p90=0, p95=0, p99=0
 [I] Iteration: 2
 [I]     simple | Comparing Output: 'y' (dtype=float32, shape=(1, 10)) with 'y' (dtype=float32, shape=(1, 10))
 [I]         Tolerance: [abs=0.001, rel=0.001] | Checking elemwise error
@@ -95,10 +95,10 @@
 [I]             Relative Difference | Stats: mean=0, std-dev=0, var=0, median=0, min=0 at (0,), max=0 at (0,), avg-magnitude=0, p90=0, p95=0, p99=0
 [I]         PASSED | Output: 'z' | Difference is within tolerance (rel=0.001, abs=0.001)
 [I]     PASSED | simple | All outputs matched | Outputs: ['y', 'z']
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: y | Stats: mean=3.2319, std-dev=23.543, var=554.29, median=-0.19346, min=-20.495 at (0, 5), max=59.125 at (0, 4), avg-magnitude=16.639, p90=32.458, p95=45.792, p99=56.458
-[I]     trt-runner-N0-10/14/26-15:07:50: y | Stats: mean=3.2319, std-dev=23.543, var=554.29, median=-0.19346, min=-20.495 at (0, 5), max=59.125 at (0, 4), avg-magnitude=16.639, p90=32.458, p95=45.792, p99=56.458
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: z | Stats: mean=4, std-dev=0, var=0, median=4, min=4 at (0,), max=4 at (0,), avg-magnitude=4, p90=4, p95=4, p99=4
-[I]     trt-runner-N0-10/14/26-15:07:50: z | Stats: mean=4, std-dev=0, var=0, median=4, min=4 at (0,), max=4 at (0,), avg-magnitude=4, p90=4, p95=4, p99=4
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: y | Stats: mean=3.2319, std-dev=23.543, var=554.29, median=-0.19346, min=-20.495 at (0, 5), max=59.125 at (0, 4), avg-magnitude=16.639, p90=32.458, p95=45.792, p99=56.458
+[I]     trt-runner-N0-10/15/26-08:52:16: y | Stats: mean=3.2319, std-dev=23.543, var=554.29, median=-0.19346, min=-20.495 at (0, 5), max=59.125 at (0, 4), avg-magnitude=16.639, p90=32.458, p95=45.792, p99=56.458
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: z | Stats: mean=4, std-dev=0, var=0, median=4, min=4 at (0,), max=4 at (0,), avg-magnitude=4, p90=4, p95=4, p99=4
+[I]     trt-runner-N0-10/15/26-08:52:16: z | Stats: mean=4, std-dev=0, var=0, median=4, min=4 at (0,), max=4 at (0,), avg-magnitude=4, p90=4, p95=4, p99=4
 [I] Iteration: 3
 [I]     simple | Comparing Output: 'y' (dtype=float32, shape=(1, 10)) with 'y' (dtype=float32, shape=(1, 10))
 [I]         Tolerance: [abs=0.001, rel=0.001] | Checking elemwise error
@@ -115,10 +115,10 @@
 [I]             Relative Difference | Stats: mean=0, std-dev=0, var=0, median=0, min=0 at (0,), max=0 at (0,), avg-magnitude=0, p90=0, p95=0, p99=0
 [I]         PASSED | Output: 'z' | Difference is within tolerance (rel=0.001, abs=0.001)
 [I]     PASSED | simple | All outputs matched | Outputs: ['y', 'z']
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: y | Stats: mean=4.1092, std-dev=11.908, var=141.81, median=2.9947, min=-11.804 at (0, 5), max=34.125 at (0, 1), avg-magnitude=8.809, p90=11.549, p95=22.837, p99=31.868
-[I]     trt-runner-N0-10/14/26-15:07:50: y | Stats: mean=4.1092, std-dev=11.908, var=141.81, median=2.9947, min=-11.804 at (0, 5), max=34.125 at (0, 1), avg-magnitude=8.809, p90=11.549, p95=22.837, p99=31.868
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: z | Stats: mean=1, std-dev=0, var=0, median=1, min=1 at (0,), max=1 at (0,), avg-magnitude=1, p90=1, p95=1, p99=1
-[I]     trt-runner-N0-10/14/26-15:07:50: z | Stats: mean=1, std-dev=0, var=0, median=1, min=1 at (0,), max=1 at (0,), avg-magnitude=1, p90=1, p95=1, p99=1
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: y | Stats: mean=4.1092, std-dev=11.908, var=141.81, median=2.9947, min=-11.804 at (0, 5), max=34.125 at (0, 1), avg-magnitude=8.809, p90=11.549, p95=22.837, p99=31.868
+[I]     trt-runner-N0-10/15/26-08:52:16: y | Stats: mean=4.1092, std-dev=11.908, var=141.81, median=2.9947, min=-11.804 at (0, 5), max=34.125 at (0, 1), avg-magnitude=8.809, p90=11.549, p95=22.837, p99=31.868
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: z | Stats: mean=1, std-dev=0, var=0, median=1, min=1 at (0,), max=1 at (0,), avg-magnitude=1, p90=1, p95=1, p99=1
+[I]     trt-runner-N0-10/15/26-08:52:16: z | Stats: mean=1, std-dev=0, var=0, median=1, min=1 at (0,), max=1 at (0,), avg-magnitude=1, p90=1, p95=1, p99=1
 [I] Iteration: 4
 [I]     simple | Comparing Output: 'y' (dtype=float32, shape=(1, 10)) with 'y' (dtype=float32, shape=(1, 10))
 [I]         Tolerance: [abs=0.001, rel=0.001] | Checking elemwise error
@@ -135,10 +135,10 @@
 [I]             Relative Difference | Stats: mean=0, std-dev=0, var=0, median=0, min=0 at (0,), max=0 at (0,), avg-magnitude=0, p90=0, p95=0, p99=0
 [I]         PASSED | Output: 'z' | Difference is within tolerance (rel=0.001, abs=0.001)
 [I]     PASSED | simple | All outputs matched | Outputs: ['y', 'z']
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: y | Stats: mean=1.9206, std-dev=6.248, var=39.037, median=0.56428, min=-4.5483 at (0, 3), max=17.032 at (0, 9), avg-magnitude=4.5661, p90=9.4088, p95=13.22, p99=16.269
-[I]     trt-runner-N0-10/14/26-15:07:50: y | Stats: mean=1.9206, std-dev=6.248, var=39.037, median=0.56428, min=-4.5483 at (0, 3), max=17.032 at (0, 9), avg-magnitude=4.5661, p90=9.4088, p95=13.22, p99=16.269
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: z | Stats: mean=9, std-dev=0, var=0, median=9, min=9 at (0,), max=9 at (0,), avg-magnitude=9, p90=9, p95=9, p99=9
-[I]     trt-runner-N0-10/14/26-15:07:50: z | Stats: mean=9, std-dev=0, var=0, median=9, min=9 at (0,), max=9 at (0,), avg-magnitude=9, p90=9, p95=9, p99=9
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: y | Stats: mean=1.9206, std-dev=6.248, var=39.037, median=0.56428, min=-4.5483 at (0, 3), max=17.032 at (0, 9), avg-magnitude=4.5661, p90=9.4088, p95=13.22, p99=16.269
+[I]     trt-runner-N0-10/15/26-08:52:16: y | Stats: mean=1.9206, std-dev=6.248, var=39.037, median=0.56428, min=-4.5483 at (0, 3), max=17.032 at (0, 9), avg-magnitude=4.5661, p90=9.4088, p95=13.22, p99=16.269
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: z | Stats: mean=9, std-dev=0, var=0, median=9, min=9 at (0,), max=9 at (0,), avg-magnitude=9, p90=9, p95=9, p99=9
+[I]     trt-runner-N0-10/15/26-08:52:16: z | Stats: mean=9, std-dev=0, var=0, median=9, min=9 at (0,), max=9 at (0,), avg-magnitude=9, p90=9, p95=9, p99=9
 [I] Iteration: 5
 [I]     simple | Comparing Output: 'y' (dtype=float32, shape=(1, 10)) with 'y' (dtype=float32, shape=(1, 10))
 [I]         Tolerance: [abs=0.001, rel=0.001] | Checking elemwise error
@@ -155,10 +155,10 @@
 [I]             Relative Difference | Stats: mean=0, std-dev=0, var=0, median=0, min=0 at (0,), max=0 at (0,), avg-magnitude=0, p90=0, p95=0, p99=0
 [I]         PASSED | Output: 'z' | Difference is within tolerance (rel=0.001, abs=0.001)
 [I]     PASSED | simple | All outputs matched | Outputs: ['y', 'z']
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: y | Stats: mean=-0.034582, std-dev=11.888, var=141.33, median=-2.1012, min=-14.758 at (0, 6), max=30.281 at (0, 2), avg-magnitude=8.3567, p90=8.4228, p95=19.352, p99=28.095
-[I]     trt-runner-N0-10/14/26-15:07:50: y | Stats: mean=-0.034582, std-dev=11.888, var=141.33, median=-2.1012, min=-14.758 at (0, 6), max=30.281 at (0, 2), avg-magnitude=8.3567, p90=8.4228, p95=19.352, p99=28.095
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: z | Stats: mean=2, std-dev=0, var=0, median=2, min=2 at (0,), max=2 at (0,), avg-magnitude=2, p90=2, p95=2, p99=2
-[I]     trt-runner-N0-10/14/26-15:07:50: z | Stats: mean=2, std-dev=0, var=0, median=2, min=2 at (0,), max=2 at (0,), avg-magnitude=2, p90=2, p95=2, p99=2
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: y | Stats: mean=-0.034582, std-dev=11.888, var=141.33, median=-2.1012, min=-14.758 at (0, 6), max=30.281 at (0, 2), avg-magnitude=8.3567, p90=8.4228, p95=19.352, p99=28.095
+[I]     trt-runner-N0-10/15/26-08:52:16: y | Stats: mean=-0.034582, std-dev=11.888, var=141.33, median=-2.1012, min=-14.758 at (0, 6), max=30.281 at (0, 2), avg-magnitude=8.3567, p90=8.4228, p95=19.352, p99=28.095
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: z | Stats: mean=2, std-dev=0, var=0, median=2, min=2 at (0,), max=2 at (0,), avg-magnitude=2, p90=2, p95=2, p99=2
+[I]     trt-runner-N0-10/15/26-08:52:16: z | Stats: mean=2, std-dev=0, var=0, median=2, min=2 at (0,), max=2 at (0,), avg-magnitude=2, p90=2, p95=2, p99=2
 [I] Iteration: 6
 [I]     simple | Comparing Output: 'y' (dtype=float32, shape=(1, 10)) with 'y' (dtype=float32, shape=(1, 10))
 [I]         Tolerance: [abs=0.001, rel=0.001] | Checking elemwise error
@@ -175,10 +175,10 @@
 [I]             Relative Difference | Stats: mean=0, std-dev=0, var=0, median=0, min=0 at (0,), max=0 at (0,), avg-magnitude=0, p90=0, p95=0, p99=0
 [I]         PASSED | Output: 'z' | Difference is within tolerance (rel=0.001, abs=0.001)
 [I]     PASSED | simple | All outputs matched | Outputs: ['y', 'z']
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: y | Stats: mean=3.9218, std-dev=9.3717, var=87.829, median=3.3362, min=-5.6495 at (0, 7), max=27.229 at (0, 1), avg-magnitude=7.4384, p90=11.558, p95=19.394, p99=25.662
-[I]     trt-runner-N0-10/14/26-15:07:50: y | Stats: mean=3.9218, std-dev=9.3717, var=87.829, median=3.3362, min=-5.6495 at (0, 7), max=27.229 at (0, 1), avg-magnitude=7.4384, p90=11.558, p95=19.394, p99=25.662
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: z | Stats: mean=1, std-dev=0, var=0, median=1, min=1 at (0,), max=1 at (0,), avg-magnitude=1, p90=1, p95=1, p99=1
-[I]     trt-runner-N0-10/14/26-15:07:50: z | Stats: mean=1, std-dev=0, var=0, median=1, min=1 at (0,), max=1 at (0,), avg-magnitude=1, p90=1, p95=1, p99=1
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: y | Stats: mean=3.9218, std-dev=9.3717, var=87.829, median=3.3362, min=-5.6495 at (0, 7), max=27.229 at (0, 1), avg-magnitude=7.4384, p90=11.558, p95=19.394, p99=25.662
+[I]     trt-runner-N0-10/15/26-08:52:16: y | Stats: mean=3.9218, std-dev=9.3717, var=87.829, median=3.3362, min=-5.6495 at (0, 7), max=27.229 at (0, 1), avg-magnitude=7.4384, p90=11.558, p95=19.394, p99=25.662
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: z | Stats: mean=1, std-dev=0, var=0, median=1, min=1 at (0,), max=1 at (0,), avg-magnitude=1, p90=1, p95=1, p99=1
+[I]     trt-runner-N0-10/15/26-08:52:16: z | Stats: mean=1, std-dev=0, var=0, median=1, min=1 at (0,), max=1 at (0,), avg-magnitude=1, p90=1, p95=1, p99=1
 [I] Iteration: 7
 [I]     simple | Comparing Output: 'y' (dtype=float32, shape=(1, 10)) with 'y' (dtype=float32, shape=(1, 10))
 [I]         Tolerance: [abs=0.001, rel=0.001] | Checking elemwise error
@@ -195,10 +195,10 @@
 [I]             Relative Difference | Stats: mean=0, std-dev=0, var=0, median=0, min=0 at (0,), max=0 at (0,), avg-magnitude=0, p90=0, p95=0, p99=0
 [I]         PASSED | Output: 'z' | Difference is within tolerance (rel=0.001, abs=0.001)
 [I]     PASSED | simple | All outputs matched | Outputs: ['y', 'z']
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: y | Stats: mean=-0.68609, std-dev=10.209, var=104.22, median=0.39025, min=-18.191 at (0, 6), max=23.149 at (0, 3), avg-magnitude=6.6284, p90=4.8075, p95=13.978, p99=21.315
-[I]     trt-runner-N0-10/14/26-15:07:50: y | Stats: mean=-0.68609, std-dev=10.209, var=104.22, median=0.39025, min=-18.191 at (0, 6), max=23.149 at (0, 3), avg-magnitude=6.6284, p90=4.8075, p95=13.978, p99=21.315
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: z | Stats: mean=3, std-dev=0, var=0, median=3, min=3 at (0,), max=3 at (0,), avg-magnitude=3, p90=3, p95=3, p99=3
-[I]     trt-runner-N0-10/14/26-15:07:50: z | Stats: mean=3, std-dev=0, var=0, median=3, min=3 at (0,), max=3 at (0,), avg-magnitude=3, p90=3, p95=3, p99=3
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: y | Stats: mean=-0.68609, std-dev=10.209, var=104.22, median=0.39025, min=-18.191 at (0, 6), max=23.149 at (0, 3), avg-magnitude=6.6284, p90=4.8075, p95=13.978, p99=21.315
+[I]     trt-runner-N0-10/15/26-08:52:16: y | Stats: mean=-0.68609, std-dev=10.209, var=104.22, median=0.39025, min=-18.191 at (0, 6), max=23.149 at (0, 3), avg-magnitude=6.6284, p90=4.8075, p95=13.978, p99=21.315
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: z | Stats: mean=3, std-dev=0, var=0, median=3, min=3 at (0,), max=3 at (0,), avg-magnitude=3, p90=3, p95=3, p99=3
+[I]     trt-runner-N0-10/15/26-08:52:16: z | Stats: mean=3, std-dev=0, var=0, median=3, min=3 at (0,), max=3 at (0,), avg-magnitude=3, p90=3, p95=3, p99=3
 [I] Iteration: 8
 [I]     simple | Comparing Output: 'y' (dtype=float32, shape=(1, 10)) with 'y' (dtype=float32, shape=(1, 10))
 [I]         Tolerance: [abs=0.001, rel=0.001] | Checking elemwise error
@@ -215,10 +215,10 @@
 [I]             Relative Difference | Stats: mean=0, std-dev=0, var=0, median=0, min=0 at (0,), max=0 at (0,), avg-magnitude=0, p90=0, p95=0, p99=0
 [I]         PASSED | Output: 'z' | Difference is within tolerance (rel=0.001, abs=0.001)
 [I]     PASSED | simple | All outputs matched | Outputs: ['y', 'z']
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: y | Stats: mean=4.6484, std-dev=10.1, var=102.01, median=3.2011, min=-5.7376 at (0, 6), max=31.883 at (0, 1), avg-magnitude=7.095, p90=10.426, p95=21.155, p99=29.737
-[I]     trt-runner-N0-10/14/26-15:07:50: y | Stats: mean=4.6484, std-dev=10.1, var=102.01, median=3.2011, min=-5.7376 at (0, 6), max=31.883 at (0, 1), avg-magnitude=7.095, p90=10.426, p95=21.155, p99=29.737
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: z | Stats: mean=1, std-dev=0, var=0, median=1, min=1 at (0,), max=1 at (0,), avg-magnitude=1, p90=1, p95=1, p99=1
-[I]     trt-runner-N0-10/14/26-15:07:50: z | Stats: mean=1, std-dev=0, var=0, median=1, min=1 at (0,), max=1 at (0,), avg-magnitude=1, p90=1, p95=1, p99=1
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: y | Stats: mean=4.6484, std-dev=10.1, var=102.01, median=3.2011, min=-5.7376 at (0, 6), max=31.883 at (0, 1), avg-magnitude=7.095, p90=10.426, p95=21.155, p99=29.737
+[I]     trt-runner-N0-10/15/26-08:52:16: y | Stats: mean=4.6484, std-dev=10.1, var=102.01, median=3.2011, min=-5.7376 at (0, 6), max=31.883 at (0, 1), avg-magnitude=7.095, p90=10.426, p95=21.155, p99=29.737
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: z | Stats: mean=1, std-dev=0, var=0, median=1, min=1 at (0,), max=1 at (0,), avg-magnitude=1, p90=1, p95=1, p99=1
+[I]     trt-runner-N0-10/15/26-08:52:16: z | Stats: mean=1, std-dev=0, var=0, median=1, min=1 at (0,), max=1 at (0,), avg-magnitude=1, p90=1, p95=1, p99=1
 [I] Iteration: 9
 [I]     simple | Comparing Output: 'y' (dtype=float32, shape=(1, 10)) with 'y' (dtype=float32, shape=(1, 10))
 [I]         Tolerance: [abs=0.001, rel=0.001] | Checking elemwise error
@@ -235,9 +235,9 @@
 [I]             Relative Difference | Stats: mean=0, std-dev=0, var=0, median=0, min=0 at (0,), max=0 at (0,), avg-magnitude=0, p90=0, p95=0, p99=0
 [I]         PASSED | Output: 'z' | Difference is within tolerance (rel=0.001, abs=0.001)
 [I]     PASSED | simple | All outputs matched | Outputs: ['y', 'z']
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: y | Stats: mean=3.2551, std-dev=13.194, var=174.07, median=1.1178, min=-9.1711 at (0, 3), max=38.195 at (0, 4), avg-magnitude=8.9297, p90=11.179, p95=24.687, p99=35.493
-[I]     trt-runner-N0-10/14/26-15:07:50: y | Stats: mean=3.2551, std-dev=13.194, var=174.07, median=1.1178, min=-9.1711 at (0, 3), max=38.195 at (0, 4), avg-magnitude=8.9297, p90=11.179, p95=24.687, p99=35.493
-[I]     onnxrt-runner-N0-10/14/26-15:07:50: z | Stats: mean=4, std-dev=0, var=0, median=4, min=4 at (0,), max=4 at (0,), avg-magnitude=4, p90=4, p95=4, p99=4
-[I]     trt-runner-N0-10/14/26-15:07:50: z | Stats: mean=4, std-dev=0, var=0, median=4, min=4 at (0,), max=4 at (0,), avg-magnitude=4, p90=4, p95=4, p99=4
-[I] Accuracy Summary | onnxrt-runner-N0-10/14/26-15:07:50 vs. trt-runner-N0-10/14/26-15:07:50 | Passed: 10/10 iterations | Pass Rate: 100.00%
-[I] PASSED | Runtime: 11.732s | Command: /usr/local/bin/polygraphy run /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-trained.onnx --onnxrt --trt --data-loader-script data_loader.py --sequential-runners --warm-up 3 --check-error-stat elemwise --atol 1e-3 --rtol 1e-3 --trt-min-shapes x:[1,1,28,28] --trt-opt-shapes x:[1,1,28,28] --trt-max-shapes x:[16,1,28,28]
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: y | Stats: mean=3.2551, std-dev=13.194, var=174.07, median=1.1178, min=-9.1711 at (0, 3), max=38.195 at (0, 4), avg-magnitude=8.9297, p90=11.179, p95=24.687, p99=35.493
+[I]     trt-runner-N0-10/15/26-08:52:16: y | Stats: mean=3.2551, std-dev=13.194, var=174.07, median=1.1178, min=-9.1711 at (0, 3), max=38.195 at (0, 4), avg-magnitude=8.9297, p90=11.179, p95=24.687, p99=35.493
+[I]     onnxrt-runner-N0-10/15/26-08:52:16: z | Stats: mean=4, std-dev=0, var=0, median=4, min=4 at (0,), max=4 at (0,), avg-magnitude=4, p90=4, p95=4, p99=4
+[I]     trt-runner-N0-10/15/26-08:52:16: z | Stats: mean=4, std-dev=0, var=0, median=4, min=4 at (0,), max=4 at (0,), avg-magnitude=4, p90=4, p95=4, p99=4
+[I] Accuracy Summary | onnxrt-runner-N0-10/15/26-08:52:16 vs. trt-runner-N0-10/15/26-08:52:16 | Passed: 10/10 iterations | Pass Rate: 100.00%
+[I] PASSED | Runtime: 10.177s | Command: /usr/local/bin/polygraphy run /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-trained.onnx --onnxrt --trt --data-loader-script data_loader.py --sequential-runners --warm-up 3 --check-error-stat elemwise --atol 1e-3 --rtol 1e-3 --trt-min-shapes x:[1,1,28,28] --trt-opt-shapes x:[1,1,28,28] --trt-max-shapes x:[16,1,28,28]

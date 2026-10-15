@@ -225,6 +225,7 @@ def case_calibrate_on_a_reference_graph() -> None:
     import onnxruntime
     option = onnxruntime.SessionOptions()
     option.intra_op_num_threads = 1
+    option.inter_op_num_threads = 1  # The inter-op pool floods stderr the same way
     session = onnxruntime.InferenceSession(str(reference_file), option, providers=["CPUExecutionProvider"])
     probe = np.random.rand(N_BATCH, N_CHANNEL, N_SIZE, N_SIZE).astype(np.float32)
     reference_output = session.run(None, {"x": probe})[0]

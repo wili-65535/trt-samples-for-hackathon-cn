@@ -15,8 +15,8 @@
 ============================== End   [case_backend]
 ============================== Start [case_autotune,(),{}]
     model-a.onnx: 13 nodes, no Q/DQ yet
-    autotuned in 203.9 s, 14 TensorRT benchmarks
-    baseline 0.140 ms -> tuned 0.100 ms  (**1.428x**)
+    autotuned in 154.4 s, 14 TensorRT benchmarks
+    baseline 0.110 ms -> tuned 0.080 ms  (**1.400x**)
     baseline.onnx        :  13 nodes, 0 Q / 0 DQ
     optimized_final.onnx :  25 nodes, 6 Q / 6 DQ
 
@@ -27,13 +27,13 @@
     Contrast 07-Tool/FP16Tuning, which searches precision per layer against *accuracy*.
 ============================== End   [case_autotune]
 ============================== Start [case_regions_and_patterns,(),{}]
-    baseline_latency_ms: 0.136353
+    baseline_latency_ms: 0.108154
     performance_threshold: 1.02   <- a scheme must beat the best by this factor to be adopted
 
     3 pattern(s) discovered, each a sub-graph the search treats as one unit:
-      size 3: Conv -> Relu -> Conv                          4 scheme(s), best 0.1262 ms
-      size 5: Conv -> Relu -> Conv -> Relu -> MaxPool       4 scheme(s), best 0.0708 ms
-      size 13: COMPOSITE(Conv -> Relu -> Conv -> Relu -> Conv -> Relu -> MaxPool -> Relu -> Conv -> Relu -> MaxPool 4 scheme(s), best 0.0953 ms
+      size 3: Conv -> Relu -> Conv                          4 scheme(s), best 0.1018 ms
+      size 5: Conv -> Relu -> Conv -> Relu -> MaxPool       4 scheme(s), best 0.0568 ms
+      size 13: COMPOSITE(Conv -> Relu -> Conv -> Relu -> Conv -> Relu -> MaxPool -> Relu -> Conv -> Relu -> MaxPool 4 scheme(s), best 0.0773 ms
 
     A pattern signature is the op sequence *with its attributes*:
       Conv[dilations=1x1,group=1,kernel_shape=3x3,pads=1x1x1x1,strides=1x1]->Relu->Conv[dilations=1x1,group=1,kernel...
@@ -45,8 +45,8 @@
 
     tuning model-b        benchmarks   wall time   speedup found
     --------------------------------------------------------------
-    without the cache             14     164.0 s   1.397x
-    with model-a's cache          14     167.3 s   1.398x
+    without the cache             14     150.3 s   1.385x
+    with model-a's cache          14     144.7 s   1.363x
 
     The cache is keyed by pattern signature, so the shared conv blocks are recognised
     even though model-b has a different head. What it saves is benchmarks -- and a

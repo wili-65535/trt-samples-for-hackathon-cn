@@ -20,10 +20,10 @@
     but `mark_output` needs no listener, no debug state, and no callback per inference
 ============================== End   [case_against_marking_it_an_output]
 ============================== Start [case_marking_costs_you_even_when_switched_off,(),{}]
-    baseline          :  0.332 ms, workspace  127488 B
-    MarkDebug         :  0.599 ms, workspace  201216 B
-    mark_output       :  0.417 ms, workspace  102400 B
-    MarkDebug costs 1.80x over baseline, with the debug state never switched on
+    baseline          :  0.325 ms, workspace  127488 B
+    MarkDebug         :  0.593 ms, workspace  201216 B
+    mark_output       :  0.405 ms, workspace  102400 B
+    MarkDebug costs 1.82x over baseline, with the debug state never switched on
     mark_output costs 1.25x -- the cheaper of the two here
 ============================== End   [case_marking_costs_you_even_when_switched_off]
 ============================== Start [case_every_unfused_tensor,(),{}]

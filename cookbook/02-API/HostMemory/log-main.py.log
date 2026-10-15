@@ -1,6 +1,6 @@
 [TensorRT-Cookbook] Version: 2.0.0
 
-================ Public members of <tensorrt.tensorrt.IHostMemory object at 0x7e108371b530> (instance)
+================ Public members of <tensorrt.tensorrt.IHostMemory object at 0x7bc89c416ab0> (instance)
  0 Callback members: []
  0 Callable methods: []
  2 Non-callable attributions: ['dtype', 'nbytes']
