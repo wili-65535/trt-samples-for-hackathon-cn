@@ -1,4 +1,4 @@
-[TensorRT-Cookbook] Version: 1.0.0
+[TensorRT-Cookbook] Version: 2.0.0
 ============================== Start [case_device_info,(),{}]
 Found 4 device(s):
   Device 0: NVIDIA B200
@@ -21,12 +21,12 @@ Wrote device_info.json
 ============================== End   [case_device_info]
 ============================== Start [case_gpu_state,(),{}]
 Current GPU 0 state:
-    temperature_C: 30
-    power_W: 193
+    temperature_C: 37
+    power_W: 215
     gpu_util_pct: 0
-    sm_clock_mhz: 135
+    sm_clock_mhz: 1500
     mem_clock_mhz: 3996
-    graphics_clock_mhz: 135
+    graphics_clock_mhz: 1500
 
 Max clocks: sm=1965 MHz, mem=3996 MHz
 Note: the SM clock is below its maximum. For reproducible profiling, lock the clocks (needs root):

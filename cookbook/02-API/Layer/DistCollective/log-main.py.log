@@ -1,8 +1,8 @@
 [TensorRT-Cookbook] Version: 2.0.0
 [TensorRT-Cookbook] Version: 2.0.0
 [TensorRT-Cookbook] Version: 2.0.0
-[09/09/2026-10:10:52] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[09/09/2026-10:10:52] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-06:29:02] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-06:29:02] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 Members of tensorrt.tensorrt.CollectiveOperation:
  0 -> ALL_REDUCE
  1 -> ALL_GATHER
@@ -41,24 +41,24 @@ Members of tensorrt.tensorrt.ReduceOperation:
 Input ->DataType.FLOAT, (4, 3), (4, 3), input
 Output->DataType.FLOAT, (4, 3), (4, 3), output
 [check]:True,maxAbsDiff=0.000e+00,meanAbsDiff=0.000e+00,maxRelDiff=0.000e+00,meanRelDiff=0.000e+00
-Rank 0 PASSED
-
-================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x7d7c9124aab0> (instance)
- 0 Callback members: []
- 0 Callable methods: []
- 0 Non-callable attributions: []
-Finish child process
 Rank 1 PASSED
 
-================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x714dd40795f0> (instance)
+================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x795d1b88cc70> (instance)
+ 0 Callback members: []
+ 0 Callable methods: []
+ 0 Non-callable attributions: []
+Finish child process
+Rank 0 PASSED
+
+================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x707799628df0> (instance)
  0 Callback members: []
  0 Callable methods: []
  0 Non-callable attributions: []
 Finish child process
 [TensorRT-Cookbook] Version: 2.0.0
 [TensorRT-Cookbook] Version: 2.0.0
-[09/09/2026-10:10:58] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[09/09/2026-10:10:58] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-06:29:12] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-06:29:12] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 Members of tensorrt.tensorrt.CollectiveOperation:
  0 -> ALL_REDUCE
  1 -> ALL_GATHER
@@ -99,22 +99,22 @@ Output->DataType.FLOAT, (8, 3), (8, 3), output
 [check]:True,maxAbsDiff=0.000e+00,meanAbsDiff=0.000e+00,maxRelDiff=0.000e+00,meanRelDiff=0.000e+00
 Rank 1 PASSED
 
-================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x7897a03e92f0> (instance)
+================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x7a6e33f53ef0> (instance)
  0 Callback members: []
  0 Callable methods: []
  0 Non-callable attributions: []
 Finish child process
 Rank 0 PASSED
 
-================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x771a2e3cab70> (instance)
+================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x70bbbe0f7eb0> (instance)
  0 Callback members: []
  0 Callable methods: []
  0 Non-callable attributions: []
 Finish child process
 [TensorRT-Cookbook] Version: 2.0.0
 [TensorRT-Cookbook] Version: 2.0.0
-[09/09/2026-10:11:04] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[09/09/2026-10:11:04] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-06:29:22] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-06:29:22] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 Members of tensorrt.tensorrt.CollectiveOperation:
  0 -> ALL_REDUCE
  1 -> ALL_GATHER
@@ -155,22 +155,22 @@ Output->DataType.FLOAT, (4, 3), (4, 3), output
 [check]:True,maxAbsDiff=0.000e+00,meanAbsDiff=0.000e+00,maxRelDiff=0.000e+00,meanRelDiff=0.000e+00
 Rank 1 PASSED
 
-================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x77a3d8c6d4b0> (instance)
+================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x774e611791b0> (instance)
  0 Callback members: []
  0 Callable methods: []
  0 Non-callable attributions: []
 Finish child process
 Rank 0 PASSED
 
-================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x70759c631a30> (instance)
+================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x7c18701c52b0> (instance)
  0 Callback members: []
  0 Callable methods: []
  0 Non-callable attributions: []
 Finish child process
 [TensorRT-Cookbook] Version: 2.0.0
 [TensorRT-Cookbook] Version: 2.0.0
-[09/09/2026-10:11:11] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[09/09/2026-10:11:11] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-06:29:32] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-06:29:32] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 Members of tensorrt.tensorrt.CollectiveOperation:
  0 -> ALL_REDUCE
  1 -> ALL_GATHER
@@ -190,13 +190,6 @@ Members of tensorrt.tensorrt.ReduceOperation:
 Input ->DataType.FLOAT, (4, 3), (4, 3), input
 Output->DataType.FLOAT, (4, 3), (4, 3), output
 [check]:True,maxAbsDiff=0.000e+00,meanAbsDiff=0.000e+00,maxRelDiff=0.000e+00,meanRelDiff=0.000e+00
-Rank 0 PASSED
-
-================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x7a842806d770> (instance)
- 0 Callback members: []
- 0 Callable methods: []
- 0 Non-callable attributions: []
-Finish child process
 Members of tensorrt.tensorrt.CollectiveOperation:
  0 -> ALL_REDUCE
  1 -> ALL_GATHER
@@ -217,15 +210,22 @@ Input ->DataType.FLOAT, (4, 3), (4, 3), input
 Output->DataType.FLOAT, (4, 3), (4, 3), output
 Rank 1 PASSED
 
-================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x7168e80eab70> (instance)
+================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x7e8a8e10e770> (instance)
+ 0 Callback members: []
+ 0 Callable methods: []
+ 0 Non-callable attributions: []
+Finish child process
+Rank 0 PASSED
+
+================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x7c8f5211a5f0> (instance)
  0 Callback members: []
  0 Callable methods: []
  0 Non-callable attributions: []
 Finish child process
 [TensorRT-Cookbook] Version: 2.0.0
 [TensorRT-Cookbook] Version: 2.0.0
-[09/09/2026-10:11:17] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[09/09/2026-10:11:17] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-06:29:42] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/15/2026-06:29:42] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 Members of tensorrt.tensorrt.CollectiveOperation:
  0 -> ALL_REDUCE
  1 -> ALL_GATHER
@@ -264,16 +264,16 @@ Members of tensorrt.tensorrt.ReduceOperation:
 Input ->DataType.FLOAT, (4, 3), (4, 3), input
 Output->DataType.FLOAT, (2, 3), (2, 3), output
 [check]:True,maxAbsDiff=0.000e+00,meanAbsDiff=0.000e+00,maxRelDiff=0.000e+00,meanRelDiff=0.000e+00
-Rank 1 PASSED
+Rank 0 PASSED
 
-================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x7e9c282215f0> (instance)
+================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x76466770c170> (instance)
  0 Callback members: []
  0 Callable methods: []
  0 Non-callable attributions: []
 Finish child process
-Rank 0 PASSED
+Rank 1 PASSED
 
-================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x7b442f95e770> (instance)
+================ Public members of <tensorrt.tensorrt.IDistCollectiveLayer object at 0x7fa08fed64f0> (instance)
  0 Callback members: []
  0 Callable methods: []
  0 Non-callable attributions: []

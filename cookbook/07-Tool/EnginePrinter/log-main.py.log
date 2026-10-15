@@ -1,6 +1,6 @@
 [TensorRT-Cookbook] Version: 2.0.0
 ============================== Start [case_simple,(),{}]
-    Built model-trained.trt, 12.81 MiB
+    Built model-trained.trt, 12.82 MiB
 Skip usage of `print_engine_information` since it reads TensorRT engine internal metadata which is not public.
 
 Information of engine input / output.

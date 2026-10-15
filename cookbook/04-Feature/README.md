@@ -6,6 +6,10 @@
 
 + Use auxiliary streams for infernece.
 
+## Build route
+
++ `IBuilderConfig.all_build_routes` and `IBuilderConfig.build_route`: the builder's internal tuning
+
 ## Builder Optimization Level
 
 + Set optimization level for TRT building.

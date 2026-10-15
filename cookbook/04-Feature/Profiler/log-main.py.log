@@ -1,81 +1,81 @@
 [TensorRT-Cookbook] Version: 2.0.0
-[09/09/2026-18:13:13] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[09/09/2026-18:13:21] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[09/09/2026-18:13:24] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[09/09/2026-18:13:34] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[09/09/2026-18:13:45] [TRT] [E] IExecutionContext::setProfiler: Error Code 3: API Usage Error (Parameter check failed, condition: (profiler) != nullptr.  In setProfiler at /_src/runtime/api/executionContext.h:160)
+[10/14/2026-05:57:48] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/14/2026-05:57:54] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/14/2026-05:57:55] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/14/2026-05:58:00] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/14/2026-05:58:06] [TRT] [E] IExecutionContext::setProfiler: Error Code 3: API Usage Error (Parameter check failed, condition: (profiler) != nullptr.  In setProfiler at /_src/runtime/api/executionContext.h:161)
 ============================== Start [case_normal,(True,),{}]
 Input ->DataType.FLOAT, (-1, 1, 28, 28), (1, 1, 28, 28), x
 Output->DataType.FLOAT, (-1, 10), (1, 10), y
 Output->DataType.INT64, (-1,), (1,), z
-Timing:    2.592us -> __mye362_0_myl0_0
-Timing:   15.456us -> __myl_Move_myl0_1
-Timing:   30.144us -> node_conv2d_myl0_2
-Timing:   11.584us -> node_max_pool2d_myl0_3
-Timing:   35.424us -> node_conv2d_1_myl0_4
-Timing:    6.272us -> node_max_pool2d_1_myl0_5
-Timing:    6.464us -> __myl_Resh_myl0_6
-Timing:   24.992us -> node_linear_myl0_7
-Timing:   13.504us -> node_linear_1_2_myl0_8
-Timing:    6.560us -> __myl_MaxrSubExpSum_myl0_9
-Timing:    6.592us -> __myl_DivMulTopk_myl0_10
-Timing:    6.496us -> __myl_CastReshCast_myl0_11
-Timing:    2.880us -> __mye362_0_myl0_0
-Timing:    6.976us -> __myl_Move_myl0_1
-Timing:    8.640us -> node_conv2d_myl0_2
-Timing:    6.880us -> node_max_pool2d_myl0_3
-Timing:   11.264us -> node_conv2d_1_myl0_4
-Timing:    6.592us -> node_max_pool2d_1_myl0_5
-Timing:    6.304us -> __myl_Resh_myl0_6
-Timing:   14.816us -> node_linear_myl0_7
-Timing:   13.632us -> node_linear_1_2_myl0_8
-Timing:    6.560us -> __myl_MaxrSubExpSum_myl0_9
-Timing:    6.560us -> __myl_DivMulTopk_myl0_10
-Timing:    5.568us -> __myl_CastReshCast_myl0_11
+Timing:    2.848us -> __mye362_0_myl0_0
+Timing:   14.336us -> __myl_Move_myl0_1
+Timing:   28.896us -> node_conv2d_myl0_2
+Timing:    8.864us -> node_max_pool2d_myl0_3
+Timing:   29.984us -> node_conv2d_1_myl0_4
+Timing:    7.360us -> node_max_pool2d_1_myl0_5
+Timing:    7.456us -> __myl_Resh_myl0_6
+Timing:   18.432us -> node_linear_myl0_7
+Timing:   15.616us -> node_linear_1_2_myl0_8
+Timing:    8.416us -> __myl_MaxrSubExpSum_myl0_9
+Timing:    8.512us -> __myl_DivTopk_myl0_10
+Timing:    7.424us -> __myl_CastReshCast_myl0_11
+Timing:    3.136us -> __mye362_0_myl0_0
+Timing:    7.776us -> __myl_Move_myl0_1
+Timing:    9.344us -> node_conv2d_myl0_2
+Timing:    7.040us -> node_max_pool2d_myl0_3
+Timing:   13.632us -> node_conv2d_1_myl0_4
+Timing:    7.808us -> node_max_pool2d_1_myl0_5
+Timing:    7.008us -> __myl_Resh_myl0_6
+Timing:   15.584us -> node_linear_myl0_7
+Timing:   15.584us -> node_linear_1_2_myl0_8
+Timing:    8.416us -> __myl_MaxrSubExpSum_myl0_9
+Timing:    8.416us -> __myl_DivTopk_myl0_10
+Timing:    7.392us -> __myl_CastReshCast_myl0_11
 ============================== End   [case_normal]
 ============================== Start [case_normal,(False,),{}]
 Input ->DataType.FLOAT, (-1, 1, 28, 28), (1, 1, 28, 28), x
 Output->DataType.FLOAT, (-1, 10), (1, 10), y
 Output->DataType.INT64, (-1,), (1,), z
-Timing:    2.624us -> __mye362_0_myl0_0
-Timing:   15.008us -> __myl_Move_myl0_1
-Timing:   28.128us -> node_conv2d_myl0_2
-Timing:   11.680us -> node_max_pool2d_myl0_3
-Timing:   34.240us -> node_conv2d_1_myl0_4
-Timing:    8.192us -> node_max_pool2d_1_myl0_5
-Timing:    6.592us -> __myl_Resh_myl0_6
-Timing:   19.904us -> node_linear_myl0_7
-Timing:   13.440us -> node_linear_1_2_myl0_8
-Timing:    6.336us -> __myl_MaxrSubExpSum_myl0_9
-Timing:    6.592us -> __myl_DivMulTopk_myl0_10
-Timing:    7.584us -> __myl_CastReshCast_myl0_11
+Timing:    2.720us -> __mye362_0_myl0_0
+Timing:   13.184us -> __myl_Move_myl0_1
+Timing:   28.096us -> node_conv2d_myl0_2
+Timing:    9.120us -> node_max_pool2d_myl0_3
+Timing:   26.976us -> node_conv2d_1_myl0_4
+Timing:    8.448us -> node_max_pool2d_1_myl0_5
+Timing:    6.432us -> __myl_Resh_myl0_6
+Timing:   19.968us -> node_linear_myl0_7
+Timing:   15.648us -> node_linear_1_2_myl0_8
+Timing:    8.352us -> __myl_MaxrSubExpSum_myl0_9
+Timing:    8.512us -> __myl_DivTopk_myl0_10
+Timing:    7.456us -> __myl_CastReshCast_myl0_11
 ============================== End   [case_normal]
 ============================== Start [case_latency_report,(),{}]
       metric |       min       max      mean    median       p90       p95       p99       cv
 ---------------------------------------------------------------------------------------------
-         H2D |    0.0081    0.0103    0.0090    0.0091    0.0098    0.0099    0.0101    6.83%  ms
-     compute |    0.0484    0.0581    0.0505    0.0503    0.0517    0.0520    0.0532    2.06%  ms
-         D2H |    0.0109    0.0193    0.0166    0.0170    0.0190    0.0191    0.0192   11.61%  ms
-     latency |    0.0679    0.0811    0.0762    0.0765    0.0778    0.0782    0.0801    2.76%  ms
-     enqueue |    0.0303    0.0413    0.0313    0.0310    0.0316    0.0325    0.0388    4.30%  ms
+         H2D |    0.0082    0.0105    0.0093    0.0094    0.0098    0.0099    0.0103    5.04%  ms
+     compute |    0.0593    0.0652    0.0619    0.0622    0.0632    0.0634    0.0635    1.51%  ms
+         D2H |    0.0112    0.0179    0.0132    0.0126    0.0147    0.0157    0.0177   10.27%  ms
+     latency |    0.0820    0.0911    0.0844    0.0844    0.0856    0.0864    0.0870    1.28%  ms
+     enqueue |    0.0267    0.0411    0.0279    0.0276    0.0285    0.0295    0.0360    5.45%  ms
 
-Throughput: 5.226e+04 inference/s at the median
-p99 / median = 1.05x -- the tail the mean would have hidden
+Throughput: 4.742e+04 inference/s at the median
+p99 / median = 1.03x -- the tail the mean would have hidden
 
  median ms     share  layer
-    0.0138     15.4%  MatrixMultiplication1_myl0_7
-    0.0138     15.4%  MatrixMultiplication2_myl0_8
-    0.0111     12.4%  Convolution2_myl0_4
-    0.0087      9.7%  Convolution1_myl0_2
-    0.0067      7.5%  Pooling1_myl0_3
-    0.0067      7.4%  Pooling2_myl0_5
-    0.0066      7.4%  __myl_Move_myl0_1
-    0.0066      7.3%  __myl_MaxrSubExpSumDiv_myl0_9
-    0.0066      7.3%  __myl_Topk_myl0_10
-    0.0065      7.2%  __myl_Resh_myl0_6
-    0.0027      3.0%  __mye324_0_myl0_0
+    0.0176     16.1%  MatrixMultiplication1_myl0_7
+    0.0156     14.2%  MatrixMultiplication2_myl0_8
+    0.0155     14.1%  Convolution2_myl0_4
+    0.0095      8.7%  Convolution1_myl0_2
+    0.0088      8.1%  Pooling1_myl0_3
+    0.0085      7.7%  __myl_Topk_myl0_10
+    0.0084      7.7%  Pooling2_myl0_5
+    0.0084      7.7%  __myl_MaxrSubExpSumDiv_myl0_9
+    0.0073      6.7%  __myl_Resh_myl0_6
+    0.0070      6.4%  __myl_Move_myl0_1
+    0.0029      2.6%  __mye324_0_myl0_0
 ----------------------------------------------------------------------------------------------------
-    0.0896           (sum of per-layer medians)
+    0.1097           (sum of per-layer medians)
     The sum does not match the un-profiled compute time above, and that is expected:
     profiling serialises the layers. Per-layer numbers find the expensive layer; they
     are never a total to quote.

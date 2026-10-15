@@ -1,4 +1,4 @@
-[TensorRT-Cookbook] Version: 1.0.0
+[TensorRT-Cookbook] Version: 2.0.0
 
 ---------------------------------------------------------------- Build phase
 builder_config.num_compute_capabilities = 0

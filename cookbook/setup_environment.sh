@@ -16,14 +16,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Install everything the cookbook needs, preferring the local cache in `dependence_packages/`
-# over the network.
+# Install everything the cookbook needs, using the download caches under `dependence_packages/`.
 #
-#   ./setup_environment.sh           install: apt packages, pip packages, then `pip install -e .`
-#   ./setup_environment.sh --refresh re-download the caches first (needs network), then install
+#   ./setup_environment.sh
 #
-# The container is reset between sessions and loses all of this, which is why the caches live in
-# the repository rather than in `~/.cache`.
+# The container is reset between sessions and loses every installed package, while `/work` survives.
+# That is the whole reason the caches live in the repository rather than in `~/.cache`: they are
+# there so the reinstall does not re-download half a gigabyte each time.
+#
+# They save download time and nothing else. The script assumes the network is reachable, so a cache
+# miss is slow, never fatal, and there is no "refresh" step to remember - both caches fill
+# themselves on first use and are consulted automatically afterwards.
+#
+#   dependence_packages/pip  pip's own download cache (`PIP_CACHE_DIR`). Consulted by *any*
+#                            `pip install`, including ad-hoc ones such as `tensorrt_rtx` that are
+#                            not in `requirements.txt` at all.
+#   dependence_packages/apt  `.deb` files, which apt has no equivalent cache for here. Downloaded
+#                            once, then reinstalled with `dpkg` after every container reset.
 
 set -o errexit
 set -o nounset
@@ -31,90 +40,51 @@ set -o pipefail
 
 COOKBOOK_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CACHE_PATH="${COOKBOOK_PATH}/dependence_packages"
-PIP_CACHE="${CACHE_PATH}/pip"
 APT_CACHE="${CACHE_PATH}/apt"
+PIP_CACHE="${CACHE_PATH}/pip"
+export PIP_CACHE_DIR="${PIP_CACHE}"
 APT_PACKAGE_LIST=(graphviz git-lfs)
 
-B_REFRESH=0
-[ "${1:-}" = "--refresh" ] && B_REFRESH=1
-
-mkdir -p "${PIP_CACHE}" "${APT_CACHE}"
+mkdir -p "${APT_CACHE}" "${PIP_CACHE}"
 
 say() { printf '\n\033[1m== %s\033[0m\n' "$*"; }
 
 # ---------------------------------------------------------------- apt packages
 say "apt packages: ${APT_PACKAGE_LIST[*]}"
 
-if [ "${B_REFRESH}" = "1" ]; then
-    # `apt-get download` fetches into the working directory and does not need root, but it does not
-    # resolve dependencies, so ask apt for the full URI list of the package and everything it pulls
-    # in. `--reinstall` makes apt list packages that are already installed here, which is the whole
-    # point: they will not be installed in the next container.
-    echo "Refreshing the apt cache (needs network)"
+if ! ls "${APT_CACHE}"/*.deb > /dev/null 2>&1; then
+    # `apt-get download` does not need root but does not resolve dependencies either, so ask apt for
+    # the full URI list of the packages and everything they pull in. `--reinstall` makes apt list
+    # packages that are already installed here, which is the whole point: they will not be installed
+    # in the next container.
+    echo "Downloading the .deb files (first run on this machine)"
     (
         cd "${APT_CACHE}"
         apt-get install --print-uris -y --reinstall "${APT_PACKAGE_LIST[@]}" \
             | grep -oP "(?<=^')[^']+" \
             | while read -r url; do
-                  file="$(basename "${url}")"
-                  [ -f "${file}" ] || wget --quiet --show-progress "${url}" -O "${file}"
+                  wget --quiet --show-progress "${url}" -O "$(basename "${url}")"
               done
     )
 fi
 
-if ls "${APT_CACHE}"/*.deb > /dev/null 2>&1; then
-    echo "Installing $(ls "${APT_CACHE}"/*.deb | wc -l) .deb from the cache"
-    # `dpkg -i` needs root. Everything else in this script does not, so the failure is made
-    # survivable: the packages it installs are optional for most of the cookbook.
-    if ! sudo dpkg --install --skip-same-version "${APT_CACHE}"/*.deb 2>&1 | tail -5; then
-        echo "  [SKIP] could not install the .deb files (needs root). Run by hand:"
-        echo "         sudo dpkg -i ${APT_CACHE}/*.deb"
-    fi
-else
-    echo "  [SKIP] ${APT_CACHE} is empty. Populate it once, with network and root:"
-    echo "         ./setup_environment.sh --refresh"
+echo "Installing $(ls "${APT_CACHE}"/*.deb 2> /dev/null | wc -l) .deb from ${APT_CACHE}"
+# `dpkg -i` needs root. Nothing else in this script does, so the failure is made survivable: these
+# two packages are optional for most of the cookbook.
+if ! sudo dpkg --install --skip-same-version "${APT_CACHE}"/*.deb 2>&1 | tail -5; then
+    echo "  [SKIP] could not install the .deb files (needs root). Run by hand:"
+    echo "         sudo dpkg -i ${APT_CACHE}/*.deb"
 fi
 
 # ---------------------------------------------------------------- pip packages
-say "pip packages from ${PIP_CACHE}"
-
-if [ "${B_REFRESH}" = "1" ]; then
-    echo "Refreshing the pip cache (needs network)"
-    # Resolve against *this* container: the NGC image already provides torch, tensorrt, numpy and
-    # more, and `pip download` would otherwise fetch gigabytes of them. The report lists only what
-    # pip would actually install here.
-    python3 -m pip install --dry-run --quiet --report "${CACHE_PATH}/report.json" -r "${COOKBOOK_PATH}/requirements.txt"
-    python3 - "${CACHE_PATH}/report.json" > "${CACHE_PATH}/resolved.txt" <<'PYEOF'
-import json, sys
-for item in json.load(open(sys.argv[1])).get("install", []):
-    print(f"{item['metadata']['name']}=={item['metadata']['version']}")
-PYEOF
-    python3 -m pip download --no-deps --dest "${PIP_CACHE}" -r "${CACHE_PATH}/resolved.txt"
-    # Build dependencies for anything that arrives as a source distribution, since `--no-index`
-    # cannot fetch them later
-    python3 -m pip download --no-deps --dest "${PIP_CACHE}" setuptools wheel
-    # Turn every source distribution into a wheel now, while there is a network. Offline, pip would
-    # have to build it, and building needs build dependencies that `--no-index` cannot reach:
-    # `cppimport` fails on `setuptools_scm>=6.2` no matter how many of them are cached.
-    for archive in "${PIP_CACHE}"/*.tar.gz "${PIP_CACHE}"/*.zip; do
-        [ -e "${archive}" ] || continue
-        echo "Building a wheel for $(basename "${archive}")"
-        python3 -m pip wheel --no-deps --wheel-dir "${PIP_CACHE}" "${archive}" && rm -f "${archive}"
-    done
-fi
-
-# `--no-index` first: if the cache is complete this never touches the network. If it is not - a
-# different base image, a changed requirements.txt - fall back rather than fail.
-if ! python3 -m pip install --no-index --find-links="${PIP_CACHE}" -r "${COOKBOOK_PATH}/requirements.txt"; then
-    echo "  Cache is incomplete; falling back to the network for the rest"
-    python3 -m pip install --find-links="${PIP_CACHE}" -r "${COOKBOOK_PATH}/requirements.txt"
-fi
+say "pip packages (download cache: ${PIP_CACHE})"
+python3 -m pip install -r "${COOKBOOK_PATH}/requirements.txt"
 
 # ---------------------------------------------------------------- the cookbook itself
 say "tensorrt_cookbook (editable)"
-# `--no-build-isolation` uses the setuptools already present instead of fetching a fresh copy into a
-# throwaway build environment, which is what makes this step work with no network at all.
-python3 -m pip install --no-build-isolation --no-index -e "${COOKBOOK_PATH}"
+# `--no-build-isolation` reuses the setuptools already installed instead of fetching a fresh copy
+# into a throwaway build environment on every run.
+python3 -m pip install --no-build-isolation -e "${COOKBOOK_PATH}"
 
 # ---------------------------------------------------------------- report
 say "Checking"

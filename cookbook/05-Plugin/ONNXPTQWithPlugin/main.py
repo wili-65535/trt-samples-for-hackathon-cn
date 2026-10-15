@@ -56,7 +56,7 @@ np.random.seed(31193)
 
 N_BATCH, N_CHANNEL, N_SIZE = 8, 16, 16
 SCALAR = 1.0
-PLUGIN_NAME = "AddScalar"
+PLUGIN_NAME = "AddScalarV3"
 
 output_path = Path(__file__).parent
 plugin_source_directory = cookbook_path("05-Plugin", "BasicExample")

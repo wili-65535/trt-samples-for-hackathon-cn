@@ -1,7 +1,7 @@
 [I] RUNNING | Command: /usr/local/bin/polygraphy run /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-trained.onnx --trt --onnxrt --atol 1e-5 --rtol 1e-5
 [I] TF32 is disabled by default. Turn on TF32 for better performance with minor accuracy differences.
 [I] TF32 is disabled by default. Turn on TF32 for better performance with minor accuracy differences.
-[I] trt-runner-N0-09/08/26-10:07:22     | Activating and starting inference
+[I] trt-runner-N0-10/14/26-09:51:17     | Activating and starting inference
 [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
 [W] Input tensor: x (dtype=DataType.FLOAT, shape=(-1, 1, 28, 28)) | No shapes provided; Will use shape: [1, 1, 28, 28] for min/opt/max in profile.
 [W] This will cause the tensor to have a static shape. If this is incorrect, please set the range of shapes for this input tensor.
@@ -12,49 +12,43 @@
 [I] Building engine with configuration:
     Flags                  | [STRONGLY_TYPED]
     Engine Capability      | EngineCapability.STANDARD
-    Memory Pools           | [WORKSPACE: 182619.62 MiB, TACTIC_DRAM: 182619.62 MiB, TACTIC_SHARED_MEMORY: 1024.00 MiB]
+    Memory Pools           | [WORKSPACE: 182672.12 MiB, TACTIC_DRAM: 182672.12 MiB, TACTIC_SHARED_MEMORY: 1024.00 MiB]
     Tactic Sources         | [EDGE_MASK_CONVOLUTIONS, JIT_CONVOLUTIONS]
     Profiling Verbosity    | ProfilingVerbosity.DETAILED
-[I] Finished engine building in 4.449 seconds
-[I] trt-runner-N0-09/08/26-10:07:22
-    ---- Inference Input(s) ----
-    {x [dtype=float32, shape=(1, 1, 28, 28)]}
-[I] trt-runner-N0-09/08/26-10:07:22
-    ---- Inference Output(s) ----
-    {y [dtype=float32, shape=(1, 10)],
-     z [dtype=int64, shape=(1,)]}
-[I] trt-runner-N0-09/08/26-10:07:22     | Completed 1 iteration(s) in 1213 ms | Average inference time: 1213 ms.
-[I] onnxrt-runner-N0-09/08/26-10:07:22  | Activating and starting inference
+[I] Finished engine building in 4.792 seconds
+[I] onnxrt-runner-N0-10/14/26-09:51:17  | Activating and starting inference
 [I] Creating ONNX-Runtime Inference Session with providers: ['CPUExecutionProvider']
-[I] onnxrt-runner-N0-09/08/26-10:07:22
+[I] Streaming iteration 0
     ---- Inference Input(s) ----
     {x [dtype=float32, shape=(1, 1, 28, 28)]}
-[I] onnxrt-runner-N0-09/08/26-10:07:22
+[I] trt-runner-N0-10/14/26-09:51:17    
     ---- Inference Output(s) ----
     {y [dtype=float32, shape=(1, 10)],
      z [dtype=int64, shape=(1,)]}
-[I] onnxrt-runner-N0-09/08/26-10:07:22  | Completed 1 iteration(s) in 5.091 ms | Average inference time: 5.091 ms.
-[I] Accuracy Comparison | trt-runner-N0-09/08/26-10:07:22 vs. onnxrt-runner-N0-09/08/26-10:07:22
-[I]     Comparing Output: 'y' (dtype=float32, shape=(1, 10)) with 'y' (dtype=float32, shape=(1, 10))
+[I] onnxrt-runner-N0-10/14/26-09:51:17 
+    ---- Inference Output(s) ----
+    {y [dtype=float32, shape=(1, 10)],
+     z [dtype=int64, shape=(1,)]}
+[I] Accuracy Comparison | trt-runner-N0-10/14/26-09:51:17 vs. onnxrt-runner-N0-10/14/26-09:51:17
+[I] Iteration: 0
+[I]     simple | Comparing Output: 'y' (dtype=float32, shape=(1, 10)) with 'y' (dtype=float32, shape=(1, 10))
 [I]         Tolerance: [abs=1e-05, rel=1e-05] | Checking elemwise error
-[I]         trt-runner-N0-09/08/26-10:07:22: y | Stats: mean=-0.0052072, std-dev=0.032513, var=0.0010571, median=0.0030958, min=-0.071973 at (0, 6), max=0.053192 at (0, 3), avg-magnitude=0.022946, p90=0.017002, p95=0.035097, p99=0.049573
-[I]         onnxrt-runner-N0-09/08/26-10:07:22: y | Stats: mean=-0.0052072, std-dev=0.032513, var=0.0010571, median=0.0030958, min=-0.071973 at (0, 6), max=0.053192 at (0, 3), avg-magnitude=0.022946, p90=0.017002, p95=0.035097, p99=0.049573
 [I]         Error Metrics: y
-[I]             Minimum Required Tolerance: elemwise error | [abs=7.4506e-09] OR [rel=1.8437e-05] (requirements may be lower if both abs/rel tolerances are set)
-[I]             Absolute Difference | Stats: mean=2.695e-09, std-dev=2.5846e-09, var=6.6801e-18, median=1.8626e-09, min=0 at (0, 7), max=7.4506e-09 at (0, 3), avg-magnitude=2.695e-09, p90=7.4506e-09, p95=7.4506e-09, p99=7.4506e-09
-[I]             Relative Difference | Stats: mean=1.9423e-06, std-dev=5.4991e-06, var=3.024e-11, median=9.5758e-08, min=0 at (0, 7), max=1.8437e-05 at (0, 5), avg-magnitude=1.9423e-06, p90=2.1484e-06, p95=1.0293e-05, p99=1.6808e-05
+[I]             Minimum Required Tolerance: elemwise error | [abs=3.7253e-09] OR [rel=1.3067e-07] (requirements may be lower if both abs/rel tolerances are set)
+[I]             Absolute Difference | Stats: mean=1.4203e-09, std-dev=1.3107e-09, var=1.7179e-18, median=9.3132e-10, min=0 at (0, 1), max=3.7253e-09 at (0, 3), avg-magnitude=1.4203e-09, p90=3.7253e-09, p95=3.7253e-09, p99=3.7253e-09
+[I]             Relative Difference | Stats: mean=7.703e-08, std-dev=4.3354e-08, var=1.8795e-15, median=8.8571e-08, min=0 at (0, 1), max=1.3067e-07 at (0, 5), avg-magnitude=7.703e-08, p90=1.165e-07, p95=1.2359e-07, p99=1.2925e-07
 [I]         PASSED | Output: 'y' | Difference is within tolerance (rel=1e-05, abs=1e-05)
-[I]     Comparing Output: 'z' (dtype=int64, shape=(1,)) with 'z' (dtype=int64, shape=(1,))
+[I]     simple | Comparing Output: 'z' (dtype=int64, shape=(1,)) with 'z' (dtype=int64, shape=(1,))
 [I]         Tolerance: [abs=1e-05, rel=1e-05] | Checking elemwise error
-[I]         trt-runner-N0-09/08/26-10:07:22: z | Stats: mean=3, std-dev=0, var=0, median=3, min=3 at (0,), max=3 at (0,), avg-magnitude=3, p90=3, p95=3, p99=3
-[I]         onnxrt-runner-N0-09/08/26-10:07:22: z | Stats: mean=3, std-dev=0, var=0, median=3, min=3 at (0,), max=3 at (0,), avg-magnitude=3, p90=3, p95=3, p99=3
 [I]         Error Metrics: z
 [I]             Minimum Required Tolerance: elemwise error | [abs=0] OR [rel=0] (requirements may be lower if both abs/rel tolerances are set)
 [I]             Absolute Difference | Stats: mean=0, std-dev=0, var=0, median=0, min=0 at (0,), max=0 at (0,), avg-magnitude=0, p90=0, p95=0, p99=0
 [I]             Relative Difference | Stats: mean=0, std-dev=0, var=0, median=0, min=0 at (0,), max=0 at (0,), avg-magnitude=0, p90=0, p95=0, p99=0
 [I]         PASSED | Output: 'z' | Difference is within tolerance (rel=1e-05, abs=1e-05)
-[I]     PASSED | All outputs matched | Outputs: ['y', 'z']
-[I] Average Metrics | y: max_absdiff=7.4506e-09 (n=1), max_reldiff=1.8437e-05 (n=1), mean_absdiff=2.695e-09 (n=1), mean_reldiff=1.9423e-06 (n=1), median_absdiff=1.8626e-09 (n=1), median_reldiff=9.5758e-08 (n=1)
-    Average Metrics | z: max_absdiff=0 (n=1), max_reldiff=0 (n=1), mean_absdiff=0 (n=1), mean_reldiff=0 (n=1), median_absdiff=0 (n=1), median_reldiff=0 (n=1)
-    Accuracy Summary | trt-runner-N0-09/08/26-10:07:22 vs. onnxrt-runner-N0-09/08/26-10:07:22 | Passed: 1/1 iterations | Pass Rate: 100.0%
-[I] PASSED | Runtime: 8.334s | Command: /usr/local/bin/polygraphy run /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-trained.onnx --trt --onnxrt --atol 1e-5 --rtol 1e-5
+[I]     PASSED | simple | All outputs matched | Outputs: ['y', 'z']
+[I]     trt-runner-N0-10/14/26-09:51:17: y | Stats: mean=-0.003304, std-dev=0.028673, var=0.00082216, median=0.0045262, min=-0.061557 at (0, 6), max=0.040855 at (0, 3), avg-magnitude=0.023139, p90=0.02031, p95=0.030583, p99=0.038801
+[I]     onnxrt-runner-N0-10/14/26-09:51:17: y | Stats: mean=-0.003304, std-dev=0.028673, var=0.00082216, median=0.0045262, min=-0.061557 at (0, 6), max=0.040855 at (0, 3), avg-magnitude=0.023139, p90=0.02031, p95=0.030583, p99=0.038801
+[I]     trt-runner-N0-10/14/26-09:51:17: z | Stats: mean=3, std-dev=0, var=0, median=3, min=3 at (0,), max=3 at (0,), avg-magnitude=3, p90=3, p95=3, p99=3
+[I]     onnxrt-runner-N0-10/14/26-09:51:17: z | Stats: mean=3, std-dev=0, var=0, median=3, min=3 at (0,), max=3 at (0,), avg-magnitude=3, p90=3, p95=3, p99=3
+[I] Accuracy Summary | trt-runner-N0-10/14/26-09:51:17 vs. onnxrt-runner-N0-10/14/26-09:51:17 | Passed: 1/1 iterations | Pass Rate: 100.00%
+[I] PASSED | Runtime: 8.985s | Command: /usr/local/bin/polygraphy run /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-trained.onnx --trt --onnxrt --atol 1e-5 --rtol 1e-5

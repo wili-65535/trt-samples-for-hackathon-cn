@@ -45,8 +45,8 @@ Removed 18 dangling input tensors (read but never written, and not graph inputs)
     l2_cache_policy_inputs_8_myl0
     l2_cache_policy_inputs_9_myl0
 Succeed saving result-engine.onnx:    13 Nodes,    17 tensors
-    __mye1085_myl0_0
-        {'name': '__mye1085_myl0_0', 'timeMs': 58.9907, 'averageMs': 0.00275246, 'medianMs': 0.002752, 'percentage': 3.40484}
+    __mye695_myl0_0
+        {'name': '__mye695_myl0_0', 'timeMs': 52.1933, 'averageMs': 0.00284929, 'medianMs': 0.002848, 'percentage': 2.79543}
 ============================== End   [case_export_with_latency]
 ============================== Start [case_export_corpus,(),{}]
 Removed 18 dangling input tensors (read but never written, and not graph inputs):
@@ -77,7 +77,7 @@ Succeed saving result-engine-model-redundant.onnx:     1 Nodes,     3 tensors
 ============================== End   [case_export_corpus]
 ============================== Start [case_cycle_is_viewable,(),{}]
     reference-cyclic-no-subgraph.onnx: onnx.load works, onnx.checker rejects it as expected
-        Nodes in a graph must be topologically sorted, however input 'loop_back' of node:
+        Nodes in a graph must be topologically sorted, however input 'loop_back' of node: 
 ============================== End   [case_cycle_is_viewable]
 ============================== Start [case_control_flow,(),{}]
 Removed 3 dangling input tensors (read but never written, and not graph inputs):
@@ -85,8 +85,8 @@ Removed 3 dangling input tensors (read but never written, and not graph inputs):
     l2_cache_management_host_0_myl0
     l2_cache_policy_inputs_0_myl0
 [W] Found distinct tensors that share the same name:
-[id: 136429521708016] Variable ($$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
-[id: 136429521703168] Variable ($$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081925916256] Variable ($$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081925919904] Variable ($$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
 Note: Producer node(s) of first tensor:
 [mov__mye64_myl0_4 (memset)
 	Inputs: [
@@ -108,8 +108,8 @@ Producer node(s) of second tensor:
 Attributes: OrderedDict({'Constants': '[]', 'TacticName': '', 'StreamId': '0', 'Metadata': '', 'Latency': '', 'TensorInfo': "{'$$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0': '(Linear) Row major linear format Int32->Unknown', '__d^M1i32_myl0': '(Linear) Row major linear format Int32->Unknown'}"})
 Domain: trt.engine]
 [W] Found distinct tensors that share the same name:
-[id: 136429521700672] Variable ($$myelin$$(Unnamed Loop* 0)^body_value_in.2_myl0): (shape=[4], dtype=<class 'numpy.float32'>)
-[id: 136429521704752] Variable ($$myelin$$(Unnamed Loop* 0)^body_value_in.2_myl0): (shape=[4], dtype=<class 'numpy.float32'>)
+[id: 138081925919040] Variable ($$myelin$$(Unnamed Loop* 0)^body_value_in.2_myl0): (shape=[4], dtype=<class 'numpy.float32'>)
+[id: 138081925914432] Variable ($$myelin$$(Unnamed Loop* 0)^body_value_in.2_myl0): (shape=[4], dtype=<class 'numpy.float32'>)
 Note: Producer node(s) of first tensor:
 [__myl_Move_myl0_5 (kgen)
 	Inputs: [
@@ -131,8 +131,8 @@ Producer node(s) of second tensor:
 Attributes: OrderedDict({'Constants': '[]', 'TacticName': '__myl_Move_0x928c7dd2c2cebb44760c202be1a2dc82', 'StreamId': '0', 'Metadata': '', 'Latency': '', 'TensorInfo': "{'y': '(Linear) Row major linear format Float->Unknown', '$$myelin$$(Unnamed Loop* 0)^body_value_in.2_myl0': '(Linear) Row major linear format Float->Unknown'}"})
 Domain: trt.engine]
 [W] Found distinct tensors that share the same name:
-[id: 136429521708016] Variable ($$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
-[id: 136429521703168] Variable ($$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081925916256] Variable ($$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081925919904] Variable ($$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
 Note: Producer node(s) of first tensor:
 [mov__mye64_myl0_4 (memset)
 	Inputs: [
@@ -154,8 +154,8 @@ Producer node(s) of second tensor:
 Attributes: OrderedDict({'Constants': '[]', 'TacticName': '', 'StreamId': '0', 'Metadata': '', 'Latency': '', 'TensorInfo': "{'$$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0': '(Linear) Row major linear format Int32->Unknown', '__d^M1i32_myl0': '(Linear) Row major linear format Int32->Unknown'}"})
 Domain: trt.engine]
 [W] Found distinct tensors that share the same name:
-[id: 136429521700672] Variable ($$myelin$$(Unnamed Loop* 0)^body_value_in.2_myl0): (shape=[4], dtype=<class 'numpy.float32'>)
-[id: 136429521704752] Variable ($$myelin$$(Unnamed Loop* 0)^body_value_in.2_myl0): (shape=[4], dtype=<class 'numpy.float32'>)
+[id: 138081925919040] Variable ($$myelin$$(Unnamed Loop* 0)^body_value_in.2_myl0): (shape=[4], dtype=<class 'numpy.float32'>)
+[id: 138081925914432] Variable ($$myelin$$(Unnamed Loop* 0)^body_value_in.2_myl0): (shape=[4], dtype=<class 'numpy.float32'>)
 Note: Producer node(s) of first tensor:
 [__myl_Move_myl0_5 (kgen)
 	Inputs: [
@@ -204,8 +204,8 @@ Removed 14 dangling input tensors (read but never written, and not graph inputs)
     l2_cache_policy_inputs_8_myl0
     l2_cache_policy_inputs_9_myl0
 [W] Found distinct tensors that share the same name:
-[id: 136429521698448] Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
-[id: 136429521698016] Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081924234464] Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081924234848] Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
 Note: Producer node(s) of first tensor:
 [__myl_Move_myl0_15 (kgen)
 	Inputs: [
@@ -228,11 +228,11 @@ Producer node(s) of second tensor:
 	Outputs: [
 		Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
 	]
-Attributes: OrderedDict({'Constants': '[]', 'TacticName': '__myl_GathAddReshScat_0x764f1622de89ffeaa5a85924991aed9e', 'StreamId': '0', 'Metadata': '[ONNX Layer: If_26]\x1f[ONNX Layer: Gather_27 | sub_graph1 (then_branch) | If_26 (If)]\x1f[ONNX Layer: Add_28 | sub_graph1 (then_branch) | If_26 (If)]\x1f[ONNX Layer: ScatterND_50 | sub_graph1 (then_branch) | If_26 (If)]', 'Latency': '', 'TensorInfo': "{'$$myelin$$(Unnamed Loop* 0)^27.4_myl0': '(Linear) Row major linear format Int32->Unknown', '__myln_k_arg__bb181_2_myl0@2': '(Linear) Row major linear format Int64->Unknown', '$$myelin$$(Unnamed Loop* 0)^c.3_myl0': '(Linear) Row major linear format Int32->Unknown', 'y': '(Linear) Row major linear format Int32->Unknown', '$$myelin$$(Unnamed Loop* 0)^ONNXTRT_castHelper_4_output.3_myl0': '(Linear) Row major linear format Int32->Unknown'}"})
+Attributes: OrderedDict({'Constants': '[]', 'TacticName': '__myl_GathAddReshScat_0xa42abf7d3a44ad2265b68622997ac33d', 'StreamId': '0', 'Metadata': '[ONNX Layer: If_26]\x1f[ONNX Layer: Gather_27 | sub_graph1 (then_branch) | If_26 (If)]\x1f[ONNX Layer: Add_28 | sub_graph1 (then_branch) | If_26 (If)]\x1f[ONNX Layer: ScatterND_50 | sub_graph1 (then_branch) | If_26 (If)]', 'Latency': '', 'TensorInfo': "{'$$myelin$$(Unnamed Loop* 0)^27.4_myl0': '(Linear) Row major linear format Int32->Unknown', '__myln_k_arg__bb181_2_myl0@2': '(Linear) Row major linear format Int64->Unknown', '$$myelin$$(Unnamed Loop* 0)^c.3_myl0': '(Linear) Row major linear format Int32->Unknown', 'y': '(Linear) Row major linear format Int32->Unknown', '$$myelin$$(Unnamed Loop* 0)^ONNXTRT_castHelper_4_output.3_myl0': '(Linear) Row major linear format Int32->Unknown'}"})
 Domain: trt.engine]
 [W] Found distinct tensors that share the same name:
-[id: 136429521698016] Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
-[id: 136429521697824] Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081924234848] Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081924234080] Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
 Note: Producer node(s) of first tensor:
 [__myl_GathAddReshScat_myl0_17 (kgen)
 	Inputs: [
@@ -245,7 +245,7 @@ Note: Producer node(s) of first tensor:
 	Outputs: [
 		Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
 	]
-Attributes: OrderedDict({'Constants': '[]', 'TacticName': '__myl_GathAddReshScat_0x764f1622de89ffeaa5a85924991aed9e', 'StreamId': '0', 'Metadata': '[ONNX Layer: If_26]\x1f[ONNX Layer: Gather_27 | sub_graph1 (then_branch) | If_26 (If)]\x1f[ONNX Layer: Add_28 | sub_graph1 (then_branch) | If_26 (If)]\x1f[ONNX Layer: ScatterND_50 | sub_graph1 (then_branch) | If_26 (If)]', 'Latency': '', 'TensorInfo': "{'$$myelin$$(Unnamed Loop* 0)^27.4_myl0': '(Linear) Row major linear format Int32->Unknown', '__myln_k_arg__bb181_2_myl0@2': '(Linear) Row major linear format Int64->Unknown', '$$myelin$$(Unnamed Loop* 0)^c.3_myl0': '(Linear) Row major linear format Int32->Unknown', 'y': '(Linear) Row major linear format Int32->Unknown', '$$myelin$$(Unnamed Loop* 0)^ONNXTRT_castHelper_4_output.3_myl0': '(Linear) Row major linear format Int32->Unknown'}"})
+Attributes: OrderedDict({'Constants': '[]', 'TacticName': '__myl_GathAddReshScat_0xa42abf7d3a44ad2265b68622997ac33d', 'StreamId': '0', 'Metadata': '[ONNX Layer: If_26]\x1f[ONNX Layer: Gather_27 | sub_graph1 (then_branch) | If_26 (If)]\x1f[ONNX Layer: Add_28 | sub_graph1 (then_branch) | If_26 (If)]\x1f[ONNX Layer: ScatterND_50 | sub_graph1 (then_branch) | If_26 (If)]', 'Latency': '', 'TensorInfo': "{'$$myelin$$(Unnamed Loop* 0)^27.4_myl0': '(Linear) Row major linear format Int32->Unknown', '__myln_k_arg__bb181_2_myl0@2': '(Linear) Row major linear format Int64->Unknown', '$$myelin$$(Unnamed Loop* 0)^c.3_myl0': '(Linear) Row major linear format Int32->Unknown', 'y': '(Linear) Row major linear format Int32->Unknown', '$$myelin$$(Unnamed Loop* 0)^ONNXTRT_castHelper_4_output.3_myl0': '(Linear) Row major linear format Int32->Unknown'}"})
 Domain: trt.engine]
 Producer node(s) of second tensor:
 [__myl_Move_myl0_19 (kgen)
@@ -258,8 +258,8 @@ Producer node(s) of second tensor:
 Attributes: OrderedDict({'Constants': '[]', 'TacticName': '__myl_Move_0xe93dd59ca2413f8d3ef18b533c4bbe35', 'StreamId': '0', 'Metadata': '[ONNX Layer: If_26]', 'Latency': '', 'TensorInfo': "{'y': '(Linear) Row major linear format Int32->Unknown', '$$myelin$$(Unnamed Loop* 0)^27.4_myl0': '(Linear) Row major linear format Int32->Unknown'}"})
 Domain: trt.engine]
 [W] Found distinct tensors that share the same name:
-[id: 136429523497136] Variable ($$myelin$$(Unnamed Loop* 0)^(Unnamed Layer* 19) [Recurrence]_output.2_myl0): (shape=[1], dtype=<class 'numpy.int64'>)
-[id: 136429521693744] Variable ($$myelin$$(Unnamed Loop* 0)^(Unnamed Layer* 19) [Recurrence]_output.2_myl0): (shape=[1], dtype=<class 'numpy.int64'>)
+[id: 138081926121136] Variable ($$myelin$$(Unnamed Loop* 0)^(Unnamed Layer* 19) [Recurrence]_output.2_myl0): (shape=[1], dtype=<class 'numpy.int64'>)
+[id: 138081924233840] Variable ($$myelin$$(Unnamed Loop* 0)^(Unnamed Layer* 19) [Recurrence]_output.2_myl0): (shape=[1], dtype=<class 'numpy.int64'>)
 Note: Producer node(s) of first tensor:
 [__myl_Move_myl0_8 (kgen)
 	Inputs: [
@@ -280,8 +280,8 @@ Producer node(s) of second tensor:
 Attributes: OrderedDict({'Constants': '[]', 'TacticName': '__myl_Move_0xeed08b8c7b9aa42768de51557f8d9ebf', 'StreamId': '0', 'Metadata': '[ONNX Layer: If_26]', 'Latency': '', 'TensorInfo': "{'$$myelin$$(Unnamed Loop* 0)^(Unnamed Layer* 20) [ElementWise]_output.3_myl0': '(Linear) Row major linear format Int64->Unknown', '$$myelin$$(Unnamed Loop* 0)^(Unnamed Layer* 19) [Recurrence]_output.2_myl0': '(Linear) Row major linear format Int64->Unknown'}"})
 Domain: trt.engine]
 [W] Found distinct tensors that share the same name:
-[id: 136429523493536] Variable ($$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
-[id: 136429521693936] Variable ($$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081926119984] Variable ($$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081924229328] Variable ($$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
 Note: Producer node(s) of first tensor:
 [mov__mye118_myl0_7 (memset)
 	Inputs: [
@@ -292,7 +292,7 @@ Note: Producer node(s) of first tensor:
 Attributes: OrderedDict({'Constants': '[]', 'TacticName': '', 'StreamId': '0', 'Metadata': '', 'Latency': '', 'TensorInfo': "{'$$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0': '(Linear) Row major linear format Int32->Unknown'}"})
 Domain: trt.engine]
 Producer node(s) of second tensor:
-[__mye1855_myl0_22 (copy)
+[__mye1340_myl0_22 (copy)
 	Inputs: [
 		Variable ($$myelin$$(Unnamed Loop* 0)^ElementWise 2 Output .3_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
 	]
@@ -302,8 +302,8 @@ Producer node(s) of second tensor:
 Attributes: OrderedDict({'Constants': '[]', 'TacticName': '', 'StreamId': '0', 'Metadata': '', 'Latency': '', 'TensorInfo': "{'$$myelin$$(Unnamed Loop* 0)^ElementWise 2 Output .3_myl0': '(Linear) Row major linear format Int32->Unknown', '$$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0': '(Linear) Row major linear format Int32->Unknown'}"})
 Domain: trt.engine]
 [W] Found distinct tensors that share the same name:
-[id: 136429523488592] Variable (y): (shape=[1], dtype=<class 'numpy.int32'>)
-[id: 136429521694128] Variable (y): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081926121328] Variable (y): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081924229712] Variable (y): (shape=[1], dtype=<class 'numpy.int32'>)
 Note: Producer node(s) of first tensor:
 [__myl_Move_myl0_5 (kgen)
 	Inputs: [
@@ -324,8 +324,8 @@ Producer node(s) of second tensor:
 Attributes: OrderedDict({'Constants': '[]', 'TacticName': '__myl_Move_0x2cf09ded5a71659fa62382173f4ade22', 'StreamId': '0', 'Metadata': '[ONNX Layer: If_26]', 'Latency': '', 'TensorInfo': "{'$$myelin$$(Unnamed Loop* 0)^27.4_myl0': '(Linear) Row major linear format Int32->Unknown', 'y': '(Linear) Row major linear format Int32->Unknown'}"})
 Domain: trt.engine]
 [W] Found distinct tensors that share the same name:
-[id: 136429521694128] Variable (y): (shape=[1], dtype=<class 'numpy.int32'>)
-[id: 136429523488592] Variable (y): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081924229712] Variable (y): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081926121328] Variable (y): (shape=[1], dtype=<class 'numpy.int32'>)
 Note: Producer node(s) of first tensor:
 [__myl_Move_myl0_23 (kgen)
 	Inputs: [
@@ -346,8 +346,8 @@ Producer node(s) of second tensor:
 Attributes: OrderedDict({'Constants': '[]', 'TacticName': '__myl_Move_0x9794a96d0a6dcce528f1ca21717eaebb', 'StreamId': '0', 'Metadata': '[ONNX Layer: If_26]', 'Latency': '', 'TensorInfo': "{'y': '(Linear) Row major linear format Int32->Unknown'}"})
 Domain: trt.engine]
 [W] Found distinct tensors that share the same name:
-[id: 136429521698448] Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
-[id: 136429521698016] Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081924234464] Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081924234848] Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
 Note: Producer node(s) of first tensor:
 [__myl_Move_myl0_15 (kgen)
 	Inputs: [
@@ -370,11 +370,11 @@ Producer node(s) of second tensor:
 	Outputs: [
 		Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
 	]
-Attributes: OrderedDict({'Constants': '[]', 'TacticName': '__myl_GathAddReshScat_0x764f1622de89ffeaa5a85924991aed9e', 'StreamId': '0', 'Metadata': '[ONNX Layer: If_26]\x1f[ONNX Layer: Gather_27 | sub_graph1 (then_branch) | If_26 (If)]\x1f[ONNX Layer: Add_28 | sub_graph1 (then_branch) | If_26 (If)]\x1f[ONNX Layer: ScatterND_50 | sub_graph1 (then_branch) | If_26 (If)]', 'Latency': '', 'TensorInfo': "{'$$myelin$$(Unnamed Loop* 0)^27.4_myl0': '(Linear) Row major linear format Int32->Unknown', '__myln_k_arg__bb181_2_myl0@2': '(Linear) Row major linear format Int64->Unknown', '$$myelin$$(Unnamed Loop* 0)^c.3_myl0': '(Linear) Row major linear format Int32->Unknown', 'y': '(Linear) Row major linear format Int32->Unknown', '$$myelin$$(Unnamed Loop* 0)^ONNXTRT_castHelper_4_output.3_myl0': '(Linear) Row major linear format Int32->Unknown'}"})
+Attributes: OrderedDict({'Constants': '[]', 'TacticName': '__myl_GathAddReshScat_0xa42abf7d3a44ad2265b68622997ac33d', 'StreamId': '0', 'Metadata': '[ONNX Layer: If_26]\x1f[ONNX Layer: Gather_27 | sub_graph1 (then_branch) | If_26 (If)]\x1f[ONNX Layer: Add_28 | sub_graph1 (then_branch) | If_26 (If)]\x1f[ONNX Layer: ScatterND_50 | sub_graph1 (then_branch) | If_26 (If)]', 'Latency': '', 'TensorInfo': "{'$$myelin$$(Unnamed Loop* 0)^27.4_myl0': '(Linear) Row major linear format Int32->Unknown', '__myln_k_arg__bb181_2_myl0@2': '(Linear) Row major linear format Int64->Unknown', '$$myelin$$(Unnamed Loop* 0)^c.3_myl0': '(Linear) Row major linear format Int32->Unknown', 'y': '(Linear) Row major linear format Int32->Unknown', '$$myelin$$(Unnamed Loop* 0)^ONNXTRT_castHelper_4_output.3_myl0': '(Linear) Row major linear format Int32->Unknown'}"})
 Domain: trt.engine]
 [W] Found distinct tensors that share the same name:
-[id: 136429521698016] Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
-[id: 136429521697824] Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081924234848] Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081924234080] Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
 Note: Producer node(s) of first tensor:
 [__myl_GathAddReshScat_myl0_17 (kgen)
 	Inputs: [
@@ -387,7 +387,7 @@ Note: Producer node(s) of first tensor:
 	Outputs: [
 		Variable ($$myelin$$(Unnamed Loop* 0)^27.4_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
 	]
-Attributes: OrderedDict({'Constants': '[]', 'TacticName': '__myl_GathAddReshScat_0x764f1622de89ffeaa5a85924991aed9e', 'StreamId': '0', 'Metadata': '[ONNX Layer: If_26]\x1f[ONNX Layer: Gather_27 | sub_graph1 (then_branch) | If_26 (If)]\x1f[ONNX Layer: Add_28 | sub_graph1 (then_branch) | If_26 (If)]\x1f[ONNX Layer: ScatterND_50 | sub_graph1 (then_branch) | If_26 (If)]', 'Latency': '', 'TensorInfo': "{'$$myelin$$(Unnamed Loop* 0)^27.4_myl0': '(Linear) Row major linear format Int32->Unknown', '__myln_k_arg__bb181_2_myl0@2': '(Linear) Row major linear format Int64->Unknown', '$$myelin$$(Unnamed Loop* 0)^c.3_myl0': '(Linear) Row major linear format Int32->Unknown', 'y': '(Linear) Row major linear format Int32->Unknown', '$$myelin$$(Unnamed Loop* 0)^ONNXTRT_castHelper_4_output.3_myl0': '(Linear) Row major linear format Int32->Unknown'}"})
+Attributes: OrderedDict({'Constants': '[]', 'TacticName': '__myl_GathAddReshScat_0xa42abf7d3a44ad2265b68622997ac33d', 'StreamId': '0', 'Metadata': '[ONNX Layer: If_26]\x1f[ONNX Layer: Gather_27 | sub_graph1 (then_branch) | If_26 (If)]\x1f[ONNX Layer: Add_28 | sub_graph1 (then_branch) | If_26 (If)]\x1f[ONNX Layer: ScatterND_50 | sub_graph1 (then_branch) | If_26 (If)]', 'Latency': '', 'TensorInfo': "{'$$myelin$$(Unnamed Loop* 0)^27.4_myl0': '(Linear) Row major linear format Int32->Unknown', '__myln_k_arg__bb181_2_myl0@2': '(Linear) Row major linear format Int64->Unknown', '$$myelin$$(Unnamed Loop* 0)^c.3_myl0': '(Linear) Row major linear format Int32->Unknown', 'y': '(Linear) Row major linear format Int32->Unknown', '$$myelin$$(Unnamed Loop* 0)^ONNXTRT_castHelper_4_output.3_myl0': '(Linear) Row major linear format Int32->Unknown'}"})
 Domain: trt.engine]
 Producer node(s) of second tensor:
 [__myl_Move_myl0_19 (kgen)
@@ -400,8 +400,8 @@ Producer node(s) of second tensor:
 Attributes: OrderedDict({'Constants': '[]', 'TacticName': '__myl_Move_0xe93dd59ca2413f8d3ef18b533c4bbe35', 'StreamId': '0', 'Metadata': '[ONNX Layer: If_26]', 'Latency': '', 'TensorInfo': "{'y': '(Linear) Row major linear format Int32->Unknown', '$$myelin$$(Unnamed Loop* 0)^27.4_myl0': '(Linear) Row major linear format Int32->Unknown'}"})
 Domain: trt.engine]
 [W] Found distinct tensors that share the same name:
-[id: 136429523497136] Variable ($$myelin$$(Unnamed Loop* 0)^(Unnamed Layer* 19) [Recurrence]_output.2_myl0): (shape=[1], dtype=<class 'numpy.int64'>)
-[id: 136429521693744] Variable ($$myelin$$(Unnamed Loop* 0)^(Unnamed Layer* 19) [Recurrence]_output.2_myl0): (shape=[1], dtype=<class 'numpy.int64'>)
+[id: 138081926121136] Variable ($$myelin$$(Unnamed Loop* 0)^(Unnamed Layer* 19) [Recurrence]_output.2_myl0): (shape=[1], dtype=<class 'numpy.int64'>)
+[id: 138081924233840] Variable ($$myelin$$(Unnamed Loop* 0)^(Unnamed Layer* 19) [Recurrence]_output.2_myl0): (shape=[1], dtype=<class 'numpy.int64'>)
 Note: Producer node(s) of first tensor:
 [__myl_Move_myl0_8 (kgen)
 	Inputs: [
@@ -422,8 +422,8 @@ Producer node(s) of second tensor:
 Attributes: OrderedDict({'Constants': '[]', 'TacticName': '__myl_Move_0xeed08b8c7b9aa42768de51557f8d9ebf', 'StreamId': '0', 'Metadata': '[ONNX Layer: If_26]', 'Latency': '', 'TensorInfo': "{'$$myelin$$(Unnamed Loop* 0)^(Unnamed Layer* 20) [ElementWise]_output.3_myl0': '(Linear) Row major linear format Int64->Unknown', '$$myelin$$(Unnamed Loop* 0)^(Unnamed Layer* 19) [Recurrence]_output.2_myl0': '(Linear) Row major linear format Int64->Unknown'}"})
 Domain: trt.engine]
 [W] Found distinct tensors that share the same name:
-[id: 136429523493536] Variable ($$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
-[id: 136429521693936] Variable ($$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081926119984] Variable ($$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081924229328] Variable ($$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
 Note: Producer node(s) of first tensor:
 [mov__mye118_myl0_7 (memset)
 	Inputs: [
@@ -434,7 +434,7 @@ Note: Producer node(s) of first tensor:
 Attributes: OrderedDict({'Constants': '[]', 'TacticName': '', 'StreamId': '0', 'Metadata': '', 'Latency': '', 'TensorInfo': "{'$$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0': '(Linear) Row major linear format Int32->Unknown'}"})
 Domain: trt.engine]
 Producer node(s) of second tensor:
-[__mye1855_myl0_22 (copy)
+[__mye1340_myl0_22 (copy)
 	Inputs: [
 		Variable ($$myelin$$(Unnamed Loop* 0)^ElementWise 2 Output .3_myl0): (shape=[1], dtype=<class 'numpy.int32'>)
 	]
@@ -444,8 +444,8 @@ Producer node(s) of second tensor:
 Attributes: OrderedDict({'Constants': '[]', 'TacticName': '', 'StreamId': '0', 'Metadata': '', 'Latency': '', 'TensorInfo': "{'$$myelin$$(Unnamed Loop* 0)^ElementWise 2 Output .3_myl0': '(Linear) Row major linear format Int32->Unknown', '$$myelin$$(Unnamed Loop* 0)^Recurrence 0 Output .2_myl0': '(Linear) Row major linear format Int32->Unknown'}"})
 Domain: trt.engine]
 [W] Found distinct tensors that share the same name:
-[id: 136429523488592] Variable (y): (shape=[1], dtype=<class 'numpy.int32'>)
-[id: 136429521694128] Variable (y): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081926121328] Variable (y): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081924229712] Variable (y): (shape=[1], dtype=<class 'numpy.int32'>)
 Note: Producer node(s) of first tensor:
 [__myl_Move_myl0_5 (kgen)
 	Inputs: [
@@ -466,8 +466,8 @@ Producer node(s) of second tensor:
 Attributes: OrderedDict({'Constants': '[]', 'TacticName': '__myl_Move_0x2cf09ded5a71659fa62382173f4ade22', 'StreamId': '0', 'Metadata': '[ONNX Layer: If_26]', 'Latency': '', 'TensorInfo': "{'$$myelin$$(Unnamed Loop* 0)^27.4_myl0': '(Linear) Row major linear format Int32->Unknown', 'y': '(Linear) Row major linear format Int32->Unknown'}"})
 Domain: trt.engine]
 [W] Found distinct tensors that share the same name:
-[id: 136429521694128] Variable (y): (shape=[1], dtype=<class 'numpy.int32'>)
-[id: 136429523488592] Variable (y): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081924229712] Variable (y): (shape=[1], dtype=<class 'numpy.int32'>)
+[id: 138081926121328] Variable (y): (shape=[1], dtype=<class 'numpy.int32'>)
 Note: Producer node(s) of first tensor:
 [__myl_Move_myl0_23 (kgen)
 	Inputs: [

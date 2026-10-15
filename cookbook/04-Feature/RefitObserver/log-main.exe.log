@@ -4,20 +4,20 @@ TensorRT headers 11.3.0.93, runtime 110300
     refittable plan: 190596 bytes
 
     getAllWeights() reports 7 refittable weights:
-      conv.weight  conv.bias  const_out  tmp_refittable_weight  gain.double  tmp_refittable_weight_0  tmp_refittable_weight_1
+      conv.weight  conv.bias  const_out  tmp_refittable_weight  gain.double  tmp_refittable_weight_0  tmp_refittable_weight_1  
     Three of those names appear nowhere in the ONNX file. Knowing which
     initializers feed them, and how, is exactly what the observer supplies.
 
     the observer recorded 7 entries:
     engine weight              transform                 count  epsilon    sources
     ------------------------------------------------------------------------------------------------
-    conv.weight                kIDENTITY                   144  -          conv.weight
-    conv.bias                  kIDENTITY                     4  -          conv.bias
-    gain.double                kDOUBLE_TO_FLOAT              4  -          gain.double
-    tmp_refittable_weight      kBATCH_NORM_FOLD_SCALE        4  0.001      bn.scale bn.bias bn.mean bn.var
-    tmp_refittable_weight_0    kBATCH_NORM_FOLD_BIAS         4  0.001      bn.scale bn.bias bn.mean bn.var
-    const_out                  kCONSTANT_NODE                4  -          (16 bytes carried in the record)const_out
-    tmp_refittable_weight_1    kCONSTANT_OF_SHAPE            1  -          (4 bytes carried in the record)ones
+    conv.weight                kIDENTITY                   144  -          conv.weight 
+    conv.bias                  kIDENTITY                     4  -          conv.bias 
+    gain.double                kDOUBLE_TO_FLOAT              4  -          gain.double 
+    tmp_refittable_weight      kBATCH_NORM_FOLD_SCALE        4  0.001      bn.scale bn.bias bn.mean bn.var 
+    tmp_refittable_weight_0    kBATCH_NORM_FOLD_BIAS         4  0.001      bn.scale bn.bias bn.mean bn.var 
+    const_out                  kCONSTANT_NODE                4  -          (16 bytes carried in the record)const_out 
+    tmp_refittable_weight_1    kCONSTANT_OF_SHAPE            1  -          (4 bytes carried in the record)ones 
 
     wrote refit-table.txt (469 bytes). Together with the plan, that is the whole
     deploy-time dependency -- no .onnx, no parser, no protobuf.

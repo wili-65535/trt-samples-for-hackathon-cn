@@ -1,13 +1,13 @@
-[09/08/2026-09:27:55] [TRT] [W] Functionality provided through tensorrt.plugin module is experimental.
-[TensorRT-Cookbook] Version: 1.0.0
+[10/14/2026-06:28:44] [TRT] [W] Functionality provided through tensorrt.plugin module is experimental.
+[TensorRT-Cookbook] Version: 2.0.0
 ============================== Start [case_two_spellings,(),{}]
     torch.compile(backend='tensorrt')      : max |eager - TensorRT| = 0.0e+00
     torch.compile(backend='torch_tensorrt'): max |eager - TensorRT| = 0.0e+00
     torch_tensorrt.compile(ir='torch_compile'): max |eager - TensorRT| = 0.0e+00
 ============================== End   [case_two_spellings]
 ============================== Start [case_when_is_the_engine_built,(),{}]
-    AOT: compile call  5.58 s, first inference 0.000 s
-    JIT: compile call  0.00 s, first inference 4.221 s
+    AOT: compile call  5.20 s, first inference 0.003 s
+    JIT: compile call  0.00 s, first inference 4.481 s
     `torch.compile` returns immediately -- it has not looked at the model yet
 ============================== End   [case_when_is_the_engine_built]
 ============================== Start [case_data_dependent_control_flow,(),{}]
@@ -17,7 +17,7 @@
     the branch stays in Python; each side is its own graph
 ============================== End   [case_data_dependent_control_flow]
 ============================== Start [case_saveability,(),{}]
-    AOT: saved 96 KB
+    AOT: saved 93 KB
     JIT: cannot save -- ValueError: Input model is of type nn.Module. Saving nn.Module directly is not supported. Su
     to ship a JIT-compiled model, recompile AOT or use engine caching (see ../EngineCaching/)
 ============================== End   [case_saveability]

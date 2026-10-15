@@ -71,12 +71,15 @@ tensorrt_cookbook/utils_private.py
 # by the test config and is safe to commit; this one is not.
 07-Tool/EnginePrinter/log-main.py-internal.log
 
-# Offline install caches, deliberately not tracked. They are a *local* accelerator, not something
-# the repository ships: a fresh clone still downloads everything once, and only the second and later
-# setups on that machine are offline. Tracking them would put ~455 MB of wheels into git history
-# permanently, and would not help anyway - `/work` already survives the container resets that wipe
-# the installed packages. See dependence_packages/README.md.
-dependence_packages/*.json
-dependence_packages/apt/*.deb
-dependence_packages/pip/*.whl
-dependence_packages/resolved.txt
+# Download caches, deliberately not tracked - the whole directory, not just its contents, so a
+# fresh clone starts from nothing and downloads everything once. They are a *local* accelerator
+# that saves download time, not something the repository ships. Tracking them would put ~610 MB
+# into git history permanently and would not help anyway - `/work` already survives the container
+# resets that wipe the installed packages.
+# The explanation lives in `dependence_packages.md`, which IS tracked, deliberately outside this
+# directory so the directory can be ignored whole.
+dependence_packages/
+
+# Session progress notes, written for the maintainer to read between sessions. Deliberately local:
+# it records what is half-finished right now, which is not something the repository should ship.
+progress.md

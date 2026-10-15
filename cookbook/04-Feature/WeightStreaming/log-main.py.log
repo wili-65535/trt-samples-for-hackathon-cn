@@ -1,43 +1,37 @@
-[TensorRT-Cookbook] Version: 1.0.0
-[09/08/2026-09:09:00] [TRT] [I] [MemUsageChange] Init CUDA: CPU +53, GPU +0, now: CPU 194, GPU 627 (MiB)
-[09/08/2026-09:09:00] [TRT] [I] ----------------------------------------------------------------
-[09/08/2026-09:09:00] [TRT] [I] Input filename:   /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-trained.onnx
-[09/08/2026-09:09:00] [TRT] [I] ONNX IR version:  0.0.10
-[09/08/2026-09:09:00] [TRT] [I] Opset version:    18
-[09/08/2026-09:09:00] [TRT] [I] Producer name:    pytorch
-[09/08/2026-09:09:00] [TRT] [I] Producer version: 2.11.0a0+a6c236b9fd.nv26.03.46836102
-[09/08/2026-09:09:00] [TRT] [I] Domain:
-[09/08/2026-09:09:00] [TRT] [I] Model version:    0
-[09/08/2026-09:09:00] [TRT] [I] Doc string:
-[09/08/2026-09:09:00] [TRT] [I] ----------------------------------------------------------------
-[09/08/2026-09:09:00] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[09/08/2026-09:09:00] [TRT] [I] [MemUsageChange] Init builder kernel library: CPU +321, GPU +8, now: CPU 725, GPU 635 (MiB)
-[09/08/2026-09:09:00] [TRT] [I] Local timing cache in use. Profiling results in this builder pass will not be stored.
-[09/08/2026-09:09:00] [TRT] [I] Compiler backend is used during engine build.
-[09/08/2026-09:09:07] [TRT] [I] Detected 1 inputs and 2 output network tensors.
-[09/08/2026-09:09:07] [TRT] [I] Total Host Persistent Memory: 80 bytes
-[09/08/2026-09:09:07] [TRT] [I] Total Device Persistent Memory: 0 bytes
-[09/08/2026-09:09:07] [TRT] [I] Max Scratch Memory: 591872 bytes
-[09/08/2026-09:09:07] [TRT] [I] [BlockAssignment] Started assigning block shifts. This will take 1 steps to complete.
-[09/08/2026-09:09:07] [TRT] [I] [BlockAssignment] Algorithm ShiftNTopDown took 0.005651ms to assign 1 blocks to 1 nodes requiring 591872 bytes.
-[09/08/2026-09:09:07] [TRT] [I] Total Activation Memory: 591872 bytes
-[09/08/2026-09:09:08] [TRT] [I] Detected 1 inputs and 2 output network tensors.
-[09/08/2026-09:09:08] [TRT] [I] Total Host Persistent Memory: 80 bytes
-[09/08/2026-09:09:08] [TRT] [I] Total Device Persistent Memory: 0 bytes
-[09/08/2026-09:09:08] [TRT] [I] Max Scratch Memory: 591872 bytes
-[09/08/2026-09:09:08] [TRT] [I] [BlockAssignment] Started assigning block shifts. This will take 1 steps to complete.
-[09/08/2026-09:09:08] [TRT] [I] [BlockAssignment] Algorithm ShiftNTopDown took 0.004594ms to assign 1 blocks to 1 nodes requiring 591872 bytes.
-[09/08/2026-09:09:08] [TRT] [I] Total Activation Memory: 591872 bytes
-[09/08/2026-09:09:08] [TRT] [I] Total Weights Memory: 13098880 bytes
-[09/08/2026-09:09:08] [TRT] [I] Engine generation completed in 7.45024 seconds.
-[09/08/2026-09:09:08] [TRT] [I] [MemUsageStats] Peak memory usage of TRT CPU/GPU memory allocators: CPU 0 MiB, GPU 12 MiB
-[09/08/2026-09:09:08] [TRT] [I] Loaded engine size: 12 MiB
-[09/08/2026-09:09:08] [TRT] [W] Providing user-owned deserialization memory with weight streaming enabled will increase peak CPU memory usage by 1X weights size. Please use IRuntime::deserializeCudaEngine(IStreamReaderV2&) instead.
-[09/08/2026-09:09:08] [TRT] [I] This engine can stream its weights. Please use setWeightStreamingBudgetV2() to enable it during execution.
-[09/08/2026-09:09:08] [TRT] [I] - Minimum budget: 0 bytes
-[09/08/2026-09:09:08] [TRT] [I] - Maximum budget: 13098880 bytes
-[09/08/2026-09:09:08] [TRT] [I] [MemUsageChange] TensorRT-managed allocation in IExecutionContext creation: CPU +0, GPU +14, now: CPU 12, GPU 14 (MiB)
-[09/08/2026-09:09:08] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[TensorRT-Cookbook] Version: 2.0.0
+[10/14/2026-06:03:02] [TRT] [I] [MemUsageChange] Init CUDA: CPU +53, GPU +0, now: CPU 193, GPU 627 (MiB)
+[10/14/2026-06:03:02] [TRT] [I] ----------------------------------------------------------------
+[10/14/2026-06:03:02] [TRT] [I] Input filename:   /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-trained.onnx
+[10/14/2026-06:03:02] [TRT] [I] ONNX IR version:  0.0.10
+[10/14/2026-06:03:02] [TRT] [I] Opset version:    18
+[10/14/2026-06:03:02] [TRT] [I] Producer name:    pytorch
+[10/14/2026-06:03:02] [TRT] [I] Producer version: 2.13.0a0+8145d630e8.nv26.06
+[10/14/2026-06:03:02] [TRT] [I] Domain:           
+[10/14/2026-06:03:02] [TRT] [I] Model version:    0
+[10/14/2026-06:03:02] [TRT] [I] Doc string:       
+[10/14/2026-06:03:02] [TRT] [I] ----------------------------------------------------------------
+[10/14/2026-06:03:02] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/14/2026-06:03:02] [TRT] [I] In input (x), minShape is not the same as maxShape.
+[10/14/2026-06:03:02] [TRT] [I] [MemUsageChange] Init builder kernel library: CPU +329, GPU +8, now: CPU 733, GPU 635 (MiB)
+[10/14/2026-06:03:02] [TRT] [I] Local timing cache in use. Profiling results in this builder pass will not be stored.
+[10/14/2026-06:03:02] [TRT] [I] Compiler backend is used during engine build.
+[10/14/2026-06:03:08] [TRT] [I] Detected 1 inputs and 2 output network tensors.
+[10/14/2026-06:03:08] [TRT] [I] Total Host Persistent Memory: 80 bytes
+[10/14/2026-06:03:08] [TRT] [I] Total Device Persistent Memory: 0 bytes
+[10/14/2026-06:03:08] [TRT] [I] Max Scratch Memory: 591872 bytes
+[10/14/2026-06:03:08] [TRT] [I] [BlockAssignment] Started assigning block shifts. This will take 1 steps to complete.
+[10/14/2026-06:03:08] [TRT] [I] [BlockAssignment] Algorithm ShiftNTopDown took 0.004828ms to assign 1 blocks to 1 nodes requiring 591872 bytes.
+[10/14/2026-06:03:08] [TRT] [I] Total Activation Memory: 591872 bytes
+[10/14/2026-06:03:08] [TRT] [I] Total Weights Memory: 13098880 bytes
+[10/14/2026-06:03:08] [TRT] [I] Engine generation completed in 5.89226 seconds.
+[10/14/2026-06:03:08] [TRT] [I] [MemUsageStats] Peak memory usage of TRT CPU/GPU memory allocators: CPU 0 MiB, GPU 12 MiB
+[10/14/2026-06:03:08] [TRT] [I] Loaded engine size: 12 MiB
+[10/14/2026-06:03:08] [TRT] [W] Providing user-owned deserialization memory with weight streaming enabled will increase peak CPU memory usage by 1X weights size. Please use IRuntime::deserializeCudaEngine(IStreamReaderV2&) instead.
+[10/14/2026-06:03:08] [TRT] [I] This engine can stream its weights. Please use setWeightStreamingBudgetV2() to enable it during execution.
+[10/14/2026-06:03:08] [TRT] [I] - Minimum budget: 0 bytes
+[10/14/2026-06:03:08] [TRT] [I] - Maximum budget: 13098880 bytes
+[10/14/2026-06:03:08] [TRT] [I] [MemUsageChange] TensorRT-managed allocation in IExecutionContext creation: CPU +0, GPU +14, now: CPU 12, GPU 14 (MiB)
+[10/14/2026-06:03:08] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 ============================== Start [case_normal,(),{}]
 tw.engine.get_weight_streaming_automatic_budget()=13098880B
 tw.engine.weight_streaming_scratch_memory_size=13054976B
@@ -130,8 +124,8 @@ x
       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
       0.   0.]]]]
 y
-[[-5.088133   -2.3532653   6.905129    7.531381   -9.480327   -0.21823335
-  -4.0191855  -2.3085804  18.147247    0.6640431 ]]
+[[ -0.59898555  -2.3657212    5.614266    10.2168     -11.550332
+    0.8892093   -5.151585    -3.6253533   19.623173    -3.7576973 ]]
 z
 [8]
 ============================== End   [case_normal]

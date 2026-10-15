@@ -1,12 +1,12 @@
 --- infStreams=1
-[09/08/2026-10:20:45] [I] Throughput: 16179.7 qps
-[09/08/2026-10:20:45] [I] GPU Compute Time: min = 0.0583496 ms, max = 0.0948486 ms, mean = 0.0590652 ms, median = 0.0588074 ms, percentile(90%) = 0.0606689 ms, percentile(95%) = 0.060791 ms, percentile(99%) = 0.060791 ms
-[09/08/2026-10:20:45] [I] Total GPU Compute Time: 2.86708 s
+[10/15/2026-05:46:27] [I] Throughput: 12463.6 qps
+[10/15/2026-05:46:27] [I] GPU Compute Time: min = 0.061676 ms, max = 0.858398 ms, mean = 0.0690926 ms, median = 0.0629883 ms, percentile(90%) = 0.0630493 ms, percentile(95%) = 0.0632324 ms, percentile(99%) = 0.311768 ms
+[10/15/2026-05:46:27] [I] Total GPU Compute Time: 2.58358 s
 --- infStreams=2
-[09/08/2026-10:20:50] [I] Throughput: 29302.3 qps
-[09/08/2026-10:20:50] [I] GPU Compute Time: min = 0.0605469 ms, max = 0.0900879 ms, mean = 0.0653227 ms, median = 0.0649414 ms, percentile(90%) = 0.0669556 ms, percentile(95%) = 0.0689697 ms, percentile(99%) = 0.072998 ms
-[09/08/2026-10:20:50] [I] Total GPU Compute Time: 5.74258 s
+[10/15/2026-05:46:31] [I] Throughput: 18722.8 qps
+[10/15/2026-05:46:31] [I] GPU Compute Time: min = 0.060791 ms, max = 4.50903 ms, mean = 0.0763384 ms, median = 0.0692139 ms, percentile(90%) = 0.0732422 ms, percentile(95%) = 0.0742188 ms, percentile(99%) = 0.340454 ms
+[10/15/2026-05:46:31] [I] Total GPU Compute Time: 4.28793 s
 --- infStreams=4
-[09/08/2026-10:20:56] [I] Throughput: 33918.6 qps
-[09/08/2026-10:20:56] [I] GPU Compute Time: min = 0.0646973 ms, max = 0.10376 ms, mean = 0.0748586 ms, median = 0.074585 ms, percentile(90%) = 0.0767822 ms, percentile(95%) = 0.0778809 ms, percentile(99%) = 0.0803223 ms
-[09/08/2026-10:20:56] [I] Total GPU Compute Time: 7.61806 s
+[10/15/2026-05:46:35] [I] Throughput: 23117 qps
+[10/15/2026-05:46:35] [I] GPU Compute Time: min = 0.0620117 ms, max = 7.02332 ms, mean = 0.0794825 ms, median = 0.0765381 ms, percentile(90%) = 0.0800781 ms, percentile(95%) = 0.0812988 ms, percentile(99%) = 0.0852356 ms
+[10/15/2026-05:46:35] [I] Total GPU Compute Time: 5.51259 s

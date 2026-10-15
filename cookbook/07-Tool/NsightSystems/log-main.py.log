@@ -1,16 +1,16 @@
-[TensorRT-Cookbook] Version: 1.0.0
+[TensorRT-Cookbook] Version: 2.0.0
 ============================== Start [case_profile_and_export,(),{}]
-    --cuda-graph-trace=graph: report   137.0 KiB -> sqlite    520.0 KiB, export 0.1 s
-    --cuda-graph-trace=node : report   145.2 KiB -> sqlite    568.0 KiB, export 0.1 s
+    --cuda-graph-trace=graph: report   139.8 KiB -> sqlite    520.0 KiB, export 0.1 s
+    --cuda-graph-trace=node : report   148.8 KiB -> sqlite    564.0 KiB, export 0.1 s
 ============================== End   [case_profile_and_export]
 ============================== Start [case_survey_the_database,(),{}]
     55 tables, 29 non-empty and not an ENUM_ lookup. The ones that matter here:
-        CUPTI_ACTIVITY_KIND_RUNTIME              1625
-        StringIds                                 247
+        CUPTI_ACTIVITY_KIND_RUNTIME              1660
+        StringIds                                 210
         NVTX_EVENTS                                52
-        CUPTI_ACTIVITY_KIND_GRAPH_TRACE            50
+        CUPTI_ACTIVITY_KIND_GRAPH_TRACE            51
         CUPTI_ACTIVITY_KIND_KERNEL                 11
-        CUPTI_ACTIVITY_KIND_MEMCPY                  3
+        CUPTI_ACTIVITY_KIND_MEMCPY                  8
 ============================== End   [case_survey_the_database]
 ============================== Start [case_the_nvtx_text_trap,(),{}]
     NVTX_EVENTS rows with inline `text`: 21, with interned `textId`: 30, with both: 0
@@ -20,64 +20,64 @@
 ============================== End   [case_the_nvtx_text_trap]
 ============================== Start [case_tensorrt_layers_from_nvtx,(),{}]
     NVTX range                                      count     CPU ns
-    myelinGraphLoadPersistent                           1    6951413
-    myelinGraphDeserializeBinary                        1    2496256
-    ExecutionContext::enqueueV3                         2     516845
-    myelinGraphUnloadPersistent                         1     241216
-    {ForeignNode[node_conv2d...ONNXTRT_castHelper_      2     219306
-    myelinGraphExecute                                  2     178300
-    __myl_Move_myl0_1                                   2      47007
-    node_conv2d_1_myl0_4                                2      29316
+    myelinGraphLoadPersistent                           1    6711179
+    myelinGraphDeserializeBinary                        1    2296369
+    ExecutionContext::enqueueV3                         2     576228
+    {ForeignNode[node_conv2d...ONNXTRT_castHelper_      2     317913
+    myelinGraphExecute                                  2     289378
+    myelinGraphUnloadPersistent                         1     242041
+    __myl_Move_myl0_1                                   2     150560
+    node_conv2d_1_myl0_4                                2      34304
     -> `node_*` are ONNX node names carried through; `__myl_*` are fused Myelin regions
     -> ranges cover the CPU-side enqueue, not the GPU work; case 6 joins them to kernels
 ============================== End   [case_tensorrt_layers_from_nvtx]
 ============================== Start [case_the_cuda_graph_trap,(),{}]
     --cuda-graph-trace=graph
-        CUPTI_ACTIVITY_KIND_KERNEL      :    11 rows,    0.029 ms
-        CUPTI_ACTIVITY_KIND_GRAPH_TRACE :    50 rows,    1.223 ms
-        cudaGraphLaunch calls           :    50
+        CUPTI_ACTIVITY_KIND_KERNEL      :    11 rows,    0.037 ms
+        CUPTI_ACTIVITY_KIND_GRAPH_TRACE :    51 rows,    1.553 ms
+        cudaGraphLaunch calls           :    51
     --cuda-graph-trace=node
-        CUPTI_ACTIVITY_KIND_KERNEL      :   561 rows,    1.267 ms
+        CUPTI_ACTIVITY_KIND_KERNEL      :   572 rows,    1.599 ms
         CUPTI_ACTIVITY_KIND_GRAPH_TRACE : table does not exist in this report
-        cudaGraphLaunch calls           :    50
+        cudaGraphLaunch calls           :    51
 
     Reading GPU time off the kernel table alone:
-        default granularity : 0.029 ms from 11 kernels
-        node granularity    : 1.267 ms from 561 kernels
+        default granularity : 0.037 ms from 11 kernels
+        node granularity    : 1.599 ms from 572 kernels
         -> the default under-reports GPU time by 44x
     The default is not lying, it is answering a different question:
-        graph-mode GRAPH_TRACE total 1.223 ms vs node-mode kernel total 1.267 ms
-        (3.5% apart -- same work, different granularity of recording)
+        graph-mode GRAPH_TRACE total 1.553 ms vs node-mode kernel total 1.599 ms
+        (2.9% apart -- same work, different granularity of recording)
 
-    Where 561 comes from: 50 graph replays x 11 kernels + 11 captured = 561
+    Where 572 comes from: 51 graph replays x 11 kernels + 11 captured = 572
 ============================== End   [case_the_cuda_graph_trap]
 ============================== Start [case_per_layer_gpu_time,(),{}]
     TensorRT layer                      kernels    GPU ns   share
-    node_conv2d_1_myl0_4                      1      6016   20.8%
-    node_linear_myl0_7                        1      5216   18.0%
-    node_conv2d_myl0_2                        1      3616   12.5%
-    node_max_pool2d_myl0_3                    1      2560    8.8%
-    node_max_pool2d_1_myl0_5                  1      2432    8.4%
-    __myl_Resh_myl0_6                         1      1824    6.3%
-    __myl_DivMulMaxr_myl0_10                  1      1696    5.8%
-    __myl_Move_myl0_1                         1      1600    5.5%
-    __myl_AddMaxrSubExpSum_myl0_9             1      1568    5.4%
-    __myl_MulSum_myl0_8                       1      1376    4.7%
-    __myl_CastReshCast_myl0_11                1      1088    3.8%
-    total                                           28992
-    -> the per-layer times sum to the enclosing `enqueueV3` range exactly (28992 == 28992)
+    node_conv2d_1_myl0_4                      1      8288   22.5%
+    node_linear_myl0_7                        1      6624   18.0%
+    node_conv2d_myl0_2                        1      4704   12.8%
+    node_max_pool2d_myl0_3                    1      2880    7.8%
+    node_max_pool2d_1_myl0_5                  1      2592    7.0%
+    __myl_Move_myl0_1                         1      2304    6.3%
+    __myl_AddMaxrSubExpSum_myl0_9             1      2240    6.1%
+    __myl_MulSum_myl0_8                       1      2176    5.9%
+    __myl_Resh_myl0_6                         1      1952    5.3%
+    __myl_DivMaxr_myl0_10                     1      1696    4.6%
+    __myl_CastReshCast_myl0_11                1      1376    3.7%
+    total                                           36832
+    -> the per-layer times sum to the enclosing `enqueueV3` range exactly (36832 == 36832)
     -> BUT this covers only the capture pass: the 50 replayed iterations carry no NVTX,
        so per-layer attribution exists for one iteration, not for the steady state
 ============================== End   [case_per_layer_gpu_time]
 ============================== Start [case_cross_check_with_nsys_stats,(),{}]
-    nsys stats --report cuda_gpu_kern_sum, first 4 of 11 kernels:
+    nsys stats --report cuda_gpu_kern_sum, first 4 of 10 kernels:
          Total ns  Inst  Name
-           287295    51  cutlass3x_sm100_tensorop_s128x128x8tf32implicit_gemm_fprop_f32_f
-           198624    51  sm50_xmma_cublas_gemvx_f32f32_f32_f32_tn_n_int32_unit_n_launch_p
-           149056    51  sm80_xmma_fprop_implicit_gemm_indexed_wo_smem_f32f32_tf32f32_f32
-           102622    51  sm50_xmma_pooling_max_nhwc_FP32FP32_WINDOWSIZE_0_PROPAGATE_NAN_2
-    instance counts across kernels: [51] (one per recorded iteration, pooling runs twice)
-    total 1.267 ms -- the same number case 5 got from CUPTI_ACTIVITY_KIND_KERNEL
+           394464    52  cutlass3x_sm100_tensorop_s128x128x8tf32implicit_gemm_fprop_f32_f
+           261888    52  sm50_xmma_cublas_gemvx_f32f32_f32_f32_tn_n_int32_unit_n_launch_p
+           240544   104  sm50_xmma_pooling_max_nhwc_FP32FP32_WINDOWSIZE_0_PROPAGATE_NAN_2
+           187744    52  sm80_xmma_fprop_implicit_gemm_indexed_wo_smem_f32f32_tf32f32_f32
+    instance counts across kernels: [52, 104] (one per recorded iteration, pooling runs twice)
+    total 1.599 ms -- the same number case 5 got from CUPTI_ACTIVITY_KIND_KERNEL
     -> `nsys stats --help-reports` lists ~40 of these; reach for SQL only when none fits,
        as in case 6, where the join from NVTX layer names to kernels has no built-in report
 ============================== End   [case_cross_check_with_nsys_stats]

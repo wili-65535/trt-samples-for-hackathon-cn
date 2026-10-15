@@ -47,8 +47,8 @@ name: toyPlugin
 op: CustomToyPlugin
 instances:
 - inputs:
-  - i0
   - i1
+  - i0
   outputs:
   - o1
   - o0

@@ -140,6 +140,15 @@ Six, as of TensorRT 11.0.0.114. Passing them costs a warning line and changes no
 | `--separateProfileRun` | the profile run is always separate |
 | `--directIO` | deprecated but still functional, unlike the five above |
 
+### Options new in TensorRT 11.3, with no case here
+
+Recorded rather than demonstrated, because neither can be exercised on this machine:
+
+| Option | What it is | Why there is no case |
+| :----- | :--- | :--- |
+| `--dlaWorkspaceAllocationStrategy` | picks `DEFAULT` or `SHARED_STATIC` for DLA workspace, matching the new `trt.DLAWorkspaceAllocationStrategy` enum | `runtime.num_DLA_cores == 0` here, so every DLA path returns early — see [`../../04-Feature/DLAStandalone/`](../../04-Feature/DLAStandalone/README.md) |
+| `--dumpCheckerBlob` / `--loadCheckerBlob` | writes a checker blob at build time and replays it at load time; **safe mode only**, per its own help text | `trtexec --safe` exits immediately here: `Safety is not supported because safety runtime library is unavailable.` — the same boundary [`../../04-Feature/Safety/`](../../04-Feature/Safety/README.md) already records |
+
 ## parse_export_json.py
 
 `main.sh` has always *produced* `--exportProfile` / `--exportTimes` JSON without ever reading it

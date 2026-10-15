@@ -1,4 +1,4 @@
-[TensorRT-Cookbook] Version: 1.0.0
+[TensorRT-Cookbook] Version: 2.0.0
 ============================== Start [case_build_and_run,(),{}]
 Input ->DataType.FLOAT, (-1,), (4,), items
 Output->DataType.FLOAT, (1,), (1,), sum_even
@@ -61,7 +61,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     type:LayerType.CONSTANT
     shape: (1,)
     type: LayerType.CONSTANT
-    weights:(1,),SumAbs=0.00000e+00,Var=0.00000,Max=0.00000,Min=0.00000,SAD=0.00000
+    weights:(1,),SumAbs=0.00000e+00,Mean=0.00000,Std=0.00000,Max=0.00000,Min=0.00000,SAD=0.00000
    3->[      GATHER      ]->Gather_8
     In  0:(1,),INT64,DEVICE,onnx::Gather_4
     In  1:(1,),INT64,DEVICE,onnx::Gather_3_output
@@ -86,7 +86,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     type:LayerType.CONSTANT
     shape: (1,)
     type: LayerType.CONSTANT
-    weights:(1,),SumAbs=0.00000e+00,Var=0.00000,Max=0.00000,Min=0.00000,SAD=0.00000
+    weights:(1,),SumAbs=0.00000e+00,Mean=0.00000,Std=0.00000,Max=0.00000,Min=0.00000,SAD=0.00000
    5->[     SQUEEZE      ]->Squeeze_10
     In  0:(1,),INT64,DEVICE,onnx::Squeeze_5
     In  1:(1,),INT64,DEVICE,onnx::Squeeze_6_output
@@ -118,7 +118,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     num_ranks:1
     type:LayerType.TRIP_LIMIT
     kind: TripLimit.COUNT
-    loop: <tensorrt.tensorrt.ILoop object at 0x76a35afa25b0>
+    loop: <tensorrt.tensorrt.ILoop object at 0x7abefc10b570>
     type: LayerType.TRIP_LIMIT
    8->[     CONSTANT     ]->(Unnamed Layer* 8) [Constant]
     Out 0:(1,),INT64,DEVICE,(Unnamed Layer* 8) [Constant]_output
@@ -130,7 +130,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     type:LayerType.CONSTANT
     shape: (1,)
     type: LayerType.CONSTANT
-    weights:(1,),SumAbs=0.00000e+00,Var=0.00000,Max=0.00000,Min=0.00000,SAD=0.00000
+    weights:(1,),SumAbs=0.00000e+00,Mean=0.00000,Std=0.00000,Max=0.00000,Min=0.00000,SAD=0.00000
    9->[     CONSTANT     ]->(Unnamed Layer* 9) [Constant]
     Out 0:(1,),INT64,DEVICE,(Unnamed Layer* 9) [Constant]_output
     metadata:
@@ -141,7 +141,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     type:LayerType.CONSTANT
     shape: (1,)
     type: LayerType.CONSTANT
-    weights:(1,),SumAbs=1.00000e+00,Var=0.00000,Max=1.00000,Min=1.00000,SAD=0.00000
+    weights:(1,),SumAbs=1.00000e+00,Mean=1.00000,Std=0.00000,Max=1.00000,Min=1.00000,SAD=0.00000
   10->[    RECURRENCE    ]->(Unnamed Layer* 10) [Recurrence]
     In  0:(1,),INT64,DEVICE,(Unnamed Layer* 8) [Constant]_output
     In  1:(1,),INT64,DEVICE,(Unnamed Layer* 11) [ElementWise]_output
@@ -152,7 +152,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     num_outputs:1
     num_ranks:1
     type:LayerType.RECURRENCE
-    loop: <tensorrt.tensorrt.ILoop object at 0x76a13e6eb070>
+    loop: <tensorrt.tensorrt.ILoop object at 0x7abce8b7b3f0>
     type: LayerType.RECURRENCE
   11->[   ELEMENTWISE    ]->(Unnamed Layer* 11) [ElementWise]
     In  0:(1,),INT64,DEVICE,(Unnamed Layer* 10) [Recurrence]_output
@@ -190,7 +190,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     type:LayerType.CONSTANT
     shape: ()
     type: LayerType.CONSTANT
-    weights:(1,),SumAbs=1.00000e+00,Var=0.00000,Max=1.00000,Min=1.00000,SAD=0.00000
+    weights:(1,),SumAbs=1.00000e+00,Mean=1.00000,Std=0.00000,Max=1.00000,Min=1.00000,SAD=0.00000
   14->[     CONSTANT     ]->onnx::Loop_2
     Out 0:(1,),FLOAT,DEVICE,onnx::Loop_2_output
     metadata:
@@ -201,7 +201,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     type:LayerType.CONSTANT
     shape: (1,)
     type: LayerType.CONSTANT
-    weights:(1,),SumAbs=0.00000e+00,Var=0.00000,Max=0.00000,Min=0.00000,SAD=0.00000
+    weights:(1,),SumAbs=0.00000e+00,Mean=0.00000,Std=0.00000,Max=0.00000,Min=0.00000,SAD=0.00000
   15->[    RECURRENCE    ]->(Unnamed Layer* 15) [Recurrence]
     In  0:(1,),FLOAT,DEVICE,onnx::Loop_2_output
     In  1:(1,),FLOAT,DEVICE,s.26
@@ -212,7 +212,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     num_outputs:1
     num_ranks:1
     type:LayerType.RECURRENCE
-    loop: <tensorrt.tensorrt.ILoop object at 0x76a13e6ea8f0>
+    loop: <tensorrt.tensorrt.ILoop object at 0x7abce8b7a530>
     type: LayerType.RECURRENCE
   16->[       CAST       ]->ONNXTRT_castHelper_2
     In  0:(),INT64,DEVICE,9
@@ -249,7 +249,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     type:LayerType.CONSTANT
     shape: ()
     type: LayerType.CONSTANT
-    weights:(1,),SumAbs=2.00000e+00,Var=0.00000,Max=2.00000,Min=2.00000,SAD=0.00000
+    weights:(1,),SumAbs=2.00000e+00,Mean=2.00000,Std=0.00000,Max=2.00000,Min=2.00000,SAD=0.00000
   19->[   ELEMENTWISE    ]->Div_14
     In  0:(),FLOAT,DEVICE,c
     In  1:(),FLOAT,DEVICE,13_output
@@ -283,7 +283,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     type:LayerType.CONSTANT
     shape: ()
     type: LayerType.CONSTANT
-    weights:(1,),SumAbs=2.00000e+00,Var=0.00000,Max=2.00000,Min=2.00000,SAD=0.00000
+    weights:(1,),SumAbs=2.00000e+00,Mean=2.00000,Std=0.00000,Max=2.00000,Min=2.00000,SAD=0.00000
   22->[   ELEMENTWISE    ]->Mul_17
     In  0:(),FLOAT,DEVICE,15
     In  1:(),FLOAT,DEVICE,16_output
@@ -318,7 +318,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     type:LayerType.CONSTANT
     shape: ()
     type: LayerType.CONSTANT
-    weights:(1,),SumAbs=0.00000e+00,Var=0.00000,Max=0.00000,Min=0.00000,SAD=0.00000
+    weights:(1,),SumAbs=0.00000e+00,Mean=0.00000,Std=0.00000,Max=0.00000,Min=0.00000,SAD=0.00000
   25->[   ELEMENTWISE    ]->Equal_20
     In  0:(),FLOAT,DEVICE,18
     In  1:(),FLOAT,DEVICE,19_output
@@ -350,7 +350,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     num_outputs:0
     num_ranks:1
     type:LayerType.CONDITION
-    conditional: <tensorrt.tensorrt.IIfConditional object at 0x76a13e6e89f0>
+    conditional: <tensorrt.tensorrt.IIfConditional object at 0x7abefc2d75b0>
     type: LayerType.CONDITION
   28->[     SHUFFLE      ]->ONNXTRT_Broadcast
     In  0:(),FLOAT,DEVICE,c_InputLayer_output
@@ -397,7 +397,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     num_outputs:1
     num_ranks:1
     type:LayerType.CONDITIONAL_INPUT
-    conditional: <tensorrt.tensorrt.IIfConditional object at 0x76a13e6e6230>
+    conditional: <tensorrt.tensorrt.IIfConditional object at 0x7abefc0f31f0>
     type: LayerType.CONDITIONAL_INPUT
   32->[CONDITIONAL_INPUT ]->s.22_InputLayer
     In  0:(1,),FLOAT,DEVICE,s.22
@@ -408,7 +408,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     num_outputs:1
     num_ranks:1
     type:LayerType.CONDITIONAL_INPUT
-    conditional: <tensorrt.tensorrt.IIfConditional object at 0x76a13e6ebe70>
+    conditional: <tensorrt.tensorrt.IIfConditional object at 0x7abce8b61af0>
     type: LayerType.CONDITIONAL_INPUT
   33->[CONDITIONAL_OUTPUT]->If_22_OutputLayer
     In  0:(1,),FLOAT,DEVICE,23
@@ -420,7 +420,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     num_outputs:1
     num_ranks:1
     type:LayerType.CONDITIONAL_OUTPUT
-    conditional: <tensorrt.tensorrt.IIfConditional object at 0x76a35a7e4230>
+    conditional: <tensorrt.tensorrt.IIfConditional object at 0x7abefc2dd930>
     type: LayerType.CONDITIONAL_OUTPUT
   34->[     IDENTITY     ]->Identity_25
     In  0:(),BOOL,DEVICE,cond
@@ -442,7 +442,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     num_outputs:1
     num_ranks:1
     type:LayerType.RECURRENCE
-    loop: <tensorrt.tensorrt.ILoop object at 0x76a13cce4170>
+    loop: <tensorrt.tensorrt.ILoop object at 0x7abce8b628f0>
     type: LayerType.RECURRENCE
   36->[    TRIP_LIMIT    ]->(Unnamed Layer* 36) [TripLimit]
     In  0:(),BOOL,DEVICE,(Unnamed Layer* 35) [Recurrence]_output
@@ -453,7 +453,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     num_ranks:1
     type:LayerType.TRIP_LIMIT
     kind: TripLimit.WHILE
-    loop: <tensorrt.tensorrt.ILoop object at 0x76a13e6e43b0>
+    loop: <tensorrt.tensorrt.ILoop object at 0x7abf079d91b0>
     type: LayerType.TRIP_LIMIT
   37->[   LOOP_OUTPUT    ]->(Unnamed Layer* 37) [LoopOutput]
     In  0:(1,),FLOAT,DEVICE,s.22
@@ -466,7 +466,7 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
     type:LayerType.LOOP_OUTPUT
     axis: 0
     kind: LoopOutput.LAST_VALUE
-    loop: <tensorrt.tensorrt.ILoop object at 0x76a35b6cedb0>
+    loop: <tensorrt.tensorrt.ILoop object at 0x7abefc1098f0>
     type: LayerType.LOOP_OUTPUT
 ============================== End   [case_print_network]
 ============================== Start [case_export_network_as_onnx,(),{}]
@@ -476,8 +476,8 @@ Output  0:(1,),FLOAT,DEVICE,sum_even
 [ExportONNX]Layer input tensor not in global_tensor_map: c_InputLayer_output
 [ExportONNX]Layer input tensor not in global_tensor_map: s.22_InputLayer_output
 [W] Found distinct tensors that share the same name:
-[id: 130434881929440] Variable ((Unnamed Layer* 11) [ElementWise]_output): (shape=(1,), dtype=<class 'numpy.int64'>)
-[id: 130434881929824] Variable ((Unnamed Layer* 11) [ElementWise]_output): (shape=(1,), dtype=<class 'numpy.int64'>)
+[id: 134951776814240] Variable ((Unnamed Layer* 11) [ElementWise]_output): (shape=(1,), dtype=<class 'numpy.int64'>)
+[id: 134951776814912] Variable ((Unnamed Layer* 11) [ElementWise]_output): (shape=(1,), dtype=<class 'numpy.int64'>)
 Note: Producer node(s) of first tensor:
 []
 Producer node(s) of second tensor:
@@ -491,8 +491,8 @@ Producer node(s) of second tensor:
 	]
 Attributes: OrderedDict({'metadata': '', 'name': '(Unnamed Layer* 11) [ElementWise]', 'num_inputs': '2', 'num_outputs': '1', 'num_ranks': '1', 'type': 'LayerType.ELEMENTWISE', 'op': 'ElementWiseOperation.SUM'})]
 [W] Found distinct tensors that share the same name:
-[id: 130434881941728] Variable (c_InputLayer_output): (shape=(), dtype=<class 'numpy.float32'>)
-[id: 130434883745168] Variable (c_InputLayer_output): (shape=(), dtype=<class 'numpy.float32'>)
+[id: 134951776822592] Variable (c_InputLayer_output): (shape=(), dtype=<class 'numpy.float32'>)
+[id: 134951776815440] Variable (c_InputLayer_output): (shape=(), dtype=<class 'numpy.float32'>)
 Note: Producer node(s) of first tensor:
 []
 Producer node(s) of second tensor:
@@ -503,10 +503,10 @@ Producer node(s) of second tensor:
 	Outputs: [
 		Variable (c_InputLayer_output): (shape=(), dtype=<class 'numpy.float32'>)
 	]
-Attributes: OrderedDict({'metadata': '[ONNX Layer: If_22 | sub_graph1 (then_branch) | If_22 (If)]', 'name': 'c_InputLayer', 'num_inputs': '1', 'num_outputs': '1', 'num_ranks': '1', 'type': 'LayerType.CONDITIONAL_INPUT', 'conditional': '<tensorrt.tensorrt.IIfConditional object at 0x76a13ccf94f0>'})]
+Attributes: OrderedDict({'metadata': '[ONNX Layer: If_22 | sub_graph1 (then_branch) | If_22 (If)]', 'name': 'c_InputLayer', 'num_inputs': '1', 'num_outputs': '1', 'num_ranks': '1', 'type': 'LayerType.CONDITIONAL_INPUT', 'conditional': '<tensorrt.tensorrt.IIfConditional object at 0x7abefc10b530>'})]
 [W] Found distinct tensors that share the same name:
-[id: 130434881942112] Variable (s.22_InputLayer_output): (shape=(1,), dtype=<class 'numpy.float32'>)
-[id: 130434883745744] Variable (s.22_InputLayer_output): (shape=(1,), dtype=<class 'numpy.float32'>)
+[id: 134951776823024] Variable (s.22_InputLayer_output): (shape=(1,), dtype=<class 'numpy.float32'>)
+[id: 134951776547040] Variable (s.22_InputLayer_output): (shape=(1,), dtype=<class 'numpy.float32'>)
 Note: Producer node(s) of first tensor:
 []
 Producer node(s) of second tensor:
@@ -517,10 +517,10 @@ Producer node(s) of second tensor:
 	Outputs: [
 		Variable (s.22_InputLayer_output): (shape=(1,), dtype=<class 'numpy.float32'>)
 	]
-Attributes: OrderedDict({'metadata': '[ONNX Layer: If_22 | sub_graph1 (then_branch) | If_22 (If)]', 'name': 's.22_InputLayer', 'num_inputs': '1', 'num_outputs': '1', 'num_ranks': '1', 'type': 'LayerType.CONDITIONAL_INPUT', 'conditional': '<tensorrt.tensorrt.IIfConditional object at 0x76a35b96adf0>'})]
+Attributes: OrderedDict({'metadata': '[ONNX Layer: If_22 | sub_graph1 (then_branch) | If_22 (If)]', 'name': 's.22_InputLayer', 'num_inputs': '1', 'num_outputs': '1', 'num_ranks': '1', 'type': 'LayerType.CONDITIONAL_INPUT', 'conditional': '<tensorrt.tensorrt.IIfConditional object at 0x7abefc2dfeb0>'})]
 [W] Found distinct tensors that share the same name:
-[id: 130434881932368] Variable (s.26): (shape=(1,), dtype=<class 'numpy.float32'>)
-[id: 130434883746032] Variable (s.26): (shape=(1,), dtype=<class 'numpy.float32'>)
+[id: 134951776816496] Variable (s.26): (shape=(1,), dtype=<class 'numpy.float32'>)
+[id: 134951776538496] Variable (s.26): (shape=(1,), dtype=<class 'numpy.float32'>)
 Note: Producer node(s) of first tensor:
 []
 Producer node(s) of second tensor:
@@ -532,10 +532,10 @@ Producer node(s) of second tensor:
 	Outputs: [
 		Variable (s.26): (shape=(1,), dtype=<class 'numpy.float32'>)
 	]
-Attributes: OrderedDict({'metadata': '[ONNX Layer: If_22]', 'name': 'If_22_OutputLayer', 'num_inputs': '2', 'num_outputs': '1', 'num_ranks': '1', 'type': 'LayerType.CONDITIONAL_OUTPUT', 'conditional': '<tensorrt.tensorrt.IIfConditional object at 0x76a35b82d730>'})]
+Attributes: OrderedDict({'metadata': '[ONNX Layer: If_22]', 'name': 'If_22_OutputLayer', 'num_inputs': '2', 'num_outputs': '1', 'num_ranks': '1', 'type': 'LayerType.CONDITIONAL_OUTPUT', 'conditional': '<tensorrt.tensorrt.IIfConditional object at 0x7abce8ba00b0>'})]
 [W] Found distinct tensors that share the same name:
-[id: 130434881929440] Variable ((Unnamed Layer* 11) [ElementWise]_output): (shape=(1,), dtype=<class 'numpy.int64'>)
-[id: 130434881929824] Variable ((Unnamed Layer* 11) [ElementWise]_output): (shape=(1,), dtype=<class 'numpy.int64'>)
+[id: 134951776814240] Variable ((Unnamed Layer* 11) [ElementWise]_output): (shape=(1,), dtype=<class 'numpy.int64'>)
+[id: 134951776814912] Variable ((Unnamed Layer* 11) [ElementWise]_output): (shape=(1,), dtype=<class 'numpy.int64'>)
 Note: Producer node(s) of first tensor:
 []
 Producer node(s) of second tensor:
@@ -549,8 +549,8 @@ Producer node(s) of second tensor:
 	]
 Attributes: OrderedDict({'metadata': '', 'name': '(Unnamed Layer* 11) [ElementWise]', 'num_inputs': '2', 'num_outputs': '1', 'num_ranks': '1', 'type': 'LayerType.ELEMENTWISE', 'op': 'ElementWiseOperation.SUM'})]
 [W] Found distinct tensors that share the same name:
-[id: 130434881941728] Variable (c_InputLayer_output): (shape=(), dtype=<class 'numpy.float32'>)
-[id: 130434883745168] Variable (c_InputLayer_output): (shape=(), dtype=<class 'numpy.float32'>)
+[id: 134951776822592] Variable (c_InputLayer_output): (shape=(), dtype=<class 'numpy.float32'>)
+[id: 134951776815440] Variable (c_InputLayer_output): (shape=(), dtype=<class 'numpy.float32'>)
 Note: Producer node(s) of first tensor:
 []
 Producer node(s) of second tensor:
@@ -561,10 +561,10 @@ Producer node(s) of second tensor:
 	Outputs: [
 		Variable (c_InputLayer_output): (shape=(), dtype=<class 'numpy.float32'>)
 	]
-Attributes: OrderedDict({'metadata': '[ONNX Layer: If_22 | sub_graph1 (then_branch) | If_22 (If)]', 'name': 'c_InputLayer', 'num_inputs': '1', 'num_outputs': '1', 'num_ranks': '1', 'type': 'LayerType.CONDITIONAL_INPUT', 'conditional': '<tensorrt.tensorrt.IIfConditional object at 0x76a13ccf94f0>'})]
+Attributes: OrderedDict({'metadata': '[ONNX Layer: If_22 | sub_graph1 (then_branch) | If_22 (If)]', 'name': 'c_InputLayer', 'num_inputs': '1', 'num_outputs': '1', 'num_ranks': '1', 'type': 'LayerType.CONDITIONAL_INPUT', 'conditional': '<tensorrt.tensorrt.IIfConditional object at 0x7abefc10b530>'})]
 [W] Found distinct tensors that share the same name:
-[id: 130434881942112] Variable (s.22_InputLayer_output): (shape=(1,), dtype=<class 'numpy.float32'>)
-[id: 130434883745744] Variable (s.22_InputLayer_output): (shape=(1,), dtype=<class 'numpy.float32'>)
+[id: 134951776823024] Variable (s.22_InputLayer_output): (shape=(1,), dtype=<class 'numpy.float32'>)
+[id: 134951776547040] Variable (s.22_InputLayer_output): (shape=(1,), dtype=<class 'numpy.float32'>)
 Note: Producer node(s) of first tensor:
 []
 Producer node(s) of second tensor:
@@ -575,10 +575,10 @@ Producer node(s) of second tensor:
 	Outputs: [
 		Variable (s.22_InputLayer_output): (shape=(1,), dtype=<class 'numpy.float32'>)
 	]
-Attributes: OrderedDict({'metadata': '[ONNX Layer: If_22 | sub_graph1 (then_branch) | If_22 (If)]', 'name': 's.22_InputLayer', 'num_inputs': '1', 'num_outputs': '1', 'num_ranks': '1', 'type': 'LayerType.CONDITIONAL_INPUT', 'conditional': '<tensorrt.tensorrt.IIfConditional object at 0x76a35b96adf0>'})]
+Attributes: OrderedDict({'metadata': '[ONNX Layer: If_22 | sub_graph1 (then_branch) | If_22 (If)]', 'name': 's.22_InputLayer', 'num_inputs': '1', 'num_outputs': '1', 'num_ranks': '1', 'type': 'LayerType.CONDITIONAL_INPUT', 'conditional': '<tensorrt.tensorrt.IIfConditional object at 0x7abefc2dfeb0>'})]
 [W] Found distinct tensors that share the same name:
-[id: 130434881932368] Variable (s.26): (shape=(1,), dtype=<class 'numpy.float32'>)
-[id: 130434883746032] Variable (s.26): (shape=(1,), dtype=<class 'numpy.float32'>)
+[id: 134951776816496] Variable (s.26): (shape=(1,), dtype=<class 'numpy.float32'>)
+[id: 134951776538496] Variable (s.26): (shape=(1,), dtype=<class 'numpy.float32'>)
 Note: Producer node(s) of first tensor:
 []
 Producer node(s) of second tensor:
@@ -590,7 +590,7 @@ Producer node(s) of second tensor:
 	Outputs: [
 		Variable (s.26): (shape=(1,), dtype=<class 'numpy.float32'>)
 	]
-Attributes: OrderedDict({'metadata': '[ONNX Layer: If_22]', 'name': 'If_22_OutputLayer', 'num_inputs': '2', 'num_outputs': '1', 'num_ranks': '1', 'type': 'LayerType.CONDITIONAL_OUTPUT', 'conditional': '<tensorrt.tensorrt.IIfConditional object at 0x76a35b82d730>'})]
+Attributes: OrderedDict({'metadata': '[ONNX Layer: If_22]', 'name': 'If_22_OutputLayer', 'num_inputs': '2', 'num_outputs': '1', 'num_ranks': '1', 'type': 'LayerType.CONDITIONAL_OUTPUT', 'conditional': '<tensorrt.tensorrt.IIfConditional object at 0x7abce8ba00b0>'})]
 Succeed saving network.onnx:    38 Nodes,    36 tensors
     exported network.onnx: 38 nodes, 0 of them hold a sub-graph
     node types: {'SHAPE': 1, 'CAST': 4, 'CONSTANT': 9, 'GATHER': 2, 'SQUEEZE': 1, 'TRIP_LIMIT': 2, 'RECURRENCE': 3, 'ELEMENTWISE': 6, 'SHUFFLE': 2, 'UNARY': 1, 'CONDITION': 1, 'IDENTITY': 2, 'CONDITIONAL_INPUT': 2, 'CONDITIONAL_OUTPUT': 1, 'LOOP_OUTPUT': 1}

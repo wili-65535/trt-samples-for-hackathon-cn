@@ -1,12 +1,12 @@
-[TensorRT-Cookbook] Version: 1.0.0
-[09/08/2026-08:48:23] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[09/08/2026-08:48:29] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[TensorRT-Cookbook] Version: 2.0.0
+[10/14/2026-05:10:22] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/14/2026-05:10:28] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 ============================== Start [case_autocast,(),{}]
-[FP32] Epoch  0, test acc = 0.7300
-[FP32] Epoch  1, test acc = 0.9460
-[FP32] Epoch  2, test acc = 0.9480
-[FP32] Epoch  3, test acc = 0.9520
-[FP32] Epoch  4, test acc = 0.9540
+[FP32] Epoch  0, test acc = 0.8340
+[FP32] Epoch  1, test acc = 0.9260
+[FP32] Epoch  2, test acc = 0.9540
+[FP32] Epoch  3, test acc = 0.9560
+[FP32] Epoch  4, test acc = 0.9620
 Succeed exporting /work/trt-samples-for-hackathon-cn-wili/cookbook/03-Workflow/pyTorch-ModelOptimizer-ONNX-TensorRT/model-fp32.onnx
 model-fp32.onnx: 13 nodes (0 Cast), initializers={'FP32': 8}, intermediate tensors={}
 Input ->DataType.FLOAT, (-1, 1, 28, 28), (1, 1, 28, 28), x
@@ -98,16 +98,16 @@ x
       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
       0.   0.]]]]
 y
-[[ 0.81594294 -1.3640512   7.198541    7.8274903  -7.6236897   1.5929695
-  -8.238501   -5.8308253  15.937824   -0.77427775]]
+[[ 4.9851465  -1.1165152   1.5490382   0.8284599  -3.933176   -1.3446889
+  -1.1137384  -2.8085153  10.526964    0.13979846]]
 z
 [8]
-2026-09-08 08:48:30,186 - [modelopt][onnx] - INFO - Successfully enabled 1 EPs for ORT: ['CPUExecutionProvider']
-2026-09-08 08:48:30,203 - [modelopt][onnx] - INFO - Running ONNX Runtime to obtain reference outputs (this may take a while)...
-2026-09-08 08:48:30,263 - [modelopt][onnx] - WARNING - Some initializers contain values smaller than smallest fp16 value, values will be replaced with 6.0e-08.
-2026-09-08 08:48:30,315 - [modelopt][onnx] - INFO - Converted 13/13 nodes (100.00%) to fp16
-[09/08/2026-08:48:30] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[09/08/2026-08:48:38] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+2026-10-14 05:10:28,987 - [modelopt][onnx] - INFO - Successfully enabled 1 EPs for ORT: ['CPUExecutionProvider']
+2026-10-14 05:10:29,010 - [modelopt][onnx] - INFO - Running ONNX Runtime to obtain reference outputs (this may take a while)...
+2026-10-14 05:10:29,095 - [modelopt][onnx] - WARNING - Some initializers contain values smaller than smallest fp16 value, values will be replaced with 6.0e-08.
+2026-10-14 05:10:29,142 - [modelopt][onnx] - INFO - Converted 13/13 nodes (100.00%) to fp16
+[10/14/2026-05:10:29] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/14/2026-05:10:49] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 Succeed exporting /work/trt-samples-for-hackathon-cn-wili/cookbook/03-Workflow/pyTorch-ModelOptimizer-ONNX-TensorRT/model-fp16-autocast.onnx
 model-fp16-autocast.onnx: 15 nodes (2 Cast), initializers={'FP16': 8}, intermediate tensors={'FP16': 23, 'INT64': 1, 'FP32': 11}
 Input ->DataType.FLOAT, (-1, 1, 28, 28), (1, 1, 28, 28), x
@@ -199,23 +199,23 @@ x
       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
       0.   0.]]]]
 y
-[[ 0.8125    -1.3632812  7.1992188  7.828125  -7.625      1.5966797
-  -8.2421875 -5.8320312 15.9453125 -0.7753906]]
+[[ 4.9882812  -1.1162109   1.546875    0.82714844 -3.9335938  -1.34375
+  -1.1132812  -2.8046875  10.5234375   0.14562988]]
 z
 [8]
-[check]:True,maxAbsDiff=7.488e-03,meanAbsDiff=2.404e-03,maxRelDiff=4.169e-03,meanRelDiff=9.932e-04
+[check]:True,maxAbsDiff=5.831e-03,meanAbsDiff=2.191e-03,maxRelDiff=3.893e-02,meanRelDiff=4.568e-03
 Predicted label unchanged: True
 ============================== End   [case_autocast]
 ============================== Start [case_autocast_exclude,(),{}]
-2026-09-08 08:48:39,036 - [modelopt][onnx] - INFO - Successfully enabled 1 EPs for ORT: ['CPUExecutionProvider']
-2026-09-08 08:48:39,037 - [modelopt][onnx] - INFO - Running ONNX Runtime to obtain reference outputs (this may take a while)...
-2026-09-08 08:48:39,058 - [modelopt][onnx] - INFO - Skipping node /gemm1/Gemm: DisabledOpTypes
-2026-09-08 08:48:39,058 - [modelopt][onnx] - INFO - Skipping node /gemm2/Gemm: DisabledOpTypes
-2026-09-08 08:48:39,112 - [modelopt][onnx] - INFO - Converted 11/13 nodes (84.62%) to fp16
-[09/08/2026-08:48:39] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[09/08/2026-08:48:44] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[09/08/2026-08:48:45] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[09/08/2026-08:48:50] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+2026-10-14 05:10:50,326 - [modelopt][onnx] - INFO - Successfully enabled 1 EPs for ORT: ['CPUExecutionProvider']
+2026-10-14 05:10:50,326 - [modelopt][onnx] - INFO - Running ONNX Runtime to obtain reference outputs (this may take a while)...
+2026-10-14 05:10:50,347 - [modelopt][onnx] - INFO - Skipping node /gemm1/Gemm: DisabledOpTypes
+2026-10-14 05:10:50,348 - [modelopt][onnx] - INFO - Skipping node /gemm2/Gemm: DisabledOpTypes
+2026-10-14 05:10:50,400 - [modelopt][onnx] - INFO - Converted 11/13 nodes (84.62%) to fp16
+[10/14/2026-05:10:50] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/14/2026-05:10:56] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/14/2026-05:10:57] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/14/2026-05:11:02] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 Succeed exporting /work/trt-samples-for-hackathon-cn-wili/cookbook/03-Workflow/pyTorch-ModelOptimizer-ONNX-TensorRT/model-fp16-autocast-excluded.onnx
 model-fp16-autocast.onnx: 15 nodes (2 Cast), initializers={'FP16': 8}, intermediate tensors={'FP16': 23, 'INT64': 1, 'FP32': 11}
 model-fp16-autocast-excluded.onnx: 18 nodes (5 Cast), initializers={'FP32': 4, 'FP16': 4}, intermediate tensors={'FP16': 19, 'INT64': 1, 'FP32': 10}
@@ -308,8 +308,8 @@ x
       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
       0.   0.]]]]
 y
-[[ 0.81405175 -1.3633586   7.1969595   7.82717    -7.6234136   1.5967704
-  -8.235895   -5.8324633  15.939777   -0.7760898 ]]
+[[ 4.987839   -1.1163433   1.5471718   0.82707727 -3.9342782  -1.3448808
+  -1.1137222  -2.8057802  10.524766    0.14348441]]
 z
 [8]
 ============================== End   [case_autocast_exclude]
@@ -403,21 +403,21 @@ x
       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
       0.   0.]]]]
 y
-[[ 0.81594294 -1.3640512   7.198541    7.8274903  -7.6236897   1.5929695
-  -8.238501   -5.8308253  15.937824   -0.77427775]]
+[[ 4.985145   -1.1165152   1.5490379   0.82846    -3.933175   -1.3446885
+  -1.1137384  -2.8085144  10.526961    0.13979852]]
 z
 [8]
-2026-09-08 08:48:51,783 - [modelopt][onnx] - INFO - Converting model from opset [19] to 22 using onnxscript...
-2026-09-08 08:48:51,786 - [modelopt][onnx] - INFO - Successfully converted model to opset 22
-2026-09-08 08:48:51,806 - [modelopt][onnx] - INFO - Successfully enabled 1 EPs for ORT: ['CPUExecutionProvider']
-2026-09-08 08:48:51,807 - [modelopt][onnx] - INFO - Running ONNX Runtime to obtain reference outputs (this may take a while)...
-2026-09-08 08:48:51,878 - [modelopt][onnx] - INFO - Converted 13/13 nodes (100.00%) to bf16
-[09/08/2026-08:48:51] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[09/08/2026-08:48:58] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[09/08/2026-08:48:59] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[09/08/2026-08:49:07] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-[09/08/2026-08:49:07] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[09/08/2026-08:49:13] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+2026-10-14 05:11:03,068 - [modelopt][onnx] - INFO - Converting model from opset [19] to 22 using onnxscript...
+2026-10-14 05:11:03,072 - [modelopt][onnx] - INFO - Successfully converted model to opset 22
+2026-10-14 05:11:03,092 - [modelopt][onnx] - INFO - Successfully enabled 1 EPs for ORT: ['CPUExecutionProvider']
+2026-10-14 05:11:03,092 - [modelopt][onnx] - INFO - Running ONNX Runtime to obtain reference outputs (this may take a while)...
+2026-10-14 05:11:03,169 - [modelopt][onnx] - INFO - Converted 13/13 nodes (100.00%) to bf16
+[10/14/2026-05:11:03] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/14/2026-05:11:21] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/14/2026-05:11:22] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/14/2026-05:11:42] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/14/2026-05:11:42] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/14/2026-05:11:48] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 Succeed exporting /work/trt-samples-for-hackathon-cn-wili/cookbook/03-Workflow/pyTorch-ModelOptimizer-ONNX-TensorRT/model-bf16-autocast.onnx
 model-fp16-autocast.onnx: 15 nodes (2 Cast), initializers={'FP16': 8}, intermediate tensors={'FP16': 23, 'INT64': 1, 'FP32': 11}
 model-bf16-autocast.onnx: 15 nodes (2 Cast), initializers={'BF16': 8}, intermediate tensors={'BF16': 23, 'INT64': 1, 'FP32': 11}
@@ -511,8 +511,8 @@ x
       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
       0.   0.]]]]
 y
-[[ 0.828125 -1.359375  7.1875    7.8125   -7.625     1.578125 -8.25
-  -5.8125   15.9375   -0.78125 ]]
+[[ 4.96875    -1.1171875   1.546875    0.80859375 -3.953125   -1.34375
+  -1.1015625  -2.796875   10.5         0.15527344]]
 z
 [8]
 Input ->DataType.FLOAT, (-1, 1, 28, 28), (1, 1, 28, 28), x
@@ -604,12 +604,12 @@ x
       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
       0.   0.]]]]
 y
-[[ 0.81396484 -1.3632812   7.1953125   7.828125   -7.625       1.5966797
-  -8.234375   -5.8320312  15.9375     -0.7758789 ]]
+[[ 4.9882812  -1.1162109   1.546875    0.82714844 -3.9335938  -1.34375
+  -1.1132812  -2.8046875  10.5234375   0.14562988]]
 z
 [8]
 
-    max |logit - FP32|:  FP16 4.126e-03   BF16 1.833e-02   ratio 4.4x
+    max |logit - FP32|:  FP16 5.831e-03   BF16 2.696e-02   ratio 4.6x
     predicted label unchanged: FP16 True, BF16 True
     BF16 is the *less* accurate choice on a model that never overflows, because the
     three mantissa bits it gives up buy range this model does not need. Pick BF16 for
@@ -705,24 +705,24 @@ x
       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
       0.   0.]]]]
 y
-[[ 0.81594294 -1.3640512   7.198541    7.8274903  -7.6236897   1.5929695
-  -8.238501   -5.8308253  15.937824   -0.77427775]]
+[[ 4.9851465  -1.1165152   1.5490382   0.8284599  -3.933176   -1.3446889
+  -1.1137384  -2.8085153  10.526964    0.13979846]]
 z
 [8]
     data_max   FP16 init   FP32 init   Cast nodes   max |logit - FP32|   label kept   graph
     ----------------------------------------------------------------------------------------------
-2026-09-08 08:49:14,171 - [modelopt][onnx] - INFO - Successfully enabled 1 EPs for ORT: ['CPUExecutionProvider']
-2026-09-08 08:49:14,172 - [modelopt][onnx] - INFO - Running ONNX Runtime to obtain reference outputs (this may take a while)...
-2026-09-08 08:49:14,195 - [modelopt][onnx] - INFO - Skipping node /conv1/Conv: reference IO out of range: min=-1.2796982526779175, max=1.3277006149291992, absmax=1.3277006149291992, range=[-1, 1]
-2026-09-08 08:49:14,195 - [modelopt][onnx] - INFO - Skipping node /Relu: reference IO out of range: min=-1.2796982526779175, max=1.3277006149291992, absmax=1.3277006149291992, range=[-1, 1]
-2026-09-08 08:49:14,196 - [modelopt][onnx] - INFO - Skipping node /MaxPool: reference IO out of range: min=0.0, max=1.3277006149291992, absmax=1.3277006149291992, range=[-1, 1]
-2026-09-08 08:49:14,196 - [modelopt][onnx] - INFO - Skipping node /conv2/Conv: reference IO out of range: min=0.0, max=1.3277006149291992, absmax=1.3277006149291992, range=[-1, 1]
-2026-09-08 08:49:14,196 - [modelopt][onnx] - INFO - Skipping node /Relu_1: reference IO out of range: min=-3.5503923892974854, max=0.8241983652114868, absmax=3.5503923892974854, range=[-1, 1]
-2026-09-08 08:49:14,198 - [modelopt][onnx] - INFO - Skipping node /ArgMax: reference IO out of range: min=7, max=7, absmax=7, range=[-1, 1]
-2026-09-08 08:49:14,213 - [modelopt][onnx] - WARNING - Some initializers contain values smaller than smallest fp16 value, values will be replaced with 6.0e-08.
-2026-09-08 08:49:14,257 - [modelopt][onnx] - INFO - Converted 7/13 nodes (53.85%) to fp16
-[09/08/2026-08:49:14] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[09/08/2026-08:49:21] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+2026-10-14 05:11:48,923 - [modelopt][onnx] - INFO - Successfully enabled 1 EPs for ORT: ['CPUExecutionProvider']
+2026-10-14 05:11:48,924 - [modelopt][onnx] - INFO - Running ONNX Runtime to obtain reference outputs (this may take a while)...
+2026-10-14 05:11:48,946 - [modelopt][onnx] - INFO - Skipping node /conv1/Conv: reference IO out of range: min=-1.364820957183838, max=1.360948085784912, absmax=1.364820957183838, range=[-1, 1]
+2026-10-14 05:11:48,946 - [modelopt][onnx] - INFO - Skipping node /Relu: reference IO out of range: min=-1.364820957183838, max=1.360948085784912, absmax=1.364820957183838, range=[-1, 1]
+2026-10-14 05:11:48,946 - [modelopt][onnx] - INFO - Skipping node /MaxPool: reference IO out of range: min=0.0, max=1.360948085784912, absmax=1.360948085784912, range=[-1, 1]
+2026-10-14 05:11:48,946 - [modelopt][onnx] - INFO - Skipping node /conv2/Conv: reference IO out of range: min=0.0, max=1.360948085784912, absmax=1.360948085784912, range=[-1, 1]
+2026-10-14 05:11:48,946 - [modelopt][onnx] - INFO - Skipping node /Relu_1: reference IO out of range: min=-3.427875518798828, max=0.5046108961105347, absmax=3.427875518798828, range=[-1, 1]
+2026-10-14 05:11:48,948 - [modelopt][onnx] - INFO - Skipping node /ArgMax: reference IO out of range: min=8, max=8, absmax=8, range=[-1, 1]
+2026-10-14 05:11:48,964 - [modelopt][onnx] - WARNING - Some initializers contain values smaller than smallest fp16 value, values will be replaced with 6.0e-08.
+2026-10-14 05:11:49,009 - [modelopt][onnx] - INFO - Converted 7/13 nodes (53.85%) to fp16
+[10/14/2026-05:11:49] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/14/2026-05:12:08] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 Input ->DataType.FLOAT, (-1, 1, 28, 28), (1, 1, 28, 28), x
 Output->DataType.FLOAT, (-1, 10), (1, 10), y
 Output->DataType.INT64, (-1,), (1,), z
@@ -812,17 +812,17 @@ x
       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
       0.   0.]]]]
 y
-[[ 0.8154297 -1.3632812  7.1992188  7.8320312 -7.625      1.5917969
-  -8.2421875 -5.8320312 15.9453125 -0.7739258]]
+[[ 4.9804688  -1.1171875   1.5498047   0.8286133  -3.9335938  -1.34375
+  -1.1142578  -2.8105469  10.53125     0.14147949]]
 z
 [8]
-           1           4           4            3            7.488e-03   True         84630cbb
-2026-09-08 08:49:22,450 - [modelopt][onnx] - INFO - Successfully enabled 1 EPs for ORT: ['CPUExecutionProvider']
-2026-09-08 08:49:22,450 - [modelopt][onnx] - INFO - Running ONNX Runtime to obtain reference outputs (this may take a while)...
-2026-09-08 08:49:22,490 - [modelopt][onnx] - WARNING - Some initializers contain values smaller than smallest fp16 value, values will be replaced with 6.0e-08.
-2026-09-08 08:49:22,535 - [modelopt][onnx] - INFO - Converted 13/13 nodes (100.00%) to fp16
-[09/08/2026-08:49:22] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[09/08/2026-08:49:29] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+           1           4           4            3            4.678e-03   True         a3b55050
+2026-10-14 05:12:09,582 - [modelopt][onnx] - INFO - Successfully enabled 1 EPs for ORT: ['CPUExecutionProvider']
+2026-10-14 05:12:09,583 - [modelopt][onnx] - INFO - Running ONNX Runtime to obtain reference outputs (this may take a while)...
+2026-10-14 05:12:09,626 - [modelopt][onnx] - WARNING - Some initializers contain values smaller than smallest fp16 value, values will be replaced with 6.0e-08.
+2026-10-14 05:12:09,675 - [modelopt][onnx] - INFO - Converted 13/13 nodes (100.00%) to fp16
+[10/14/2026-05:12:09] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/14/2026-05:12:29] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 Input ->DataType.FLOAT, (-1, 1, 28, 28), (1, 1, 28, 28), x
 Output->DataType.FLOAT, (-1, 10), (1, 10), y
 Output->DataType.INT64, (-1,), (1,), z
@@ -912,17 +912,17 @@ x
       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
       0.   0.]]]]
 y
-[[ 0.81396484 -1.3632812   7.1953125   7.828125   -7.625       1.5966797
-  -8.234375   -5.8320312  15.9375     -0.7758789 ]]
+[[ 4.9882812  -1.1162109   1.546875    0.82714844 -3.9335938  -1.3447266
+  -1.1132812  -2.8066406  10.5234375   0.14343262]]
 z
 [8]
-          16           8           0            2            4.126e-03   True         0cac45ca
-2026-09-08 08:49:30,656 - [modelopt][onnx] - INFO - Successfully enabled 1 EPs for ORT: ['CPUExecutionProvider']
-2026-09-08 08:49:30,656 - [modelopt][onnx] - INFO - Running ONNX Runtime to obtain reference outputs (this may take a while)...
-2026-09-08 08:49:30,697 - [modelopt][onnx] - WARNING - Some initializers contain values smaller than smallest fp16 value, values will be replaced with 6.0e-08.
-2026-09-08 08:49:30,743 - [modelopt][onnx] - INFO - Converted 13/13 nodes (100.00%) to fp16
-[09/08/2026-08:49:30] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[09/08/2026-08:49:38] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+          16           8           0            2            3.634e-03   True         b87dbce5
+2026-10-14 05:12:30,236 - [modelopt][onnx] - INFO - Successfully enabled 1 EPs for ORT: ['CPUExecutionProvider']
+2026-10-14 05:12:30,237 - [modelopt][onnx] - INFO - Running ONNX Runtime to obtain reference outputs (this may take a while)...
+2026-10-14 05:12:30,279 - [modelopt][onnx] - WARNING - Some initializers contain values smaller than smallest fp16 value, values will be replaced with 6.0e-08.
+2026-10-14 05:12:30,328 - [modelopt][onnx] - INFO - Converted 13/13 nodes (100.00%) to fp16
+[10/14/2026-05:12:30] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/14/2026-05:12:50] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 Input ->DataType.FLOAT, (-1, 1, 28, 28), (1, 1, 28, 28), x
 Output->DataType.FLOAT, (-1, 10), (1, 10), y
 Output->DataType.INT64, (-1,), (1,), z
@@ -1012,17 +1012,17 @@ x
       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
       0.   0.]]]]
 y
-[[ 0.8125    -1.3632812  7.1992188  7.828125  -7.625      1.5966797
-  -8.2421875 -5.8320312 15.9453125 -0.7753906]]
+[[ 4.9882812  -1.1171875   1.5478516   0.828125   -3.9355469  -1.3447266
+  -1.1132812  -2.8046875  10.5390625   0.14611816]]
 z
 [8]
-         512           8           0            2            7.488e-03   True         0cac45ca
-2026-09-08 08:49:38,994 - [modelopt][onnx] - INFO - Successfully enabled 1 EPs for ORT: ['CPUExecutionProvider']
-2026-09-08 08:49:38,994 - [modelopt][onnx] - INFO - Running ONNX Runtime to obtain reference outputs (this may take a while)...
-2026-09-08 08:49:39,036 - [modelopt][onnx] - WARNING - Some initializers contain values smaller than smallest fp16 value, values will be replaced with 6.0e-08.
-2026-09-08 08:49:39,084 - [modelopt][onnx] - INFO - Converted 13/13 nodes (100.00%) to fp16
-[09/08/2026-08:49:39] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[09/08/2026-08:49:46] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+         512           8           0            2            1.210e-02   True         b87dbce5
+2026-10-14 05:12:51,064 - [modelopt][onnx] - INFO - Successfully enabled 1 EPs for ORT: ['CPUExecutionProvider']
+2026-10-14 05:12:51,066 - [modelopt][onnx] - INFO - Running ONNX Runtime to obtain reference outputs (this may take a while)...
+2026-10-14 05:12:51,107 - [modelopt][onnx] - WARNING - Some initializers contain values smaller than smallest fp16 value, values will be replaced with 6.0e-08.
+2026-10-14 05:12:51,157 - [modelopt][onnx] - INFO - Converted 13/13 nodes (100.00%) to fp16
+[10/14/2026-05:12:51] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/14/2026-05:13:11] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 Input ->DataType.FLOAT, (-1, 1, 28, 28), (1, 1, 28, 28), x
 Output->DataType.FLOAT, (-1, 10), (1, 10), y
 Output->DataType.INT64, (-1,), (1,), z
@@ -1112,26 +1112,26 @@ x
       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
       0.   0.]]]]
 y
-[[ 0.81347656 -1.3642578   7.1953125   7.828125   -7.6171875   1.5957031
-  -8.234375   -5.8320312  15.9296875  -0.7763672 ]]
+[[ 4.9882812  -1.1162109   1.546875    0.82714844 -3.9335938  -1.34375
+  -1.1132812  -2.8046875  10.5234375   0.14562988]]
 z
 [8]
-       65504           8           0            2            8.137e-03   True         0cac45ca
+       65504           8           0            2            5.831e-03   True         b87dbce5
 
     data_max=1 keeps 4 initializers in FP32, data_max=65504 keeps 0.
     So 'which nodes are sensitive' is a statement about `data_max`, not a property of
     the model alone. This CNN's activations peak around 3.3, so any threshold at or
     above 16 classifies every node the same way.
 
-    data_max [16, 512, 65504] all produce the **byte-identical** graph (0cac45ca),
-    and their measured errors are 4.126e-03, 7.488e-03, 8.137e-03.
+    data_max [16, 512, 65504] all produce the **byte-identical** graph (b87dbce5),
+    and their measured errors are 3.634e-03, 1.210e-02, 5.831e-03.
     They disagree, on identical bytes.
     Any difference between those rows is TensorRT build nondeterminism, not the knob.
     Without the graph hash a lucky middle row reads as a sweet spot -- it is not one.
     **When a sweep changes a number, check whether it changed the artefact first.**
 
     data_max=1 keeps the *most* in FP32 (4 initializers against 0) and pays
-    3 Cast nodes against 2. Its error this run is 7.488e-03 against 8.137e-03.
+    3 Cast nodes against 2. Its error this run is 4.678e-03 against 5.831e-03.
     Pinning nodes to FP32 inside an FP16 graph is not free accuracy: every extra
     boundary is another round trip through FP16, and across runs this row has landed
     on both sides of the others. The Cast count is the deterministic part of that
@@ -1139,32 +1139,32 @@ z
     build noise measured just above and is deliberately *not* asserted.
 ============================== End   [case_node_sensitivity]
 ============================== Start [case_qat_train,(),{}]
-[FP32] Epoch  0, test acc = 0.7820
-[FP32] Epoch  1, test acc = 0.9000
-[FP32] Epoch  2, test acc = 0.9400
-[FP32] Epoch  3, test acc = 0.9660
-[FP32] Epoch  4, test acc = 0.9400
+[FP32] Epoch  0, test acc = 0.4040
+[FP32] Epoch  1, test acc = 0.7220
+[FP32] Epoch  2, test acc = 0.9040
+[FP32] Epoch  3, test acc = 0.9200
+[FP32] Epoch  4, test acc = 0.9580
 Inserted 12 quantizers
-conv1.input_quantizer                                                            TensorQuantizer(8 bit fake per-tensor amax=255.0000 calibrator=MaxCalibrator quant)
+conv1.input_quantizer                                                            TensorQuantizer(8 bit fake per-tensor amax=2.55e+02 calibrator=MaxCalibrator quant)
 conv1.output_quantizer                                                           TensorQuantizer(disabled)
-conv1.weight_quantizer                                                           TensorQuantizer(8 bit fake axis=0 amax=[0.1522, 0.2129](32) calibrator=MaxCalibrator quant)
-conv2.input_quantizer                                                            TensorQuantizer(8 bit fake per-tensor amax=375.4340 calibrator=MaxCalibrator quant)
+conv1.weight_quantizer                                                           TensorQuantizer(8 bit fake axis=0 amax=[1.70e-01, 2.08e-01](32) calibrator=MaxCalibrator quant)
+conv2.input_quantizer                                                            TensorQuantizer(8 bit fake per-tensor amax=4.06e+02 calibrator=MaxCalibrator quant)
 conv2.output_quantizer                                                           TensorQuantizer(disabled)
-conv2.weight_quantizer                                                           TensorQuantizer(8 bit fake axis=0 amax=[0.0428, 0.0830](64) calibrator=MaxCalibrator quant)
-gemm1.input_quantizer                                                            TensorQuantizer(8 bit fake per-tensor amax=149.1727 calibrator=MaxCalibrator quant)
+conv2.weight_quantizer                                                           TensorQuantizer(8 bit fake axis=0 amax=[4.38e-02, 9.35e-02](64) calibrator=MaxCalibrator quant)
+gemm1.input_quantizer                                                            TensorQuantizer(8 bit fake per-tensor amax=1.05e+02 calibrator=MaxCalibrator quant)
 gemm1.output_quantizer                                                           TensorQuantizer(disabled)
-gemm1.weight_quantizer                                                           TensorQuantizer(8 bit fake axis=0 amax=[0.0238, 0.1043](1024) calibrator=MaxCalibrator quant)
-gemm2.input_quantizer                                                            TensorQuantizer(8 bit fake per-tensor amax=22.8612 calibrator=MaxCalibrator quant)
+gemm1.weight_quantizer                                                           TensorQuantizer(8 bit fake axis=0 amax=[2.34e-02, 1.39e-01](1024) calibrator=MaxCalibrator quant)
+gemm2.input_quantizer                                                            TensorQuantizer(8 bit fake per-tensor amax=2.21e+01 calibrator=MaxCalibrator quant)
 gemm2.output_quantizer                                                           TensorQuantizer(disabled)
-gemm2.weight_quantizer                                                           TensorQuantizer(8 bit fake axis=0 amax=[0.0720, 0.1000](10) calibrator=MaxCalibrator quant)
+gemm2.weight_quantizer                                                           TensorQuantizer(8 bit fake axis=0 amax=[8.13e-02, 1.35e-01](10) calibrator=MaxCalibrator quant)
 12 TensorQuantizers found in model
 Loading extension modelopt_cuda_ext...
-[09/08/2026-08:51:18] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[09/08/2026-08:51:28] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
-Loaded extension modelopt_cuda_ext in 89.6 seconds
-After PTQ (before QAT) test acc = 0.9380
-[QAT] Epoch  0, test acc = 0.9740
-[QAT] Epoch  1, test acc = 0.9680
+[10/14/2026-05:14:49] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/14/2026-05:15:22] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+Loaded extension modelopt_cuda_ext in 96.4 seconds
+After PTQ (before QAT) test acc = 0.9600
+[QAT] Epoch  0, test acc = 0.9620
+[QAT] Epoch  1, test acc = 0.9500
 Succeed exporting /work/trt-samples-for-hackathon-cn-wili/cookbook/03-Workflow/pyTorch-ModelOptimizer-ONNX-TensorRT/model-int8-qat.onnx
 Input ->DataType.FLOAT, (-1, 1, 28, 28), (1, 1, 28, 28), x
 Output->DataType.FLOAT, (-1, 10), (1, 10), y
@@ -1255,36 +1255,36 @@ x
       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
       0.   0.]]]]
 y
-[[ 3.3540692  2.049644   2.8447745  8.17873   -6.2575874 -1.5974385
-  -0.9050606 -3.3144772 13.959063  -1.8845656]]
+[[ 2.4002447 -1.5199349  6.5902295  3.455022  -6.162165   1.5654436
+  -2.166285  -5.757137  15.411951  -4.03274  ]]
 z
 [8]
 ============================== End   [case_qat_train]
 ============================== Start [case_onnx_post_train,(),{}]
-[FP32] Epoch  0, test acc = 0.7760
-[FP32] Epoch  1, test acc = 0.9180
-[FP32] Epoch  2, test acc = 0.9400
-[FP32] Epoch  3, test acc = 0.9440
-[FP32] Epoch  4, test acc = 0.9600
+[FP32] Epoch  0, test acc = 0.8960
+[FP32] Epoch  1, test acc = 0.9380
+[FP32] Epoch  2, test acc = 0.9480
+[FP32] Epoch  3, test acc = 0.9560
+[FP32] Epoch  4, test acc = 0.9520
 Succeed exporting /work/trt-samples-for-hackathon-cn-wili/cookbook/03-Workflow/pyTorch-ModelOptimizer-ONNX-TensorRT/model-fp32.onnx
-2026-09-08 08:51:29,960 - [modelopt][onnx] - INFO - Starting quantization process for model: /work/trt-samples-for-hackathon-cn-wili/cookbook/03-Workflow/pyTorch-ModelOptimizer-ONNX-TensorRT/model-fp32.onnx
-2026-09-08 08:51:29,960 - [modelopt][onnx] - INFO - Quantization mode: fp8
-2026-09-08 08:51:29,960 - [modelopt][onnx] - INFO - Preprocessing the model /work/trt-samples-for-hackathon-cn-wili/cookbook/03-Workflow/pyTorch-ModelOptimizer-ONNX-TensorRT/model-fp32.onnx
-2026-09-08 08:51:30,214 - [modelopt][onnx] - INFO - Model has dynamic inputs: ['x']
-[09/08/2026-08:51:30] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-2026-09-08 08:51:30,221 - [modelopt][onnx] - INFO - Found 0 custom layers and 29 tensors
-2026-09-08 08:51:30,229 - [modelopt][onnx] - INFO - No custom ops found. If that's not correct, please make sure that the 'tensorrt' python package is correctly installed and that the paths to 'libcudnn*.so' and TensorRT 'lib/' are in 'LD_LIBRARY_PATH'. If the custom op is not directly available as a plugin in TensorRT, please also make sure that the path to the compiled '.so' TensorRT plugin is also being given via the  '--trt_plugins' flag (requires TRT 10+).
-2026-09-08 08:51:30,230 - [modelopt][onnx] - INFO - Duplicating shared constants
-2026-09-08 08:51:30,232 - [modelopt][onnx] - INFO - Setting up CalibrationDataProvider for calibration
-2026-09-08 08:51:30,242 - [modelopt][onnx] - INFO - Analyzing MHA nodes for fp8 quantization
-2026-09-08 08:51:30,247 - [modelopt][onnx] - INFO - No MHA partitions found in the model
-2026-09-08 08:51:30,247 - [modelopt][onnx] - INFO - Starting FP8 quantization process
-2026-09-08 08:51:30,247 - [modelopt][onnx] - INFO - Loading ONNX model from /work/trt-samples-for-hackathon-cn-wili/cookbook/03-Workflow/pyTorch-ModelOptimizer-ONNX-TensorRT/model-fp32.onnx
-2026-09-08 08:51:30,261 - [modelopt][onnx] - INFO - Detecting GEMV patterns for TRT optimization
-2026-09-08 08:51:30,269 - [modelopt][onnx] - INFO - Creating ORT InferenceSession
-2026-09-08 08:51:30,269 - [modelopt][onnx] - INFO - Checking for cuDNN library
-2026-09-08 08:51:30,269 - [modelopt][onnx] - WARNING - cuDNN not found in LD_LIBRARY_PATH. Attempting onnxruntime.preload_dlls() to load from site-packages...
-2026-09-08 08:51:30,270 - [modelopt][onnx] - WARNING - preload_dlls() output:
+2026-10-14 05:15:23,875 - [modelopt][onnx] - INFO - Starting quantization process for model: /work/trt-samples-for-hackathon-cn-wili/cookbook/03-Workflow/pyTorch-ModelOptimizer-ONNX-TensorRT/model-fp32.onnx
+2026-10-14 05:15:23,875 - [modelopt][onnx] - INFO - Quantization mode: fp8
+2026-10-14 05:15:23,875 - [modelopt][onnx] - INFO - Preprocessing the model /work/trt-samples-for-hackathon-cn-wili/cookbook/03-Workflow/pyTorch-ModelOptimizer-ONNX-TensorRT/model-fp32.onnx
+2026-10-14 05:15:24,103 - [modelopt][onnx] - INFO - Model has dynamic inputs: ['x']
+[10/14/2026-05:15:24] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+2026-10-14 05:15:24,114 - [modelopt][onnx] - INFO - Found 0 custom layers and 29 tensors
+2026-10-14 05:15:24,162 - [modelopt][onnx] - INFO - No custom ops found. If that's not correct, please make sure that the 'tensorrt' python package is correctly installed and that the paths to 'libcudnn*.so' and TensorRT 'lib/' are in 'LD_LIBRARY_PATH'. If the custom op is not directly available as a plugin in TensorRT, please also make sure that the path to the compiled '.so' TensorRT plugin is also being given via the  '--trt_plugins' flag (requires TRT 10+).
+2026-10-14 05:15:24,163 - [modelopt][onnx] - INFO - Duplicating shared constants
+2026-10-14 05:15:24,165 - [modelopt][onnx] - INFO - Setting up CalibrationDataProvider for calibration
+2026-10-14 05:15:24,247 - [modelopt][onnx] - INFO - Analyzing MHA nodes for fp8 quantization
+2026-10-14 05:15:24,251 - [modelopt][onnx] - INFO - No MHA partitions found in the model
+2026-10-14 05:15:24,252 - [modelopt][onnx] - INFO - Starting FP8 quantization process
+2026-10-14 05:15:24,252 - [modelopt][onnx] - INFO - Loading ONNX model from /work/trt-samples-for-hackathon-cn-wili/cookbook/03-Workflow/pyTorch-ModelOptimizer-ONNX-TensorRT/model-fp32_reconciled.onnx
+2026-10-14 05:15:24,268 - [modelopt][onnx] - INFO - Detecting GEMV patterns for TRT optimization
+2026-10-14 05:15:24,274 - [modelopt][onnx] - INFO - Creating ORT InferenceSession
+2026-10-14 05:15:24,274 - [modelopt][onnx] - INFO - Checking for cuDNN library
+2026-10-14 05:15:24,275 - [modelopt][onnx] - WARNING - cuDNN not found in LD_LIBRARY_PATH. Attempting onnxruntime.preload_dlls() to load from site-packages...
+2026-10-14 05:15:24,275 - [modelopt][onnx] - WARNING - preload_dlls() output:
 Failed to load libcublasLt.so.12: libcublasLt.so.12: cannot open shared object file: No such file or directory
 Failed to load libcublas.so.12: libcublas.so.12: cannot open shared object file: No such file or directory
 Failed to load libnvrtc.so.12: libnvrtc.so.12: cannot open shared object file: No such file or directory
@@ -1292,11 +1292,11 @@ Failed to load libcufft.so.11: libcufft.so.11: cannot open shared object file: N
 Failed to load libcudart.so.12: libcudart.so.12: cannot open shared object file: No such file or directory
 Please follow https://onnxruntime.ai/docs/install/#cuda-and-cudnn to install CUDA and CuDNN.
 
-2026-09-08 08:51:30,270 - [modelopt][onnx] - INFO - onnxruntime.preload_dlls() succeeded — CUDA/cuDNN DLLs loaded from site-packages. Verify version compatibility at https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements.
-2026-09-08 08:51:30,270 - [modelopt][onnx] - INFO - Successfully imported the `tensorrt` python package with version 11.0.0.114
-2026-09-08 08:51:30,270 - [modelopt][onnx] - INFO - Checking for cuDNN library
-2026-09-08 08:51:30,270 - [modelopt][onnx] - WARNING - cuDNN not found in LD_LIBRARY_PATH. Attempting onnxruntime.preload_dlls() to load from site-packages...
-2026-09-08 08:51:30,270 - [modelopt][onnx] - WARNING - preload_dlls() output:
+2026-10-14 05:15:24,275 - [modelopt][onnx] - INFO - onnxruntime.preload_dlls() succeeded — CUDA/cuDNN DLLs loaded from site-packages. Verify version compatibility at https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements.
+2026-10-14 05:15:24,275 - [modelopt][onnx] - INFO - Successfully imported the `tensorrt` python package with version 11.3.0.99
+2026-10-14 05:15:24,275 - [modelopt][onnx] - INFO - Checking for cuDNN library
+2026-10-14 05:15:24,275 - [modelopt][onnx] - WARNING - cuDNN not found in LD_LIBRARY_PATH. Attempting onnxruntime.preload_dlls() to load from site-packages...
+2026-10-14 05:15:24,276 - [modelopt][onnx] - WARNING - preload_dlls() output:
 Failed to load libcublasLt.so.12: libcublasLt.so.12: cannot open shared object file: No such file or directory
 Failed to load libcublas.so.12: libcublas.so.12: cannot open shared object file: No such file or directory
 Failed to load libnvrtc.so.12: libnvrtc.so.12: cannot open shared object file: No such file or directory
@@ -1304,19 +1304,19 @@ Failed to load libcufft.so.11: libcufft.so.11: cannot open shared object file: N
 Failed to load libcudart.so.12: libcudart.so.12: cannot open shared object file: No such file or directory
 Please follow https://onnxruntime.ai/docs/install/#cuda-and-cudnn to install CUDA and CuDNN.
 
-2026-09-08 08:51:30,270 - [modelopt][onnx] - INFO - onnxruntime.preload_dlls() succeeded — CUDA/cuDNN DLLs loaded from site-packages. Verify version compatibility at https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements.
-2026-09-08 08:51:30,270 - [modelopt][onnx] - INFO - Successfully enabled 3 EPs for ORT: ['CPUExecutionProvider', ('CUDAExecutionProvider', {'device_id': 0}), 'TensorrtExecutionProvider']
+2026-10-14 05:15:24,276 - [modelopt][onnx] - INFO - onnxruntime.preload_dlls() succeeded — CUDA/cuDNN DLLs loaded from site-packages. Verify version compatibility at https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements.
+2026-10-14 05:15:24,276 - [modelopt][onnx] - INFO - Successfully enabled 3 EPs for ORT: ['CPUExecutionProvider', ('CUDAExecutionProvider', {'device_id': 0}), 'TensorrtExecutionProvider']
 *************** EP Error ***************
 EP Error /onnxruntime_src/onnxruntime/python/onnxruntime_pybind_state.cc:539 void onnxruntime::python::RegisterTensorRTPluginsAsCustomOps(PySessionOptions&, const onnxruntime::ProviderOptions&) Please install TensorRT libraries as mentioned in the GPU requirements page, make sure they're in the PATH or LD_LIBRARY_PATH, and that your GPU is supported.
  when using ['CPUExecutionProvider', ('CUDAExecutionProvider', {'device_id': 0}), 'TensorrtExecutionProvider']
 Falling back to ['CUDAExecutionProvider', 'CPUExecutionProvider'] and retrying.
 ****************************************
-2026-09-08 08:51:30,313 - [modelopt][onnx] - INFO - Scanning for unsupported Conv nodes for quantization
-2026-09-08 08:51:30,313 - [modelopt][onnx] - INFO - Found 1 unsupported Conv nodes for quantization
-2026-09-08 08:51:30,313 - [modelopt][onnx] - INFO - Configuring ORT for ModelOpt ONNX quantization
-2026-09-08 08:51:30,313 - [modelopt][onnx] - INFO - Checking for cuDNN library
-2026-09-08 08:51:30,313 - [modelopt][onnx] - WARNING - cuDNN not found in LD_LIBRARY_PATH. Attempting onnxruntime.preload_dlls() to load from site-packages...
-2026-09-08 08:51:30,313 - [modelopt][onnx] - WARNING - preload_dlls() output:
+2026-10-14 05:15:24,941 - [modelopt][onnx] - INFO - Scanning for unsupported Conv nodes for quantization
+2026-10-14 05:15:24,941 - [modelopt][onnx] - INFO - Found 1 unsupported Conv nodes for quantization
+2026-10-14 05:15:24,941 - [modelopt][onnx] - INFO - Configuring ORT for ModelOpt ONNX quantization
+2026-10-14 05:15:24,941 - [modelopt][onnx] - INFO - Checking for cuDNN library
+2026-10-14 05:15:24,941 - [modelopt][onnx] - WARNING - cuDNN not found in LD_LIBRARY_PATH. Attempting onnxruntime.preload_dlls() to load from site-packages...
+2026-10-14 05:15:24,942 - [modelopt][onnx] - WARNING - preload_dlls() output:
 Failed to load libcublasLt.so.12: libcublasLt.so.12: cannot open shared object file: No such file or directory
 Failed to load libcublas.so.12: libcublas.so.12: cannot open shared object file: No such file or directory
 Failed to load libnvrtc.so.12: libnvrtc.so.12: cannot open shared object file: No such file or directory
@@ -1324,11 +1324,11 @@ Failed to load libcufft.so.11: libcufft.so.11: cannot open shared object file: N
 Failed to load libcudart.so.12: libcudart.so.12: cannot open shared object file: No such file or directory
 Please follow https://onnxruntime.ai/docs/install/#cuda-and-cudnn to install CUDA and CuDNN.
 
-2026-09-08 08:51:30,313 - [modelopt][onnx] - INFO - onnxruntime.preload_dlls() succeeded — CUDA/cuDNN DLLs loaded from site-packages. Verify version compatibility at https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements.
-2026-09-08 08:51:30,313 - [modelopt][onnx] - INFO - Successfully imported the `tensorrt` python package with version 11.0.0.114
-2026-09-08 08:51:30,313 - [modelopt][onnx] - INFO - Checking for cuDNN library
-2026-09-08 08:51:30,314 - [modelopt][onnx] - WARNING - cuDNN not found in LD_LIBRARY_PATH. Attempting onnxruntime.preload_dlls() to load from site-packages...
-2026-09-08 08:51:30,314 - [modelopt][onnx] - WARNING - preload_dlls() output:
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - onnxruntime.preload_dlls() succeeded — CUDA/cuDNN DLLs loaded from site-packages. Verify version compatibility at https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements.
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - Successfully imported the `tensorrt` python package with version 11.3.0.99
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - Checking for cuDNN library
+2026-10-14 05:15:24,942 - [modelopt][onnx] - WARNING - cuDNN not found in LD_LIBRARY_PATH. Attempting onnxruntime.preload_dlls() to load from site-packages...
+2026-10-14 05:15:24,942 - [modelopt][onnx] - WARNING - preload_dlls() output:
 Failed to load libcublasLt.so.12: libcublasLt.so.12: cannot open shared object file: No such file or directory
 Failed to load libcublas.so.12: libcublas.so.12: cannot open shared object file: No such file or directory
 Failed to load libnvrtc.so.12: libnvrtc.so.12: cannot open shared object file: No such file or directory
@@ -1336,49 +1336,49 @@ Failed to load libcufft.so.11: libcufft.so.11: cannot open shared object file: N
 Failed to load libcudart.so.12: libcudart.so.12: cannot open shared object file: No such file or directory
 Please follow https://onnxruntime.ai/docs/install/#cuda-and-cudnn to install CUDA and CuDNN.
 
-2026-09-08 08:51:30,314 - [modelopt][onnx] - INFO - onnxruntime.preload_dlls() succeeded — CUDA/cuDNN DLLs loaded from site-packages. Verify version compatibility at https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements.
-2026-09-08 08:51:30,314 - [modelopt][onnx] - INFO - Successfully enabled 3 EPs for ORT: ['CPUExecutionProvider', ('CUDAExecutionProvider', {'device_id': 0}), 'TensorrtExecutionProvider']
-2026-09-08 08:51:30,314 - [modelopt][onnx] - INFO - Quantizable op types in the model: ['Gemm', 'Conv']
-2026-09-08 08:51:30,314 - [modelopt][onnx] - INFO - Finding nodes to quantize
-2026-09-08 08:51:30,314 - [modelopt][onnx] - INFO - Building non-residual Add input map
-2026-09-08 08:51:30,314 - [modelopt][onnx] - INFO - Searching for patterns like MHA, LayerNorm, etc
-2026-09-08 08:51:30,314 - [modelopt][onnx] - INFO - Found 0 layer norm partitions
-2026-09-08 08:51:30,314 - [modelopt][onnx] - INFO - Found 0 MHA (QK_AV) Patterns
-2026-09-08 08:51:30,314 - [modelopt][onnx] - INFO - Found 1 non-quantizable partitions
-2026-09-08 08:51:30,314 - [modelopt][onnx] - INFO - Building KGEN/CASK targeted partitions
-2026-09-08 08:51:30,314 - [modelopt][onnx] - INFO - Classifying partition nodes
-2026-09-08 08:51:30,314 - [modelopt][onnx] - INFO - Found 0 Conv->LayerNorm patterns to quantize
-2026-09-08 08:51:30,314 - [modelopt][onnx] - INFO - Found 1 quantizable partition nodes and 0 quantizable KGEN heads
-2026-09-08 08:51:30,314 - [modelopt][onnx] - INFO - Finding quantizable nodes. Initial nodes to quantize: 3
-2026-09-08 08:51:30,314 - [modelopt][onnx] - INFO - Found 0 pooling/window ops
-2026-09-08 08:51:30,314 - [modelopt][onnx] - INFO - Total number of quantizable nodes: 3
-2026-09-08 08:51:30,314 - [modelopt][onnx] - INFO - Finding concat eliminated tensors
-2026-09-08 08:51:30,315 - [modelopt][onnx] - INFO - Starting INT8 quantization with 'max' calibration
-2026-09-08 08:51:30,315 - [modelopt][onnx] - INFO - Starting static quantization
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - onnxruntime.preload_dlls() succeeded — CUDA/cuDNN DLLs loaded from site-packages. Verify version compatibility at https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements.
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - Successfully enabled 3 EPs for ORT: ['CPUExecutionProvider', ('CUDAExecutionProvider', {'device_id': 0}), 'TensorrtExecutionProvider']
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - Quantizable op types in the model: ['Gemm', 'Conv']
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - Finding nodes to quantize
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - Building non-residual Add input map
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - Searching for patterns like MHA, LayerNorm, etc
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - Found 0 layer norm partitions
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - Found 0 MHA (QK_AV) Patterns
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - Found 1 non-quantizable partitions
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - Building KGEN/CASK targeted partitions
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - Classifying partition nodes
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - Found 0 Conv->LayerNorm patterns to quantize
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - Found 1 quantizable partition nodes and 0 quantizable KGEN heads
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - Finding quantizable nodes. Initial nodes to quantize: 3
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - Found 0 pooling/window ops
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - Total number of quantizable nodes: 3
+2026-10-14 05:15:24,942 - [modelopt][onnx] - INFO - Finding concat eliminated tensors
+2026-10-14 05:15:24,943 - [modelopt][onnx] - INFO - Starting INT8 quantization with 'max' calibration
+2026-10-14 05:15:24,943 - [modelopt][onnx] - INFO - Starting static quantization
 *************** EP Error ***************
 EP Error /onnxruntime_src/onnxruntime/python/onnxruntime_pybind_state.cc:539 void onnxruntime::python::RegisterTensorRTPluginsAsCustomOps(PySessionOptions&, const onnxruntime::ProviderOptions&) Please install TensorRT libraries as mentioned in the GPU requirements page, make sure they're in the PATH or LD_LIBRARY_PATH, and that your GPU is supported.
  when using [('CPUExecutionProvider', {'arena_extend_strategy': 'kSameAsRequested'}), ('CUDAExecutionProvider', {'device_id': 0, 'arena_extend_strategy': 'kSameAsRequested'}), 'TensorrtExecutionProvider']
 Falling back to ['CUDAExecutionProvider', 'CPUExecutionProvider'] and retrying.
 ****************************************
-2026-09-08 08:51:30,526 - [modelopt][onnx] - INFO - Starting post-processing of quantized model
-2026-09-08 08:51:30,531 - [modelopt][onnx] - INFO - Deleting QDQ nodes from marked inputs to make certain operations fusible
-2026-09-08 08:51:30,533 - [modelopt][onnx] - INFO - Converting float tensors to fp16
-2026-09-08 08:51:30,556 - [modelopt][onnx] - WARNING - Found QuantizeLinear/DequantizeLinear nodes. Updating minimum opset from 13 to 19.
-2026-09-08 08:51:30,559 - [modelopt][onnx] - WARNING - Shared constants were detected and duplicated accordingly.
-2026-09-08 08:51:30,570 - [modelopt][onnx] - WARNING - Some initializers contain values smaller than smallest fp16 value, values will be replaced with 6.0e-08.
-2026-09-08 08:51:30,828 - [modelopt][onnx] - INFO - Starting INT8 to FP8 conversion
-2026-09-08 08:51:30,829 - [modelopt][onnx] - INFO - FP8 quantization completed in 0.58 seconds
-[W] Could not convert: FLOAT8E4M3FN to a corresponding NumPy type. The original ONNX type will be preserved.
-2026-09-08 08:51:30,830 - [modelopt][onnx] - INFO - Total number of nodes: 19
-2026-09-08 08:51:30,830 - [modelopt][onnx] - INFO - Total number of quantized nodes: 1
-2026-09-08 08:51:30,853 - [modelopt][onnx] - INFO - Quantized onnx model is saved as /work/trt-samples-for-hackathon-cn-wili/cookbook/03-Workflow/pyTorch-ModelOptimizer-ONNX-TensorRT/model-fp8.onnx
-2026-09-08 08:51:30,853 - [modelopt][onnx] - INFO - Cleaning up intermediate files
-2026-09-08 08:51:30,855 - [modelopt][onnx] - INFO - Validating quantized model
-2026-09-08 08:51:30,933 - [modelopt][onnx] - INFO - Quantization process completed
-[09/08/2026-08:51:30] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
-[09/08/2026-08:51:38] [TRT] [W]  (foreignNode) Converting conv activation scales to fp32.
-[09/08/2026-08:51:38] [TRT] [W]  (foreignNode) Converting conv weight scales to fp32.
-[09/08/2026-08:51:38] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+2026-10-14 05:15:38,731 - [modelopt][onnx] - INFO - Starting post-processing of quantized model
+2026-10-14 05:15:38,736 - [modelopt][onnx] - INFO - Deleting QDQ nodes from marked inputs to make certain operations fusible
+2026-10-14 05:15:38,738 - [modelopt][onnx] - INFO - Converting float tensors to fp16
+2026-10-14 05:15:38,767 - [modelopt][onnx] - WARNING - Found QuantizeLinear/DequantizeLinear nodes. Updating minimum opset from 13 to 19.
+2026-10-14 05:15:38,771 - [modelopt][onnx] - WARNING - Shared constants were detected and duplicated accordingly.
+2026-10-14 05:15:38,782 - [modelopt][onnx] - WARNING - Some initializers contain values smaller than smallest fp16 value, values will be replaced with 6.0e-08.
+2026-10-14 05:15:38,836 - [modelopt][onnx] - INFO - Starting INT8 to FP8 conversion
+2026-10-14 05:15:38,836 - [modelopt][onnx] - INFO - FP8 quantization completed in 14.58 seconds
+[W] Could not convert: FLOAT8E4M3FN to a corresponding NumPy type. The original ONNX type will be preserved. 
+2026-10-14 05:15:38,837 - [modelopt][onnx] - INFO - Total number of nodes: 19
+2026-10-14 05:15:38,837 - [modelopt][onnx] - INFO - Total number of quantized nodes: 1
+2026-10-14 05:15:38,863 - [modelopt][onnx] - INFO - Quantized onnx model is saved as /work/trt-samples-for-hackathon-cn-wili/cookbook/03-Workflow/pyTorch-ModelOptimizer-ONNX-TensorRT/model-fp8.onnx
+2026-10-14 05:15:38,863 - [modelopt][onnx] - INFO - Cleaning up intermediate files
+2026-10-14 05:15:38,866 - [modelopt][onnx] - INFO - Validating quantized model
+2026-10-14 05:15:38,935 - [modelopt][onnx] - INFO - Quantization process completed
+[10/14/2026-05:15:38] [TRT] [W] ModelImporter.cpp:1047: Make sure output z has Int64 binding.
+[10/14/2026-05:15:59] [TRT] [W]  (foreignNode) Converting conv activation scales to fp32.
+[10/14/2026-05:15:59] [TRT] [W]  (foreignNode) Converting conv weight scales to fp32.
+[10/14/2026-05:15:59] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
 Succeed exporting /work/trt-samples-for-hackathon-cn-wili/cookbook/03-Workflow/pyTorch-ModelOptimizer-ONNX-TensorRT/model-fp8.onnx
 Input ->DataType.FLOAT, (-1, 1, 28, 28), (1, 1, 28, 28), x
 Output->DataType.FLOAT, (-1, 10), (1, 10), y
@@ -1469,8 +1469,8 @@ x
       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
       0.   0.]]]]
 y
-[[ 3.4804688  3.1132812  5.40625    9.796875  -2.7773438  1.5791016
-  -2.0605469 -4.8789062 13.453125  -1.9912109]]
+[[ 4.8984375  -0.25512695  3.7597656   7.2382812  -3.6816406  -1.0566406
+  -2.296875   -4.8984375  12.0625      1.4716797 ]]
 z
 [8]
 ============================== End   [case_onnx_post_train]

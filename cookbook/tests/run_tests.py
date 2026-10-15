@@ -306,7 +306,9 @@ def _build_spec(example_dir: Path, base_dir: Path, default_timeout: int | None) 
             relpath=relpath,
             name=relpath,
             timeout=default_timeout,
-            run=["python3 main.py > log-main.py.log"],
+            # `2>&1` is not optional: without it a traceback goes to the terminal and never reaches
+            # the log file, so a failure found in a sweep cannot be diagnosed afterwards.
+            run=["python3 main.py > log-main.py.log 2>&1"],
         )
 
     return None

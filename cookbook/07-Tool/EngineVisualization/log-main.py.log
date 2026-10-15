@@ -1,6 +1,6 @@
 [TensorRT-Cookbook] Version: 2.0.0
 ============================== Start [case_export_layer_info,(),{}]
-    data-layer_info.json: 13 layers, top-level keys ['Layers', 'I/O Tensors']
+    data-layer_info.json: 13 layers, top-level keys ['Layers', 'I/O Tensors', 'Engine Metadata']
     `--profilingVerbosity=detailed` is required; the default emits placeholder names.
 ============================== End   [case_export_layer_info]
 ============================== Start [case_build_graph,(),{}]
@@ -12,14 +12,14 @@
     A tensor may have several producers - keeping only the last would drop the loop edges.
 ============================== End   [case_build_graph]
 ============================== Start [case_write_every_format,(),{}]
-    Highlighting the slowest layer: node_conv2d_1_myl0_4 (0.0110 ms)
-    result-engine.gv           12304 B   view with: dot, or any Graphviz viewer
-    result-engine.html         15875 B   view with: any browser
-    result-engine.graphml      21776 B   view with: yEd
-    result-engine.svg          26272 B   view with: any image viewer or browser
+    Highlighting the slowest layer: node_conv2d_1_myl0_4 (0.0132 ms)
+    result-engine.gv           12283 B   view with: dot, or any Graphviz viewer
+    result-engine.html         15854 B   view with: any browser
+    result-engine.graphml      21755 B   view with: yEd
+    result-engine.svg          26246 B   view with: any image viewer or browser
 ============================== End   [case_write_every_format]
 ============================== Start [case_simplified,(),{}]
-    result-engine-simple.gv: 11681 B (vs 12304 B with labels, bindings and latency)
+    result-engine-simple.gv: 11660 B (vs 12283 B with labels, bindings and latency)
 ============================== End   [case_simplified]
 ============================== Start [case_multi_profile,(),{}]
     Engine has several optimization profiles: kept 18 of 24 layers for profile 0. Pass `profile_index=N` to see another.

@@ -113,35 +113,53 @@ def analyze_public_members(obj_instance: object = None, obj_class: object = None
     """Analyze public members of a TRT object/class and optionally print a summary."""
     _exclude = (exclude_set or set()) | {"_pybind11_conduit_v1_"}
 
-    def _collect(target: object) -> tuple[list[str], list[str], list[str], set[str]]:
+    def _collect(target: object) -> tuple[list[str], list[str], list[str], set[str], list[tuple[str, str]]]:
         pub = set(x for x in dir(target) if not x.startswith("__"))
         cb = sorted(pub & _COMMON_MEMBER_EXCLUDE_SET - _exclude)
-        ca = sorted(x for x in pub - _COMMON_MEMBER_EXCLUDE_SET - _exclude if callable(getattr(target, x)))
+        ca = []
+        unreadable = []
+        for name in sorted(pub - _COMMON_MEMBER_EXCLUDE_SET - _exclude):
+            # Read through `safe_getattr`: a member can exist and still refuse to be read.
+            # TensorRT raises for attributes that are meaningless in the object's current
+            # configuration - `IQuantizeLayer.block_shape` on a layer that is not block-quantized
+            # answers `RuntimeError: Could not get block_shape.` rather than returning a value.
+            # A bare `getattr` here took the whole example down with it. The member is real and
+            # belongs in the report, so it is classified as an attribute and listed separately
+            # with the reason: only its *value* is unavailable, which is itself worth seeing.
+            b_ok, value, error = safe_getattr(target, name)
+            if not b_ok:
+                unreadable.append((name, error))
+            elif callable(value):
+                ca.append(name)
         at = sorted(pub - set(cb) - set(ca) - _exclude)
-        return cb, ca, at, set(cb + ca + at)
+        return cb, ca, at, set(cb + ca + at), unreadable
 
-    def _print(target: object, cb: list[str], ca: list[str], at: list[str]) -> None:
+    def _print(target: object, cb: list[str], ca: list[str], at: list[str], unreadable: list[tuple[str, str]]) -> None:
         print(f"\n{'='* 16} Public members of {target} ({'class' if isinstance(target, type) else 'instance'})")
         print(f"{len(cb):2d} Callback members: {cb}")
         print(f"{len(ca):2d} Callable methods: {ca}")
         print(f"{len(at):2d} Non-callable attributions: {at}")
+        if unreadable:
+            print(f"{len(unreadable):2d} Members that exist but refuse to be read in this configuration:")
+            for name, error in unreadable:
+                print(f"     {name}: {error}")
 
     if obj_instance is None:
         assert obj_class is not None, "Either obj_instance or obj_class must be provided"
-        cb, ca, at, public = _collect(obj_class)
+        cb, ca, at, public, unreadable = _collect(obj_class)
         if b_print:
-            _print(obj_class, cb, ca, at)
+            _print(obj_class, cb, ca, at, unreadable)
         return public
 
     if isinstance(obj_instance, trt.ILayer):
         _exclude |= _LAYER_MEMBER_EXCLUDE_SET
 
     assert (obj_class is None) or (obj_class is obj_instance.__class__), f"{obj_class} must be the class of {obj_instance}"
-    cb, ca, at, instance_public = _collect(obj_instance)
-    _, _, _, class_public = _collect(obj_instance.__class__)
+    cb, ca, at, instance_public, unreadable = _collect(obj_instance)
+    _, _, _, class_public, _ = _collect(obj_instance.__class__)
 
     if b_print:
-        _print(obj_instance, cb, ca, at)
+        _print(obj_instance, cb, ca, at, unreadable)
         class_only = sorted(class_public - instance_public)
         instance_only = sorted(instance_public - class_public)
         if class_only or instance_only:

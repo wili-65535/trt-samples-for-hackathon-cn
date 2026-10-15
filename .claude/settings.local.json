@@ -7,7 +7,19 @@
       "WebFetch",
       "WebSearch",
       "Write",
-      "Bash(timeout 900 python3 main.py)"
+      "Bash(timeout 900 python3 main.py)",
+      "Bash(mkdir -p __TRACKED_VAR__/warm)",
+      "Bash(python3 -m pip download --no-deps --dest __TRACKED_VAR__/warm -r __TRACKED_VAR__/warm.txt)",
+      "Bash(awk '{print $1, $2}')",
+      "Bash(mv dependence_packages/cache dependence_packages/pip)",
+      "Bash(git rm *)",
+      "Bash(python3 -)",
+      "Bash(S=/tmp/claude-43427/-work-trt-samples-for-hackathon-cn-wili/dd287941-fddf-4521-9a6a-bc14d4ce2c7b/scratchpad; rm -rf $S/pv3 && cp -r /work/trt-samples-for-hackathon-cn-wili/cookbook/05-Plugin/BasicExample $S/pv3 && cd $S/pv3 && make clean >/dev/null 2>&1; TRT_COOKBOOK_PATH=/work/trt-samples-for-hackathon-cn-wili/cookbook make all -j 2>&1 | tail -2; echo \"--- 基线导出符号数 ---\"; nm -D --defined-only AddScalarPlugin.so | awk '$2==\"T\"||$2==\"W\"' | wc -l; nm -D --defined-only AddScalarPlugin.so | grep -E \"getCreators|setLoggerFinder\")",
+      "Bash(make all *)",
+      "Bash(python3 -c ' *)",
+      "Bash(cd *)",
+      "Bash(python3 -u -c ' *)",
+      "Bash(grep -vE \"^$|Hello\")"
     ]
   }
 }

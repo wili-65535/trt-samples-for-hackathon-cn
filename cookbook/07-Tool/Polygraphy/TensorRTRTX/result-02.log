@@ -1,7 +1,7 @@
-    polygraphy 0.50.3
+    polygraphy 0.53.4
     POLYGRAPHY_USE_TENSORRT_RTX at import : <unset>
     os.environ set to 1 after the import  : config.USE_TENSORRT_RTX = False
-    module polygraphy resolved            : tensorrt 11.0.0.114
+    module polygraphy resolved            : tensorrt 11.3.0.99
     CreateConfig(fp16=True)  -> accepted
     CreateConfig(int8=True)  -> accepted
     CreateConfig(bf16=True)  -> accepted
@@ -11,7 +11,7 @@
 [!] Precision flags (fp16, int8, bf16, fp8) are not supported with USE_TENSORRT_RTX=1.
 [!] Precision flags (fp16, int8, bf16, fp8) are not supported with USE_TENSORRT_RTX=1.
 [!] Precision flags (fp16, int8, bf16, fp8) are not supported with USE_TENSORRT_RTX=1.
-    polygraphy 0.50.3
+    polygraphy 0.53.4
     POLYGRAPHY_USE_TENSORRT_RTX at import : 1
     os.environ set to 1 after the import  : config.USE_TENSORRT_RTX = True
     module polygraphy resolved            : tensorrt_rtx 1.6.1.120

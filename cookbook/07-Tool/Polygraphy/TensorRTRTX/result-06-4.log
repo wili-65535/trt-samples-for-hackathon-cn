@@ -12,5 +12,5 @@
     Tactic Sources         | [EDGE_MASK_CONVOLUTIONS, JIT_CONVOLUTIONS]
     Profiling Verbosity    | ProfilingVerbosity.DETAILED
     Preview Features       | [RUNTIME_ACTIVATION_RESIZE_10_10]
-[I] Finished engine building in 0.180 seconds
+[I] Finished engine building in 0.269 seconds
 [I] Saving tactic timing cache to shared.cache

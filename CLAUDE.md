@@ -13,10 +13,10 @@ cd cookbook/
 ./setup_environment.sh
 ```
 
-That installs the apt packages, the pip packages and `tensorrt_cookbook` (editable), preferring the
-local caches in `cookbook/dependence_packages/` over the network. With the caches warm it takes
-about **6 seconds** and touches the network not at all. It ends with a table of what is present, so
-a partial setup is visible rather than assumed:
+That installs the apt packages, the pip packages and `tensorrt_cookbook` (editable), served from
+the download caches in `cookbook/dependence_packages/`. With the caches warm it takes about
+**5 seconds**. It ends with a table of what is present, so a partial setup is visible rather than
+assumed:
 
 ```txt
   [OK  ] the cookbook package
@@ -26,21 +26,26 @@ a partial setup is visible rather than assumed:
   Everything is present
 ```
 
-If something reports `MISS`, or `requirements.txt` changed, refresh the caches first — this needs
-the network, and the `.deb` step needs `sudo`:
+**There is no refresh step.** Both caches fill themselves on first use and are consulted
+automatically afterwards; the script assumes the network is reachable, so a cache miss is slow,
+never fatal. If something reports `MISS`, just run the script again.
 
-```bash
-./setup_environment.sh --refresh
-```
-
-The caches are **not** tracked by git (see `cookbook/dependence_packages/README.md`). They are a
-local accelerator: a fresh clone downloads everything once, and only later setups on that machine
-are offline.
+The caches are **not** tracked by git — the whole `dependence_packages/` directory is ignored (see
+`cookbook/dependence_packages.md`). They are a local accelerator and save download time only: a
+fresh clone downloads everything once, and only later setups on that machine are served from the
+cache.
 
 **Recommended environment:** NVIDIA Docker image `nvcr.io/nvidia/pytorch:26.07-py3` (Python 3.12,
-CUDA 13.3, TensorRT 11.0). The image already provides torch, TensorRT, numpy and much else, which is
-why the pip cache holds only the ~23 packages that are actually missing rather than the whole
-dependency tree.
+CUDA 13.3), with **TensorRT 11.3**. The image already provides torch, TensorRT, numpy and much else,
+which is why a reinstall only fetches the ~25 packages that are actually missing rather than the
+whole dependency tree.
+
+**TensorRT 11.3 is the only supported version**, and code here may assume it. Workarounds for older
+releases are removed rather than carried: the `use_patch_80` flag in
+`utils_network_serialization.py`, which repaired the pre-11.3 "80/81" garbage rank for an unassigned
+`trt.Dims`, was deleted when this rule came in. Note that removing a workaround is not the same as
+removing the behaviour it dealt with - 11.3 still reports an unassigned `trt.Dims` as `None`, which
+`add_slice()` rejects, so the *normalisation* stays while the version-compatibility code goes.
 
 ### Doing it by hand
 
@@ -54,10 +59,9 @@ pip install -e .                  # Editable install for development
 python -m pip install -U build && python -m build && pip install dist/*.whl
 ```
 
-Two flags in `setup_environment.sh` are not decoration, and hand-installs offline need them too:
-`pip install --no-index --find-links=dependence_packages/pip` to stay off the network, and
-`pip install --no-build-isolation -e .` because build isolation otherwise downloads a fresh
-`setuptools` into a throwaway environment and fails when there is no network.
+`setup_environment.sh` points `PIP_CACHE_DIR` at `dependence_packages/pip` and passes
+`--no-build-isolation` on the editable install, which reuses the installed `setuptools` instead of
+fetching a fresh copy into a throwaway build environment (measured 2.9 s against 4.2 s).
 
 ## Common Commands
 
@@ -159,6 +163,10 @@ Examples are discovered and run by `tests/run_tests.py`. Discovery rules:
 4. Presence of a `.skip_unit_test` file disables that directory entirely.
 
 `unit_test.yaml` fields: `enabled`, `tags`, `timeout`, `env`, `pre`, `run`, `post`, `clean`. See `tests/run_tests.py` for the full spec.
+
+**Every command that redirects to a log file must end in `2>&1`.** Without it stderr goes to the
+terminal instead of the log, so a traceback found during a sweep is gone by the time anyone reads
+the log file. The runner's own default command does this too.
 
 **Two selectors that change what a default sweep means:**
 

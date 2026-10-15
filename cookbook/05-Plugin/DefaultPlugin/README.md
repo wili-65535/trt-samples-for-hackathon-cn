@@ -5,10 +5,14 @@
 **Documentation only — there is nothing to run here.** The unit test for this directory is disabled
 on purpose; the list below is a snapshot, and the script that produces it is quoted at the bottom.
 
-## Measured on TensorRT 11.0.0.114
+## Measured on TensorRT 11.3.0.99
 
-**44 distinct plugins, 69 creators** (a plugin may register several versions), of which **19
+**45 distinct plugins, 70 creators** (a plugin may register several versions), of which **20
 creators use the newer `IPluginCreatorV3One`** interface and the rest the older `IPluginCreator`.
+
+On 11.0.0.114 these were 44 / 69 / 19. The one addition is **`FFTPlugin`** (version `1`, default
+namespace, `IPluginCreatorV3One`, fields `inverse` / `onesided` / `ndims`) - so every creator added
+since 11.0 arrived on the new interface, which is the direction the whole plugin API is moving.
 
 These numbers change between releases — plugins are added, retired, and migrated to new interfaces —
 so re-run the script below after an upgrade rather than trusting this page.
@@ -39,7 +43,7 @@ form a kernel wants. Asking one for its field names says so plainly:
 Error Code 1: Internal Error (Not implemented. This shall be used only in parser.)
 ```
 
-So of the 44, **37 are yours to use**.
+So of the 45, **38 are yours to use**.
 
 ## Transformer / BERT (4)
 
@@ -113,7 +117,7 @@ the bottom MLP of the DLRM recommender, weights and dynamic ranges embedded.
 
 ## Old and new creator interfaces coexist
 
-19 of the 69 creators implement `IPluginCreatorV3One`; the rest are the older `IPluginCreator`. Where
+20 of the 70 creators implement `IPluginCreatorV3One`; the rest are the older `IPluginCreator`. Where
 one plugin has both, the higher version number is usually the new interface — `ROIAlign_TRT` v1 is
 `IPluginCreator` and v2 is `IPluginCreatorV3One`. That matters when pinning a version:
 see [`../MultiVersion/`](../MultiVersion/README.md).

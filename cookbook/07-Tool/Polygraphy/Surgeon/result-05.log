@@ -6,18 +6,18 @@
 [I] Loading model: /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-trained.onnx
 [I] Original Model:
     Name: main_graph | ONNX Opset: 18
-
+    
     ---- 1 Graph Input(s) ----
     {x [dtype=float32, shape=('nBS', 1, 28, 28)]}
-
+    
     ---- 2 Graph Output(s) ----
     {y [dtype=float32, shape=('nBS', 10)],
      z [dtype=int64, shape=('nBS',)]}
-
+    
     ---- 9 Initializer(s) ----
-
+    
     ---- 12 Node(s) ----
-
+    
 [I] Beginning weight stripping...
 [W] The model is expected to be constant folded to successfully capture all weights eligible for stripping
 [I] Querying Sparse Initializers in the model
@@ -27,7 +27,7 @@
 [W] Found non-sparse tensor: conv2.weight
 [W] Found non-sparse tensor: gemm1.weight
 [W] Found non-sparse tensor: gemm2.weight
-[I] Finished checking 3 tensors.
+[I] Finished checking 3 tensors. 
 [''][I] Start a subgraph matching...
 [''][I] 	Checking node: node_conv2d against pattern node: conv_w.
 [''][I] 	Single node is matched: Conv, node_conv2d
@@ -3108,18 +3108,18 @@
 [I] Saving ONNX model to: model-trained-WS.onnx
 [I] New Model:
     Name: main_graph | ONNX Opset: 18
-
+    
     ---- 1 Graph Input(s) ----
     {x [dtype=float32, shape=('nBS', 1, 28, 28)]}
-
+    
     ---- 2 Graph Output(s) ----
     {y [dtype=float32, shape=('nBS', 10)],
      z [dtype=int64, shape=('nBS',)]}
-
+    
     ---- 9 Initializer(s) ----
-
+    
     ---- 12 Node(s) ----
-
-[I] PASSED | Runtime: 0.214s | Command: /usr/local/bin/polygraphy surgeon weight-strip /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-trained.onnx -o model-trained-WS.onnx
--rw-r--r-- 1 wili dip 13110445 Sep  8 09:03 /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-trained.onnx
--rw-r--r-- 1 wili dip    12037 Sep  8 10:06 model-trained-WS.onnx
+    
+[I] PASSED | Runtime: 0.193s | Command: /usr/local/bin/polygraphy surgeon weight-strip /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-trained.onnx -o model-trained-WS.onnx
+-rw-r--r-- 1 wili dip 13110352 Oct 14 05:56 /work/trt-samples-for-hackathon-cn-wili/cookbook/00-Data/model/model-trained.onnx
+-rw-r--r-- 1 wili dip    11944 Oct 14 09:50 model-trained-WS.onnx
