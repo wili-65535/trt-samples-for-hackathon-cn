@@ -26,12 +26,15 @@ output_path = Path(__file__).parent
 trt_file = output_path / "model-trained.trt"
 
 if __name__ == "__main__":
-    """Build an engine here, then assert the parser agrees with the API about it."""
+    """
+    Build an engine, then assert the parser agrees with the API about it.
+    This script is for catching the change of the TRT engine header, not for a user's example.
+    """
     try:
         from tensorrt_cookbook import parse_engine_information
     except ImportError:
         print("Use `TRT_COOKBOOK_ENGINE_INTERNAL=1` to enable the feature")
-        sys.exit(0)  # `return` is not valid here: this is module level, not a function
+        sys.exit(0)
 
     tw = TRTWrapperV1()
     tw.build(build_mnist_network_trt(tw))

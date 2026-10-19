@@ -5,14 +5,8 @@ tags:
   - tool
   - engineprinter
 run:
-  # The published log: what a reader of this repository gets.
   - python3 main.py > log-main.py.log 2>&1
-  # The same example with the plan-header half enabled. That needs a module which is not part of
-  # this repository, so on any checkout of it this produces exactly the output above and the log is
-  # git-ignored rather than published.
   - TRT_COOKBOOK_ENGINE_INTERNAL=1 python3 main.py > log-main.py-internal.log 2>&1
-  # Not an example: this asserts the parser's output is *true*, and is what would catch the next
-  # layout change. Without the module it reports that there is nothing to check and passes.
   - TRT_COOKBOOK_ENGINE_INTERNAL=1 python3 check_against_api.py > log-check_against_api.py.log 2>&1
 clean:
   - rm -rf *.trt

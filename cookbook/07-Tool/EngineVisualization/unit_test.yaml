@@ -6,6 +6,5 @@ tags:
   - engineinspector
 run:
   - python3 main.py > log-main.py.log 2>&1
-  - python3 export_as_onnx.py > log-export_as_onnx.py.log 2>&1
 clean:
-  - rm -rf *.log *.json *.gv *.html *.graphml *.onnx *.weight
+  - rm -rf *.log *.json *.gv *.svg *.html *.graphml *.onnx *.weight

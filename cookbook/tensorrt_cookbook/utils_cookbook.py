@@ -204,8 +204,27 @@ def print_enumerated_members(enum_class):
 
 # For logging
 
-def get_cookbook_logger(name: str | None = None, b_log_stdout: bool = False, log_file: str = "log.log") -> logging.Logger:
-    """Create a UTC+8 logger and attach file/stdout handlers."""
+def get_cookbook_logger(name: str | None = None, b_log_stdout: bool = False, log_file: str = "log.log", level: int = logging.INFO) -> logging.Logger:
+    """A UTC+8 logger writing to `log_file`, one logger per file, created at most once.
+
+    Calling this twice for the same file returns the same logger with the same handlers, so a tool
+    that builds a logger per run - `FP16Tuning` does - does not end up with the file open several
+    times over.
+
+    This used to configure the **root** logger with `logging.basicConfig`, which had three
+    consequences worth recording, since all three are the reason the function looks like this now:
+
+    + `basicConfig` is a no-op once the root logger has handlers, so the second call with a
+      *different* `log_file` was silently ignored. The file was opened (and leaked) and then never
+      written to, while the messages went to the first call's file.
+    + returning the root logger meant every third-party library's `logging` at this level or above
+      landed in what is supposed to be one tool's log.
+    + two tools in one process could not have separate logs at all.
+
+    `name` overrides the logger name when a caller wants to share one logger across several files;
+    by default the name is derived from the resolved path, which is what makes one-logger-per-file
+    work.
+    """
 
     class E8Formatter(logging.Formatter):
 
@@ -216,20 +235,24 @@ def get_cookbook_logger(name: str | None = None, b_log_stdout: bool = False, log
             dt = self.converter(record.created)
             return dt.strftime(datefmt) if datefmt is not None else dt.isoformat()
 
+    logger = logging.getLogger(name if name is not None else f"cookbook:{Path(log_file).resolve()}")
+    logger.setLevel(level)
+    # Keep the messages out of the root logger, so they do not also appear wherever the application
+    # happens to have pointed root - typically stdout, which the unit-test runner captures.
+    logger.propagate = False
+
+    if logger.handlers:  # Already built for this file by an earlier call
+        return logger
+
     formatter = E8Formatter(fmt="[%(asctime)s]%(message)s", datefmt="%Y-%m-%d %H:%M:%S")
-    handlers = []
     if b_log_stdout:
         stream_handler = logging.StreamHandler()
         stream_handler.setFormatter(formatter)
-        handlers.append(stream_handler)
+        logger.addHandler(stream_handler)
     file_handler = logging.FileHandler(str(log_file), encoding="utf-8")
     file_handler.setFormatter(formatter)
-    handlers.append(file_handler)
-    logging.basicConfig(
-        level=logging.INFO,
-        handlers=handlers,
-    )
-    return logging.getLogger(name)
+    logger.addHandler(file_handler)
+    return logger
 
 P = ParamSpec("P")
 

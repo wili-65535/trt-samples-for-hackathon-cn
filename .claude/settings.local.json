@@ -19,7 +19,13 @@
       "Bash(python3 -c ' *)",
       "Bash(cd *)",
       "Bash(python3 -u -c ' *)",
-      "Bash(grep -vE \"^$|Hello\")"
+      "Bash(grep -vE \"^$|Hello\")",
+      "Read(//work/cublas-kernel-probe/**)",
+      "Bash(python3 -c \"import ast;ast.parse\\(open\\('matmul_kernel_probe.py'\\).read\\(\\)\\)\")",
+      "Bash(timeout 1200 ./run_all.sh)",
+      "Bash(echo *)",
+      "Bash(python3 tests/run_tests.py --case 07-Tool/FP16Tuning)",
+      "Bash(rm *)"
     ]
   }
 }

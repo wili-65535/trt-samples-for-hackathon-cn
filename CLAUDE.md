@@ -122,15 +122,27 @@ All examples import from this package. Key modules:
   - `TRTWrapperDDS`, `TRTWrapperShapeInput`, `TRTWrapperV2Torch` — specialised variants
   - `CookbookLogger`, `CookbookProfiler`, `CookbookErrorRecorder` — diagnostic helpers
   - `CookbookGpuAllocator`, `CookbookOutputAllocator` — custom memory management
-- **`utils_cookbook.py`** — cookbook infrastructure: path resolution (`cookbook_path`), the `case_mark` decorator used by every `main.py`, logging, API-coverage inspection, README/copyright generation
+  - `FP16Tuning` — per-layer FP16/FP32 precision search, driven by `07-Tool/FP16Tuning/`. Its
+    `tabulate`, `tqdm` and `modelopt` imports are **inside the methods**, not at module scope: this
+    module is the first one `__init__.py` imports, and `import modelopt.onnx.autocast` alone costs
+    3.6 s against 3.3 s for the whole package
+- **`utils_cookbook.py`** — cookbook infrastructure: path resolution (`cookbook_path`), the `case_mark` decorator used by every `main.py`, logging, API-coverage inspection, README/copyright generation.
+  `get_cookbook_logger` returns **one logger per log file**, named and non-propagating; it must not
+  go back to configuring the root logger with `basicConfig`, which silently ignored every call after
+  the first and swept third-party logging into the caller's file
 - **`utils_function.py`** — framework-agnostic data helpers only: maths, array printing/comparison, dtype casting. Depends on nothing heavier than numpy/torch/tensorrt
 - **`utils_network.py`** — building and inspecting `INetworkDefinition`: layer-type helpers (`layer_dynamic_cast`, …), `parse_onnx`, `print_network`, `export_network_as_onnx`
-- **`utils_engine.py`** — inspecting a built engine: plan-file header (`print_engine_information`), engine/context I/O tables, engine-information JSON → ONNX
+- **`utils_engine.py`** — inspecting a built engine: plan-file header (`print_engine_information`), engine/context I/O tables, engine-information JSON → ONNX (`export_engine_as_onnx`, and `export_engine_graph_as_onnx` which exports, runs `onnx.checker` and reports in one call)
 - **`utils_workflow.py`** — `check_torch_operator`: run one Torch model through Torch → ONNX → ONNX-Runtime → Polygraphy → TensorRT and report which stage breaks
 - **`utils_network_serialization.py`** — network serialization/deserialization (also tested by `tests/NetworkSerialization/`)
 - **`utils_onnx.py`** — ONNX / onnx-graphsurgeon utilities. Deliberately does **not** import `tensorrt`
 - **`utils_plugin.py`** — plugin development helpers
 - **`utils_engine_explorer.py`** — TREx-derived engine profiling/visualisation
+- **`engine_visualization.py`** — draws an engine layer-info JSON as Graphviz / Dagre HTML / yEd
+  GraphML. Imports no `tensorrt`: a layer-info JSON is just a file. Defines `__all__`, because its
+  label helpers (`short`, `sanitise`, …) are too generic for the package namespace and its
+  `strip_layer_name_noise` would otherwise collide with the differently-behaved `clean_layer_name`
+  in `utils_engine_explorer`
 
 When adding a helper, place it by dependency direction, not by topic name: `utils_function` may not
 import from the package, `utils_onnx` may not import `tensorrt`, and anything that touches a built
